@@ -1,0 +1,67 @@
+{% macro render(
+        text="",
+        variant="red",
+        type="button",
+        href="#",
+        target="",
+        rel="",
+        id="",
+        name="",
+        value="",
+        disabled=false,
+        class="",
+        data={},
+        aria={}
+    ) %}
+    {% set buttonClasses = "button " + variant %}
+    {% if class %}
+        {% set buttonClasses = buttonClasses + " " + class %}
+    {% endif %}
+
+    {% if type == "link" %}
+        <a
+            class="{{ buttonClasses }}{% if disabled %} disabled{% endif %}"
+            {% if id %}id="{{ id }}"{% endif %}
+            href="{{ href }}"
+            {% if target %}target="{{ target }}"{% endif %}
+            {% if rel %}rel="{{ rel }}"{% endif %}
+            {% if data %}
+                {% for key, val in data %}
+                    data-{{ key | replace("_", "-") }}="{{ val }}"
+                {% endfor %}
+            {% endif %}
+            {% if aria %}
+                {% for key, val in aria %}
+                    aria-{{ key | replace("_", "-") }}="{{ val }}"
+                {% endfor %}
+            {% endif %}
+        >
+            {% if text %}
+                <span>{{ text }}</span>
+            {% endif %}
+        </a>
+    {% else %}
+        <button
+            class="{{ buttonClasses }}"
+            {% if id %}id="{{ id }}"{% endif %}
+            type="{{ type }}"
+            {% if name %}name="{{ name }}"{% endif %}
+            {% if value %}value="{{ value }}"{% endif %}
+            {% if data %}
+                {% for key, val in data %}
+                    data-{{ key | replace("_", "-") }}="{{ val }}"
+                {% endfor %}
+            {% endif %}
+            {% if aria %}
+                {% for key, val in aria %}
+                    aria-{{ key | replace("_", "-") }}="{{ val }}"
+                {% endfor %}
+            {% endif %}
+            {% if disabled %}disabled{% endif %}
+        >
+            {% if text %}
+                <span>{{ text }}</span>
+            {% endif %}
+        </button>
+    {% endif %}
+{% endmacro %}

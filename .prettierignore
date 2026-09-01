@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build directories
+temp/
+build/
+
+# Assets
+src/assets
+
+# Minified files
+*.min.js
+*.min.css
+
+# Package files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# System files
+.DS_Store
+Thumbs.db

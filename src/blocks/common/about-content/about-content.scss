@@ -1,0 +1,254 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.about-content {
+    position: relative;
+    padding: 50px 0 150px;
+
+    @include bp.mq(laptop) {
+        padding: 40px 0 100px;
+    }
+
+    @include bp.mq(mobile-xl) {
+        padding: 20px 0 80px;
+    }
+
+    // --------------------------------------
+    // Верхний блок: картинка + текст (на всю ширину)
+    // --------------------------------------
+
+    &__top {
+        position: relative;
+        width: 100%;
+        margin-bottom: 100px;
+
+        @include bp.mq(tablet-xl) {
+            padding-bottom: 252px;
+            margin-bottom: 80px;
+        }
+
+        @include bp.mq(tablet-l) {
+            padding-bottom: 200px;
+        }
+
+        @include bp.mq(mobile-xl) {
+            padding-bottom: 150px;
+        }
+
+        @include bp.mq(mobile-l) {
+            padding-bottom: 90px;
+        }
+    }
+
+    &__top-inner {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+
+        @include bp.mq(tablet-xl) {
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    &__bg {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        max-width: 1150px;
+        pointer-events: none;
+
+        @include bp.mq(desktop-l) {
+            max-width: 1050px;
+        }
+
+        @include bp.mq(desktop-m) {
+            max-width: 980px;
+        }
+
+        @include bp.mq(laptop-l) {
+            max-width: 780px;
+        }
+
+        @include bp.mq(laptop-m) {
+            max-width: 700px;
+        }
+
+        @include bp.mq(laptop) {
+            max-width: 500px;
+        }
+
+        @include bp.mq(tablet-xl) {
+            max-width: 110%;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__image {
+        position: relative;
+        z-index: 1;
+        flex: 0 0 587px;
+        width: 587px;
+        overflow: hidden;
+        background: var(--color-white);
+        border-radius: 0 5px 5px 0;
+
+        @include bp.mq(laptop) {
+            flex: 0 0 650px;
+            width: 650px;
+        }
+
+        @include bp.mq(tablet-xl) {
+            flex: 0 0 100%;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 587/420;
+            object-fit: cover;
+
+            @include bp.mq(laptop) {
+                aspect-ratio: 650/465;
+            }
+
+            @include bp.mq(tablet-xl) {
+                aspect-ratio: 728/520;
+            }
+
+            @include bp.mq(mobile) {
+                aspect-ratio: 1/0.6;
+            }
+        }
+    }
+
+    &__text-wrap {
+        position: relative;
+        z-index: 1;
+        flex: 1;
+        min-width: 0;
+    }
+
+    // Фиксированная ширина для текста в нижнем блоке (как у картинки)
+    &__text-wrap--fixed {
+        flex: 0 0 595px;
+        width: 595px;
+
+        @include bp.mq(laptop-l) {
+            flex: 0 0 425px;
+            width: 425px;
+        }
+
+        @include bp.mq(tablet-xl) {
+            flex: 0 0 100%;
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    &__text-block {
+        p {
+            max-width: 962px;
+            margin: 0 0 20px;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+            color: var(--color-black);
+
+            @include bp.mq(mobile-xl) {
+                font-size: 16px;
+            }
+
+            @include bp.mq(mobile) {
+                margin: 0 0 15px;
+                font-size: 14px;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            b {
+                font-weight: 500;
+                color: var(--color-black);
+            }
+        }
+    }
+
+    // --------------------------------------
+    // Нижний блок: текст + слайдер
+    // --------------------------------------
+
+    &__bottom {
+        width: 100%;
+    }
+
+    &__bottom-inner {
+        display: flex;
+        gap: 48px;
+        align-items: flex-start;
+
+        @include bp.mq(laptop) {
+            gap: 30px;
+        }
+
+        @include bp.mq(tablet-xl) {
+            flex-direction: column-reverse;
+            gap: 30px;
+        }
+
+        @include bp.mq(mobile) {
+            gap: 20px;
+        }
+    }
+
+    &__slider {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        min-height: 300px;
+        overflow: hidden;
+        border-radius: 8px;
+
+        @include bp.mq(tablet-xl) {
+            flex: 0 0 100%;
+            width: 100%;
+            max-width: 100%;
+            min-height: 250px;
+        }
+
+        @include bp.mq(mobile) {
+            min-height: 200px;
+        }
+    }
+
+    &__slider-placeholder {
+        font-size: 20px;
+        color: var(--color-gray);
+
+        @include bp.mq(mobile) {
+            font-size: 16px;
+        }
+    }
+
+    // Текст слева в нижнем блоке с фиксированной шириной
+    &__bottom &__text-wrap--fixed {
+        order: 0;
+    }
+
+    &__bottom &__slider {
+        order: 1;
+    }
+}

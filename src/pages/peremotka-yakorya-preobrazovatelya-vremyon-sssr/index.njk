@@ -1,0 +1,17 @@
+{% set meta = { title: "Перемотка якоря преобразователя времён СССР | Статор-Сервис" } %}
+{% set page = { heading: false } %}
+{% set breadcrumbs = {
+    items: [
+        { title: "Главная", url: "/" },
+        { title: "Блог", url: "/блог-и-новости/" },
+        { title: "Перемотка якоря преобразователя времён СССР" }
+    ]
+} %}
+{% set title = { text: "Перемотка якоря преобразователя времён СССР", tag: "h1", class: "title" } %}
+{% extends "layouts/default.njk" %}
+{% block content %}
+    {% include "blocks/common/article/article.njk" %}
+
+    {% set sectionTitle = "Другие статьи" %}
+    {% include "blocks/common/articles-short/articles-short.njk" %}
+{% endblock %}

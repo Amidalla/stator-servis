@@ -1,0 +1,203 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+header.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-height);
+    background: var(--color-white);
+    transition: box-shadow 0.3s ease;
+
+    &.is-sticky {
+        box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
+    }
+
+    .container {
+        display: flex;
+        gap: 0;
+        align-items: flex-start;
+        justify-content: space-between;
+        height: 100%;
+
+        .wrap {
+            height: 100%;
+            padding-right: 60px;
+            padding-left: 60px;
+
+            &:not(:last-child) {
+                border-right: 1px solid var(--color-border-gray);
+            }
+
+            &:nth-child(1) {
+                display: flex;
+                flex-shrink: 0;
+                align-items: center;
+                justify-content: center;
+                padding-left: 0;
+
+                @include bp.mq(laptop-l) {
+                    padding-right: 30px;
+                }
+
+                @include bp.mq(laptop-m) {
+                    order: 1;
+                }
+
+                @include bp.mq(mobile-xl) {
+                    padding-right: 10px;
+                }
+            }
+
+            &:nth-child(2) {
+                flex: 1;
+
+                @include bp.mq(laptop-l) {
+                    padding-right: 30px;
+                    padding-left: 30px;
+                }
+
+                @include bp.mq(laptop-m) {
+                    display: none;
+                }
+
+                .wrap-item {
+                    &:first-child {
+                        padding-top: 13px;
+                        padding-bottom: 20px;
+                    }
+                }
+            }
+
+            &:nth-child(3) {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-right: 0;
+                padding-left: 0;
+
+                @include bp.mq(laptop-m) {
+                    order: 3;
+                }
+
+                @include bp.mq(mobile-m) {
+                    order: 2;
+                }
+            }
+
+            &:nth-child(4) {
+                display: flex;
+                flex-shrink: 0;
+                align-items: center;
+                justify-content: center;
+                padding-right: 0;
+                border-right: none;
+
+                @include bp.mq(laptop-l) {
+                    padding-left: 30px;
+                }
+
+                @include bp.mq(laptop-m) {
+                    flex: 1;
+                    order: 2;
+                    padding-right: 30px;
+                    border-right: 1px solid var(--color-border-gray);
+                }
+
+                @include bp.mq(mobile-xl) {
+                    justify-content: end;
+                    padding-right: 10px;
+                }
+
+                @include bp.mq(mobile-m) {
+                    justify-content: center;
+                    order: 3;
+                    padding-right: 20px;
+                    padding-left: 20px;
+                }
+
+                .header-btn {
+                    position: relative;
+                    padding-bottom: 6px;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 120%;
+                    color: var(--color-red);
+                    cursor: pointer;
+                    background: none;
+                    border: none;
+                    transition:
+                        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        opacity 0.3s ease;
+
+                    @include bp.mq(tablet-l) {
+                        padding: 0;
+                    }
+
+                    // Линия снизу (изначально видна)
+                    &::after {
+                        position: absolute;
+                        bottom: -4px;
+                        left: 50%;
+                        width: 100%;
+                        height: 3px;
+                        content: "";
+                        background-color: var(--color-red);
+                        border-radius: 2px;
+                        opacity: 1;
+                        transform: translateX(-50%) scaleX(1);
+                        transform-origin: center center;
+                        transition:
+                            transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                            all 0.3s ease;
+
+                        @include bp.mq(mobile-xl) {
+                            display: none;
+                        }
+                    }
+
+                    span {
+                        @include bp.mq(mobile-xl) {
+                            display: none;
+                        }
+                    }
+
+                    // По ховеру линия исчезает
+                    &:hover {
+                        color: var(--color-black);
+
+                        &::after {
+                            opacity: 0;
+                            transform: translateX(-50%) scaleX(0);
+                        }
+                    }
+
+                    svg {
+                        display: none;
+
+                        @include bp.mq(mobile-xl) {
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+            &:nth-child(5) {
+                display: none;
+
+                @include bp.mq(laptop-m) {
+                    display: flex;
+                    flex-shrink: 0;
+                    align-items: center;
+                    justify-content: center;
+                    order: 4;
+                    padding-right: 0;
+                }
+                @include bp.mq(mobile-xl) {
+                    padding-left: 10px;
+                }
+            }
+        }
+    }
+}

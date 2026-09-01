@@ -1,0 +1,15 @@
+{# components/general/partner-card/partner-card.njk #}
+
+{% macro partnerCard(params) %}
+    <div class="partner-card">
+        <div class="partner-card__image">
+            <img class="lazy" data-src="{{ params.image }}" alt="{{ params.name }}" />
+        </div>
+        <div class="partner-card__content">
+            <div class="partner-card__type">{{ params.type }}</div>
+            <h3 class="partner-card__name">{{ params.name }}</h3>
+            <div class="partner-card__address">{{ params.address }}</div>
+            <p class="partner-card__description">{{ params.description }}</p>
+        </div>
+    </div>
+{% endmacro %}

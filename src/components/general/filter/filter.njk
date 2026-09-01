@@ -1,0 +1,197 @@
+<!-- components/general/filter/filter.njk -->
+<aside class="filter">
+    <!-- Заголовок фильтров с иконкой -->
+    <div class="filter__header" id="filterToggle">
+        <svg
+            class="filter__icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M13.4472 20.9051C13.786 20.7376 14 20.3951 14 20.0204V14.6999C14 14.4376 14.1054 14.186 14.2929 14.0005L20.414 7.94576C20.789 7.57483 21 7.07135 21 6.54611V3.98915C21 3.44215 20.553 3 20 3H4C3.447 3 3 3.44215 3 3.98915V6.54611C3 7.07135 3.211 7.57483 3.586 7.94576L9.70711 14.0005C9.89464 14.186 10 14.4376 10 14.6999V21.0096C10 21.7449 10.7823 22.2231 11.4472 21.8943L13.4472 20.9051Z"
+                fill="#F33607"
+            />
+        </svg>
+        <h3 class="filter__title">Фильтры</h3>
+    </div>
+
+    <!-- Основной блок фильтров с фоном -->
+    <div class="filter__body" id="filterBody">
+        <!-- Фильтр: Мощность (кВт) -->
+        <div class="filter__section">
+            <h4 class="filter__section-title">Мощность (кВт)</h4>
+            <div class="filter__search">
+                <input type="text" class="filter__search-input" placeholder="Поиск по значению" />
+            </div>
+            <div class="custom-scroll">
+                <div class="custom-scroll__container">
+                    <ul class="filter__grid filter__grid--3">
+                        <li class="filter__item active">0,09</li>
+                        <li class="filter__item">0,12</li>
+                        <li class="filter__item">0,18</li>
+                        <li class="filter__item">0,25</li>
+                        <li class="filter__item">0,37</li>
+                        <li class="filter__item">0,55</li>
+                        <li class="filter__item">0,75</li>
+                        <li class="filter__item">1,1</li>
+                        <li class="filter__item">1,5</li>
+                        <li class="filter__item">2,2</li>
+                        <li class="filter__item">3</li>
+                        <li class="filter__item">4</li>
+                        <li class="filter__item">5,5</li>
+                        <li class="filter__item">7,5</li>
+                        <li class="filter__item">11</li>
+                        <li class="filter__item">15</li>
+                        <li class="filter__item">18,5</li>
+                        <li class="filter__item">22</li>
+                    </ul>
+                </div>
+                <div class="custom-scroll__track">
+                    <div class="custom-scroll__thumb"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Фильтр: Частота вращения (об/мин) -->
+        <div class="filter__section">
+            <h4 class="filter__section-title">Частота вращения (об/мин)</h4>
+            <div class="filter__search">
+                <input type="text" class="filter__search-input" placeholder="Поиск по значению" />
+            </div>
+            <div class="custom-scroll">
+                <div class="custom-scroll__container">
+                    <ul class="filter__grid filter__grid--3">
+                        <li class="filter__item active">750</li>
+                        <li class="filter__item">1000</li>
+                        <li class="filter__item">1500</li>
+                        <li class="filter__item active">3000</li>
+                    </ul>
+                </div>
+                <div class="custom-scroll__track">
+                    <div class="custom-scroll__thumb"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Фильтр: Монтажное исполнение -->
+        <div class="filter__section">
+            <h4 class="filter__section-title">Монтажное исполнение</h4>
+            <div class="filter__search">
+                <input type="text" class="filter__search-input" placeholder="Поиск по значению" />
+            </div>
+            <div class="custom-scroll">
+                <div class="custom-scroll__container">
+                    <ul class="filter__grid filter__grid--3">
+                        <li class="filter__item">1001</li>
+                        <li class="filter__item">1081</li>
+                        <li class="filter__item">1082</li>
+                        <li class="filter__item">2001</li>
+                        <li class="filter__item">2081</li>
+                        <li class="filter__item">2082</li>
+                        <li class="filter__item">2082</li>
+                        <li class="filter__item">2082</li>
+                        <li class="filter__item">2082</li>
+                        <li class="filter__item">2082</li>
+                        <li class="filter__item">2082</li>
+                        <li class="filter__item">2082</li>
+                        <li class="filter__item">2082</li>
+                        <li class="filter__item">2082</li>
+                        <li class="filter__item">2082</li>
+                        <li class="filter__item">2082</li>
+                        <li class="filter__item">2082</li>
+                    </ul>
+                </div>
+                <div class="custom-scroll__track">
+                    <div class="custom-scroll__thumb"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Фильтр: Модель -->
+        <div class="filter__section">
+            <h4 class="filter__section-title">Модель</h4>
+            <div class="filter__search">
+                <input type="text" class="filter__search-input" placeholder="Поиск по значению" />
+            </div>
+            <div class="custom-scroll">
+                <div class="custom-scroll__container">
+                    <ul class="filter__grid filter__grid--2">
+                        <li class="filter__item">АИР</li>
+                        <li class="filter__item">АДМ</li>
+                        <li class="filter__item">STg</li>
+                        <li class="filter__item">SEg</li>
+                        <li class="filter__item">5АИ</li>
+                        <li class="filter__item">АИ</li>
+                    </ul>
+                </div>
+                <div class="custom-scroll__track">
+                    <div class="custom-scroll__thumb"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Фильтр: Стандарт -->
+        <div class="filter__section">
+            <h4 class="filter__section-title">Стандарт</h4>
+            <div class="custom-scroll">
+                <div class="custom-scroll__container">
+                    <ul class="filter__grid filter__grid--2">
+                        <li class="filter__item">DIN (SDN)</li>
+                        <li class="filter__item active">ГОСТ</li>
+                    </ul>
+                </div>
+                <div class="custom-scroll__track">
+                    <div class="custom-scroll__thumb"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Фильтр: Напряжение (кВт) -->
+        <div class="filter__section">
+            <h4 class="filter__section-title">Напряжение (кВт)</h4>
+            <div class="custom-scroll">
+                <div class="custom-scroll__container">
+                    <ul class="filter__grid filter__grid--3">
+                        <li class="filter__item">220</li>
+                        <li class="filter__item">380</li>
+                        <li class="filter__item">220/380</li>
+                        <li class="filter__item">380/660</li>
+                    </ul>
+                </div>
+                <div class="custom-scroll__track">
+                    <div class="custom-scroll__thumb"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Фильтр: Высота оси вращения (мм) -->
+        <div class="filter__section">
+            <h4 class="filter__section-title">Высота оси вращения (мм)</h4>
+            <div class="filter__search">
+                <input type="text" class="filter__search-input" placeholder="Поиск по значению" />
+            </div>
+            <div class="custom-scroll">
+                <div class="custom-scroll__container">
+                    <ul class="filter__grid filter__grid--3">
+                        <li class="filter__item">200</li>
+                        <li class="filter__item">250</li>
+                        <li class="filter__item">375</li>
+                        <li class="filter__item">500</li>
+                    </ul>
+                </div>
+                <div class="custom-scroll__track">
+                    <div class="custom-scroll__thumb"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Кнопки внутри body -->
+        <div class="filter__buttons">
+            <button class="filter__apply button red">Показать</button>
+            <button class="filter__reset button outline">Сбросить всё</button>
+        </div>
+    </div>
+</aside>

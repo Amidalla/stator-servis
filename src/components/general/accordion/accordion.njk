@@ -1,0 +1,60 @@
+{# components/general/accordion/accordion.njk #}
+
+{% macro render(
+        items=[],
+        openFirst=true,
+        id="",
+        class="",
+        data={},
+        aria={}
+    ) %}
+    {% set accordionClasses = "accordion" %}
+    {% if class %}
+        {% set accordionClasses = accordionClasses + " " + class %}
+    {% endif %}
+
+    <div
+        class="{{ accordionClasses }}"
+        data-accordion="component"
+        {% if id %}id="{{ id }}"{% endif %}
+        {% if data %}
+            {% for key, val in data %}
+                data-{{ key | replace("_", "-") }}="{{ val }}"
+            {% endfor %}
+        {% endif %}
+        {% if aria %}
+            {% for key, val in aria %}
+                aria-{{ key | replace("_", "-") }}="{{ val }}"
+            {% endfor %}
+        {% endif %}
+    >
+        {% for item in items %}
+            <div class="item" data-accordion-item>
+                <button
+                    type="button"
+                    class="panel"
+                    aria-expanded="{% if openFirst and loop.first %}true{% else %}false{% endif %}"
+                    aria-controls="accordion-content-{{ loop.index }}"
+                >
+                    <span class="name">{{ item.name }}</span>
+                    <span class="icon" aria-hidden="true">
+                        <!-- Иконка плюс -->
+                        <svg class="icon-plus" width="31" height="32" viewBox="0 0 31 32" fill="none">
+                            <path d="M0 15.0078H31" stroke="#808080" />
+                            <path d="M15 0.0078125L15.574 31.0025" stroke="#808080" />
+                        </svg>
+                        <!-- Иконка минус (скрыта по умолчанию) -->
+                        <svg class="icon-minus" width="32" height="1" viewBox="0 0 32 1" fill="none">
+                            <path d="M0 0.5H31.5" stroke="#808080" />
+                        </svg>
+                    </span>
+                </button>
+                <div class="collapse" id="accordion-content-{{ loop.index }}" role="region">
+                    <div class="wrap">
+                        {{ item.content | safe }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}

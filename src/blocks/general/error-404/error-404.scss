@@ -1,0 +1,121 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mixin;
+
+.error-404 {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    padding: 33px 0 65px;
+    margin-bottom: unset;
+    overflow: hidden;
+    background: #f4f4f4;
+
+    .block {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        .error-404__image {
+            position: static;
+            width: 100%;
+            max-width: 1190px;
+            margin: 0 auto;
+
+            @include bp.mq(laptop) {
+                max-width: 800px;
+            }
+
+            @include bp.mq(tablet) {
+                max-width: 650px;
+            }
+
+            @include bp.mq(mobile) {
+                max-width: 320px;
+            }
+
+            img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .box {
+            position: relative;
+            z-index: 2;
+            margin-top: -100px;
+            text-align: center;
+
+            @include bp.mq(laptop) {
+                margin-top: -50px;
+            }
+
+            @include bp.mq(mobile-l) {
+                margin-top: 0;
+            }
+
+            .title {
+                margin-top: 0;
+                margin-bottom: 13px;
+                font-size: 60px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                color: var(--color-red);
+
+                @include bp.mq(laptop-l) {
+                    font-size: 52px;
+                }
+                @include bp.mq(laptop) {
+                    font-size: 42px;
+                }
+                @include bp.mq(tablet) {
+                    font-size: 30px;
+                }
+                @include bp.mq(mobile) {
+                    font-size: 24px;
+                }
+            }
+
+            .text {
+                max-width: 634px;
+                margin: 0 auto 40px;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                color: var(--color-black);
+                text-align: center;
+
+                @include bp.mq(laptop) {
+                    font-size: 22px;
+                }
+            }
+
+            .actions {
+                display: flex;
+                gap: 20px;
+                justify-content: center;
+
+                @include bp.mq(mobile-l) {
+                    flex-direction: column;
+                    gap: 10px;
+                    align-items: center;
+                }
+
+                .button {
+                    min-width: 180px;
+
+                    @include bp.mq(mobile) {
+                        min-width: 100%;
+                        max-width: 300px;
+                    }
+                }
+            }
+        }
+    }
+}

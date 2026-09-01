@@ -1,0 +1,14 @@
+{% set meta = { title: "Контакты | Статор-Сервис" } %}
+{% set page = { after_content: true } %}
+{% set breadcrumbs = {
+    items: [
+        { title: "Главная", url: "/" },
+        { title: "Контакты" }
+    ]
+} %}
+{% set title = { text: "Контакты", tag: "h1", class: "title" } %}
+{% extends "layouts/default.njk" %}
+{% block content %}
+    {% include "blocks/common/contacts-content/contacts-content.njk" %}
+    {% include "blocks/common/catalog-form/catalog-form.njk" %}
+{% endblock %}

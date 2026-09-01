@@ -1,0 +1,44 @@
+{# catalog-card.njk #}
+{% macro catalogCard(product) %}
+    <div
+        class="catalog-card{% if not product.inStock %} catalog-card--out-of-stock{% endif %}"
+    >
+        <div class="catalog-card__inner">
+            <a href="{{ product.link }}" class="catalog-card__image-link">
+                <div class="catalog-card__image-wrapper">
+                    <img class="lazy" src="{{ product.image }}" alt="{{ product.name }}" />
+                </div>
+            </a>
+            <div class="catalog-card__content">
+                <a href="{{ product.link }}" class="catalog-card__name-link">
+                    <div class="catalog-card__name">{{ product.name }}</div>
+                </a>
+                <div class="catalog-card__description">{{ product.description }}</div>
+                <div
+                    class="catalog-card__status {% if product.inStock %}in-stock{% else %}out-of-stock{% endif %}"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
+                        <circle
+                            cx="5.5"
+                            cy="5.5"
+                            r="5.5"
+                            fill="{% if product.inStock %}#F33607{% else %}#7E7E7E{% endif %}"
+                        />
+                    </svg>
+                    <span
+                        >{% if product.inStock %}В наличии{% else %}Нет в наличии
+{% endif %}</span>
+            </div>
+        </div>
+        <div class="catalog-card__actions">
+            <a href="{{ product.link }}" class="catalog-card__link button outline">Подробнее</a>
+            <button
+                class="catalog-card__order button black"
+                {% if not product.inStock %}disabled{% endif %}
+            >
+                Заказать
+            </button>
+        </div>
+    </div>
+</div>
+{% endmacro %}

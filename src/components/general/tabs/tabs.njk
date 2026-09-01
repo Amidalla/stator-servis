@@ -1,0 +1,60 @@
+{% macro render(
+        items=[],
+        activeIndex=0,
+        id="",
+        class="",
+        data={},
+        aria={}
+    ) %}
+    {% set tabsClasses = "tabs" %}
+    {% if class %}
+        {% set tabsClasses = tabsClasses + " " + class %}
+    {% endif %}
+    {% set uid = id if id else ("tabs-" + (range(10000, 99999) | random | string)) %}
+
+    <div
+        class="{{ tabsClasses }}"
+        data-component="tabs"
+        id="{{ uid }}"
+        {% if data %}
+            {% for key, val in data %}
+                data-{{ key | replace("_", "-") }}="{{ val }}"
+            {% endfor %}
+        {% endif %}
+        {% if aria %}
+            {% for key, val in aria %}
+                aria-{{ key | replace("_", "-") }}="{{ val }}"
+            {% endfor %}
+        {% endif %}
+    >
+        <div class="nav-wrap">
+            <div class="nav" role="tablist">
+                {% for item in items %}
+                    <button
+                        type="button"
+                        class="nav-item{% if loop.index0 == activeIndex %} is-active{% endif %}"
+                        role="tab"
+                        aria-selected="{% if loop.index0 == activeIndex %}true{% else %}false{% endif %}"
+                        aria-controls="{{ uid }}-panel-{{ loop.index }}"
+                        data-tabs-nav
+                    >
+                        {{ item.title }}
+                    </button>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="panels">
+            {% for item in items %}
+                <div
+                    class="panel{% if loop.index0 == activeIndex %} is-active{% endif %}"
+                    role="tabpanel"
+                    id="{{ uid }}-panel-{{ loop.index }}"
+                    {% if loop.index0 != activeIndex %}hidden{% endif %}
+                    data-tabs-panel
+                >
+                    {{ item.content | safe }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}

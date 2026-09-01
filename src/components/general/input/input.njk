@@ -1,0 +1,59 @@
+{% macro render(
+        type="text",
+        size="md",
+        id="",
+        name="",
+        placeholder="",
+        value="",
+        disabled=false,
+        readonly=false,
+        required=false,
+        maxlength="",
+        minlength="",
+        autocomplete="",
+        pattern="",
+        min="",
+        max="",
+        step="",
+        error=false,
+        class="",
+        data={},
+        aria={}
+    ) %}
+    {% set inputClasses = "input " + size %}
+    {% if error %}
+        {% set inputClasses = inputClasses + " error" %}
+    {% endif %}
+    {% if class %}
+        {% set inputClasses = inputClasses + " " + class %}
+    {% endif %}
+
+    <input
+        type="{{ type }}"
+        class="{{ inputClasses }}"
+        {% if id %}id="{{ id }}"{% endif %}
+        {% if name %}name="{{ name }}"{% endif %}
+        {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+        {% if value %}value="{{ value }}"{% endif %}
+        {% if disabled %}disabled{% endif %}
+        {% if readonly %}readonly{% endif %}
+        {% if required %}required{% endif %}
+        {% if maxlength %}maxlength="{{ maxlength }}"{% endif %}
+        {% if minlength %}minlength="{{ minlength }}"{% endif %}
+        {% if autocomplete %}autocomplete="{{ autocomplete }}"{% endif %}
+        {% if pattern %}pattern="{{ pattern }}"{% endif %}
+        {% if min %}min="{{ min }}"{% endif %}
+        {% if max %}max="{{ max }}"{% endif %}
+        {% if step %}step="{{ step }}"{% endif %}
+        {% if data %}
+            {% for key, val in data %}
+                data-{{ key | replace("_", "-") }}="{{ val }}"
+            {% endfor %}
+        {% endif %}
+        {% if aria %}
+            {% for key, val in aria %}
+                aria-{{ key | replace("_", "-") }}="{{ val }}"
+            {% endfor %}
+        {% endif %}
+    />
+{% endmacro %}

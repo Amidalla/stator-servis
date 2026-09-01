@@ -1,0 +1,22 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mixin;
+
+.contacts-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @include bp.mq(tablet) {
+        margin-top: 27px;
+    }
+
+    a {
+        color: var(--color-red);
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: var(--color-black);
+            text-decoration: none;
+        }
+    }
+}

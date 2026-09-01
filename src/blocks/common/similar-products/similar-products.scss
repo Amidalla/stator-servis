@@ -1,0 +1,233 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.similar-products {
+    padding-top: 60px;
+    padding-bottom: 139px;
+    background: #fafafa;
+
+    @include bp.mq(laptop) {
+        padding-bottom: 120px;
+    }
+
+    @include bp.mq(tablet) {
+        padding-bottom: 100px;
+    }
+
+    @include bp.mq(mobile-xl) {
+        padding-top: 40px;
+        padding-bottom: 80px;
+    }
+
+    &__title {
+        margin: 0 0 40px;
+        font-family: var(--font-family-headings);
+        font-size: 35px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 100%;
+        color: var(--color-black);
+        text-align: center;
+
+        @include bp.mq(mobile-xl) {
+            margin: 0 0 24px;
+            font-size: 22px;
+        }
+    }
+
+    &__slider-wrapper {
+        position: relative;
+        padding: 0 135px;
+
+        @include bp.mq(laptop) {
+            padding: 0 78.484px;
+        }
+
+        @include bp.mq(tablet) {
+            padding: 0 45.121px;
+        }
+
+        @include bp.mq(mobile) {
+            padding: 0 30px;
+        }
+    }
+
+    &__slider {
+        overflow: hidden;
+
+        .swiper-slide {
+            height: auto;
+        }
+    }
+
+    &__card-link {
+        display: block;
+        height: 100%;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: var(--color-red);
+            text-decoration: none;
+
+            .similar-products__card-image img {
+                transform: scale(1.02);
+            }
+        }
+    }
+
+    &__card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    &__card-image {
+        width: 100%;
+        aspect-ratio: 1/1;
+        margin-bottom: 11px;
+        overflow: hidden;
+        background: var(--color-white);
+        border-radius: 5px;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+    }
+
+    &__card-title {
+        display: -webkit-box;
+        margin: 0;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        font-size: 25px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        color: var(--color-black);
+        transition: color 0.3s ease;
+        -webkit-box-orient: vertical;
+
+        @include bp.mq(laptop) {
+            font-size: 18px;
+        }
+
+        @include bp.mq(mobile-xl) {
+            font-size: 16px;
+        }
+
+        .similar-products__card-link:hover & {
+            color: var(--color-red);
+        }
+    }
+
+    // --------------------------------------
+    // Стрелки навигации
+    // --------------------------------------
+
+    &__prev,
+    &__next {
+        position: absolute;
+        top: 0 !important;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 106px;
+        height: 100%;
+        margin-top: 0 !important;
+        color: var(--color-white);
+        cursor: pointer;
+        background: var(--color-white);
+        border: none;
+        transform: none;
+        transition: all 0.3s ease;
+
+        @include bp.mq(laptop) {
+            top: 50% !important;
+            width: 57.121px;
+            height: 105.841px;
+            transform: translateY(-50%);
+        }
+
+        @include bp.mq(tablet) {
+            top: 50%;
+            width: 30px;
+            height: 46.765px;
+            transform: translateY(-50%);
+        }
+
+        svg {
+            display: block;
+            flex-shrink: 0;
+            width: 46.338px;
+            height: 46.338px;
+
+            @include bp.mq(laptop) {
+                width: 34.374px;
+                height: 34.374px;
+            }
+
+            @include bp.mq(tablet) {
+                width: 19.285px;
+                height: 19.285px;
+            }
+
+            @include bp.mq(mobile) {
+                width: 12.974px;
+                height: 12.974px;
+            }
+
+            path {
+                transition: stroke 0.3s ease;
+            }
+        }
+
+        &:hover {
+            svg path {
+                stroke: #f33607;
+            }
+        }
+
+        &.swiper-button-disabled {
+            pointer-events: none;
+            opacity: 0.3;
+        }
+    }
+
+    &__prev {
+        left: 0;
+
+        @include bp.mq(tablet) {
+            left: 0;
+        }
+
+        @include bp.mq(mobile) {
+            left: 0;
+        }
+
+        svg {
+            transform: rotate(0);
+        }
+    }
+
+    &__next {
+        right: 0;
+
+        @include bp.mq(tablet) {
+            right: 0;
+        }
+
+        @include bp.mq(mobile) {
+            right: 0;
+        }
+
+        svg {
+            transform: rotate(0deg);
+        }
+    }
+}

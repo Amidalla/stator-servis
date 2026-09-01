@@ -1,0 +1,54 @@
+{% from "components/general/navigation-top/navigation-top.njk" import render as navigationTop %}
+{% from "components/general/logo/logo.njk" import render as logo %}
+
+<header class="header">
+    <div class="container">
+        <div class="wrap">
+            {{ logo(image="/assets/images/system/logo.svg", imageMobile="/assets/images/system/logo-mini.svg", alt="Статор-Сервис") }}
+        </div>
+        <div class="wrap">
+            <div class="wrap-item">
+                {% include "components/common/contacts-header/contacts-header.njk" %}
+            </div>
+            <div class="wrap-item">
+                {{ navigationTop(
+                     items=[
+                         { title: "О компании", href: "/o-nas/" },
+                         {
+                             title: "Услуги",
+                             href: "/uslugi/",
+                             children: [
+                                 { title: "Ремонт электродвигателей", href: "/uslugi/remont-elektrodvigateley/" },
+                                 { title: "Перемотка электродвигателей", href: "/uslugi/remont-elektrodvigateley/" },
+                                 { title: "Перемотка альтернатора", href: "/uslugi/remont-elektrodvigateley/" },
+                                 { title: "Ремонт промышленных вентиляторов", href: "/uslugi/remont-elektrodvigateley/" }
+                             ]
+                         },
+                         { title: "Наши работы", href: "/nashi-raboty/" },
+                         { title: "Цены", href: "/cena/" },
+                         { title: "Блог", href: "/блог-и-новости/" },
+                         { title: "Вопрос-ответ", href: "/faq/" },
+                         { title: "Контакты", href: "/contact/" }
+                     ]
+                ) }}
+            </div>
+        </div>
+        <div class="wrap">
+            {% include "components/general/search-form/search-form.njk" %}
+        </div>
+        <div class="wrap">
+            <button class="header-btn" data-src="popup-callback">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27" fill="none">
+                    <path
+                        d="M0.459267 21.1498L6.16387 15.5481C6.43337 15.2831 6.78779 15.1416 7.15212 15.1538C7.51645 15.166 7.8621 15.3307 8.11593 15.6133L11.4741 19.3432C12.2825 19.1765 13.9075 18.6293 15.5803 16.8273C17.2531 15.0192 17.7597 13.2595 17.9099 12.3926L14.4591 8.76427C14.1975 8.49014 14.0449 8.11683 14.0336 7.72336C14.0224 7.32989 14.1533 6.94712 14.3987 6.65606L19.5841 0.496651C19.8296 0.20468 20.1709 0.0275784 20.5353 0.00295814C20.8998 -0.0216622 21.2588 0.108139 21.5361 0.364794L24.5814 3.18533C24.824 3.44831 24.9688 3.79832 24.9884 4.16896C25.0094 4.54786 25.4108 13.5233 18.9666 20.4859C13.3448 26.5559 6.3028 27 4.36338 27C4.0799 27 3.90589 26.9909 3.85958 26.9879C3.51669 26.966 3.19314 26.8091 2.95021 26.5468L0.339981 23.2565C0.101397 22.9579 -0.0196762 22.5705 0.00261116 22.1769C0.0248985 21.7833 0.18878 21.4147 0.459267 21.1498Z"
+                        fill="#F33607"
+                    />
+                </svg>
+                <span>Заказать звонок</span>
+            </button>
+        </div>
+        <div class="wrap">
+            {% include "components/general/menu/menu-open.njk" %}
+        </div>
+    </div>
+</header>

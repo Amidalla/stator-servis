@@ -1,0 +1,71 @@
+@use "core/breakpoints" as bp;
+@use "core/popup" as *;
+
+.popup-feedback-success {
+    @include popup;
+
+    background: rgb(244 244 244 / 27%);
+    border-radius: 5px;
+    backdrop-filter: blur(9.5px);
+
+    .f-button.is-close-button {
+        svg path {
+            stroke: var(--color-white);
+        }
+    }
+
+    &__btn {
+        min-width: 160px;
+        margin-top: 16px;
+
+        @include bp.mq(mobile-xl) {
+            width: 100%;
+            min-width: unset;
+        }
+    }
+
+    .heading {
+        .icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+
+            img {
+                display: block;
+                width: 64px;
+                height: 64px;
+                object-fit: contain;
+            }
+        }
+
+        .title {
+            padding-right: 0 !important;
+            margin: 0 0 7px;
+            font-family: var(--font-family-headings);
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 110%;
+            color: var(--color-white);
+            text-align: center;
+
+            @include bp.mq(mobile-xl) {
+                font-size: 22px;
+            }
+        }
+
+        .text {
+            margin: 0 0 8px;
+            font-size: 25px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+            color: var(--color-white) !important;
+            text-align: center;
+
+            @include bp.mq(mobile-xl) {
+                font-size: 18px;
+            }
+        }
+    }
+}

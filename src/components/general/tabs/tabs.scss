@@ -1,0 +1,150 @@
+@use "core/breakpoints" as bp;
+
+.tabs {
+    --tabs-gap: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--tabs-gap);
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+
+    // --------------------------------------
+    // Navigation
+    // --------------------------------------
+
+    .nav-wrap {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 10px;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+        overflow: auto hidden;
+        overscroll-behavior-y: none;
+        touch-action: pan-x;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+
+        &::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--color-red);
+            border-radius: 4px;
+        }
+    }
+
+    .nav-item {
+        position: relative;
+        flex: 0 0 auto;
+        padding-bottom: 10px;
+        font-size: 25px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 100%;
+        color: var(--color-gray);
+        text-align: left;
+        white-space: nowrap;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        border-bottom: 5px solid #e1e0e0;
+        transition: all 0.3s;
+
+        @include bp.mq(laptop) {
+            font-size: 22px;
+        }
+
+        @include bp.mq(mobile-xl) {
+            padding-bottom: 8px;
+            font-size: 18px;
+        }
+
+        @include bp.mq(mobile) {
+            padding-bottom: 6px;
+            font-size: 16px;
+        }
+
+        &:hover {
+            color: var(--color-black);
+            border-bottom: 5px solid var(--color-black);
+        }
+
+        &.is-active {
+            color: var(--color-black);
+            border-bottom: 5px solid var(--color-black);
+        }
+    }
+
+    // --------------------------------------
+    // Panels
+    // --------------------------------------
+
+    .panels {
+        position: relative;
+        min-width: 0;
+        height: 350px;
+        transition: height 0.4s ease;
+    }
+
+    .panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        visibility: hidden;
+        width: 100%;
+        height: 100%;
+        overflow: clip auto;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        color: var(--color-black);
+        pointer-events: none;
+        background: var(--color-white);
+        opacity: 0;
+        transform: translateY(15px);
+        transition:
+            opacity 0.4s ease,
+            transform 0.4s ease,
+            visibility 0.4s ease;
+
+        @include bp.mq(mobile-xl) {
+            font-size: 16px;
+        }
+
+        p {
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        &.is-active {
+            position: relative;
+            visibility: visible;
+            pointer-events: auto;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}

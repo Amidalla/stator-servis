@@ -1,0 +1,28 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mixin;
+
+.logo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: fit-content;
+    text-decoration: none;
+    transition: opacity 0.2s ease-in-out;
+
+    img {
+        max-width: 210px;
+
+        @include bp.mq(laptop-l) {
+            max-width: 148px;
+        }
+    }
+
+    &:hover {
+        text-decoration: none;
+        opacity: 0.8;
+    }
+
+    picture {
+        display: flex;
+    }
+}

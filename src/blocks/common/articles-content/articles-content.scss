@@ -1,0 +1,37 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.articles-content {
+    padding: 40px 0 150px;
+
+    @include bp.mq(tablet) {
+        padding: 20px 0 100px;
+    }
+
+    @include bp.mq(mobile-xl) {
+        padding: 20px 0 80px;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 37px 60px;
+
+        @include bp.mq(laptop-l) {
+            gap: 20px;
+        }
+
+        @include bp.mq(tablet-xl) {
+            column-gap: 15px;
+        }
+
+        @include bp.mq(tablet) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__more {
+        margin-top: 30px;
+        text-align: center;
+    }
+}

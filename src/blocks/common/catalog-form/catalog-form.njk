@@ -1,0 +1,38 @@
+{# blocks/common/catalog-form/catalog-form.njk #}
+
+{#
+  Параметры:
+  - additionalClass: строка, дополнительный класс для секции (опционально)
+  - titleText: строка, текст заголовка (опционально)
+  - buttonClass: строка, класс для кнопки отправки (опционально)
+#}
+
+{% if not additionalClass %}
+    {% set additionalClass = "" %}
+{% endif %}
+
+{% if not titleText %}
+    {% set titleText = "Пожалуйста, заполните форму, и мы свяжемся с вами" %}
+{% endif %}
+
+{% if not buttonClass %}
+    {% set buttonClass = "button red" %}
+{% endif %}
+
+<section
+    class="catalog-form section{% if additionalClass %} {{ additionalClass }}{% endif %}"
+>
+    <picture class="catalog-form__bg">
+        <source media="(max-width: 600px)" srcset="/assets/images/content/form-mobile.jpg" />
+        <source media="(max-width: 1279.98px)" srcset="/assets/images/content/form-tablet.jpg" />
+        <img class="lazy" data-src="/assets/images/content/catalog-form.jpg" alt="" />
+    </picture>
+    <div class="container">
+        {% set title = { text: titleText, tag: "h2", class: "catalog-form__title" } %}
+        {% include "components/general/title/title.njk" %}
+
+        {% set formButtonClass = buttonClass %}
+        {% set formIdPrefix = "catalog" %}
+        {% include "components/general/form/form.njk" %}
+    </div>
+</section>

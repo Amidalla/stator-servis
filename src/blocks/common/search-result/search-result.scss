@@ -1,0 +1,67 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mixin;
+
+.search-result {
+    padding-top: 48px;
+    padding-bottom: 150px;
+
+    @include bp.mq(laptop) {
+        padding-bottom: 120px;
+    }
+
+    @include bp.mq(tablet) {
+        padding-bottom: 100px;
+    }
+
+    @include bp.mq(mobile-xl) {
+        padding-bottom: 80px;
+    }
+
+    &__info {
+        margin-bottom: 50px;
+        font-family: var(--font-family-headings);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 100%;
+        color: var(--color-1);
+
+        @include bp.mq(laptop) {
+            margin-bottom: 40px;
+        }
+
+        @include bp.mq(tablet) {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+    }
+
+    &__query {
+        font-weight: 600;
+        color: var(--color-red);
+    }
+
+    &__count {
+        color: var(--color-red);
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 0; // Убираем gap, так как margin добавляется у карточек
+
+        .catalog-card:not(.catalog-card--hidden) {
+            margin-bottom: 28px;
+        }
+
+        .catalog-card.catalog-card--out-of-stock {
+            pointer-events: none;
+        }
+    }
+
+    &__more {
+        display: flex;
+        justify-content: center;
+        margin-top: 12px;
+    }
+}

@@ -1,0 +1,56 @@
+{% macro render(
+        items=[],
+        separator="line",
+        size="lg",
+        ariaLabel="Цепочка навигации",
+        class=""
+    ) %}
+    {% set breadcrumbsClasses = "breadcrumbs " + size %}
+    {% if class %}
+        {% set breadcrumbsClasses = breadcrumbsClasses + " " + class %}
+    {% endif %}
+
+    <nav class="{{ breadcrumbsClasses }}" aria-label="{{ ariaLabel }}">
+        <div class="container">
+            <ul class="list" itemscope itemtype="https://schema.org/BreadcrumbList">
+                {% for item in items %}
+                    <li class="item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        {% if item.url %}
+                            <a
+                                href="{{ item.url }}"
+                                class="link"
+                                itemprop="item"
+                                {% if item.title %}title="{{ item.title }}"{% endif %}
+                            >
+                                <span itemprop="name">{{ item.title }}</span>
+                            </a>
+                        {% else %}
+                            <span class="current-page" aria-current="page" itemprop="name">{{ item.title }}</span>
+                        {% endif %}
+                        <meta itemprop="position" content="{{ loop.index }}" />
+
+                        {% if not loop.last %}
+                            <span class="separator {{ separator }}" aria-hidden="true">
+                                {% if separator == "chevron" %}
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6 12L10 8L6 4"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                {% elif separator == "slash" %}/
+                                {% elif separator == "arrow" %}→
+                                {% elif separator == "line" %}—
+                                {% else %}•
+                                {% endif %}
+                            </span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
+{% endmacro %}

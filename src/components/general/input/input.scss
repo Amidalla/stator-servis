@@ -1,0 +1,76 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.input {
+    // Component variables
+    --input-height: 40px;
+
+    // Base styles
+    display: block;
+    width: 100%;
+    height: var(--input-height);
+    padding: 11px;
+    font-family: var(--font-family-unna);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 120%;
+    color: var(--color-5);
+    outline: none;
+    background: var(--color-4);
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: all 0.2s ease-in-out;
+
+    &::placeholder {
+        color: var(--color-5);
+        opacity: 1;
+    }
+
+    // Hover / Focus state
+    &:hover:not(:disabled, :read-only),
+    &:focus:not(:read-only),
+    &:focus-visible:not(:read-only) {
+        border-color: var(--color-red);
+    }
+
+    // Disabled state
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    // Readonly state
+    &:read-only {
+        cursor: default;
+        opacity: 0.6;
+    }
+
+    // Error state
+    &.error {
+        border-color: var(--color-red);
+
+        &:focus {
+            border-color: var(--color-red);
+        }
+
+        &:hover {
+            border-color: var(--color-red) !important;
+        }
+    }
+
+    // Reset native browser styles
+    &[type="search"]::-webkit-search-cancel-button,
+    &[type="search"]::-webkit-search-decoration {
+        appearance: none;
+    }
+
+    &[type="number"]::-webkit-inner-spin-button,
+    &[type="number"]::-webkit-outer-spin-button {
+        margin: 0;
+        appearance: none;
+    }
+
+    &[type="number"] {
+        appearance: textfield;
+    }
+}

@@ -1,0 +1,81 @@
+// --------------------------------------
+// -- Libs
+// --------------------------------------
+@use "../../node_modules/swiper/swiper.css" as swiper;
+@use "../../node_modules/swiper/modules/navigation.css" as swiperNavigation;
+@use "../../node_modules/swiper/modules/pagination.css" as swiperPagination;
+@use "../../node_modules/swiper/modules/effect-fade.css" as swiperEffectFade;
+@use "../../node_modules/@fancyapps/ui/dist/fancybox/fancybox.css" as fancybox;
+
+// --------------------------------------
+// -- Core
+// --------------------------------------
+@use "./core/variables";
+@use "./core/fonts";
+@use "./core/mixins";
+@use "./core/globals";
+
+// --------------------------------------
+// -- Components
+// --------------------------------------
+@use "../components/general/title/title";
+@use "../components/general/heading/heading";
+@use "../components/general/button/button";
+@use "../components/general/textarea/textarea";
+@use "../components/general/input/input";
+@use "../components/general/form/form";
+@use "../components/general/menu/menu";
+@use "../components/general/navigation-top/navigation-top";
+@use "../components/general/navigation-mobile/navigation-mobile";
+@use "../components/general/navigation-bottom/navigation-bottom";
+@use "../components/general/breadcrumbs/breadcrumbs";
+@use "../components/general/search-form/search-form";
+@use "../components/general/accordion/accordion";
+@use "../components/general/tabs/tabs";
+@use "../components/general/consent-notice/consent-notice";
+@use "../components/general/consent-checkbox/consent-checkbox";
+@use "../components/general/logo/logo";
+@use "../components/general/catalog-card/catalog-card";
+@use "../components/general/photo-card/photo-card";
+@use "../components/general/partner-card/partner-card";
+@use "../components/general/article-card/article-card";
+@use "../components/general/filter/filter";
+@use "../components/general/gallery-slider/gallery-slider";
+@use "../components/common/contacts-header/contacts-header";
+@use "../components/common/text-footer/text-footer";
+@use "../components/common/contacts-footer/contacts-footer";
+@use "../components/common/footer-address/footer-address";
+@use "../components/common/copyright/copyright";
+@use "../components/common/popup-callback/popup-callback";
+@use "../components/common/popup-feedback-success/popup-feedback-success";
+@use "../components/common/contacts-mobile/contacts-mobile";
+
+// --------------------------------------
+// -- Blocks
+// --------------------------------------
+@use "../blocks/general/header/header";
+@use "../blocks/general/footer/footer";
+@use "../blocks/general/section/section";
+@use "../blocks/general/error-404/error-404";
+
+@use "../blocks/common/hero/hero";
+@use "../blocks/common/catalog-short/catalog-short";
+@use "../blocks/common/benefits/benefits";
+@use "../blocks/common/similar-products/similar-products";
+@use "../blocks/common/main-form/main-form";
+@use "../blocks/common/catalog-form/catalog-form";
+@use "../blocks/common/search-result/search-result";
+@use "../blocks/common/catalog-content/catalog-content";
+@use "../blocks/common/catalog-navigation/catalog-navigation";
+@use "../blocks/common/product-card/product-card";
+@use "../blocks/common/about-content/about-content";
+@use "../blocks/common/partners-short/partners-short";
+@use "../blocks/common/certificates/certificates";
+@use "../blocks/common/articles-short/articles-short";
+@use "../blocks/common/photos/photos";
+@use "../blocks/common/partners-content/partners-content";
+@use "../blocks/common/articles-content/articles-content";
+@use "../blocks/common/article/article";
+@use "../blocks/common/faq-content/faq-content";
+@use "../blocks/common/contacts-content/contacts-content";
+@use "../blocks/common/policy-content/policy-content";

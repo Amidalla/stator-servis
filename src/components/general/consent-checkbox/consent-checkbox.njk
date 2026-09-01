@@ -1,0 +1,38 @@
+{% macro render(
+        id="",
+        name="agree",
+        required=false,
+        text='Соглашаюсь с условиями и <a href="/persdan/">политикой обработки персональных данных.</a>',
+        class="",
+        variant="",
+        data={},
+        aria={}
+    ) %}
+    {% set consentClasses = "consent-checkbox" %}
+    {% if class %}
+        {% set consentClasses = consentClasses + " " + class + " " + variant %}
+    {% endif %}
+
+    <div class="{{ consentClasses }}">
+        <input
+            type="checkbox"
+            {% if id %}id="{{ id }}"{% endif %}
+            {% if name %}name="{{ name }}"{% endif %}
+            {% if required %}required{% endif %}
+            {% if data %}
+                {% for key, val in data %}
+                    data-{{ key | replace("_", "-") }}="{{ val }}"
+                {% endfor %}
+            {% endif %}
+            {% if aria %}
+                {% for key, val in aria %}
+                    aria-{{ key | replace("_", "-") }}="{{ val }}"
+                {% endfor %}
+            {% endif %}
+        />
+        <label {% if id %}for="{{ id }}"{% endif %}>
+            <span class="checkbox"></span>
+            <span class="value">{{ text | safe }}</span>
+        </label>
+    </div>
+{% endmacro %}

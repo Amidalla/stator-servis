@@ -1,0 +1,53 @@
+// src/scss/core/_fonts.scss
+
+// Основной шрифт для текста
+@font-face {
+    font-family: WixMadeforText;
+    font-style: normal;
+    font-weight: 400;
+    src: url("../assets/fonts/WixMadeforText.ttf") format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: WixMadeforText;
+    font-style: normal;
+    font-weight: 500;
+    src: url("../assets/fonts/WixMadeforText.ttf") format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: WixMadeforText;
+    font-style: normal;
+    font-weight: 700;
+    src: url("../assets/fonts/WixMadeforText.ttf") format("truetype");
+    font-display: swap;
+}
+
+// Шрифт для заголовков
+@font-face {
+    font-family: Commissioner;
+    font-style: normal;
+    font-weight: 400;
+    src: url("../assets/fonts/Commissioner.ttf") format("truetype");
+    font-display: swap;
+}
+
+// Шрифт для акцентов
+@font-face {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    src: url("../assets/fonts/Inter.ttf") format("truetype");
+    font-display: swap;
+}
+
+// Шрифт Unna
+@font-face {
+    font-family: Unna;
+    font-style: normal;
+    font-weight: 400;
+    src: url("../assets/fonts/Unna-Regular.ttf") format("truetype");
+    font-display: swap;
+}

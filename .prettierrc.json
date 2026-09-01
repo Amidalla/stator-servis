@@ -1,0 +1,27 @@
+{
+    "plugins": ["prettier-plugin-nunjucks"],
+    "printWidth": 120,
+    "tabWidth": 4,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": false,
+    "quoteProps": "as-needed",
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "endOfLine": "lf",
+    "overrides": [
+        {
+            "files": "*.scss",
+            "options": {
+                "singleQuote": false
+            }
+        },
+        {
+            "files": "*.html",
+            "options": {
+                "printWidth": 120
+            }
+        }
+    ]
+}

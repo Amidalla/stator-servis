@@ -1,0 +1,21 @@
+{% set meta = { title: "О компании | Статор-Сервис" } %}
+{% set page = { heading: true } %}
+{% set breadcrumbs = {
+    items: [
+        { title: "Главная", url: "/" },
+        { title: "О компании" }
+    ]
+} %}
+{% set title = { text: "О компании", tag: "h1", class: "title" } %}
+{% extends "layouts/default.njk" %}
+{% block content %}
+    {% include "blocks/common/about-content/about-content.njk" %}
+    {% include "blocks/common/certificates/certificates.njk" %}
+
+    {% include "blocks/common/articles-short/articles-short.njk" %}
+
+    {% set additionalClass = "catalog-form--modified" %}
+    {% set titleText = "Есть вопросы? Заполните форму, и мы свяжемся с вами" %}
+    {% set buttonClass = "button black" %}
+    {% include "blocks/common/catalog-form/catalog-form.njk" %}
+{% endblock %}

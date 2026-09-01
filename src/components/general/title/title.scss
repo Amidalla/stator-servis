@@ -1,0 +1,10 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.title:is(h1) {
+    margin: 0;
+
+    &.center {
+        text-align: center;
+    }
+}

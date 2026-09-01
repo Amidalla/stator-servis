@@ -1,0 +1,218 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mixin;
+
+footer.footer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 220px;
+    padding: 100px 0 102px;
+    background: var(--color-3);
+
+    @include bp.mq(laptop) {
+        gap: 92px;
+        padding: 43px 0 28px;
+    }
+    @include bp.mq(tablet) {
+        gap: 48px;
+        padding: 43px 0 19px;
+    }
+
+    .footer-main {
+        .block {
+            display: grid;
+            grid-template-columns: 6fr 4fr 3fr 3fr;
+            gap: 30px;
+
+            @include bp.mq(laptop) {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 110px;
+            }
+
+            @include bp.mq(tablet) {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .column {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                @include bp.mq(laptop) {
+                    grid-row: 1 / 2;
+                    grid-column: 1 / 4; // Вся ширина (3 колонки)
+                }
+
+                .wrap {
+                    &:last-child {
+                        display: none;
+
+                        @include bp.mq(tablet) {
+                            display: block;
+                        }
+
+                        .footer-btn {
+                            display: none;
+
+                            @include bp.mq(tablet) {
+                                display: inline-block;
+                                margin-top: 40px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .wrap {
+                &:nth-child(2) {
+                    @include bp.mq(laptop) {
+                        grid-row: 2 / 3;
+                        grid-column: 1 / 2;
+                    }
+                }
+
+                &:nth-child(3) {
+                    @include bp.mq(laptop) {
+                        grid-row: 2 / 3;
+                        grid-column: 2 / 3;
+                    }
+                }
+
+                &:nth-child(4) {
+                    @include bp.mq(laptop) {
+                        grid-row: 2 / 3;
+                        grid-column: 3 / 4;
+                        margin-top: -66px;
+                    }
+
+                    @include bp.mq(tablet) {
+                        margin-top: 0;
+
+                        .footer-btn {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer-btn {
+            display: none;
+
+            @include bp.mq(laptop) {
+                position: relative;
+                display: inline-block;
+                padding-right: 0;
+                padding-bottom: 6px;
+                padding-left: 0;
+                margin-bottom: 37px;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 120%;
+                color: var(--color-red);
+                cursor: pointer;
+                background: none;
+                border: none;
+                transition:
+                    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                    opacity 0.3s ease;
+
+                &::after {
+                    position: absolute;
+                    bottom: -4px;
+                    left: 50%;
+                    width: 100%;
+                    height: 3px;
+                    content: "";
+                    background-color: var(--color-red);
+                    border-radius: 2px;
+                    opacity: 1;
+                    transform: translateX(-50%) scaleX(1);
+                    transform-origin: center center;
+                    transition:
+                        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        all 0.3s ease;
+                }
+            }
+        }
+    }
+
+    .footer-bottom {
+        .block {
+            display: grid;
+            grid-template-columns: 6fr 4fr 3fr 3fr;
+            gap: 30px;
+            align-items: end;
+
+            @include bp.mq(laptop) {
+                grid-template-columns: 1fr 1fr;
+                gap: 50px;
+            }
+
+            @include bp.mq(tablet) {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                align-items: start;
+            }
+
+            .wrap {
+                &:nth-child(1) {
+                    grid-column: 1;
+
+                    @include bp.mq(laptop) {
+                        grid-row: 1 / 2;
+                    }
+
+                    @include bp.mq(tablet) {
+                        display: none;
+                    }
+                }
+
+                &:nth-child(2) {
+                    grid-column: 2;
+
+                    @include bp.mq(laptop) {
+                        grid-row: 1 / 2;
+                    }
+                }
+
+                &:nth-child(3) {
+                    grid-column: 4;
+
+                    @include bp.mq(laptop) {
+                        grid-row: 2 / 3;
+                        grid-column: 1 / 3;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-bg {
+        position: absolute;
+        right: 30px;
+        bottom: 10px;
+        z-index: 0;
+        max-width: 1653px;
+        pointer-events: none;
+
+        @include bp.mq(laptop-l) {
+            max-width: 1240px;
+        }
+
+        @include bp.mq(laptop) {
+            right: 9px;
+            bottom: 75px;
+            left: 9px;
+            max-width: 100%;
+        }
+
+        @include bp.mq(tablet) {
+            display: none;
+        }
+    }
+}

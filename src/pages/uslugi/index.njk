@@ -1,0 +1,15 @@
+{% set meta = { title: "Услуги | Статор-Сервис" } %}
+{% set page = { heading: true } %}
+{% set breadcrumbs = {
+    items: [
+        { title: "Главная", url: "/" },
+        { title: "Услуги" }
+    ]
+} %}
+{% set title = { text: "Наши услуги", tag: "h1", class: "title" } %}
+{% extends "layouts/default.njk" %}
+{% block content %}
+    {% set catalogAdditionalClass = "bg" %}
+    {% include "blocks/common/catalog-short/catalog-short.njk" %}
+    {% include "blocks/common/catalog-form/catalog-form.njk" %}
+{% endblock %}

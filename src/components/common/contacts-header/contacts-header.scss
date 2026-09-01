@@ -1,0 +1,149 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mixin;
+
+.contacts-header {
+    display: flex;
+    gap: 83px;
+    align-items: flex-start;
+
+    .item {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+        color: var(--color-1);
+
+        &.email {
+            a {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                font-size: 15px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 19px;
+                color: var(--color-1);
+            }
+        }
+
+        &.phones {
+            a {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                font-size: 15px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 120%;
+                color: var(--color-1);
+            }
+        }
+    }
+}
+
+/* .contacts-header {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+
+    @include bp.mq(laptop) {
+        gap: 16px;
+        width: 100%;
+    }
+    @include bp.mq(tablet) {
+        align-items: center;
+    }
+
+    .item {
+        display: flex;
+        gap: 9px;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1;
+        white-space: nowrap;
+
+        @include bp.mq(laptop) {
+            font-size: 15px;
+        }
+
+        svg {
+            margin-top: -1px;
+        }
+
+        a {
+            display: flex;
+            color: var(--color-primary);
+
+            &:hover {
+                color: var(--color-primary-dark);
+                text-decoration: none;
+            }
+        }
+
+        &.email {
+            @include bp.mq(tablet) {
+                display: none;
+            }
+        }
+
+        &.phones {
+            gap: 24px;
+            align-items: flex-start;
+
+            @include bp.mq(laptop) {
+                gap: 16px;
+            }
+
+            @include bp.mq(tablet) {
+                display: none;
+            }
+
+            a {
+                display: flex;
+                gap: 10px;
+                color: var(--color-black);
+                transition: all 0.3s;
+
+                &:hover {
+                    color: var(--color-primary);
+                    text-decoration: none;
+                }
+
+                small {
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: normal;
+                    color: var(--color-1);
+                }
+            }
+        }
+
+        button {
+            padding: 0;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1;
+            color: var(--color-primary);
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: all 0.3s;
+
+            &:hover {
+                color: var(--color-primary-dark);
+            }
+        }
+
+        &.callback {
+            @include bp.mq(laptop) {
+                flex: 1 1 auto;
+                justify-content: flex-end;
+                margin-top: 4px;
+            }
+        }
+    }
+} */

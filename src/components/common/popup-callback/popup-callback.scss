@@ -1,0 +1,13 @@
+@use "core/popup" as *;
+
+.popup-callback {
+    @include popup;
+
+    .frame {
+        .form {
+            .field {
+                margin-bottom: 8px;
+            }
+        }
+    }
+}

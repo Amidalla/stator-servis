@@ -1,0 +1,88 @@
+{% from "components/general/logo/logo.njk" import render as logo %}
+{% from "components/general/navigation-bottom/navigation-bottom.njk" import render as navigationBottom %}
+
+<footer class="footer">
+    <div class="footer-main">
+        <div class="container">
+            <div class="block">
+                <!-- Колонка 1: Логотип + текст -->
+                <div class="column">
+                    <div class="wrap">
+                        {{ logo(image="/assets/images/system/logo.svg", alt="Статор-Сервис") }}
+                    </div>
+                    <div class="wrap">
+                        {% include "components/common/text-footer/text-footer.njk" %}
+                    </div>
+                    <div class="wrap">
+                        {% include "components/common/contacts-footer/contacts-footer.njk" %}
+                        <button class="footer-btn" data-src="popup-callback">
+                            <span>Заказать звонок</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Колонка 2: О компании, работы, цены -->
+                <div class="wrap">
+                    {{ navigationBottom(
+                        items=[
+                            { title: "О компании", href: "/o-nas/" },
+                            { title: "Наши работы", href: "/nashi-raboty/" },
+                            { title: "Цены", href: "/cena/" }
+                        ]
+                    ) }}
+                </div>
+
+                <!-- Колонка 3: Услуги с подменю -->
+                <div class="wrap">
+                    {{ navigationBottom(
+                        items=[
+                            {
+                                title: "Услуги",
+                                href: "/uslugi/",
+                                children: [
+                                    { title: "Ремонт электродвигателей", href: "/uslugi/remont-elektrodvigateley/" },
+                                    { title: "Перемотка электродвигателей", href: "/uslugi/remont-elektrodvigateley/" },
+                                    { title: "Перемотка альтернатора", href: "/uslugi/remont-elektrodvigateley/" },
+                                    { title: "Ремонт промышленных вентиляторов", href: "/uslugi/remont-elektrodvigateley/" }
+                                ]
+                            }
+                        ]
+                    ) }}
+                </div>
+
+                <!-- Колонка 4: Блог, Вопрос-ответ, Контакты -->
+                <div class="wrap">
+                    <button class="footer-btn" data-src="popup-callback">
+                        <span>Заказать звонок</span>
+                    </button>
+                    {{ navigationBottom(
+                        items=[
+                            { title: "Блог", href: "/блог-и-новости/" },
+                            { title: "Вопрос-ответ", href: "/faq/" },
+                            { title: "Контакты", href: "/contact/" }
+                        ]
+                    ) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="block">
+                <div class="wrap">
+                    {% include "components/common/contacts-footer/contacts-footer.njk" %}
+                </div>
+                <div class="wrap">
+                    {% include "components/common/footer-address/footer-address.njk" %}
+                </div>
+                <div class="wrap">
+                    {% include "components/common/copyright/copyright.njk" %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bg">
+        <img class="lazy" src="/assets/images/content/footer-bg.svg" alt="" />
+    </div>
+</footer>

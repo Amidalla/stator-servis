@@ -1,0 +1,116 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.breadcrumbs {
+    // Component variables
+    --breadcrumbs-font-size-sm: 13px;
+    --breadcrumbs-font-size-lg: 16px;
+    --breadcrumbs-gap-sm: 0.25rem;
+    --breadcrumbs-gap-lg: 0.5rem;
+
+    // Base styles
+    display: block;
+    width: 100%;
+
+    // --------------------------------------
+    // List
+    // --------------------------------------
+
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--breadcrumbs-gap-lg);
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        font-size: var(--breadcrumbs-font-size-lg);
+        line-height: 1.5;
+        list-style: none;
+    }
+
+    // --------------------------------------
+    // Item
+    // --------------------------------------
+
+    .item {
+        display: inline-flex;
+        gap: var(--breadcrumbs-gap-lg);
+        align-items: center;
+    }
+
+    // --------------------------------------
+    // Link
+    // --------------------------------------
+
+    .link {
+        display: inline-flex;
+        align-items: center;
+        color: var(--color-gray);
+        text-decoration: none;
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    // --------------------------------------
+    // Current Page
+    // --------------------------------------
+
+    .current-page {
+        display: inline-flex;
+        align-items: center;
+        color: var(--color-black);
+    }
+
+    // --------------------------------------
+    // Separator
+    // --------------------------------------
+
+    .separator {
+        display: inline-flex;
+        align-items: center;
+        user-select: none;
+
+        svg {
+            display: block;
+            width: 1em;
+            height: 1em;
+        }
+
+        &.chevron svg {
+            width: 1em;
+            height: 1em;
+        }
+    }
+
+    // --------------------------------------
+    // Sizes
+    // --------------------------------------
+
+    // SM - для mobile-xl и ниже
+    &.sm {
+        @include bp.mq(mobile-xl) {
+            .list {
+                gap: var(--breadcrumbs-gap-sm);
+                font-size: var(--breadcrumbs-font-size-sm);
+            }
+
+            .item {
+                gap: var(--breadcrumbs-gap-sm);
+            }
+        }
+    }
+
+    &.lg {
+        .list {
+            gap: var(--breadcrumbs-gap-lg);
+            font-size: var(--breadcrumbs-font-size-lg);
+        }
+
+        .item {
+            gap: var(--breadcrumbs-gap-lg);
+        }
+    }
+}

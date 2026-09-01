@@ -1,0 +1,341 @@
+{# blocks/common/product-card/product-card.njk #}
+<section class="product-card section bg">
+    <div class="container">
+        <div class="product-card__wrapper">
+            <!-- Левая часть: галерея -->
+            <div class="product-card__gallery">
+                <!-- Главный слайдер -->
+                <div class="product-card__main-slider swiper">
+                    <div class="swiper-wrapper">
+                        <!-- Слайд 1 -->
+                        <div class="swiper-slide">
+                            <a
+                                href="/assets/images/content/product-main.jpg"
+                                data-fancybox="product-gallery"
+                                class="product-card__link"
+                            >
+                                <div class="product-card__main-image">
+                                    <img
+                                        class="lazy"
+                                        data-src="/assets/images/content/product-main.jpg"
+                                        alt="Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081"
+                                    />
+                                    <span class="product-card__zoom">
+                                        <img
+                                            src="/assets/images/content/magnifying-glass.png"
+                                            alt="Увеличить"
+                                            width="44"
+                                            height="41"
+                                        />
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Слайд 2 -->
+                        <div class="swiper-slide">
+                            <a
+                                href="/assets/images/content/hero-img-3.png"
+                                data-fancybox="product-gallery"
+                                class="product-card__link"
+                            >
+                                <div class="product-card__main-image">
+                                    <img
+                                        class="lazy"
+                                        data-src="/assets/images/content/hero-img-3.png"
+                                        alt="Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081"
+                                    />
+                                    <span class="product-card__zoom">
+                                        <img
+                                            src="/assets/images/content/magnifying-glass.png"
+                                            alt="Увеличить"
+                                            width="44"
+                                            height="41"
+                                        />
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Слайд 3 -->
+                        <div class="swiper-slide">
+                            <a
+                                href="/assets/images/content/product-main.jpg"
+                                data-fancybox="product-gallery"
+                                class="product-card__link"
+                            >
+                                <div class="product-card__main-image">
+                                    <img
+                                        class="lazy"
+                                        data-src="/assets/images/content/product-main.jpg"
+                                        alt="Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081"
+                                    />
+                                    <span class="product-card__zoom">
+                                        <img
+                                            src="/assets/images/content/magnifying-glass.png"
+                                            alt="Увеличить"
+                                            width="44"
+                                            height="41"
+                                        />
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Слайд 4 -->
+                        <div class="swiper-slide">
+                            <a
+                                href="/assets/images/content/hero-img-3.png"
+                                data-fancybox="product-gallery"
+                                class="product-card__link"
+                            >
+                                <div class="product-card__main-image">
+                                    <img
+                                        class="lazy"
+                                        data-src="/assets/images/content/hero-img-3.png"
+                                        alt="Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081"
+                                    />
+                                    <span class="product-card__zoom">
+                                        <img
+                                            src="/assets/images/content/magnifying-glass.png"
+                                            alt="Увеличить"
+                                            width="44"
+                                            height="41"
+                                        />
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Слайд 5 -->
+                        <div class="swiper-slide">
+                            <a
+                                href="/assets/images/content/product-main.jpg"
+                                data-fancybox="product-gallery"
+                                class="product-card__link"
+                            >
+                                <div class="product-card__main-image">
+                                    <img
+                                        class="lazy"
+                                        data-src="/assets/images/content/product-main.jpg"
+                                        alt="Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081"
+                                    />
+                                    <span class="product-card__zoom">
+                                        <img
+                                            src="/assets/images/content/magnifying-glass.png"
+                                            alt="Увеличить"
+                                            width="44"
+                                            height="41"
+                                        />
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Пагинация для мобильной версии -->
+                    <div class="product-card__pagination"></div>
+                </div>
+
+                <!-- Миниатюры -->
+                <div class="product-card__thumb-wrapper">
+                    <div class="product-card__thumb-slider swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="product-card__thumb-image">
+                                    <img
+                                        class="lazy"
+                                        data-src="/assets/images/content/product-main.jpg"
+                                        alt="Миниатюра 1"
+                                    />
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="product-card__thumb-image">
+                                    <img
+                                        class="lazy"
+                                        data-src="/assets/images/content/hero-img-3.png"
+                                        alt="Миниатюра 2"
+                                    />
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="product-card__thumb-image">
+                                    <img
+                                        class="lazy"
+                                        data-src="/assets/images/content/product-thumb-1.jpg"
+                                        alt="Миниатюра 3"
+                                    />
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="product-card__thumb-image">
+                                    <img
+                                        class="lazy"
+                                        data-src="/assets/images/content/product-thumb-2.jpg"
+                                        alt="Миниатюра 4"
+                                    />
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="product-card__thumb-image">
+                                    <img
+                                        class="lazy"
+                                        data-src="/assets/images/content/product-main.jpg"
+                                        alt="Миниатюра 5"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Стрелки навигации с классами Swiper -->
+                    <div class="swiper-button-prev product-card__thumb-prev">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle
+                                cx="20"
+                                cy="20"
+                                r="19.5"
+                                transform="matrix(-1 0 0 1 40 0)"
+                                fill="white"
+                                stroke="#808080"
+                            />
+                            <path
+                                d="M24.0947 10.3311L14.425 20.001L24.0947 29.6707"
+                                stroke="#808080"
+                                stroke-width="2"
+                            />
+                        </svg>
+                    </div>
+                    <div class="swiper-button-next product-card__thumb-next">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle
+                                cx="20"
+                                cy="20"
+                                r="19.5"
+                                transform="matrix(-1 0 0 1 40 0)"
+                                fill="white"
+                                stroke="#808080"
+                            />
+                            <path
+                                d="M24.0947 10.3311L14.425 20.001L24.0947 29.6707"
+                                stroke="#808080"
+                                stroke-width="2"
+                            />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Правая часть: информация о товаре -->
+            <div class="product-card__info">
+                <div class="product-card__top">
+                    <h1 class="product-card__title">Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081</h1>
+
+                    <div class="product-card__info-grid">
+                        <!-- Левая колонка: информация -->
+                        <div class="product-card__details">
+                            <div class="product-card__article">Артикул 7585949504</div>
+                            <div class="product-card__info-item">
+                                <span class="product-card__info-label">Тип изделия:</span>
+                                <span class="product-card__info-value">Электродвигатель</span>
+                            </div>
+                            <div class="product-card__info-item">
+                                <span class="product-card__info-label">Страна производства:</span>
+                                <span class="product-card__info-value">Россия</span>
+                            </div>
+                            <a href="#" class="product-card__download" download>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="26"
+                                    height="29"
+                                    viewBox="0 0 26 29"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M4.83337 15.4665H3.8667V13.5332H4.83337C5.08974 13.5332 5.33562 13.635 5.5169 13.8163C5.69819 13.9976 5.80003 14.2435 5.80003 14.4999C5.80003 14.7562 5.69819 15.0021 5.5169 15.1834C5.33562 15.3647 5.08974 15.4665 4.83337 15.4665ZM11.6 19.3332V13.5332H12.5667C12.8231 13.5332 13.069 13.635 13.2502 13.8163C13.4315 13.9976 13.5334 14.2435 13.5334 14.4999V18.3665C13.5334 18.6229 13.4315 18.8688 13.2502 19.0501C13.069 19.2314 12.8231 19.3332 12.5667 19.3332H11.6Z"
+                                        fill="#101828"
+                                    />
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M0 2.9C0 2.13087 0.305535 1.39325 0.84939 0.84939C1.39325 0.305535 2.13087 0 2.9 0L18.7669 0L25.1333 6.36647V26.1C25.1333 26.8691 24.8278 27.6068 24.2839 28.1506C23.7401 28.6945 23.0025 29 22.2333 29H2.9C2.13087 29 1.39325 28.6945 0.84939 28.1506C0.305535 27.6068 0 26.8691 0 26.1V2.9ZM4.83333 11.6H1.93333V21.2667H3.86667V17.4H4.83333C5.60246 17.4 6.34009 17.0945 6.88394 16.5506C7.4278 16.0068 7.73333 15.2691 7.73333 14.5C7.73333 13.7309 7.4278 12.9932 6.88394 12.4494C6.34009 11.9055 5.60246 11.6 4.83333 11.6ZM12.5667 11.6H9.66667V21.2667H12.5667C13.3358 21.2667 14.0734 20.9611 14.6173 20.4173C15.1611 19.8734 15.4667 19.1358 15.4667 18.3667V14.5C15.4667 13.7309 15.1611 12.9932 14.6173 12.4494C14.0734 11.9055 13.3358 11.6 12.5667 11.6ZM17.4 21.2667V11.6H23.2V13.5333H19.3333V15.4667H21.2667V17.4H19.3333V21.2667H17.4Z"
+                                        fill="#101828"
+                                    />
+                                </svg>
+                                Скачать каталог продукции
+                            </a>
+                            <div class="product-card__status in-stock">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 14 14"
+                                    fill="none"
+                                >
+                                    <circle cx="7" cy="7" r="7" fill="#F33607" />
+                                </svg>
+                                <span>В наличии на складе</span>
+                            </div>
+                            <button class="product-card__order button red">Заказать</button>
+                        </div>
+
+                        <!-- Правая колонка: характеристики -->
+                        <div class="product-card__params">
+                            <div class="product-card__param-group">
+                                <div class="product-card__param-label">Мощность (кВт)</div>
+                                <div class="product-card__param-values">
+                                    <span class="product-card__param-value active">0,06</span>
+                                    <span class="product-card__param-value">0,08</span>
+                                    <span class="product-card__param-value">0,12</span>
+                                </div>
+                            </div>
+                            <div class="product-card__param-group">
+                                <div class="product-card__param-label">Скорость (об/мин)</div>
+                                <div class="product-card__param-values">
+                                    <span class="product-card__param-value active">1500</span>
+                                    <span class="product-card__param-value">1000</span>
+                                    <span class="product-card__param-value">750</span>
+                                </div>
+                            </div>
+                            <div class="product-card__param-group">
+                                <div class="product-card__param-label">Исполнение</div>
+                                <div class="product-card__param-values">
+                                    <span class="product-card__param-value active">1081</span>
+                                    <span class="product-card__param-value">2081</span>
+                                    <span class="product-card__param-value">3081</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-card__status in-stock mobile">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="14"
+                                height="14"
+                                viewBox="0 0 14 14"
+                                fill="none"
+                            >
+                                <circle cx="7" cy="7" r="7" fill="#F33607" />
+                            </svg>
+                            <span>В наличии на складе</span>
+                        </div>
+                        <button class="product-card__order button red mobile">Заказать</button>
+                    </div>
+                </div>
+
+                <!-- Нижний блок: табы -->
+                <div class="product-card__bottom">
+                    {% from "components/general/tabs/tabs.njk" import render as tabs %}
+                    {{ tabs(
+                        items=[
+                            {
+                                title: "Описание товара",
+                                content: "<div class='product-card__tab-content'><p>Здесь будет описание товара. Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081 представляет собой современное высокоэффективное оборудование, предназначенное для использования в различных промышленных установках.</p><p>Двигатель имеет высокую надежность и долговечность благодаря использованию качественных материалов и современных технологий производства.</p></div>"
+                            },
+                            {
+                                title: "Технические характеристики",
+                                content: "<div class='product-card__tab-content'>Здесь будут характеристики товара</div>"
+                            }
+                        ],
+                        activeIndex=0,
+                        class="product-card__tabs"
+                    ) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

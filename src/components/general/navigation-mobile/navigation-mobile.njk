@@ -1,0 +1,59 @@
+{% macro render(
+        items=[],
+        class="",
+        ariaLabel="Мобильная навигация"
+    ) %}
+    {% set navClasses = "navigation-mobile" %}
+    {% if class %}
+        {% set navClasses = navClasses + " " + class %}
+    {% endif %}
+
+    <nav class="{{ navClasses }}" aria-label="{{ ariaLabel }}" data-navigation-mobile>
+        {{ renderList(items, 1) }}
+    </nav>
+{% endmacro %}
+
+{% macro renderList(items, level) %}
+    <ul data-level="{{ level }}">
+        {% for item in items %}
+            {% set hasChildren = item.children and item.children.length > 0 %}
+            {% set itemText = item.text or item.title %}
+            <li class="{{ item.class if item.class else '' }}{% if hasChildren %} has-children{% endif %}">
+                <div class="item">
+                    <a
+                        href="{{ item.href }}"
+                        {% if itemText %}
+                            title="{{ itemText }}"
+                        {% endif %}
+                        {% if item.target %}
+                            target="{{ item.target }}"
+                        {% endif %}
+                        {% if item.ariaCurrent %}
+                            aria-current="{{ item.ariaCurrent }}"
+                        {% endif %}
+                    >
+                        {{ itemText }}
+                        {# Стрелка для ссылок, которые НАХОДЯТСЯ внутри подменю (уровень > 1) #}
+                        {% if level > 1 %}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="21" viewBox="0 0 12 21" fill="none">
+                                <path d="M0.707031 0.707092L10.3767 10.377L0.707031 20.0467" stroke="#7E7E7E" stroke-width="2" />
+                            </svg>
+                        {% endif %}
+                    </a>
+                    {% if hasChildren %}
+                        <button class="toggle" type="button" aria-expanded="false" data-toggle-submenu>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="21" viewBox="0 0 12 21" fill="none">
+                                <path d="M0.707123 0.707092L10.3768 10.377L0.707123 20.0467" stroke-width="2" />
+                            </svg>
+                        </button>
+                    {% endif %}
+                </div>
+                {% if hasChildren %}
+                    <div class="submenu">
+                        {{ renderList(item.children, level + 1) }}
+                    </div>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}

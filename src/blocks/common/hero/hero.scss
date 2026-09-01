@@ -1,0 +1,360 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.hero {
+    position: relative;
+    margin-bottom: unset;
+    background: var(--color-4);
+
+    .hero-bg {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        max-width: 1460px;
+        pointer-events: none;
+
+        @include bp.mq(laptop-l) {
+            max-width: 1030px;
+        }
+
+        @include bp.mq(laptop) {
+            bottom: 20px;
+        }
+    }
+
+    // Скрытый заголовок
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        border: 0;
+        clip-path: inset(0);
+    }
+
+    .slider {
+        width: 100%;
+        height: 100%;
+
+        .swiper-slide {
+            position: relative;
+            height: auto;
+            background: transparent;
+
+            .container {
+                display: flex;
+                height: 100%;
+                padding-top: 108px;
+                padding-bottom: 233px;
+
+                @include bp.mq(laptop-l) {
+                    padding-bottom: 167px;
+                }
+
+                @include bp.mq(laptop) {
+                    padding-top: 91px;
+                    padding-bottom: 0;
+                }
+
+                @include bp.mq(tablet) {
+                    padding-top: 68px;
+                    padding-bottom: 60px;
+                }
+
+                @include bp.mq(mobile-xl) {
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                }
+            }
+
+            .block {
+                position: relative;
+                display: flex;
+                width: 100%;
+
+                @include bp.mq(laptop) {
+                    flex-direction: column-reverse;
+                    gap: 0;
+                    min-height: auto;
+                }
+
+                .content {
+                    position: relative;
+                    z-index: 2;
+                    flex: 0 0 60%;
+                    max-width: 60%;
+
+                    @include bp.mq(laptop) {
+                        flex: none;
+                        max-width: 100%;
+                    }
+                }
+
+                .image {
+                    position: absolute;
+                    top: 45%;
+                    right: 0;
+                    z-index: 1;
+                    width: 45%;
+                    max-width: 50%;
+                    pointer-events: none;
+                    transform: translateY(-50%);
+
+                    img {
+                        display: block;
+                        width: 100%;
+                        height: auto;
+                        max-height: 500px;
+                        object-fit: contain;
+                    }
+
+                    @include bp.mq(laptop) {
+                        position: relative;
+                        top: auto;
+                        left: auto;
+                        z-index: 3;
+                        display: flex;
+                        justify-content: flex-end;
+                        order: -1;
+                        width: 100%;
+                        max-width: 100%;
+                        padding-bottom: 82px;
+                        margin-top: -35px;
+                        pointer-events: auto;
+                        transform: none;
+
+                        img {
+                            width: auto;
+                            max-width: 582px;
+                        }
+                    }
+
+                    @include bp.mq(tablet) {
+                        padding-bottom: 40px;
+                        margin-top: 0;
+
+                        img {
+                            max-width: 100%;
+                            max-height: 300px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .hero__title {
+        margin-top: 0;
+        margin-bottom: 21px;
+        font-family: var(--font-family-headings);
+        font-size: 60px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 110%;
+        color: var(--color-black);
+
+        @include bp.mq(laptop-l) {
+            margin-bottom: 26px;
+            font-size: 45px;
+        }
+
+        @include bp.mq(laptop) {
+            margin-bottom: 17px;
+            font-size: 40px;
+        }
+
+        @include bp.mq(tablet) {
+            margin-bottom: 1px;
+            font-size: 27px;
+            line-height: 120%;
+        }
+    }
+
+    .hero__subtitle {
+        margin-bottom: 68px;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        color: #312f2f;
+
+        @include bp.mq(laptop-l) {
+            margin-bottom: 41px;
+            font-size: 25px;
+        }
+
+        @include bp.mq(laptop) {
+            margin-bottom: 37px;
+        }
+
+        @include bp.mq(tablet) {
+            margin-bottom: 18px;
+            font-size: 18px;
+        }
+    }
+
+    .hero__stats {
+        display: flex;
+        gap: 35px;
+
+        @include bp.mq(laptop-l) {
+            gap: 28px;
+        }
+
+        @include bp.mq(laptop) {
+            gap: 19px;
+        }
+
+        @include bp.mq(tablet) {
+            gap: 10px;
+        }
+
+        @include bp.mq(mobile-xl) {
+            justify-content: center;
+        }
+    }
+
+    .hero__stat {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 25px 26px 30px;
+        background: var(--color-white);
+        border-radius: 5px;
+
+        @include bp.mq(laptop-l) {
+            padding: 15px 24px 31px;
+        }
+
+        @include bp.mq(laptop) {
+            padding: 15px 16px 17px;
+        }
+
+        @include bp.mq(tablet) {
+            padding: 11px 8px 4px;
+        }
+    }
+
+    .hero__stat-number {
+        font-family: var(--font-family-headings);
+        font-size: 45px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%;
+        color: var(--color-blue);
+
+        @include bp.mq(laptop-l) {
+            font-size: 40px;
+        }
+
+        @include bp.mq(laptop) {
+            font-size: 30px;
+        }
+
+        @include bp.mq(tablet) {
+            font-size: 22px;
+        }
+    }
+
+    .hero__stat-text {
+        font-family: var(--font-family-accent);
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        color: #969696;
+
+        @include bp.mq(laptop-l) {
+            font-size: 16px;
+        }
+
+        @include bp.mq(tablet) {
+            font-size: 14px;
+        }
+    }
+
+    .navigation {
+        position: absolute;
+        right: 0; /* Пагинация справа */
+        bottom: 23px;
+        left: auto; /* Отменяем left: 0 */
+        z-index: 1;
+        width: 100%;
+        height: fit-content;
+
+        @include bp.mq(laptop) {
+            right: auto;
+            bottom: 0;
+            left: 0;
+        }
+
+        .swiper-pagination {
+            position: static;
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end; /* Выравнивание вправо */
+            width: 100%;
+            padding-right: 9%; /* Отступ от правого края */
+
+            @include bp.mq(laptop-l) {
+                padding-right: 0;
+            }
+
+            @include bp.mq(laptop) {
+                justify-content: center;
+                padding-right: 0;
+            }
+
+            .swiper-pagination-bullet {
+                width: 235px;
+                height: 5px;
+                margin: 0 !important;
+                background: var(--color-white);
+                border-radius: 0;
+                opacity: 1;
+                transition: all 0.3s;
+
+                @include bp.mq(laptop-l) {
+                    width: 196.62px;
+                    height: 4.183px;
+                }
+
+                @include bp.mq(laptop) {
+                    width: 196.62px;
+                    height: 4.183px;
+                }
+
+                @include bp.mq(tablet) {
+                    width: 93.749px;
+                    height: 3px;
+                }
+
+                &.swiper-pagination-bullet-active {
+                    width: 235px;
+                    height: 5px;
+                    background: #012f6b;
+                    border-radius: 0;
+                    opacity: 1;
+
+                    @include bp.mq(laptop-l) {
+                        width: 196.62px;
+                        height: 4.183px;
+                    }
+
+                    @include bp.mq(laptop) {
+                        width: 196.62px;
+                        height: 4.183px;
+                    }
+
+                    @include bp.mq(tablet) {
+                        width: 93.749px;
+                        height: 3px;
+                    }
+                }
+            }
+        }
+    }
+}

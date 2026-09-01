@@ -1,0 +1,18 @@
+{# components/general/photo-card/photo-card.njk #}
+
+{% macro photoCard(params) %}
+    <div class="photo-card">
+        <a href="{{ params.url | default(params.image) }}" {% if not params.url %}data-fancybox="photos"{% endif %} class="photo-card__link">
+            <div class="photo-card__image">
+                <img class="lazy" data-src="{{ params.image }}" alt="{{ params.title }}" />
+            </div>
+        </a>
+        <h3 class="photo-card__title">
+            {% if params.url %}
+                <a href="{{ params.url }}">{{ params.title }}</a>
+            {% else %}
+                {{ params.title }}
+            {% endif %}
+        </h3>
+    </div>
+{% endmacro %}

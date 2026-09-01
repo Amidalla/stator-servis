@@ -1,0 +1,79 @@
+{# blocks/common/articles-content/articles-content.njk #}
+
+<section class="articles-content section bg" data-limit="6">
+    <div class="container">
+        <div class="articles-content__grid">
+            {% from "components/general/article-card/article-card.njk" import articleCard %}
+
+            {{ articleCard({
+                image: '/assets/images/content/article-1.jpg',
+                date: '11 апреля 2025',
+                title: 'Защита асинхронного двигателя – способы и схемы',
+                description: 'Если правильно эксплуатировать асинхронный двигатель, он прослужит очень долго. Однако существуют факторы, способные сократить срок его службы, и их требуется нейтрализовать. В случае входа в аварийный режим электромотор должен быть быстро и своевременно отключен, иначе он сгорит.',
+                url: '/peremotka-yakorya-preobrazovatelya-vremyon-sssr/'
+            }) }}
+
+            {{ articleCard({
+                image: '/assets/images/content/article-2.jpg',
+                date: '10 апреля 2025',
+                title: 'Выбор электродвигателя по мощности и частоте вращения',
+                description: 'Правильный выбор электродвигателя — залог эффективной работы оборудования. Рассмотрим основные критерии выбора двигателя по мощности, частоте вращения и условиям эксплуатации.',
+                url: '/peremotka-yakorya-preobrazovatelya-vremyon-sssr/'
+            }) }}
+
+            {{ articleCard({
+                image: '/assets/images/content/article-3.jpg',
+                date: '9 апреля 2025',
+                title: 'Модернизация электропривода: экономия электроэнергии и повышение эффективности',
+                description: 'Модернизация электропривода позволяет значительно снизить потребление электроэнергии и повысить эффективность работы оборудования. Рассмотрим основные способы модернизации.',
+                url: '/peremotka-yakorya-preobrazovatelya-vremyon-sssr/'
+            }) }}
+
+            {{ articleCard({
+                image: '/assets/images/content/article-1.jpg',
+                date: '8 апреля 2025',
+                title: 'Обслуживание и ремонт электродвигателей: основные правила',
+                description: 'Регулярное обслуживание и своевременный ремонт электродвигателей позволяют продлить срок их службы и избежать внезапных поломок.',
+                url: '/peremotka-yakorya-preobrazovatelya-vremyon-sssr/'
+            }) }}
+
+            {{ articleCard({
+                image: '/assets/images/content/article-2.jpg',
+                date: '7 апреля 2025',
+                title: 'Современные системы управления электродвигателями',
+                description: 'Современные системы управления позволяют оптимизировать работу электродвигателей, снизить энергопотребление и повысить надежность оборудования.',
+                url: '/peremotka-yakorya-preobrazovatelya-vremyon-sssr/'
+            }) }}
+
+            {{ articleCard({
+                image: '/assets/images/content/article-3.jpg',
+                date: '6 апреля 2025',
+                title: 'Энергоэффективные электродвигатели: преимущества и применение',
+                description: 'Энергоэффективные электродвигатели класса IE3 и IE4 позволяют существенно снизить затраты на электроэнергию и уменьшить углеродный след.',
+                url: '/peremotka-yakorya-preobrazovatelya-vremyon-sssr/'
+            }) }}
+
+            {{ articleCard({
+                image: '/assets/images/content/article-1.jpg',
+                date: '5 апреля 2025',
+                title: 'Защита электродвигателей от перегрузок и коротких замыканий',
+                description: 'Современные системы защиты электродвигателей позволяют предотвратить выход оборудования из строя при перегрузках и коротких замыканиях.',
+                url: '/peremotka-yakorya-preobrazovatelya-vremyon-sssr/'
+            }) }}
+
+            {{ articleCard({
+                image: '/assets/images/content/article-2.jpg',
+                date: '4 апреля 2025',
+                title: 'Выбор электродвигателя для промышленных предприятий',
+                description: 'При выборе электродвигателя для промышленного предприятия необходимо учитывать множество факторов: мощность, частоту вращения, условия эксплуатации и другие.',
+                url: '/peremotka-yakorya-preobrazovatelya-vremyon-sssr/'
+            }) }}
+        </div>
+
+        <div class="articles-content__more">
+            <button type="button" class="articles-content__more-btn button outline" id="showMoreArticles">
+                Ещё
+            </button>
+        </div>
+    </div>
+</section>

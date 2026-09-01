@@ -1,0 +1,46 @@
+{# blocks/common/partners-content/partners-content.njk #}
+
+<section class="partners-content section bg">
+    <div class="container">
+        <div class="partners-content__grid">
+            {% from "components/general/partner-card/partner-card.njk" import partnerCard %}
+
+            <!-- Партнер 1 -->
+            {{ partnerCard({
+                type: "ОАО",
+                name: "Могилевский завод лифтового машиностроения",
+                address: "Республика Беларусь, г. Могилев",
+                description: "Выпускается широкая номенклатура запасных частей и оборудование для модернизации морально устаревших и физически изношенных лифтов.",
+                image: "/assets/images/content/partner-1.png"
+            }) }}
+
+            <!-- Партнер 2 -->
+            {{ partnerCard({
+                type: "АО",
+                name: 'Медногорский электротехнический завод "УРАЛЭЛЕКТРО"',
+                address: "Россия,  г. Медногорск",
+                description: "Отечественный завод с полным технологическим циклом производства асинхронных электродвигателей и низковольтной аппаратуры (пускателей, контакторов).",
+                image: "/assets/images/content/partner-2.png"
+            }) }}
+
+            <!-- Партнер 3 -->
+            {{ partnerCard({
+                type: "ОАО",
+                name: 'ОАО "Полесьеэлектромаш"',
+                address: "Республика Беларусь,  г. Лунинец",
+                description: "Производство электродвигателей, электроконфорок, насосов, чугунное
+                              и цветное литье.",
+                image: "/assets/images/content/partner-3.png"
+            }) }}
+
+            <!-- Партнер 4 -->
+            {{ partnerCard({
+                type: "СООО",
+                name: 'Медногорский электротехнический завод "УРАЛЭЛЕКТРО"',
+                address: "Республика Беларусь, г. Полоцк",
+                description: "Производство асинхронных электродвигателей, трехфазных асинхронных электродвигателей. Электродвигатели серии АДР и серии АДИ. Однофазные асинхронные электродвигатели.",
+                image: "/assets/images/content/partner-1.png"
+            }) }}
+        </div>
+    </div>
+</section>

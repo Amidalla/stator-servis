@@ -1,0 +1,13 @@
+{% set meta = { title: "Наши работы | Статор-Сервис" } %}
+{% set page = { heading: true } %}
+{% set breadcrumbs = {
+    items: [
+        { title: "Главная", url: "/" },
+        { title: "Наши работы" }
+    ]
+} %}
+{% set title = { text: "Наши работы", tag: "h1", class: "title" } %}
+{% extends "layouts/default.njk" %}
+{% block content %}
+    {% include "blocks/common/photos/photos.njk" %}
+{% endblock %}

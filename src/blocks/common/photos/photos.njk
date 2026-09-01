@@ -1,0 +1,63 @@
+{# blocks/common/photos/photos.njk #}
+
+<section class="photos section bg" data-limit="6">
+    <div class="container">
+        <div class="photos__grid">
+            {% from "components/general/photo-card/photo-card.njk" import photoCard %}
+
+            {{ photoCard({
+                image: '/assets/images/content/photo-1.jpg',
+                title: 'Перемотка альтернатора',
+                url: '/nashi-raboty/peremotka-alternatora/'
+            }) }}
+
+            {{ photoCard({
+                image: '/assets/images/content/photo-2.jpg',
+                title: 'Ремонт электродвигателя',
+                url: '/nashi-raboty/peremotka-alternatora/'
+            }) }}
+
+            {{ photoCard({
+                image: '/assets/images/content/photo-3.jpg',
+                title: 'Ремонт электродвигателя насоса',
+                url: '/nashi-raboty/peremotka-alternatora/'
+            }) }}
+
+            {{ photoCard({
+                image: '/assets/images/content/photo-1.jpg',
+                title: 'Перемотка статора',
+                url: '/nashi-raboty/peremotka-alternatora/'
+            }) }}
+
+            {{ photoCard({
+                image: '/assets/images/content/photo-2.jpg',
+                title: 'Ремонт промышленного вентилятора',
+                url: '/nashi-raboty/peremotka-alternatora/'
+            }) }}
+
+            {{ photoCard({
+                image: '/assets/images/content/photo-3.jpg',
+                title: 'Перемотка электродвигателя',
+                url: '/nashi-raboty/peremotka-alternatora/'
+            }) }}
+
+            {{ photoCard({
+                image: '/assets/images/content/photo-1.jpg',
+                title: 'Ремонт бензогенератора',
+                url: '/nashi-raboty/peremotka-alternatora/'
+            }) }}
+
+            {{ photoCard({
+                image: '/assets/images/content/photo-2.jpg',
+                title: 'Перемотка трансформатора',
+                url: '/nashi-raboty/peremotka-alternatora/'
+            }) }}
+        </div>
+
+        <div class="photos__more">
+            <button type="button" class="photos__more-btn button outline" id="showMorePhotos">
+                Ещё
+            </button>
+        </div>
+    </div>
+</section>

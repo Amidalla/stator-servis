@@ -1,0 +1,8 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.heading {
+    .title {
+        margin: 0;
+    }
+}

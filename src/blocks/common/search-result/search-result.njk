@@ -1,0 +1,99 @@
+{# search-result.njk #}
+{% from "components/general/catalog-card/catalog-card.njk" import catalogCard %}
+
+<section class="search-result section bg" data-limit="8">
+    <div class="container">
+        <div class="search-result__info">
+            По запросу <span class="search-result__query">«Электродвигатели»</span> найдено
+            <span class="search-result__count">186</span> товаров
+        </div>
+
+        <div class="search-result__list">
+            {{ catalogCard({
+                image: '/assets/images/content/search-img2.jpg',
+                name: 'Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081',
+                description: 'GU 5.5 / 1500 об.мин / IM 1081',
+                inStock: true,
+                link: '/uslugi/remont-elektrodvigateley/'
+            }) }}
+
+            {{ catalogCard({
+                image: '/assets/images/content/search-img3.png',
+                name: 'Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081',
+                description: 'GU 5.5 / 1500 об.мин / IM 1081',
+                inStock: false,
+                link: '/uslugi/remont-elektrodvigateley/'
+            }) }}
+
+            {{ catalogCard({
+                image: '/assets/images/content/search-img2.jpg',
+                name: 'Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081',
+                description: 'GU 5.5 / 1500 об.мин / IM 1081',
+                inStock: true,
+                link: '/uslugi/remont-elektrodvigateley/'
+            }) }}
+
+            {{ catalogCard({
+                image: '/assets/images/content/search-img3.png',
+                name: 'Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081',
+                description: 'GU 5.5 / 1500 об.мин / IM 1081',
+                inStock: true,
+                link: '/uslugi/remont-elektrodvigateley/'
+            }) }}
+
+            {{ catalogCard({
+                image: '/assets/images/content/search-img2.jpg',
+                name: 'Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081',
+                description: 'GU 5.5 / 1500 об.мин / IM 1081',
+                inStock: true,
+                link: '/uslugi/remont-elektrodvigateley/'
+            }) }}
+
+            {{ catalogCard({
+                image: '/assets/images/content/search-img3.png',
+                name: 'Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081',
+                description: 'GU 5.5 / 1500 об.мин / IM 1081',
+                inStock: true,
+                link: '/uslugi/remont-elektrodvigateley/'
+            }) }}
+
+            {{ catalogCard({
+                image: '/assets/images/content/search-img2.jpg',
+                name: 'Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081',
+                description: 'GU 5.5 / 1500 об.мин / IM 1081',
+                inStock: true,
+                link: '/uslugi/remont-elektrodvigateley/'
+            }) }}
+
+            {{ catalogCard({
+                image: '/assets/images/content/search-img3.png',
+                name: 'Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081',
+                description: 'GU 5.5 / 1500 об.мин / IM 1081',
+                inStock: true,
+                link: '/uslugi/remont-elektrodvigateley/'
+            }) }}
+
+            {{ catalogCard({
+                image: '/assets/images/content/search-img2.jpg',
+                name: 'Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081',
+                description: 'GU 5.5 / 1500 об.мин / IM 1081',
+                inStock: true,
+                link: '/uslugi/remont-elektrodvigateley/'
+            }) }}
+
+            {{ catalogCard({
+                image: '/assets/images/content/search-img3.png',
+                name: 'Эл.двигатель 5АИ 112 М4 GU 5.5/1500 IM 1081',
+                description: 'GU 5.5 / 1500 об.мин / IM 1081',
+                inStock: false,
+                link: '/uslugi/remont-elektrodvigateley/'
+            }) }}
+        </div>
+
+        <div class="search-result__more">
+            <button type="button" class="search-result__more-btn button outline" id="showMoreBtn">
+                Ещё
+            </button>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,24 @@
+{# catalog-navigation.njk #}
+{% macro render(items) %}
+    <section class="catalog-navigation section bg">
+        <div class="container">
+            <div class="catalog-navigation__scroll">
+                <div class="catalog-navigation__wrapper">
+                    {% for item in items %}
+                        <a
+                            href="{{ item.url }}"
+                            class="catalog-navigation__item{% if item.isAll %} catalog-navigation__item--all{% endif %}{% if loop.index0 == 0 %} active{% endif %}"
+                        >
+                            {% if item.icon %}
+                                <div class="catalog-navigation__icon">
+                                    <img class="lazy" src="{{ item.icon }}" alt="{{ item.title }}" />
+                                </div>
+                            {% endif %}
+                            <span class="catalog-navigation__name">{{ item.title }}</span>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endmacro %}

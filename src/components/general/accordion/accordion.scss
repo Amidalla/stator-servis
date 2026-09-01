@@ -1,0 +1,161 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.accordion:not(section) {
+    --accordion-gap: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--accordion-gap);
+
+    .item {
+        overflow: hidden;
+        background: var(--color-white);
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgb(0 0 0 / 5%);
+        transition: box-shadow 0.3s ease;
+
+        &:hover {
+            box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
+        }
+
+        .panel {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 19px 20px;
+            text-align: left;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            transition: all 0.3s;
+
+            @include bp.mq(laptop) {
+                padding: 16px;
+            }
+
+            @include bp.mq(mobile) {
+                gap: 12px;
+                padding: 14px 16px;
+            }
+
+            &:hover {
+                .name {
+                    color: var(--color-red);
+                }
+            }
+
+            .name {
+                flex: 1;
+                margin: 0;
+                font-size: 25px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 120%;
+                color: var(--color-gray);
+                transition: all 0.3s;
+
+                @include bp.mq(mobile-xl) {
+                    font-size: 20px;
+                }
+            }
+
+            .icon {
+                display: flex;
+                flex: 0 0 31px;
+                align-items: center;
+                justify-content: center;
+                width: 31px;
+                height: 32px;
+                transition: all 0.3s;
+
+                @include bp.mq(mobile) {
+                    flex: 0 0 24px;
+                    width: 24px;
+                    height: 24px;
+                }
+
+                svg {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    transition: all 0.3s;
+
+                    path {
+                        transition: all 0.3s;
+                    }
+                }
+
+                .icon-minus {
+                    display: none;
+                }
+            }
+        }
+
+        .collapse {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+
+            .wrap {
+                padding: 5px 20px 20px;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 120%;
+                color: var(--color-black);
+
+                @include bp.mq(mobile-xl) {
+                    padding: 5px 16px 16px;
+                    font-size: 16px;
+                }
+
+                @include mix.reset-child-outer-margins;
+
+                a:not(.button) {
+                    color: var(--color-red);
+                    text-decoration: underline;
+
+                    &:hover {
+                        color: var(--color-red-dark);
+                    }
+                }
+
+                ul,
+                ol {
+                    padding-left: 1.75rem;
+                }
+
+                li + li {
+                    margin-top: 0.5rem;
+                }
+            }
+        }
+
+        // --------------------------------------
+        // Open state - только иконки и цвет, без max-height
+        // --------------------------------------
+
+        &.is-open {
+            box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
+
+            .panel {
+                .name {
+                    color: var(--color-red);
+                }
+
+                .icon {
+                    .icon-plus {
+                        display: none;
+                    }
+
+                    .icon-minus {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

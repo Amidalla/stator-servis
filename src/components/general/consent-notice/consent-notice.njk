@@ -1,0 +1,49 @@
+{% macro render(
+        content="",
+        buttonText="Принимаю",
+        id="",
+        class="",
+        data={},
+        aria={}
+    ) %}
+    {% from "components/general/button/button.njk" import render as button %}
+
+    {% set noticeClasses = "consent-notice" %}
+    {% if class %}
+        {% set noticeClasses = noticeClasses + " " + class %}
+    {% endif %}
+
+    <div
+        class="{{ noticeClasses }}"
+        {% if id %}id="{{ id }}"{% endif %}
+        data-consent="notice"
+        {% if data %}
+            {% for key, val in data %}
+                data-{{ key | replace("_", "-") }}="{{ val }}"
+            {% endfor %}
+        {% endif %}
+        role="dialog"
+        aria-labelledby="consent-notice-title"
+        {% if aria %}
+            {% for key, val in aria %}
+                aria-{{ key | replace("_", "-") }}="{{ val }}"
+            {% endfor %}
+        {% endif %}
+    >
+        <div class="container">
+            <div class="block">
+                <div class="box">
+                    <div class="text" id="consent-notice-title">{{ content | safe }}</div>
+                </div>
+                {{ button(
+                    type="button",
+                    text=buttonText,
+                    variant="red",
+                    size="md",
+                    data={ consent: "accept" },
+                    aria={ label: "Принять условия" }
+                ) }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}

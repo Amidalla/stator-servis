@@ -1,0 +1,140 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mixin;
+
+.catalog-short {
+    padding-top: 68px;
+    padding-bottom: 77px;
+    background: var(--color-4);
+
+    @include bp.mq(laptop-l) {
+        padding-top: 41px;
+        padding-bottom: 99px;
+    }
+
+    @include bp.mq(laptop) {
+        padding-top: 90px;
+        padding-bottom: 73px;
+    }
+
+    @include bp.mq(tablet) {
+        padding-top: 40.5px;
+        padding-bottom: 80px;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 45px;
+
+        @include bp.mq(tablet-xl) {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        a {
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: none;
+                transform: none;
+            }
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 22px 50px;
+        text-decoration: none;
+        cursor: pointer;
+        background: var(--color-white);
+        transition:
+            box-shadow 0.3s ease,
+            transform 0.2s ease;
+
+        &:hover {
+            box-shadow: 0 10px 30px rgb(0 0 0 / 8%);
+            transform: translateY(-2px);
+        }
+
+        &:active {
+            transform: scale(0.98);
+        }
+
+        @include bp.mq(tablet) {
+            padding: 15px;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        max-width: 522px;
+        border-radius: 8px;
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+    }
+
+    // Ховер на картинку при ховере на весь блок
+    &__item:hover &__image img {
+        transform: scale(1.01);
+    }
+
+    &__title {
+        margin: 0;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%;
+        color: var(--color-black);
+
+        @include bp.mq(laptop-l) {
+            font-size: 30px;
+        }
+
+        @include bp.mq(tablet) {
+            font-size: 20px;
+        }
+    }
+
+    // Спан-кнопка "Подробнее"
+    .button {
+        &.red {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 35px;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--color-white);
+            text-decoration: none;
+            cursor: pointer;
+            background: var(--color-red);
+            border: 1px solid var(--color-red);
+            border-radius: 5px;
+            transition:
+                background 0.3s ease,
+                border-color 0.3s ease,
+                color 0.3s ease;
+
+            &:hover {
+                color: var(--color-white);
+                background: var(--color-black);
+                border-color: var(--color-black);
+            }
+
+            span {
+                display: inline-block;
+            }
+        }
+    }
+}

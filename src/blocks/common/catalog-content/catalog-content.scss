@@ -1,0 +1,119 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mixin;
+
+// На laptop и ниже: filter__header и заголовок в одной строке, пока влезают.
+// Заголовок справа; после переноса оба слева, на одном расстоянии до списка.
+.container.catalog-sidebar {
+    @include bp.mq(laptop) {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 15px 20px;
+        align-items: flex-end;
+        justify-content: flex-start;
+
+        .page-sidebar,
+        .page-sidebar .inner,
+        .page-content,
+        .catalog-page {
+            display: contents;
+        }
+
+        .filter {
+            flex: 0 0 auto;
+            margin: 0 auto -33px 0;
+        }
+
+        .filter__header {
+            margin-bottom: 0;
+        }
+
+        .catalog-page__title {
+            flex: 0 0 auto;
+            min-width: max-content;
+            max-width: 100%;
+            margin: 0 0 33px;
+            text-align: right;
+        }
+
+        .catalog-content {
+            flex: 1 1 100%;
+            width: 100%;
+            max-width: 100%;
+            padding-top: 0;
+            margin: 0;
+        }
+    }
+}
+
+.catalog-page {
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+
+    &__title {
+        margin: 0;
+
+        @include bp.mq(laptop) {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 33px;
+            font-size: 32px;
+        }
+
+        @include bp.mq(mobile-xl) {
+            width: 100%;
+            margin-top: 45px !important;
+            margin-bottom: 50px !important;
+            text-align: left !important;
+        }
+    }
+}
+
+.catalog-content {
+    padding-top: 0;
+    padding-bottom: 50px;
+
+    &__info {
+        margin-bottom: 50px;
+        font-family: var(--font-family-headings);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 100%;
+        color: var(--color-1);
+
+        @include bp.mq(laptop) {
+            margin-bottom: 40px;
+        }
+
+        @include bp.mq(tablet) {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+    }
+
+    &__query {
+        font-weight: 600;
+        color: var(--color-red);
+    }
+
+    &__count {
+        color: var(--color-red);
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+
+        .catalog-card:not(.catalog-card--hidden) {
+            margin-bottom: 28px;
+        }
+    }
+
+    &__more {
+        display: flex;
+        justify-content: center;
+        margin-top: 12px;
+    }
+}

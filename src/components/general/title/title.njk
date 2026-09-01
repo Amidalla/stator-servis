@@ -1,0 +1,17 @@
+{% set allowedTags = [
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "div",
+    "span"
+] %}
+{% if title.tag in allowedTags %}
+    <{{ title.tag }} class="{{ title.class }}">
+        {{ title.text | safe }}
+    </{{ title.tag }}>
+{% else %}
+    <div class="{{ title.class }}">{{ title.text }}</div>
+{% endif %}

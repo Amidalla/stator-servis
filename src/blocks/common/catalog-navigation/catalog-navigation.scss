@@ -1,0 +1,124 @@
+@use "core/breakpoints" as bp;
+
+.catalog-navigation {
+    padding: 0 0 50px;
+
+    &__scroll {
+        overflow: auto hidden;
+        overscroll-behavior-y: none;
+        touch-action: pan-x;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+
+        &::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--color-red);
+            border-radius: 4px;
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        @media (max-width: 1799.98px) {
+            display: grid;
+            grid-template-rows: auto auto;
+            grid-auto-columns: max-content;
+            grid-auto-flow: column;
+            width: max-content;
+        }
+
+        @include bp.mq(tablet) {
+            gap: 12px;
+        }
+
+        @include bp.mq(mobile-xl) {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 8px;
+            width: auto;
+            min-width: min-content;
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex: 0 0 auto;
+        gap: 10px;
+        align-items: center;
+        max-width: 460px;
+        padding: 12px 20px;
+        text-decoration: none;
+        background: var(--color-white);
+        border-radius: 5px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            text-decoration: none;
+            background: var(--color-red);
+            box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
+
+            .catalog-navigation__name {
+                color: var(--color-white);
+            }
+        }
+
+        &.active {
+            font-weight: 600;
+            text-decoration: none;
+            background: var(--color-red);
+            box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
+
+            .catalog-navigation__name {
+                color: var(--color-white);
+            }
+        }
+
+        @include bp.mq(tablet) {
+            gap: 10px;
+            padding: 10px 16px;
+        }
+
+        @include bp.mq(mobile-xl) {
+            gap: 8px;
+            padding: 8px 12px;
+        }
+    }
+
+    &__icon {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: 72px;
+        height: 72px;
+        margin-top: -12px;
+        margin-bottom: -12px;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__name {
+        min-width: 0;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+        color: var(--color-black);
+        transition: color 0.3s ease;
+    }
+}

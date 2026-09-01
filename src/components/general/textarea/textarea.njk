@@ -1,0 +1,46 @@
+{% macro render(
+        rows=4,
+        id="",
+        name="",
+        placeholder="",
+        value="",
+        disabled=false,
+        readonly=false,
+        required=false,
+        maxlength="",
+        error=false,
+        class="",
+        data={},
+        aria={}
+    ) %}
+    {# Формируем классы: base класс + error + пользовательский класс #}
+    {% set textareaClasses = "textarea" %}
+    {% if error %}
+        {% set textareaClasses = textareaClasses + " error" %}
+    {% endif %}
+    {% if class %}
+        {% set textareaClasses = textareaClasses + " " + class %}
+    {% endif %}
+
+    <textarea
+        class="{{ textareaClasses }}"
+        {% if id %}id="{{ id }}"{% endif %}
+        {% if name %}name="{{ name }}"{% endif %}
+        {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+        rows="{{ rows }}"
+        {% if disabled %}disabled{% endif %}
+        {% if readonly %}readonly{% endif %}
+        {% if required %}required{% endif %}
+        {% if maxlength %}maxlength="{{ maxlength }}"{% endif %}
+        {% if data %}
+            {% for key, val in data %}
+                data-{{ key | replace("_", "-") }}="{{ val }}"
+            {% endfor %}
+        {% endif %}
+        {% if aria %}
+            {% for key, val in aria %}
+                aria-{{ key | replace("_", "-") }}="{{ val }}"
+            {% endfor %}
+        {% endif %}
+    >{% if value %}{{ value }}{% endif %}</textarea>
+{% endmacro %}

@@ -1,0 +1,14 @@
+{% set meta = { title: "Вопрос-ответ | Статор-Сервис" } %}
+{% set page = { heading: true } %}
+{% set breadcrumbs = {
+    items: [
+        { title: "Главная", url: "/" },
+        { title: "Вопрос-ответ" }
+    ]
+} %}
+{% set title = { text: "Вопрос-ответ", tag: "h1", class: "title" } %}
+{% extends "layouts/default.njk" %}
+{% block content %}
+    {% include "blocks/common/faq-content/faq-content.njk" %}
+    {% include "blocks/common/catalog-form/catalog-form.njk" %}
+{% endblock %}

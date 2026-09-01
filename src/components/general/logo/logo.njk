@@ -1,0 +1,18 @@
+{% macro render(href = "/", image = "/assets/images/system/logo.svg", imageMobile = "", alt = "Статор-Сервис", class = "", text = "") %}
+    {% set logoClasses = "logo" %}
+    {% if class %}
+        {% set logoClasses = logoClasses + " " + class %}
+    {% endif %}
+
+    <a class="{{ logoClasses }}" href="{{ href }}">
+        <picture>
+            {% if imageMobile %}
+                <source media="(max-width: 767px)" srcset="{{ imageMobile }}" />
+            {% endif %}
+            <img src="{{ image }}" alt="{{ alt }}" />
+        </picture>
+        {% if text %}
+            <span class="text">{{ text }}</span>
+        {% endif %}
+    </a>
+{% endmacro %}

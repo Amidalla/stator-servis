@@ -1,0 +1,88 @@
+{% from "components/general/consent-notice/consent-notice.njk" import render as consentNotice %}
+{% from "components/general/breadcrumbs/breadcrumbs.njk" import render as breadcrumbsComponent %}
+
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        {% include "blocks/general/meta/meta.njk" %}
+        <link rel="stylesheet" href="/css/bundle.css" />
+    </head>
+    <body>
+        <div class="site">
+            {% include "blocks/general/header/header.njk" %}
+            <main class="page">
+                {% set page = page | default({}) %}
+                {% set page = {
+                    breadcrumbs: page.breadcrumbs | default(true),
+                    heading: page.heading | default(true),
+                    after_content: page.after_content | default(false),
+                    sidebar: page.sidebar | default(false),
+                    sidebar_position: page.sidebar_position | default("left"),
+                    sidebar_class: page.sidebar_class | default(""),
+                    catalog_nav: page.catalog_nav | default(false)
+                } %}
+
+                {% if page.breadcrumbs or page.heading or page.catalog_nav %}
+                    <div class="page-header">
+                        {% if page.breadcrumbs %}
+                            {{ breadcrumbsComponent(items=breadcrumbs.items, size="sm", separator="slash") }}
+                        {% endif %}
+
+                        {# Блок для навигации каталога #}
+                        {% block page_header_after %}{% endblock %}
+
+                        {% if page.heading %}
+                            {% include "components/general/heading/heading.njk" %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {# ОБЕРТКА В ЗАВИСИМОСТИ ОТ НАЛИЧИЯ САЙДБАРА #}
+                {% if page.sidebar %}
+                    <div
+                        class="container has-sidebar sidebar-{{ page.sidebar_position }}{% if page.sidebar_class %} {{ page.sidebar_class }}{% endif %}"
+                    >
+                        <aside class="page-sidebar">
+                            <div class="inner">
+                                {% block sidebar %}{% endblock %}
+                            </div>
+                        </aside>
+                        <div class="page-content">
+                        {% else %}
+                            <div class="page-content">
+                            {% endif %}
+
+                            {# ОДИН БЛОК CONTENT #}
+                            {% block content %}{% endblock %}
+
+                            {% if page.sidebar %}
+                            </div>
+                        </div>
+                    {% else %}
+                    </div>
+                {% endif %}
+
+                {% if page.after_content %}
+                    <div class="page-footer">
+                        {% block after_content %}{% endblock %}
+                    </div>
+                {% endif %}
+            </main>
+
+            {% include "blocks/general/footer/footer.njk" %}
+
+            {% include "components/general/menu/menu.njk" %}
+
+            {% include "components/common/popup-callback/popup-callback.njk" %}
+
+            {% include "components/common/popup-feedback-success/popup-feedback-success.njk" %}
+
+            {% set consentContent %}
+                Мы используем файлы cookie и сервис веб-аналитики Яндекс Метрика для улучшения работы сайта. Оставаясь на
+                сайте, вы соглашаетесь с <a href="/persdan/">Политикой обработки персональных данных</a>.
+            {% endset %}
+            {{ consentNotice(content=consentContent) }}
+        </div>
+        <script src="/js/bundle.js"></script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+{# components/general/form/form.njk #}
+
+{% from "components/general/button/button.njk" import render as button %}
+{% from "components/general/input/input.njk" import render as input %}
+{% from "components/general/textarea/textarea.njk" import render as textarea %}
+{% from "components/general/consent-checkbox/consent-checkbox.njk" import render as consentCheckbox %}
+
+{# Принимаем класс для кнопки и префикс id извне #}
+{% set formButtonClass = formButtonClass | default("button red") %}
+{% set formIdPrefix = formIdPrefix | default("feedback") %}
+
+<form class="form" data-validate>
+    <div class="grid col-1">
+        <div class="field">
+            <label class="label" for="{{ formIdPrefix }}-name">Имя</label>
+            {{ input(
+                type="text",
+                id=formIdPrefix + "-name",
+                name="name",
+                placeholder="Имя*",
+                autocomplete="name",
+                required=true,
+                minlength="2",
+                data={"error": "Введите имя (минимум 2 буквы)"}
+            ) }}
+        </div>
+
+        <div class="field">
+            <label class="label" for="{{ formIdPrefix }}-phone">Телефон</label>
+            {{ input(
+                type="tel",
+                id=formIdPrefix + "-phone",
+                name="phone",
+                placeholder="Телефон*",
+                autocomplete="tel",
+                data={"mask": "phone", "error": "Введите полный номер телефона"},
+                required=true
+            ) }}
+        </div>
+
+        <div class="field">
+            <label class="label" for="{{ formIdPrefix }}-message">Комментарий</label>
+            {{ textarea(
+                id=formIdPrefix + "-message",
+                name="message",
+                rows="6",
+                placeholder="Комментарий"
+            ) }}
+        </div>
+
+        <div class="field-consent">
+            {{ consentCheckbox(
+                id=formIdPrefix + "-consent",
+                class="variant",
+                data={"error": "Необходимо отметить"},
+                required=true
+            ) }}
+        </div>
+
+        <div class="actions">
+            {{ button(
+                text="Отправить",
+                type="submit",
+                variant="red",
+                disabled=true,
+                class=formButtonClass
+            ) }}
+        </div>
+    </div>
+</form>

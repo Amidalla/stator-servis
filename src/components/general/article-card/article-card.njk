@@ -1,0 +1,27 @@
+{# components/general/article-card/article-card.njk #}
+
+{% macro articleCard(params) %}
+    <article class="article-card">
+        <a href="{{ params.url | default('/peremotka-yakorya-preobrazovatelya-vremyon-sssr/') }}" class="article-card__link">
+            <div class="article-card__image">
+                <img class="lazy" data-src="{{ params.image }}" alt="{{ params.title }}" />
+            </div>
+            <div class="article-card__content">
+                <time class="article-card__date" datetime="{{ params.date }}">{{ params.date }}</time>
+                <h3 class="article-card__title">{{ params.title }}</h3>
+                <p class="article-card__description">{{ params.description }}</p>
+                <div class="article-card__actions">
+                    <button class="article-card__btn button black">
+                        <span class="article-card__btn-text">Читать</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="27" viewBox="0 0 36 27" fill="none">
+                            <path
+                                d="M0 13.5086C0 13.1827 0.126428 12.8702 0.351472 12.6398C0.576515 12.4094 0.88174 12.28 1.2 12.28H24.696L14.736 2.0822C14.5174 1.85047 14.3965 1.54012 14.3992 1.21797C14.4019 0.895822 14.5281 0.587663 14.7506 0.359862C14.9731 0.132061 15.2741 0.00284581 15.5887 4.6446e-05C15.9034 -0.00275292 16.2065 0.121088 16.4328 0.344895L28.4328 12.6313C28.6578 12.8618 28.7841 13.1742 28.7841 13.5C28.7841 13.8258 28.6578 14.1382 28.4328 14.3687L16.4328 26.6551C16.2065 26.8789 15.9034 27.0028 15.5887 27C15.2741 26.9972 14.9731 26.8679 14.7506 26.6401C14.5281 26.4123 14.4019 26.1042 14.3992 25.782C14.3965 25.4599 14.5174 25.1495 14.736 24.9178L24.696 14.72H1.2C0.88174 14.72 0.576515 14.5906 0.351472 14.3602C0.126428 14.1298 0 13.8173 0 13.4914V13.5086ZM33.6 23.3378C33.6 23.6636 33.7264 23.9761 33.9515 24.2065C34.1765 24.437 34.4817 24.5664 34.8 24.5664C35.1183 24.5664 35.4235 24.437 35.6485 24.2065C35.8736 23.9761 36 23.6636 36 23.3378V3.67944C36 3.35358 35.8736 3.04107 35.6485 2.81066C35.4235 2.58024 35.1183 2.45079 34.8 2.45079C34.4817 2.45079 34.1765 2.58024 33.9515 2.81066C33.7264 3.04107 33.6 3.35358 33.6 3.67944V23.3378Z"
+                                fill="white"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </a>
+    </article>
+{% endmacro %}
