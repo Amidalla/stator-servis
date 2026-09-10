@@ -1,76 +1,52 @@
 @use "core/breakpoints" as bp;
-@use "core/mixins" as mix;
 
 .button {
-    // Component variables
-    --button-border-radius: 5px;
-    --button-bg: transparent;
-    --button-color: var(--color-black);
-    --button-border-color: transparent;
-    --button-hover-bg: transparent;
-    --button-hover-color: var(--color-white);
-    --button-hover-border-color: transparent;
-    --button-active-bg: transparent;
-    --button-active-color: var(--color-white);
-    --button-active-border-color: transparent;
+    --button-height: 63px;
+    --button-padding: 20px;
+    --button-gap: 1px;
     --button-width: auto;
-    --button-height: 57px;
-    --button-padding: 19px 51px;
-    --button-align-self: auto;
     --button-font-size: 18px;
-    --button-font-weight: 600;
-    --button-line-height: 120%;
+    --button-bg: var(--brand-dark-orange);
+    --button-color: var(--color-white);
+    --button-border-color: var(--brand-dark-orange);
 
-    // Base styles
     position: relative;
-    z-index: 0;
     display: inline-flex;
-    gap: 10px;
+    flex-shrink: 0;
+    gap: var(--button-gap);
     align-items: center;
-    align-self: var(--button-align-self);
     justify-content: center;
     width: var(--button-width);
     height: var(--button-height);
     padding: var(--button-padding);
-    overflow: hidden;
-    font-family: var(--font-family-secondary);
+    font-family: var(--font-family-primary);
     font-size: var(--button-font-size);
-    font-weight: var(--button-font-weight);
-    line-height: var(--button-line-height);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
     color: var(--button-color);
     white-space: nowrap;
     text-decoration: none;
     cursor: pointer;
     user-select: none;
+    background: var(--button-bg);
+    border: 2px solid var(--button-border-color);
+    border-radius: 12px;
     outline: none;
-    background-color: var(--button-bg);
-    border: 1px solid var(--button-border-color);
-    border-radius: var(--button-border-radius);
     transition:
-        color 0.3s,
-        background-color 0.3s,
-        border-color 0.3s;
+        color 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease;
 
     &:hover:not(:disabled, .disabled) {
-        color: var(--button-hover-color);
         text-decoration: none;
-        background-color: var(--button-hover-bg);
-        border-color: var(--button-hover-border-color);
     }
 
-    &:active:not(:disabled, .disabled) {
-        color: var(--button-active-color);
-        background-color: var(--button-active-bg);
-        border-color: var(--button-active-border-color);
-    }
-
-    // Focus state (accessibility)
     &:focus-visible {
-        outline: 2px solid var(--color-primary);
-        outline-offset: 2px;
+        outline: 2px solid var(--brand-dark-orange);
+        outline-offset: 3px;
     }
 
-    // Disabled state
     &:disabled,
     &.disabled {
         pointer-events: none;
@@ -79,98 +55,49 @@
     }
 
     // --------------------------------------
-    // Variants (4 варианта)
+    // 1. Оранжевая
     // --------------------------------------
-
-    // 1 вариант: Красная кнопка
+    &.primary,
     &.red {
-        --button-width: 212px;
-        --button-height: 57px;
-        --button-padding: 19px 51px;
-        --button-font-size: 18px;
-        --button-font-weight: 600;
-        --button-line-height: 120%;
-        --button-bg: var(--color-red);
+        --button-bg: var(--brand-dark-orange);
         --button-color: var(--color-white);
-        --button-border-color: var(--color-red);
-        --button-hover-bg: var(--color-black);
-        --button-hover-color: var(--color-white);
-        --button-hover-border-color: var(--color-black);
-        --button-active-bg: var(--color-red-darker);
-        --button-active-border-color: var(--color-red-darker);
-    }
+        --button-border-color: var(--brand-dark-orange);
 
-    // 2 вариант: Outline (обводка) - черный бордер, прозрачный фон, черный текст
-    &.outline {
-        --button-width: 212px;
-        --button-height: 57px;
-        --button-padding: 19px 51px;
-        --button-font-size: 18px;
-        --button-font-weight: 600;
-        --button-line-height: 120%;
-        --button-bg: transparent;
-        --button-color: var(--color-black);
-        --button-border-color: var(--color-black);
-        --button-hover-bg: var(--color-black);
-        --button-hover-color: var(--color-white);
-        --button-hover-border-color: var(--color-black);
-        --button-active-bg: var(--color-black-light);
-        --button-active-border-color: var(--color-black-light);
-    }
-
-    // 3 вариант: Черная кнопка (ховер -> красная)
-    &.black {
-        --button-width: 212px;
-        --button-height: 57px;
-        --button-padding: 19px 51px;
-        --button-font-size: 18px;
-        --button-font-weight: 600;
-        --button-line-height: 120%;
-        --button-bg: var(--color-black);
-        --button-color: var(--color-white);
-        --button-border-color: var(--color-black);
-        --button-hover-bg: var(--color-red); // ← ховер становится красным
-        --button-hover-color: var(--color-white);
-        --button-hover-border-color: var(--color-red); // ← бордер тоже красный
-        --button-active-bg: var(--color-red-darker);
-        --button-active-border-color: var(--color-red-darker);
-    }
-
-    // 4 вариант: White (белая кнопка с черным бордером)
-    &.white {
-        --button-width: 212px;
-        --button-height: 57px;
-        --button-padding: 19px 51px;
-        --button-font-size: 18px;
-        --button-font-weight: 600;
-        --button-line-height: 120%;
-        --button-bg: var(--color-white);
-        --button-color: var(--color-black);
-        --button-border-color: var(--color-black);
-        --button-hover-bg: var(--color-black);
-        --button-hover-color: var(--color-white);
-        --button-hover-border-color: var(--color-black);
-        --button-active-bg: var(--color-black-light);
-        --button-active-border-color: var(--color-black-light);
-    }
-
-    // --------------------------------------
-    // Tablet-XL и меньше — только отступы и размер шрифта
-    // --------------------------------------
-    @include bp.mq(tablet-xl) {
-        --button-padding: 13px 37px;
-        --button-font-size: 16px;
-        --button-font-weight: 600;
-        --button-line-height: 120%;
-
-        &.red,
-        &.outline,
-        &.black,
-        &.white {
-            --button-padding: 13px 37px;
-            --button-font-size: 16px;
-            --button-font-weight: 600;
-            --button-line-height: 120%;
+        &:hover:not(:disabled, .disabled) {
+            --button-bg: var(--color-white);
+            --button-color: var(--brand-dark-orange);
+            --button-border-color: var(--brand-dark-orange);
         }
+    }
+
+    // --------------------------------------
+    // 2. Белая
+    // --------------------------------------
+    &.secondary,
+    &.white,
+    &.black,
+    &.outline {
+        --button-width: 366px;
+        --button-gap: 9px;
+        --button-bg: var(--color-white);
+        --button-color: var(--txt-dark);
+        --button-border-color: var(--color-white);
+
+        &:hover:not(:disabled, .disabled) {
+            --button-bg: var(--brand-dark-orange);
+            --button-color: var(--color-white);
+            --button-border-color: var(--brand-dark-orange);
+        }
+    }
+
+    @include bp.mq(tablet) {
+        --button-width: 100%;
+        --button-height: 50px;
+        --button-padding: 20px 60px;
+        --button-gap: 1px;
+        --button-font-size: 16px;
+
+        align-self: stretch;
+        width: 100%;
     }
 }

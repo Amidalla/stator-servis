@@ -83,7 +83,7 @@
 
             &.swiper-slide-thumb-active {
                 .gallery-slider__thumb-image {
-                    border-top: 2px solid var(--color-red);
+                    border-top: 2px solid var(--brand-dark-orange);
                 }
             }
         }
@@ -102,7 +102,7 @@
         transition: all 0.3s ease;
 
         &:hover {
-            border-color: var(--color-red);
+            border-color: var(--brand-dark-orange);
         }
 
         img {
@@ -147,7 +147,7 @@
         &:hover {
             svg {
                 path {
-                    stroke: var(--color-red);
+                    stroke: var(--brand-dark-orange);
                 }
             }
         }

@@ -26,7 +26,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 100%;
-        color: var(--color-black);
+        color: var(--txt-dark);
         text-align: center;
 
         @include bp.mq(mobile-xl) {
@@ -67,7 +67,7 @@
         transition: color 0.3s ease;
 
         &:hover {
-            color: var(--color-red);
+            color: var(--brand-dark-orange);
             text-decoration: none;
 
             .similar-products__card-image img {
@@ -108,7 +108,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
-        color: var(--color-black);
+        color: var(--txt-dark);
         transition: color 0.3s ease;
         -webkit-box-orient: vertical;
 
@@ -121,7 +121,7 @@
         }
 
         .similar-products__card-link:hover & {
-            color: var(--color-red);
+            color: var(--brand-dark-orange);
         }
     }
 
@@ -189,7 +189,7 @@
 
         &:hover {
             svg path {
-                stroke: #f33607;
+                stroke: var(--brand-dark-orange);
             }
         }
 

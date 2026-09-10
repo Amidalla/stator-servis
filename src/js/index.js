@@ -7,6 +7,7 @@ import { accordion } from "../components/general/accordion/accordion.js";
 import { consentNotice } from "../components/general/consent-notice/consent-notice.js";
 import { navigationMobile } from "../components/general/navigation-mobile/navigation-mobile.js";
 import { hero } from "../blocks/common/hero/hero.js";
+import { directions } from "../blocks/common/directions/directions.js";
 import { header } from "../blocks/general/header/header.js";
 import { showPopup } from "./utils/popup.js";
 import { searchForm } from "../components/general/search-form/search-form.js";
@@ -20,6 +21,8 @@ import { gallerySlider } from "../components/general/gallery-slider/gallery-slid
 import { certificates } from "../blocks/common/certificates/certificates.js";
 import { photos } from "../blocks/common/photos/photos.js";
 import { articlesContent } from "../blocks/common/articles-content/articles-content.js";
+import { ourWorks } from "../blocks/common/our-works/our-works.js";
+import { reviews } from "../blocks/common/reviews/reviews.js";
 import { popupCallback } from "../components/common/popup-callback/popup-callback.js";
 import { popupFeedbackSuccess } from "../components/common/popup-feedback-success/popup-feedback-success.js";
 
@@ -32,6 +35,7 @@ const components = [
     consentNotice,
     navigationMobile,
     hero,
+    directions,
     header,
     searchForm,
     searchResult,
@@ -43,6 +47,8 @@ const components = [
     certificates,
     photos,
     articlesContent,
+    ourWorks,
+    reviews,
     popupCallback,
     popupFeedbackSuccess
 ];

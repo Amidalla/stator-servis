@@ -10,11 +10,10 @@
     transition: opacity 0.2s ease-in-out;
 
     img {
+        width: auto;
         max-width: 210px;
-
-        @include bp.mq(laptop-l) {
-            max-width: 148px;
-        }
+        height: auto;
+        object-fit: contain;
     }
 
     &:hover {

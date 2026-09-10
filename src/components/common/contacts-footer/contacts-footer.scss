@@ -1,22 +1,42 @@
 @use "core/breakpoints" as bp;
-@use "core/mixins" as mixin;
 
 .contacts-footer {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
 
-    @include bp.mq(tablet) {
-        margin-top: 27px;
+    .item {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        font-family: var(--font-family-primary);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        color: var(--color-white);
+
+        img {
+            flex-shrink: 0;
+            width: 20px;
+            height: auto;
+            margin-top: 2px;
+            object-fit: contain;
+        }
+
+        span {
+            min-width: 0;
+        }
     }
 
-    a {
-        color: var(--color-red);
-        transition: all 0.3s ease;
+    a.item {
+        text-decoration: none;
+        transition: opacity 0.3s ease;
 
         &:hover {
-            color: var(--color-black);
+            color: var(--color-white);
             text-decoration: none;
+            opacity: 0.8;
         }
     }
 }

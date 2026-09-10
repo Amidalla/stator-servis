@@ -95,7 +95,7 @@
                 .wrap {
                     padding: 5px 20px 16px;
                     font-size: 16px;
-                    color: var(--color-gray);
+                    color: var(--txt-dark);
 
                     @include bp.mq(mobile) {
                         padding: 5px 16px 12px;

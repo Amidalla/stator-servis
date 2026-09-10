@@ -1,0 +1,164 @@
+{% macro star_icon() %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M10.839 0.697887C11.1325 -0.235501 12.4534 -0.235498 12.7469 0.697889L14.8283 7.31725C14.9593 7.73387 15.3455 8.01729 15.7823 8.01729H22.5857C23.5465 8.01729 23.9544 9.24016 23.1861 9.817L17.6262 13.9912C17.2871 14.2457 17.1454 14.6864 17.2726 15.0908L19.3829 21.8021C19.6744 22.7293 18.6058 23.4853 17.8286 22.9018L12.3934 18.8213C12.0376 18.5542 11.5483 18.5542 11.1926 18.8213L5.75737 22.9018C4.98016 23.4853 3.91151 22.7293 4.20303 21.8021L6.31332 15.0908C6.44049 14.6864 6.29881 14.2457 5.95976 13.9912L0.399828 9.817C-0.368504 9.24016 0.0394521 8.01729 1.00022 8.01729H7.80368C8.24042 8.01729 8.62663 7.73387 8.75764 7.31725L10.839 0.697887Z" fill="currentColor"/>
+    </svg>
+{% endmacro %}
+
+{% macro stars(rating=5) %}
+    {% set full = rating | round(0, "floor") %}
+    {% set has_half = rating > full %}
+    <div class="stars" aria-label="Оценка {{ rating }} из 5">
+        {% for i in range(1, 6) %}
+            {% if i <= full %}
+                <span class="star is-full">{{ star_icon() }}</span>
+            {% elif has_half and i == full + 1 %}
+                <span class="star is-half">
+                    <span class="base">{{ star_icon() }}</span>
+                    <span class="fill">{{ star_icon() }}</span>
+                </span>
+            {% else %}
+                <span class="star is-empty">{{ star_icon() }}</span>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+<section class="reviews" data-reviews>
+    <div class="container">
+        <div class="layout">
+            <div class="intro">
+                <h2 class="title">Отзывы</h2>
+                <p class="lead">
+                    Нам доверяют предприятия по всей России. Ремонтируем оборудование, на которое можно положиться.
+                </p>
+
+                <div class="controls">
+                    <button class="nav-btn prev" type="button" aria-label="Предыдущий отзыв">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="58" height="63" viewBox="0 0 58 63" fill="none" aria-hidden="true">
+                            <path class="shape" d="M58 0H8L0 63H58V0Z" fill="#D9D9D9"/>
+                            <path class="arrow" d="M22.2929 32.2071C21.9024 31.8166 21.9024 31.1834 22.2929 30.7929L28.6569 24.4289C29.0474 24.0384 29.6805 24.0384 30.0711 24.4289C30.4616 24.8195 30.4616 25.4526 30.0711 25.8431L24.4142 31.5L30.0711 37.1569C30.4616 37.5474 30.4616 38.1805 30.0711 38.5711C29.6805 38.9616 29.0474 38.9616 28.6569 38.5711L22.2929 32.2071ZM43 31.5V32.5H23V31.5V30.5H43V31.5Z" fill="#D64212"/>
+                        </svg>
+                    </button>
+
+                    <div class="pagination"></div>
+
+                    <button class="nav-btn next" type="button" aria-label="Следующий отзыв">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="58" height="63" viewBox="0 0 58 63" fill="none" aria-hidden="true">
+                            <path class="shape" d="M0 0H50L58 63H0V0Z" fill="#D9D9D9"/>
+                            <path class="arrow" d="M34.8751 32.2071C35.2656 31.8166 35.2656 31.1834 34.8751 30.7929L28.5111 24.4289C28.1206 24.0384 27.4874 24.0384 27.0969 24.4289C26.7064 24.8195 26.7064 25.4526 27.0969 25.8431L32.7538 31.5L27.0969 37.1569C26.7064 37.5474 26.7064 38.1805 27.0969 38.5711C27.4874 38.9616 28.1206 38.9616 28.5111 38.5711L34.8751 32.2071ZM14.168 31.5V32.5H34.168V31.5V30.5H14.168V31.5Z" fill="#D64212"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="slider swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <article class="card">
+                            <div class="meta">
+                                {{ stars() }}
+                                <time class="date" datetime="2025-06-19">19.06.2025</time>
+                            </div>
+                            <div class="author">
+                                <div class="name">Александр Морозов</div>
+                                <div class="role">Главный механик ООО «ФИРМА №34»</div>
+                            </div>
+                            <div class="body">
+                                <div class="text">
+                                    <p>
+                                        Обратились в Статор-Сервис с неисправным насосом. Диагностику провели быстро, ремонт сделали в срок. Оборудование работает стабильно, претензий нет. На каждом этапе сообщали статус работ, согласовывали материалы и сроки. После возврата на площадку запуск прошёл без замечаний. Рекомендуем как надёжного подрядчика по ремонту промышленного оборудования.
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="expand" type="button" hidden>Развернуть полностью</button>
+                        </article>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <article class="card">
+                            <div class="meta">
+                                {{ stars(4.5) }}
+                                <time class="date" datetime="2025-05-02">02.05.2025</time>
+                            </div>
+                            <div class="author">
+                                <div class="name">Игорь Семёнов</div>
+                                <div class="role">Инженер ООО «ТехПром»</div>
+                            </div>
+                            <div class="body">
+                                <div class="text">
+                                    <p>
+                                        Перемотка электродвигателя выполнена качественно. Сроки соблюдены, претензий нет.
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="expand" type="button" hidden>Развернуть полностью</button>
+                        </article>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <article class="card">
+                            <div class="meta">
+                                {{ stars() }}
+                                <time class="date" datetime="2025-04-11">11.04.2025</time>
+                            </div>
+                            <div class="author">
+                                <div class="name">Николай Морозов</div>
+                                <div class="role">Главный механик ООО «ФИРМА №34»</div>
+                            </div>
+                            <div class="body">
+                                <div class="text">
+                                    <p>
+                                        Сотрудничаем со Статор-Сервис уже не первый год. В этот раз передали на ремонт сразу несколько единиц оборудования. Специалисты оперативно провели диагностику, согласовали смету и сроки. Все этапы выполнялись прозрачно: нас информировали о состоянии узлов, использованных материалах и результатах испытаний. После возврата техники на площадку запуск прошёл без замечаний. Отдельно отмечаем аккуратность упаковки и доставки. Рекомендуем компанию как надёжного партнёра по ремонту промышленного оборудования.
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="expand" type="button" hidden>Развернуть полностью</button>
+                        </article>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <article class="card">
+                            <div class="meta">
+                                {{ stars() }}
+                                <time class="date" datetime="2025-03-28">28.03.2025</time>
+                            </div>
+                            <div class="author">
+                                <div class="name">Дмитрий Козлов</div>
+                                <div class="role">Начальник участка ЗАО «Поток»</div>
+                            </div>
+                            <div class="body">
+                                <div class="text">
+                                    <p>
+                                        Балансировка ротора выполнена точно. Вибрация ушла, оборудование снова в работе.
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="expand" type="button" hidden>Развернуть полностью</button>
+                        </article>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <article class="card">
+                            <div class="meta">
+                                {{ stars() }}
+                                <time class="date" datetime="2025-02-14">14.02.2025</time>
+                            </div>
+                            <div class="author">
+                                <div class="name">Сергей Белов</div>
+                                <div class="role">Технический директор АО «Север»</div>
+                            </div>
+                            <div class="body">
+                                <div class="text">
+                                    <p>
+                                        Нужен был срочный ремонт альтернатора. Команда Статор-Сервис уложилась в оговорённый срок и дала гарантию. Результатом довольны. На время ремонта помогли с логистикой и приёмкой. После испытаний оборудование приняли без доработок. Планируем долгосрочное сотрудничество по сервисному обслуживанию парка.
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="expand" type="button" hidden>Развернуть полностью</button>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

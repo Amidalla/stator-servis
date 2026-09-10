@@ -51,12 +51,12 @@
         font-style: normal;
         font-weight: 600;
         line-height: 120%;
-        color: var(--color-black);
+        color: var(--txt-dark);
         transition: all 0.3s ease;
         -webkit-box-orient: vertical;
 
         .photo-card:hover & {
-            color: var(--color-red);
+            color: var(--brand-dark-orange);
         }
     }
 }

@@ -97,7 +97,7 @@
         transition: background 0.3s ease;
 
         &--active {
-            background: var(--color-red);
+            background: var(--brand-dark-orange);
         }
     }
 
@@ -181,7 +181,7 @@
 
             &.swiper-slide-thumb-active {
                 .product-card__thumb-image {
-                    border-top: 2px solid var(--color-red);
+                    border-top: 2px solid var(--brand-dark-orange);
                 }
             }
         }
@@ -202,7 +202,7 @@
         transition: all 0.5s ease;
 
         &:hover {
-            border-top: 2px solid var(--color-red);
+            border-top: 2px solid var(--brand-dark-orange);
         }
 
         img {
@@ -244,12 +244,12 @@
         }
 
         &:hover {
-            color: var(--color-red);
+            color: var(--brand-dark-orange);
 
             svg {
                 circle {
-                    fill: var(--color-red);
-                    stroke: var(--color-red);
+                    fill: var(--brand-dark-orange);
+                    stroke: var(--brand-dark-orange);
                 }
 
                 path {
@@ -321,7 +321,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 100%;
-        color: var(--color-black);
+        color: var(--txt-dark);
 
         @include bp.mq(laptop) {
             margin: 0 0 36px;
@@ -357,7 +357,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
-        color: var(--color-gray);
+        color: var(--txt-dark);
     }
 
     &__info-item {
@@ -367,7 +367,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
-        color: var(--color-gray);
+        color: var(--txt-dark);
     }
 
     &__download {
@@ -380,7 +380,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
-        color: var(--color-black);
+        color: var(--txt-dark);
         text-decoration: underline;
         transition: color 0.3s ease;
 
@@ -393,12 +393,12 @@
         }
 
         &:hover {
-            color: var(--color-red);
+            color: var(--brand-dark-orange);
             text-decoration: none;
 
             svg {
                 path {
-                    fill: var(--color-red);
+                    fill: var(--brand-dark-orange);
                 }
             }
         }
@@ -440,11 +440,11 @@
         }
 
         &.in-stock {
-            color: var(--color-black);
+            color: var(--txt-dark);
         }
 
         &.out-of-stock {
-            color: var(--color-gray);
+            color: var(--txt-dark);
 
             svg circle {
                 fill: #7e7e7e;
@@ -494,7 +494,7 @@
         font-style: normal;
         font-weight: 500;
         line-height: 140%;
-        color: var(--color-black);
+        color: var(--txt-dark);
     }
 
     &__param-values {
@@ -513,10 +513,10 @@
         font-style: normal;
         font-weight: 500;
         line-height: 140%;
-        color: var(--color-red);
+        color: var(--brand-dark-orange);
         cursor: pointer;
         background: #f4f4f4;
-        border: 1px solid #f33607;
+        border: 1px solid var(--brand-dark-orange);
         border-radius: 5px;
         transition: all 0.3s ease;
 
@@ -534,14 +534,14 @@
 
         &:hover {
             color: var(--color-white);
-            background: var(--color-red);
-            border-color: var(--color-red);
+            background: var(--brand-dark-orange);
+            border-color: var(--brand-dark-orange);
         }
 
         &.active {
             color: var(--color-white);
-            background: var(--color-red);
-            border-color: var(--color-red);
+            background: var(--brand-dark-orange);
+            border-color: var(--brand-dark-orange);
         }
     }
 

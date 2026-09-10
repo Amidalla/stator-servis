@@ -24,7 +24,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 100%;
-        color: var(--color-1);
+        color: var(--txt-dark);
 
         @include bp.mq(laptop) {
             margin-bottom: 40px;
@@ -38,11 +38,11 @@
 
     &__query {
         font-weight: 600;
-        color: var(--color-red);
+        color: var(--brand-dark-orange);
     }
 
     &__count {
-        color: var(--color-red);
+        color: var(--brand-dark-orange);
     }
 
     &__list {

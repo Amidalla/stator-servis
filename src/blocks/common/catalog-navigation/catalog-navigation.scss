@@ -19,7 +19,7 @@
         }
 
         &::-webkit-scrollbar-thumb {
-            background: var(--color-red);
+            background: var(--brand-dark-orange);
             border-radius: 4px;
         }
     }
@@ -64,7 +64,7 @@
 
         &:hover {
             text-decoration: none;
-            background: var(--color-red);
+            background: var(--brand-dark-orange);
             box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
 
             .catalog-navigation__name {
@@ -75,7 +75,7 @@
         &.active {
             font-weight: 600;
             text-decoration: none;
-            background: var(--color-red);
+            background: var(--brand-dark-orange);
             box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
 
             .catalog-navigation__name {
@@ -118,7 +118,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
-        color: var(--color-black);
+        color: var(--txt-dark);
         transition: color 0.3s ease;
     }
 }

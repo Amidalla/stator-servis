@@ -4,16 +4,22 @@
 .navigation-top {
     ul {
         display: flex;
-        gap: 42px;
+        gap: 40px;
         align-items: center;
         width: 100%;
         padding: 0;
         margin: 0;
         list-style: none;
 
-        @include bp.mq(laptop-l) {
-            gap: 25px;
+        @include bp.mq(desktop-l) {
+            gap: 28px;
         }
+
+        @include bp.mq(desktop-m) {
+            gap: 40px;
+        }
+
+
 
         > li {
             position: relative;
@@ -27,11 +33,11 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 20px;
+                font-size: 18px;
                 font-style: normal;
                 font-weight: 400;
-                line-height: 19px;
-                color: var(--color-black);
+                line-height: 120%;
+                color: var(--color-white);
                 white-space: nowrap;
                 transition: color 0.3s ease;
 
@@ -43,7 +49,7 @@
                     width: 100%;
                     height: 3px;
                     content: "";
-                    background-color: var(--color-red);
+                    background-color: var(--brand-dark-orange);
                     border-radius: 2px;
                     transform: translateX(-50%) scaleX(0);
                     transform-origin: center center;
@@ -51,7 +57,7 @@
                 }
 
                 &:hover {
-                    color: var(--color-red);
+                    color: var(--color-white);
                     text-decoration: none;
 
                     // По ховеру линия появляется
@@ -75,7 +81,7 @@
                         width: 20px;
                         height: 11px;
                         content: "";
-                        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='11' viewBox='0 0 20 11' fill='none'%3E%3Cpath d='M19.4774 0.35355L9.91548 9.91547L0.353558 0.35355' stroke='%23101828'/%3E%3C/svg%3E");
+                        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='11' viewBox='0 0 20 11' fill='none'%3E%3Cpath d='M19.4774 0.35355L9.91548 9.91547L0.353558 0.35355' stroke='%23ffffff'/%3E%3C/svg%3E");
                         background-repeat: no-repeat;
                         background-size: contain;
                         transform: translateY(-50%);
@@ -86,11 +92,11 @@
 
                 &:hover {
                     > a {
-                        color: var(--color-red);
+                        color: var(--brand-dark-orange);
 
                         // Стрелка становится красной и переворачивается
                         &::before {
-                            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='11' viewBox='0 0 20 11' fill='none'%3E%3Cpath d='M19.4774 0.35355L9.91548 9.91547L0.353558 0.35355' stroke='%23F33607'/%3E%3C/svg%3E");
+                            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='11' viewBox='0 0 20 11' fill='none'%3E%3Cpath d='M19.4774 0.35355L9.91548 9.91547L0.353558 0.35355' stroke='%23D64212'/%3E%3C/svg%3E");
                             transform: translateY(-50%) scaleY(-1);
                         }
                     }
@@ -136,7 +142,7 @@
                             font-style: normal;
                             font-weight: 400;
                             line-height: 19px;
-                            color: var(--color-black);
+                            color: var(--txt-dark);
                             text-transform: unset;
                             border-bottom: 1px solid #7e7e7e;
                             border-radius: 5px;
@@ -149,7 +155,7 @@
 
                             svg {
                                 path {
-                                    stroke: #101828;
+                                    stroke: var(--txt-dark);
                                     transition: stroke 0.3s ease;
                                 }
                             }
@@ -157,8 +163,8 @@
                             &:hover {
                                 color: var(--color-white);
                                 text-decoration: none;
-                                background: var(--color-red);
-                                border-bottom: 1px solid var(--color-red);
+                                background: var(--brand-dark-orange);
+                                border-bottom: 1px solid var(--brand-dark-orange);
 
                                 svg {
                                     path {

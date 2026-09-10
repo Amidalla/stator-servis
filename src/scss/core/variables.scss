@@ -3,41 +3,29 @@
 
 :root {
     // --------------------------------------
-    // -- Base Colors
+    // -- Brand Colors
     // --------------------------------------
     --color-white: #fff;
-    --color-black: #101828;
-    --color-gray: #746c6c;
-    --color-text-gray: #808080;
-    --color-border-gray: #e9e9e9;
-    --color-red: #f33607;
-    --color-blue: #0040a1;
-
-    // --------------------------------------
-    // -- Button Colors
-    // --------------------------------------
-    --color-red-dark: #c92a05;
-    --color-red-darker: #a82204;
-    --color-black-light: #2d3748;
-    --color-black-lighter: #4a5568;
-
-    // --------------------------------------
-    // -- Others Сolors
-    // --------------------------------------
-    --color-1: #7e7e7e;
-    --color-2: #ececec;
-    --color-3: #ededed;
-    --color-4: #e7e7e7;
-    --color-5: #8f8f8f;
+    --color-light-grey: #d9d9d9;
+    --txt-dark: #161616;
+    --txt-light-dark: #383838;
+    --txt-secondary: #fff7f2;
+    --brand-dark-orange: #d64212;
+    --btn-grey: #a8a8a8;
+    --hradient-red-orange: #a70000;
+    --color-sky: #3d8bfd;
+    --color-blue: #064aa7;
 
     // --------------------------------------
     // -- Fonts
     // --------------------------------------
     --font-family-primary:
-        "WixMadeforText", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, helvetica, arial, sans-serif;
-    --font-family-headings: "Commissioner", georgia, "Times New Roman", serif;
-    --font-family-accent: "Inter", "Segoe UI", tahoma, geneva, verdana, sans-serif;
-    --font-family-unna: "Unna", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
+        "Noto Sans", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, helvetica, arial, sans-serif;
+    --font-family-headings: "Tektur", "Noto Sans", sans-serif;
+    --font-family-heading: var(--font-family-headings);
+    --font-family-accent: var(--font-family-primary);
+    --font-family-unna: var(--font-family-primary);
+    --font-family-secondary: var(--font-family-primary);
 
     // --------------------------------------
     // -- Font Weights
@@ -49,17 +37,34 @@
     // --------------------------------------
     // -- Sizes
     // --------------------------------------
-    --container-width: 1801px;
+    --container-width: 1720px;
     --container-padding: 60px;
-    --header-height: 99px;
+    --container-max-width: calc(var(--container-width) + var(--container-padding) * 2);
+    --header-height: 112px;
+    --section-padding-top: 80px;
+    --section-padding-bottom: 80px;
 
-    @include bp.mq(tablet-xl) {
-        --header-height: 68px;
-        --container-padding: 40px;
+    @include bp.mq(desktop-m) {
+        --header-height: 119px;
     }
 
-    @include bp.mq(mobile-xl) {
-        --container-padding: 15px;
-        --header-height: 50px;
+    @include bp.mq(laptop-m) {
+        --container-width: 1263px;
+    }
+
+    @include bp.mq(laptop) {
+        --container-width: 1163px;
+    }
+
+    @include bp.mq(tablet-xl) {
+        --header-height: 110px;
+        --container-width: 100%;
+        --container-padding: 40px;
+        --container-max-width: 100%;
+    }
+
+    @include bp.mq(tablet) {
+        --container-padding: 16px;
+        --header-height: 106px;
     }
 }

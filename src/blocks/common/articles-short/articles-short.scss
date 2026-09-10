@@ -24,7 +24,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 100%;
-        color: var(--color-black);
+        color: var(--txt-dark);
 
         @include bp.mq(tablet) {
             margin: 0 0 20px;
@@ -152,7 +152,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
-        color: var(--color-gray);
+        color: var(--txt-dark);
 
         @include bp.mq(laptop) {
             display: none;
@@ -177,7 +177,7 @@
         font-style: normal;
         font-weight: var(--font-weight-medium);
         line-height: 120%;
-        color: var(--color-black);
+        color: var(--txt-dark);
         white-space: wrap;
         transition: all 0.3s ease;
         -webkit-box-orient: vertical;
@@ -187,7 +187,7 @@
         }
 
         .articles-short__item:hover & {
-            color: var(--color-red);
+            color: var(--brand-dark-orange);
         }
     }
 
@@ -235,12 +235,12 @@
         font-style: normal;
         font-weight: 600;
         line-height: 120%;
-        color: var(--color-black);
+        color: var(--txt-dark);
         text-decoration: none;
         transition: color 0.3s ease;
 
         &:hover {
-            color: var(--color-red);
+            color: var(--brand-dark-orange);
             text-decoration: none;
         }
     }

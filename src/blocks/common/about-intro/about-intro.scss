@@ -1,0 +1,126 @@
+@use "core/breakpoints" as bp;
+
+.about-intro {
+    --about-cut-w: var(--dir-cut-bottom-w, calc(100vw * 91.66 / 1920));
+    --about-cut-h: var(--dir-cut-bottom-h, calc(100vw * 188.69 / 1920));
+
+    position: relative;
+    z-index: 2;
+    min-height: 534px;
+    overflow: hidden;
+    background: var(--color-white);
+    clip-path: polygon(
+        0 0,
+        calc(100% - var(--about-cut-w)) 0,
+        100% var(--about-cut-h),
+        100% 100%,
+        var(--about-cut-w) 100%,
+        0 calc(100% - var(--about-cut-h))
+    );
+
+    @include bp.mq(laptop-l) {
+        min-height: 0;
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+
+        @include bp.mq(tablet) {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+    }
+
+    .content {
+        @include bp.mq(mobile-l) {
+            max-width: 328px;
+            margin: 0 auto;
+        }
+    }
+
+    .title {
+        margin: 0 0 20px;
+        color: #000;
+        max-width: 798px;
+
+        @include bp.mq(laptop-l) {
+            font-size: 32px;
+        }
+
+        @include bp.mq(tablet) {
+            margin-bottom: 16px;
+            font-size: 28px;
+        }
+    }
+
+    .text {
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%;
+        color: #000;
+        max-width: 75%;
+
+        @include bp.mq(laptop-m) {
+            max-width: 93%;
+        }
+
+        @include bp.mq(tablet) {
+            font-size: 16px;
+        }
+
+        @include bp.mq(mobile-m) {
+            max-width: 100%;
+        }
+    }
+
+    .visual {
+        position: absolute;
+        top: -60px;
+        right: -17px;
+        z-index: 1;
+        width: 454px;
+        pointer-events: none;
+
+        @include bp.mq(laptop-l) {
+            right: -48px;
+            width: 420px;
+        }
+
+        @include bp.mq(laptop-m) {
+            top: auto;
+            right: 0;
+            bottom: -15px;
+            width: 296px;
+        }
+
+        @include bp.mq(tablet) {
+            top: auto;
+            right: 0;
+            bottom: 0;
+            width: 296px;
+            margin: 0;
+            transform: none;
+        }
+
+        @include bp.mq(mobile-l) {
+            top: auto;
+            right: 0;
+            bottom: 0;
+            width: 159px;
+            margin: 0;
+        }
+
+        picture,
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+    }
+}

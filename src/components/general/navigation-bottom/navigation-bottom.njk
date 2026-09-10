@@ -11,23 +11,27 @@
     <nav class="{{ navClasses }}" aria-label="{{ ariaLabel }}">
         <ul>
             {% for item in items %}
-                <li {% if item.class %}class="{{ item.class }}" {% endif %}>
-                    <a
-                        href="{{ item.href }}"
-                        {% if item.title %}
-                            title="{{ item.title }}"
-                        {% endif %}
-                        {% if item.target %}
-                            target="{{ item.target }}"
-                        {% endif %}
-                        {% if item.ariaCurrent %}
-                            aria-current="{{ item.ariaCurrent }}"
-                        {% endif %}
-                    >
-                        {{ item.title }}
-                    </a>
+                <li{% if item.heading or item.class %} class="{% if item.heading %}heading{% endif %}{% if item.class %} {{ item.class }}{% endif %}"{% endif %}>
+                    {% if item.heading and not item.href %}
+                        <span>{{ item.title }}</span>
+                    {% else %}
+                        <a
+                            href="{{ item.href }}"
+                            {% if item.title %}
+                                title="{{ item.title }}"
+                            {% endif %}
+                            {% if item.target %}
+                                target="{{ item.target }}"
+                            {% endif %}
+                            {% if item.ariaCurrent %}
+                                aria-current="{{ item.ariaCurrent }}"
+                            {% endif %}
+                        >
+                            {{ item.title }}
+                        </a>
+                    {% endif %}
                     {% if item.children %}
-                        <ul class="navigation-bottom__submenu">
+                        <ul class="submenu">
                             {% for child in item.children %}
                                 <li>
                                     <a

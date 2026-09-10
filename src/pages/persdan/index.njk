@@ -1,13 +1,6 @@
 {% set meta = { title: "Политика обработки персональных данных | Статор-Сервис" } %}
-{% set page = { heading: true } %}
-{% set breadcrumbs = {
-    items: [
-        { title: "Главная", url: "/" },
-        { title: "Политика обработки персональных данных" }
-    ]
-} %}
-{% set title = { text: "Политика обработки персональных данных", tag: "h1", class: "title-policy" } %}
+{% set page = { breadcrumbs: false, heading: false } %}
 {% extends "layouts/default.njk" %}
 {% block content %}
-    {% include "blocks/common/policy-content/policy-content.njk" %}
+    {% include "blocks/general/page-in-dev/page-in-dev.njk" %}
 {% endblock %}

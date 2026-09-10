@@ -1,21 +1,6 @@
 {% set meta = { title: "Перемотка альтернатора | Статор-Сервис" } %}
-
-{% set page = { heading: false, after_content: true, sidebar: false } %}
-
-{% set breadcrumbs = {
-    items: [
-        { title: "Главная", url: "/" },
-        { title: "Наши работы", url: "/nashi-raboty/" },
-        { title: "Перемотка альтернатора" }
-    ]
-} %}
-
+{% set page = { breadcrumbs: false, heading: false, after_content: false } %}
 {% extends "layouts/default.njk" %}
-
 {% block content %}
-    {% include "blocks/common/product-card/product-card.njk" %}
-{% endblock %}
-
-{% block after_content %}
-    {% include "blocks/common/catalog-form/catalog-form.njk" %}
+    {% include "blocks/general/page-in-dev/page-in-dev.njk" %}
 {% endblock %}

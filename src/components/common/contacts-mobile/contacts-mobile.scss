@@ -1,53 +1,41 @@
 @use "core/breakpoints" as bp;
-@use "core/mixins" as mixin;
 
 .contacts-mobile {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 
     .item {
         display: flex;
-        gap: 9px;
-        align-items: center;
+        gap: 12px;
+        align-items: flex-start;
+        font-family: var(--font-family-primary);
         font-size: 16px;
         font-weight: 400;
-        line-height: 1;
-        white-space: nowrap;
+        line-height: 140%;
+        color: var(--color-white);
 
-        svg {
-            margin-top: -1px;
+        img {
+            flex-shrink: 0;
+            width: 20px;
+            height: auto;
+            margin-top: 2px;
+            object-fit: contain;
         }
 
-        a {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            color: var(--color-1);
-
-            &:hover {
-                color: var(--color-primary-dark);
-                text-decoration: none;
-            }
+        span {
+            min-width: 0;
         }
 
-        button {
-            padding: 0 0 5px;
-            margin-top: 20px;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 120%;
-            color: var(--color-red);
-            cursor: pointer;
-            background: none;
-            border: none;
-            border-bottom: 2px solid var(--color-red);
-            transition: all 0.3s;
-
-            &:hover {
-                color: var(--color-primary-dark);
-            }
+        &:hover {
+            color: var(--color-white);
+            text-decoration: none;
         }
+    }
+
+    a.item:hover {
+        color: var(--color-white);
+        text-decoration: none;
+        opacity: 0.8;
     }
 }

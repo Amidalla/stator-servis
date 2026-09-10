@@ -57,8 +57,17 @@
 @use "../blocks/general/footer/footer";
 @use "../blocks/general/section/section";
 @use "../blocks/general/error-404/error-404";
+@use "../blocks/general/page-in-dev/page-in-dev";
 
 @use "../blocks/common/hero/hero";
+@use "../blocks/common/directions/directions";
+@use "../blocks/common/about-intro/about-intro";
+@use "../blocks/common/about-company/about-company";
+@use "../blocks/common/advantages/advantages";
+@use "../blocks/common/our-works/our-works";
+@use "../blocks/common/reviews/reviews";
+@use "../blocks/common/work-types/work-types";
+@use "../blocks/common/faq-home/faq-home";
 @use "../blocks/common/catalog-short/catalog-short";
 @use "../blocks/common/benefits/benefits";
 @use "../blocks/common/similar-products/similar-products";

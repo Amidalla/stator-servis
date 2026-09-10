@@ -1,0 +1,245 @@
+@use "core/breakpoints" as bp;
+
+.page:has(.directions) {
+    --dir-cut-top-w: var(--hero-cut-w, calc(100vw * 94.1152 / 1920));
+    --dir-cut-top-h: var(--hero-cut-h, calc(100vw * 193.46 / 1920));
+    --dir-cut-bottom-w: calc(100vw * 91.66 / 1920);
+    --dir-cut-bottom-h: calc(100vw * 188.69 / 1920);
+
+    @include bp.mq(mobile-l) {
+        --dir-cut-bottom-w: calc(100vw * 48.8828 / 360);
+        --dir-cut-bottom-h: calc(100vw * 96.0283 / 360);
+    }
+}
+
+.page:has(.hero) .directions {
+    margin-top: calc(-1 * (var(--dir-cut-top-h) + var(--hero-dir-overlap-extra, 0px)));
+}
+
+.directions {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    padding-bottom: calc(var(--dir-cut-bottom-h) + 71px);
+    margin-top: calc(-1 * var(--dir-cut-top-h));
+    overflow: hidden;
+    color: var(--txt-dark);
+    background-color: #a8a8a8;
+    clip-path: polygon(
+        var(--dir-cut-top-w) 0,
+        100% 0,
+        100% 100%,
+        calc(100% - var(--dir-cut-bottom-w)) calc(100% - var(--dir-cut-bottom-h)),
+        0 calc(100% - var(--dir-cut-bottom-h)),
+        0 var(--dir-cut-top-h)
+    );
+
+    @include bp.mq(desktop) {
+        padding-bottom: calc(var(--dir-cut-bottom-h) + 80px);
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    + .about-intro {
+        margin-top: calc(-1 * var(--dir-cut-bottom-h));
+    }
+
+    .intro {
+        max-width: 630px;
+        margin-bottom: 48px;
+
+        @include bp.mq(tablet-xl) {
+            max-width: none;
+            margin-bottom: 32px;
+        }
+
+        @include bp.mq(mobile-l) {
+            max-width: 284px;
+            margin-left: auto;
+        }
+    }
+
+    .title {
+        margin: 0 0 15px;
+        color: var(--txt-dark, #161616);
+
+        @include bp.mq(tablet) {
+            margin-bottom: 12px;
+            font-size: 28px;
+        }
+    }
+
+    .text {
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 140%;
+        color: var(--txt-light-dark, #383838);
+
+        @include bp.mq(tablet) {
+            font-size: 16px;
+        }
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+
+        @include bp.mq(tablet-l) {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        overflow: hidden;
+        background: var(--color-white);
+        border-radius: 12px;
+
+        @include bp.mq(tablet) {
+            padding: 16px;
+        }
+
+        &:hover {
+            .name a {
+                color: var(--color-blue, #064aa7);
+            }
+
+            .image img {
+                transform: scale(1.05);
+            }
+
+            .tags a {
+                color: var(--color-blue, #064aa7);
+                border-color: var(--color-blue, #064aa7);
+            }
+        }
+    }
+
+    .visual {
+        position: relative;
+        margin-bottom: 3px;
+    }
+
+    .watermark {
+        position: absolute;
+        top: calc(100% + 3px);
+        left: 0;
+        z-index: 0;
+        width: 100%;
+        height: auto;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .image {
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 12px;
+        text-decoration: none;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 212.075px;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.45s ease;
+        }
+    }
+
+    .name {
+        position: relative;
+        z-index: 1;
+        margin: 0 0 3px;
+        font-family: var(--font-family-headings);
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%;
+        color: var(--txt-dark, #161616);
+        transition: color 0.3s ease;
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+    }
+
+    .caption {
+        position: relative;
+        z-index: 1;
+        margin: 0 0 40px;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--txt-dark, #161616);
+    }
+
+    .tags {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+
+        a {
+            display: block;
+            flex-grow: 1;
+            flex-shrink: 0;
+            flex-basis: max-content;
+            width: auto;
+            min-width: calc((100% - 12px) / 2);
+            max-width: 100%;
+            padding: 10px 12px;
+            font-family: var(--font-family-primary);
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+            color: var(--txt-light-dark, #383838);
+            text-align: left;
+            text-decoration: none;
+            white-space: nowrap;
+            background: var(--color-white, #fff);
+            border: 1px solid var(--txt-light-dark, #383838);
+            border-radius: 8px;
+            transition:
+                color 0.3s ease,
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+
+            @include bp.mq(mobile-l) {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+
+            &.wide {
+                flex: 1 1 100%;
+            }
+
+            &:hover {
+                color: var(--color-blue, #064aa7);
+                text-decoration: none;
+                background: color-mix(in srgb, var(--color-white, #fff) 88%, var(--txt-dark, #161616));
+                border-color: var(--color-blue, #064aa7);
+            }
+        }
+    }
+}

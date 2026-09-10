@@ -1,6 +1,7 @@
 {% macro render(
+        title="Мы используем файлы cookies",
         content="",
-        buttonText="Принимаю",
+        buttonText="Принять",
         id="",
         class="",
         data={},
@@ -32,17 +33,19 @@
     >
         <div class="container">
             <div class="block">
-                <div class="box">
-                    <div class="text" id="consent-notice-title">{{ content | safe }}</div>
+                <div class="copy">
+                    <div class="title" id="consent-notice-title">{{ title }}</div>
+                    <div class="text">{{ content | safe }}</div>
                 </div>
-                {{ button(
-                    type="button",
-                    text=buttonText,
-                    variant="red",
-                    size="md",
-                    data={ consent: "accept" },
-                    aria={ label: "Принять условия" }
-                ) }}
+                <div class="actions">
+                    {{ button(
+                        type="button",
+                        text=buttonText,
+                        variant="red",
+                        data={ consent: "accept" },
+                        aria={ label: "Принять условия" }
+                    ) }}
+                </div>
             </div>
         </div>
     </div>

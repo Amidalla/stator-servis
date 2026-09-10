@@ -1,0 +1,14 @@
+{% set meta = { title: "Ремонт промышленного оборудования в СПб | Статор-Сервис" } %}
+{% set page = { breadcrumbs: false, heading: false } %}
+{% extends "layouts/default.njk" %}
+{% block content %}
+    {% include "blocks/common/hero/hero.njk" %}
+    {% include "blocks/common/directions/directions.njk" %}
+    {% include "blocks/common/about-intro/about-intro.njk" %}
+    {% include "blocks/common/about-company/about-company.njk" %}
+    {% include "blocks/common/advantages/advantages.njk" %}
+    {% include "blocks/common/our-works/our-works.njk" %}
+    {% include "blocks/common/reviews/reviews.njk" %}
+    {% include "blocks/common/work-types/work-types.njk" %}
+    {% include "blocks/common/faq-home/faq-home.njk" %}
+{% endblock %}

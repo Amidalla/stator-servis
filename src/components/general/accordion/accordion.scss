@@ -43,7 +43,7 @@
 
             &:hover {
                 .name {
-                    color: var(--color-red);
+                    color: var(--brand-dark-orange);
                 }
             }
 
@@ -54,7 +54,7 @@
                 font-style: normal;
                 font-weight: 400;
                 line-height: 120%;
-                color: var(--color-gray);
+                color: var(--txt-dark);
                 transition: all 0.3s;
 
                 @include bp.mq(mobile-xl) {
@@ -105,7 +105,7 @@
                 font-style: normal;
                 font-weight: 400;
                 line-height: 120%;
-                color: var(--color-black);
+                color: var(--txt-dark);
 
                 @include bp.mq(mobile-xl) {
                     padding: 5px 16px 16px;
@@ -115,11 +115,11 @@
                 @include mix.reset-child-outer-margins;
 
                 a:not(.button) {
-                    color: var(--color-red);
+                    color: var(--brand-dark-orange);
                     text-decoration: underline;
 
                     &:hover {
-                        color: var(--color-red-dark);
+                        color: var(--brand-dark-orange);
                     }
                 }
 
@@ -143,7 +143,7 @@
 
             .panel {
                 .name {
-                    color: var(--color-red);
+                    color: var(--brand-dark-orange);
                 }
 
                 .icon {

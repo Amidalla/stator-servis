@@ -8,22 +8,18 @@ export function searchForm(context = document) {
     const dropdown = root.querySelector(".search-dropdown");
     const input = root.querySelector(".search-header input");
     const allResultsBtn = root.querySelector(".search-all-results");
-    const wrap = root.closest(".wrap");
     let isOpen = false;
 
     const open = () => {
         if (isOpen) return;
         isOpen = true;
         root.classList.add("is-active");
-        if (wrap) wrap.style.background = "var(--color-red)";
-        setTimeout(() => input?.focus(), 300);
     };
 
     const close = () => {
         if (!isOpen) return;
         isOpen = false;
         root.classList.remove("is-active");
-        if (wrap) wrap.style.background = "";
         if (input) {
             input.value = "";
             input.blur();
@@ -58,9 +54,8 @@ export function searchForm(context = document) {
         }
     });
 
-    // Кнопка "Показать все результаты" - не закрывает поиск, просто переходит по ссылке
-    allResultsBtn?.addEventListener("click", () => {
-        // Ничего не делаем, просто переходим по ссылке
+    allResultsBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
     });
 
     root.addEventListener(

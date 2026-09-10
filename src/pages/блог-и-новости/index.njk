@@ -1,13 +1,6 @@
 {% set meta = { title: "Блог и новости | Статор-Сервис" } %}
-{% set page = { heading: true } %}
-{% set breadcrumbs = {
-    items: [
-        { title: "Главная", url: "/" },
-        { title: "Блог" }
-    ]
-} %}
-{% set title = { text: "Блог и новости", tag: "h1", class: "title" } %}
+{% set page = { breadcrumbs: false, heading: false } %}
 {% extends "layouts/default.njk" %}
 {% block content %}
-    {% include "blocks/common/articles-content/articles-content.njk" %}
+    {% include "blocks/general/page-in-dev/page-in-dev.njk" %}
 {% endblock %}

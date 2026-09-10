@@ -1,0 +1,32 @@
+@use "core/breakpoints" as bp;
+
+.page:has(.page-in-dev) {
+    .page-content {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+    }
+}
+
+.page-in-dev {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    padding: 80px 0;
+
+    p {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 130%;
+        color: var(--txt-dark);
+        text-align: center;
+
+        @include bp.mq(tablet) {
+            font-size: 28px;
+        }
+    }
+}

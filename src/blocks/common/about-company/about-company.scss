@@ -1,0 +1,277 @@
+@use "core/breakpoints" as bp;
+
+.page:has(.about-company) {
+    background: #f4f4f4;
+}
+
+.about-company {
+    --about-cut-h: var(--dir-cut-bottom-h, calc(100vw * 188.69 / 1920));
+
+    position: relative;
+    z-index: 1;
+    padding-top: var(--about-cut-h);
+    padding-bottom: 20px;
+    margin-top: calc(-1 * var(--about-cut-h));
+    color: var(--color-white);
+    background: var(--txt-dark);
+
+    @include bp.mq(tablet-l) {
+        background: var(--txt-light-dark, #383838);
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+        padding-top: 80px;
+    }
+
+    h2 {
+        color: var(--color-white);
+    }
+
+    .head {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 40px;
+
+        @include bp.mq(tablet-l) {
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    .head .title {
+        margin: 0;
+    }
+
+    .lead {
+        flex-shrink: 0;
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%;
+        color: var(--color-white);
+
+        @include bp.mq(mobile-l) {
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 150%;
+            color: var(--color-white, #fff);
+        }
+    }
+
+    .mosaic {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-areas:
+            "shop cycle worker access"
+            "cables spb spb machine";
+        gap: 40px 20px;
+        margin-bottom: 80px;
+
+        @include bp.mq(laptop-l) {
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            grid-template-areas:
+                "shop shop cycle cycle worker worker"
+                "cables cables cables spb spb spb"
+                "machine machine machine access access access";
+        }
+
+        @include bp.mq(tablet-l) {
+            grid-template-areas:
+                "shop shop shop worker worker worker"
+                "cycle cycle cycle cycle cycle cycle"
+                "cables cables cables spb spb spb"
+                "machine machine machine access access access";
+        }
+
+        @include bp.mq(mobile-l) {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "shop"
+                "cycle"
+                "worker"
+                "access"
+                "cables"
+                "spb"
+                "machine";
+        }
+    }
+
+    .card {
+        min-width: 0;
+        overflow: hidden;
+        border-radius: 12px;
+
+        &.shop {
+            display: flex;
+            flex-direction: column;
+            grid-area: shop;
+            gap: 24px;
+            height: 451px;
+            padding: 20px;
+            background: var(--btn-grey, #a8a8a8);
+
+            @include bp.mq(laptop-l) {
+                height: auto;
+                min-height: 451px;
+            }
+
+            .caption {
+                display: flex;
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .media {
+                flex: 1 1 auto;
+                min-height: 0;
+                overflow: hidden;
+                border-radius: 12px;
+            }
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                transition: transform 0.45s ease;
+            }
+
+            &:hover img {
+                transform: scale(1.05);
+            }
+        }
+
+        &.cycle {
+            grid-area: cycle;
+        }
+
+        &.worker {
+            grid-area: worker;
+        }
+
+        &.access {
+            grid-area: access;
+        }
+
+        &.cables {
+            grid-area: cables;
+        }
+
+        &.spb {
+            grid-area: spb;
+        }
+
+        &.machine {
+            grid-area: machine;
+        }
+    }
+
+    .card.photo {
+        position: relative;
+        min-height: 408px;
+
+        @include bp.mq(mobile-l) {
+            min-height: 327px;
+        }
+
+        img {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.45s ease;
+        }
+
+        &:hover img {
+            transform: scale(1.05);
+        }
+    }
+
+    .card.text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px;
+        color: var(--txt-dark);
+        background: var(--color-white);
+
+        @include bp.mq(tablet-l) {
+            gap: 40px;
+        }
+
+        .name,
+        .text {
+            min-width: 0;
+        }
+
+        &.spb {
+            background-color: var(--color-white);
+            background-image: url("/assets/images/content/about-company-spb-bg.png");
+            background-repeat: no-repeat;
+            background-position: right -2px center;
+            background-size: cover;
+
+            @include bp.mq(tablet-l) {
+                background-image: none;
+            }
+
+            .name {
+                max-width: 340px;
+            }
+        }
+
+        &.access {
+            .name {
+                max-width: 340px;
+            }
+        }
+    }
+
+    .card .name {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--txt-dark);
+    }
+
+    .card .text {
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        color: var(--txt-dark);
+    }
+
+    .why {
+        .title {
+            margin: 0 0 20px;
+            max-width: 1430px;
+        }
+
+        .text {
+            margin: 0;
+            font-family: var(--font-family-primary);
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+            color: var(--color-white);
+            max-width: 1430px;
+        }
+    }
+}

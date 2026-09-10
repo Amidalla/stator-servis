@@ -142,7 +142,7 @@ component-name/
 - Каждый файл `.njk` становится HTML страницей; вложенные папки сохраняют URL (`uslugi/index.njk` → `/uslugi/`)
 - Страницы расширяют макеты и включают блоки/компоненты
 - Используйте `{% extends "layouts/default.njk" %}` и `{% block content %}`
-- Список шаблонов для вёрстки: `/pages.html`
+- Список шаблонов для вёрстки: `/` (`index.html`)
 
 **Подключение шаблонов**:
 - Блоки/компоненты: `{% include "blocks/general/header/header.njk" %}`

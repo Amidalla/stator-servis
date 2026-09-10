@@ -42,7 +42,7 @@
             margin-bottom: unset;
 
             span {
-                color: var(--color-secondary);
+                color: var(--txt-dark);
             }
         }
 
@@ -50,7 +50,7 @@
             font-size: 16px;
             font-weight: 700;
             line-height: 150%;
-            color: var(--color-10);
+            color: var(--txt-dark);
             letter-spacing: 0.32px;
         }
     }
@@ -61,7 +61,7 @@
         font-size: 16px;
         font-weight: 400;
         line-height: 150%;
-        color: var(--color-10);
+        color: var(--txt-dark);
         letter-spacing: 0.32px;
 
         @include mix.reset-child-outer-margins;
@@ -92,7 +92,7 @@
                 margin-top: 8px;
                 font-size: 14px;
                 font-style: italic;
-                color: var(--color-8);
+                color: var(--txt-dark);
                 text-align: center;
             }
         }
@@ -106,7 +106,7 @@
             font-family: var(--font-family-secondary);
             font-weight: 500;
             line-height: 130%;
-            color: var(--color-9);
+            color: var(--txt-dark);
             letter-spacing: 0.88px;
         }
 

@@ -44,7 +44,7 @@
         }
 
         &::-webkit-scrollbar-thumb {
-            background: var(--color-red);
+            background: var(--brand-dark-orange);
             border-radius: 4px;
         }
     }
@@ -57,7 +57,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 100%;
-        color: var(--color-gray);
+        color: var(--txt-dark);
         text-align: left;
         white-space: nowrap;
         cursor: pointer;
@@ -81,13 +81,13 @@
         }
 
         &:hover {
-            color: var(--color-black);
-            border-bottom: 5px solid var(--color-black);
+            color: var(--txt-dark);
+            border-bottom: 5px solid var(--txt-dark);
         }
 
         &.is-active {
-            color: var(--color-black);
-            border-bottom: 5px solid var(--color-black);
+            color: var(--txt-dark);
+            border-bottom: 5px solid var(--txt-dark);
         }
     }
 
@@ -115,7 +115,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
-        color: var(--color-black);
+        color: var(--txt-dark);
         pointer-events: none;
         background: var(--color-white);
         opacity: 0;

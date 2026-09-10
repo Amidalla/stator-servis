@@ -3,7 +3,7 @@
 
 .partners-short {
     padding: 60px 0;
-    background: var(--color-black);
+    background: var(--txt-dark);
 
     @include bp.mq(tablet) {
         padding: 40px 0;

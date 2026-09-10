@@ -56,7 +56,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 100%;
-        color: var(--color-black);
+        color: var(--txt-dark);
 
         @include bp.mq(tablet-l) {
             display: block;
@@ -103,7 +103,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 100%;
-        color: var(--color-black);
+        color: var(--txt-dark);
 
         @include bp.mq(tablet-l) {
             display: none;
@@ -128,7 +128,7 @@
             font-style: normal;
             font-weight: 400;
             line-height: 140%;
-            color: var(--color-black);
+            color: var(--txt-dark);
 
             @include bp.mq(mobile-xl) {
                 font-size: 16px;
@@ -140,7 +140,7 @@
 
             b {
                 font-weight: 500;
-                color: var(--color-black);
+                color: var(--txt-dark);
             }
         }
     }
@@ -158,7 +158,7 @@
             font-style: normal;
             font-weight: 400;
             line-height: 160%;
-            color: var(--color-black);
+            color: var(--txt-dark);
 
             @include bp.mq(mobile-xl) {
                 font-size: 16px;
@@ -189,7 +189,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
-        color: var(--color-black);
+        color: var(--txt-dark);
         text-decoration: none;
         cursor: pointer;
         background: #ededed;
@@ -209,7 +209,7 @@
         &:hover {
             color: var(--color-white);
             text-decoration: none;
-            background: var(--color-black);
+            background: var(--txt-dark);
 
             svg path {
                 fill: var(--color-white);

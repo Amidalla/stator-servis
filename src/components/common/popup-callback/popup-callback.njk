@@ -1,12 +1,67 @@
+{% from "components/general/button/button.njk" import render as button %}
+{% from "components/general/input/input.njk" import render as input %}
+{% from "components/general/textarea/textarea.njk" import render as textarea %}
+
 <div id="popup-callback" class="popup-callback">
-    <div class="block">
-        <div class="heading">
-            <div class="title">Заказать звонок</div>
-            <div class="text">оставьте контакты - мы перезвоним и поможем подобрать оборудование</div>
-        </div>
-        <div class="frame">
-            {% set formIdPrefix = "popup-callback" %}
-            {% include "components/general/form/form.njk" %}
-        </div>
+    <button class="popup-callback-close" type="button" aria-label="Закрыть">
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none" aria-hidden="true">
+                <path
+                    d="M20.207 1.41406L11.5166 10.1035L20.2051 18.792L18.791 20.2061L10.1035 11.5176L1.41602 20.2061L0.00195312 18.792L8.68945 10.1035L0 1.41406L1.41406 0L10.1035 8.68945L18.793 0L20.207 1.41406Z"
+                    fill="#D64212"
+                />
+            </svg>
+    </button>
+
+    <div class="heading">
+        <div class="title">Заказать звонок</div>
+        <p class="text">Оставьте ваши контакты, и мы перезвоним вам в ближайшее время.</p>
     </div>
+
+    <form class="form" data-validate>
+        <div class="field">
+            <label class="label" for="popup-callback-name">Ваше имя</label>
+            {{ input(
+                type="text",
+                id="popup-callback-name",
+                name="name",
+                placeholder="Введите ваше имя",
+                autocomplete="name",
+                required=true,
+                minlength="2",
+                data={"error": "Введите имя (минимум 2 буквы)"}
+            ) }}
+        </div>
+
+        <div class="field">
+            <label class="label" for="popup-callback-phone">Телефон</label>
+            {{ input(
+                type="tel",
+                id="popup-callback-phone",
+                name="phone",
+                placeholder="+7 (___) ___-__-__",
+                autocomplete="tel",
+                data={"mask": "phone", "error": "Введите полный номер телефона"},
+                required=true
+            ) }}
+        </div>
+
+        <div class="field">
+            <label class="label" for="popup-callback-message">Комментарий</label>
+            {{ textarea(
+                id="popup-callback-message",
+                name="message",
+                rows="4",
+                placeholder="Комментарий"
+            ) }}
+        </div>
+
+        <div class="actions">
+            {{ button(
+                text="Отправить данные",
+                type="submit",
+                variant="red",
+                disabled=true
+            ) }}
+        </div>
+    </form>
 </div>

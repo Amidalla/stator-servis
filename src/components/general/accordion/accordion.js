@@ -49,16 +49,31 @@ export function accordion(context = document) {
             const isOpen = targetItem.classList.contains("is-open");
             if (isOpen) {
                 collapseItem(targetItem);
-            } else {
-                expandItem(targetItem);
+                return;
             }
+
+            items.forEach((item) => {
+                if (item !== targetItem && item.classList.contains("is-open")) {
+                    collapseItem(item);
+                }
+            });
+            expandItem(targetItem);
         };
 
         items.forEach((item) => {
             const panel = item.querySelector(".panel");
-            if (panel) {
-                panel.addEventListener("click", () => toggleItem(item), { signal });
+            if (!panel) return;
+
+            if (panel.getAttribute("aria-expanded") === "true" || item.classList.contains("is-open")) {
+                item.classList.add("is-open");
+                panel.setAttribute("aria-expanded", "true");
+                const collapse = item.querySelector(".collapse");
+                if (collapse) {
+                    collapse.style.maxHeight = `${collapse.scrollHeight}px`;
+                }
             }
+
+            panel.addEventListener("click", () => toggleItem(item), { signal });
         });
 
         root.addEventListener("destroy", () => controller.abort(), { once: true });

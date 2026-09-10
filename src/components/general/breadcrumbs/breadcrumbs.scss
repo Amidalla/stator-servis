@@ -45,7 +45,7 @@
     .link {
         display: inline-flex;
         align-items: center;
-        color: var(--color-gray);
+        color: var(--txt-dark);
         text-decoration: none;
         transition: color 0.2s ease-in-out;
 
@@ -61,7 +61,7 @@
     .current-page {
         display: inline-flex;
         align-items: center;
-        color: var(--color-black);
+        color: var(--txt-dark);
     }
 
     // --------------------------------------

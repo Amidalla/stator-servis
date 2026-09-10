@@ -40,7 +40,7 @@
                         203deg,
                         rgb(16 24 40 / 50%) 5.04%,
                         rgb(0 64 161 / 15%) 47.97%,
-                        #101828 121.84%
+                        #161616 121.84%
                     )
                     no-repeat center;
                 background-size: cover;
@@ -91,11 +91,11 @@
         textarea,
         input {
             height: 60px;
-            color: var(--color-2);
+            color: var(--color-white);
             background: rgb(244 244 244 / 17%);
 
             &::placeholder {
-                color: var(--color-2);
+                color: var(--color-white);
             }
 
             @include bp.mq(tablet-xl) {
@@ -168,7 +168,7 @@
 
         .catalog-form__title {
             max-width: 100%;
-            color: var(--color-black);
+            color: var(--txt-dark);
         }
 
         .form .grid {
@@ -178,11 +178,11 @@
             textarea,
             input {
                 height: 60px;
-                color: var(--color-black);
+                color: var(--txt-dark);
                 background: var(--color-white);
 
                 &::placeholder {
-                    color: var(--color-black);
+                    color: var(--txt-dark);
                 }
 
                 @include bp.mq(tablet-xl) {
@@ -199,10 +199,10 @@
             .consent-checkbox.variant {
                 label {
                     .value {
-                        color: var(--color-black);
+                        color: var(--txt-dark);
 
                         a {
-                            color: var(--color-black);
+                            color: var(--txt-dark);
                         }
                     }
                 }

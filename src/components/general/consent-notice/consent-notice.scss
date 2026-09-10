@@ -2,27 +2,23 @@
 
 .consent-notice {
     position: fixed;
+    right: 0;
     bottom: 0;
     left: 0;
-    z-index: 100;
+    z-index: 110;
     display: none;
     width: 100%;
-    padding: 30px 0;
-    overflow: hidden;
-    background: var(--color-white);
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0 -14px 47px 0 rgb(0 0 0 / 10%);
-
-    @include bp.mq(laptop) {
-        padding: 20px 0;
-    }
+    padding: 20px 0;
+    color: var(--color-white);
+    background: var(--txt-dark);
+    box-shadow: 0 -8px 32px 0 rgb(0 0 0 / 25%);
 
     // --------------------------------------
     // Состояния
     // --------------------------------------
 
     &.is-visible {
-        display: flex;
+        display: block;
     }
 
     // --------------------------------------
@@ -31,76 +27,104 @@
 
     .block {
         display: flex;
+        gap: 40px;
         align-items: center;
+        justify-content: space-between;
+    }
 
-        @include bp.mq(tablet) {
-            flex-wrap: wrap;
+    .copy {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        gap: 15px;
+        min-width: 0;
+    }
+
+    .title {
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--color-white);
+    }
+
+    .text {
+        font-family: var(--font-family-primary);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%;
+        color: var(--color-white);
+        max-width: 967px;
+
+        a {
+            color: #d64212;
+            text-decoration: underline;
+
+            &:hover {
+                color: #d64212;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .actions {
+        display: flex;
+        flex-shrink: 0;
+        gap: 16px;
+        align-items: center;
+    }
+
+    .button {
+        --button-width: auto;
+
+        align-self: auto;
+        width: auto;
+    }
+
+    @include bp.mq(tablet) {
+        right: 16px;
+        bottom: 16px;
+        left: 16px;
+        width: auto;
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0 8px 32px 0 rgb(0 0 0 / 30%);
+
+        .container {
+            padding: 0;
         }
 
-        .box {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            padding-right: 20px;
-            margin-right: auto;
+        .block {
+            flex-direction: column;
+            gap: 16px;
+            align-items: stretch;
+        }
 
-            @include bp.mq(tablet) {
-                margin-bottom: 20px;
-            }
+        .title {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 130%;
+        }
 
-            .image {
-                display: flex;
-                flex: 0 0 auto;
-                max-width: 106px;
+        .text {
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 140%;
+        }
 
-                @include bp.mq(laptop) {
-                    max-width: 66px;
-                }
-
-                @include bp.mq(tablet) {
-                    max-width: 56px;
-                }
-            }
-
-            .text {
-                max-width: 778px;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 130%;
-                color: var(--color-black);
-
-                @include bp.mq(laptop) {
-                    max-width: 678px;
-                    font-size: 16px;
-                }
-
-                @include bp.mq(tablet) {
-                    max-width: unset;
-                    font-size: 15px;
-                }
-
-                a {
-                    color: var(--color-primary);
-                    text-decoration: none;
-
-                    &:hover {
-                        text-decoration: underline;
-                    }
-                }
-            }
+        .actions {
+            width: 100%;
         }
 
         .button {
+            --button-width: 100%;
+            --button-height: 50px;
+            --button-padding: 14px 20px;
+
             width: 100%;
-            max-width: 344px;
-
-            @include bp.mq(laptop) {
-                max-width: 264px;
-            }
-
-            @include bp.mq(tablet) {
-                max-width: unset;
-            }
         }
     }
 }

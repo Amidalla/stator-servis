@@ -3,147 +3,201 @@
 
 .contacts-header {
     display: flex;
-    gap: 83px;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+    align-items: center;
+
+    @include bp.mq(laptop-m) {
+        flex-wrap: nowrap;
+        gap: 12px 20px;
+    }
+
+    @include bp.mq(tablet) {
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-start;
+
+        .email {
+            order: 2;
+        }
+
+        .phones {
+            order: 1;
+        }
+    }
 
     .item {
         display: flex;
-        gap: 10px;
+        gap: 8px;
         align-items: center;
         font-size: 15px;
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
-        color: var(--color-1);
-
-        &.email {
-            a {
-                display: flex;
-                gap: 10px;
-                align-items: center;
-                font-size: 15px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 19px;
-                color: var(--color-1);
-            }
-        }
-
-        &.phones {
-            a {
-                display: flex;
-                gap: 10px;
-                align-items: center;
-                font-size: 15px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 120%;
-                color: var(--color-1);
-            }
-        }
-    }
-}
-
-/* .contacts-header {
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
-
-    @include bp.mq(laptop) {
-        gap: 16px;
-        width: 100%;
-    }
-    @include bp.mq(tablet) {
-        align-items: center;
-    }
-
-    .item {
-        display: flex;
-        gap: 9px;
-        align-items: center;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 1;
+        color: var(--color-white);
         white-space: nowrap;
+        text-decoration: none;
 
-        @include bp.mq(laptop) {
-            font-size: 15px;
+        @include bp.mq(laptop-m) {
+            font-size: 12px;
+        }
+
+        @include bp.mq(tablet) {
+            gap: 6px;
+            font-size: 12px;
+        }
+
+        img {
+            flex-shrink: 0;
+            width: 20px;
+            height: auto;
+            object-fit: contain;
+
+            @include bp.mq(tablet) {
+                width: 14px;
+            }
+        }
+
+        span {
+            color: inherit;
+        }
+
+        &:hover {
+            color: var(--color-white);
+            text-decoration: none;
+        }
+    }
+
+    a.item,
+    .item a {
+        color: var(--color-white);
+        text-decoration: none;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            color: var(--color-white);
+            text-decoration: none;
+            opacity: 0.8;
+        }
+    }
+
+    .city {
+        @include bp.mq(tablet-xl) {
+            display: none;
+        }
+    }
+
+    .phones {
+        position: relative;
+        display: flex;
+        flex-flow: row wrap;
+        gap: 8px 16px;
+        align-items: center;
+
+        > a {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            color: var(--color-white);
+            white-space: nowrap;
+
+            @include bp.mq(tablet) {
+                gap: 6px;
+            }
+
+            &:hover {
+                text-decoration: none;
+                opacity: 0.8;
+            }
+        }
+    }
+
+    .phones > a.phones-extra {
+        @include bp.mq(desktop-m) {
+            display: none;
+        }
+    }
+
+    .phones-toggle {
+        display: none;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: 21px;
+        height: 12px;
+        padding: 0;
+        color: var(--brand-dark-orange);
+        cursor: pointer;
+        background: none;
+        border: none;
+        transition:
+            transform 0.2s ease,
+            opacity 0.2s ease;
+
+        @include bp.mq(desktop-m) {
+            display: flex;
+        }
+
+        @include bp.mq(tablet) {
+            display: none;
         }
 
         svg {
-            margin-top: -1px;
+            display: block;
+            width: 21px;
+            height: 12px;
+        }
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+        &[aria-expanded="true"] {
+            transform: rotate(180deg);
+        }
+    }
+
+    .phones-dropdown {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        z-index: 5;
+        display: none;
+        min-width: 100%;
+        padding: 12px;
+        background: var(--txt-dark);
+        border: 1px solid rgb(255 255 255 / 15%);
+        border-radius: 4px;
+        box-shadow: 0 8px 20px rgb(0 0 0 / 25%);
+
+        @include bp.mq(tablet-xl) {
+            padding: 8px 12px;
         }
 
         a {
-            display: flex;
-            color: var(--color-primary);
+            display: block;
+            font-size: 15px;
+            color: var(--color-white);
+            white-space: nowrap;
+
+            @include bp.mq(tablet-xl) {
+                font-size: 12px;
+            }
 
             &:hover {
-                color: var(--color-primary-dark);
                 text-decoration: none;
-            }
-        }
-
-        &.email {
-            @include bp.mq(tablet) {
-                display: none;
-            }
-        }
-
-        &.phones {
-            gap: 24px;
-            align-items: flex-start;
-
-            @include bp.mq(laptop) {
-                gap: 16px;
-            }
-
-            @include bp.mq(tablet) {
-                display: none;
-            }
-
-            a {
-                display: flex;
-                gap: 10px;
-                color: var(--color-black);
-                transition: all 0.3s;
-
-                &:hover {
-                    color: var(--color-primary);
-                    text-decoration: none;
-                }
-
-                small {
-                    font-size: 14px;
-                    font-weight: 400;
-                    line-height: normal;
-                    color: var(--color-1);
-                }
-            }
-        }
-
-        button {
-            padding: 0;
-            font-size: 16px;
-            font-weight: 400;
-            line-height: 1;
-            color: var(--color-primary);
-            cursor: pointer;
-            background: none;
-            border: none;
-            transition: all 0.3s;
-
-            &:hover {
-                color: var(--color-primary-dark);
-            }
-        }
-
-        &.callback {
-            @include bp.mq(laptop) {
-                flex: 1 1 auto;
-                justify-content: flex-end;
-                margin-top: 4px;
+                opacity: 0.8;
             }
         }
     }
-} */
+
+    .phones.is-open .phones-dropdown {
+        @include bp.mq(desktop-m) {
+            display: block;
+        }
+
+        @include bp.mq(tablet) {
+            display: none;
+        }
+    }
+}

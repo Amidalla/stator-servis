@@ -4,7 +4,7 @@
 .catalog-short {
     padding-top: 68px;
     padding-bottom: 77px;
-    background: var(--color-4);
+    background: var(--color-white);
 
     @include bp.mq(laptop-l) {
         padding-top: 41px;
@@ -94,7 +94,7 @@
         font-style: normal;
         font-weight: 500;
         line-height: 120%;
-        color: var(--color-black);
+        color: var(--txt-dark);
 
         @include bp.mq(laptop-l) {
             font-size: 30px;
@@ -102,39 +102,6 @@
 
         @include bp.mq(tablet) {
             font-size: 20px;
-        }
-    }
-
-    // Спан-кнопка "Подробнее"
-    .button {
-        &.red {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 35px;
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 1.2;
-            color: var(--color-white);
-            text-decoration: none;
-            cursor: pointer;
-            background: var(--color-red);
-            border: 1px solid var(--color-red);
-            border-radius: 5px;
-            transition:
-                background 0.3s ease,
-                border-color 0.3s ease,
-                color 0.3s ease;
-
-            &:hover {
-                color: var(--color-white);
-                background: var(--color-black);
-                border-color: var(--color-black);
-            }
-
-            span {
-                display: inline-block;
-            }
         }
     }
 }

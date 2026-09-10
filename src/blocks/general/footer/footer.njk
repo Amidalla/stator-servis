@@ -1,88 +1,133 @@
 {% from "components/general/logo/logo.njk" import render as logo %}
 {% from "components/general/navigation-bottom/navigation-bottom.njk" import render as navigationBottom %}
+{% from "components/general/button/button.njk" import render as button %}
 
-<footer class="footer">
+<footer class="footer" id="footer">
     <div class="footer-main">
         <div class="container">
             <div class="block">
-                <!-- Колонка 1: Логотип + текст -->
-                <div class="column">
-                    <div class="wrap">
+                <div class="brand">
+                    <div class="identity">
                         {{ logo(image="/assets/images/system/logo.svg", alt="Статор-Сервис") }}
-                    </div>
-                    <div class="wrap">
                         {% include "components/common/text-footer/text-footer.njk" %}
                     </div>
-                    <div class="wrap">
-                        {% include "components/common/contacts-footer/contacts-footer.njk" %}
-                        <button class="footer-btn" data-src="popup-callback">
-                            <span>Заказать звонок</span>
-                        </button>
+                    {{ button(
+                        text="Заказать звонок",
+                        type="button",
+                        variant="red",
+                        data={"src": "popup-callback"}
+                    ) }}
+                    <a class="faq brand-faq" href="/faq/">Вопрос-ответ</a>
+                    {% include "components/common/contacts-footer/contacts-footer.njk" %}
+                </div>
+
+                <div class="faq-col">
+                    <a class="faq" href="/faq/">Вопрос-ответ</a>
+                </div>
+
+                <div class="nav-cols">
+                    <div class="col about">
+                        {{ navigationBottom(
+                            ariaLabel="О компании",
+                            items=[
+                                { title: "О компании", href: "/o-nas/", heading: true },
+                                { title: "Цены", href: "/cena/" },
+                                { title: "Наши работы", href: "/nashi-raboty/" },
+                                { title: "Доставка", href: "#" },
+                                { title: "Статьи", href: "/блог-и-новости/" },
+                                { title: "Контакты", href: "/contact/" }
+                            ]
+                        ) }}
+                    </div>
+                    <div class="col">
+                        {{ navigationBottom(
+                            ariaLabel="Ремонт",
+                            items=[
+                                { title: "Ремонт", href: "/uslugi/remont-elektrodvigateley/", heading: true },
+                                { title: "Электродвигатели", href: "/uslugi/remont-elektrodvigateley/" },
+                                { title: "Насосы", href: "/uslugi/" },
+                                { title: "Бензогенераторы", href: "/uslugi/" },
+                                { title: "Вентиляторы", href: "/uslugi/" }
+                            ]
+                        ) }}
+                    </div>
+                    <div class="col">
+                        {{ navigationBottom(
+                            ariaLabel="Перемотка",
+                            items=[
+                                { title: "Перемотка", href: "/uslugi/", heading: true },
+                                { title: "Электродвигатели", href: "/uslugi/" },
+                                { title: "Бензогенераторы", href: "/uslugi/" },
+                                { title: "Альтернаторы", href: "/nashi-raboty/peremotka-alternatora/" },
+                                { title: "Трансформаторы", href: "/uslugi/" },
+                                { title: "Катушки", href: "/uslugi/" }
+                            ]
+                        ) }}
+                    </div>
+                    <div class="col">
+                        {{ navigationBottom(
+                            ariaLabel="Балансировка",
+                            items=[
+                                { title: "Балансировка", href: "/uslugi/", heading: true },
+                                { title: "Роторы", href: "/uslugi/" },
+                                { title: "Якоря", href: "/uslugi/" },
+                                { title: "Муфты", href: "/uslugi/" },
+                                { title: "Промышленные вентиляторы", href: "/uslugi/" }
+                            ]
+                        ) }}
                     </div>
                 </div>
+            </div>
 
-                <!-- Колонка 2: О компании, работы, цены -->
-                <div class="wrap">
-                    {{ navigationBottom(
-                        items=[
-                            { title: "О компании", href: "/o-nas/" },
-                            { title: "Наши работы", href: "/nashi-raboty/" },
-                            { title: "Цены", href: "/cena/" }
-                        ]
-                    ) }}
-                </div>
-
-                <!-- Колонка 3: Услуги с подменю -->
-                <div class="wrap">
-                    {{ navigationBottom(
-                        items=[
-                            {
-                                title: "Услуги",
-                                href: "/uslugi/",
-                                children: [
-                                    { title: "Ремонт электродвигателей", href: "/uslugi/remont-elektrodvigateley/" },
-                                    { title: "Перемотка электродвигателей", href: "/uslugi/remont-elektrodvigateley/" },
-                                    { title: "Перемотка альтернатора", href: "/uslugi/remont-elektrodvigateley/" },
-                                    { title: "Ремонт промышленных вентиляторов", href: "/uslugi/remont-elektrodvigateley/" }
-                                ]
-                            }
-                        ]
-                    ) }}
-                </div>
-
-                <!-- Колонка 4: Блог, Вопрос-ответ, Контакты -->
-                <div class="wrap">
-                    <button class="footer-btn" data-src="popup-callback">
-                        <span>Заказать звонок</span>
-                    </button>
-                    {{ navigationBottom(
-                        items=[
-                            { title: "Блог", href: "/блог-и-новости/" },
-                            { title: "Вопрос-ответ", href: "/faq/" },
-                            { title: "Контакты", href: "/contact/" }
-                        ]
-                    ) }}
-                </div>
+            <div class="socials">
+                <a
+                    class="socials-link telegram"
+                    href="https://t.me/+79218454400"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Telegram"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                        <rect width="40" height="40" rx="5" fill="white" />
+                        <path
+                            d="M30.308 9.82363C27.1418 11.1348 13.5662 16.7581 9.81519 18.2908C7.2995 19.2725 8.77208 20.1928 8.77208 20.1928C8.77208 20.1928 10.9194 20.929 12.7601 21.4812C14.6008 22.0335 15.5825 21.4199 15.5825 21.4199L24.2335 15.5909C27.3012 13.505 26.5651 15.2228 25.8289 15.959C24.2335 17.5544 21.5953 20.0698 19.3866 22.0946C18.4049 22.9536 18.8957 23.69 19.3252 24.0581C20.9206 25.4079 25.2767 28.1689 25.5222 28.353C26.8185 29.2706 29.368 30.5916 29.7558 27.8008L31.2898 18.168C31.7806 14.9161 32.2715 11.9096 32.3329 11.0507C32.5168 8.96468 30.308 9.82363 30.308 9.82363Z"
+                            fill="#383838"
+                        />
+                    </svg>
+                </a>
+                <a
+                    class="socials-link vk"
+                    href="#"
+                    aria-label="VKontakte"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="17" viewBox="0 0 28 17" fill="none" aria-hidden="true">
+                        <path
+                            d="M13.6841 16.0696H15.3552C15.3552 16.0696 15.8604 16.0136 16.1174 15.7357C16.3551 15.4805 16.3464 15.0015 16.3464 15.0015C16.3464 15.0015 16.3132 12.7588 17.355 12.4284C18.3811 12.1033 19.6991 14.596 21.0958 15.5557C22.1516 16.2811 22.954 16.122 22.954 16.122L26.6896 16.0696C26.6896 16.0696 28.6439 15.949 27.7174 14.4124C27.6423 14.2866 27.1773 13.2762 24.9398 11.1995C22.5974 9.02495 22.912 9.37806 25.7334 5.61801C27.4517 3.32807 28.1387 1.92963 27.9237 1.3318C27.7192 0.761935 26.4553 0.912267 26.4553 0.912267L22.253 0.93674C22.253 0.93674 21.9419 0.894787 21.7094 1.03288C21.4839 1.16923 21.3388 1.48388 21.3388 1.48388C21.3388 1.48388 20.6728 3.2564 19.7848 4.76321C17.9126 7.94291 17.1627 8.11072 16.8568 7.91319C16.1453 7.45346 16.3237 6.06376 16.3237 5.07786C16.3237 1.99606 16.7904 0.711242 15.4129 0.379113C14.9549 0.268986 14.6193 0.195568 13.4499 0.183332C11.95 0.167599 10.6792 0.188576 9.96076 0.539933C9.4818 0.774172 9.11296 1.29684 9.33846 1.32655C9.6164 1.36326 10.2457 1.49611 10.5796 1.95061C11.0113 2.5362 10.9956 3.85423 10.9956 3.85423C10.9956 3.85423 11.2438 7.48143 10.417 7.93242C9.84889 8.24183 9.07101 7.61078 7.40162 4.72476C6.54683 3.24766 5.90005 1.61323 5.90005 1.61323C5.90005 1.61323 5.77594 1.30907 5.55394 1.14651C5.28474 0.948976 4.90716 0.886046 4.90716 0.886046L0.911123 0.910519C0.911123 0.910519 0.311543 0.928 0.0912887 1.18846C-0.104493 1.42095 0.0755563 1.89991 0.0755563 1.89991C0.0755563 1.89991 3.20456 9.21899 6.7461 12.9091C9.99572 16.2916 13.6841 16.0696 13.6841 16.0696Z"
+                            fill="white"
+                        />
+                    </svg>
+                </a>
+                <a
+                    class="socials-link max"
+                    href="https://max.ru/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Max"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path
+                            d="M11.6804 0.3211C4.72705 0.684433 0.137055 6.13777 0.427054 13.0144C0.553721 16.0244 1.76372 18.6144 2.05039 21.4711C2.12372 22.2111 1.91039 23.1244 2.76372 23.4478C3.81372 23.8444 5.42372 23.1778 6.30372 22.5678C6.60372 22.3644 6.89039 22.1278 7.11039 21.8344C8.02039 22.4378 8.88372 23.0211 9.96705 23.2811C14.7371 24.4244 19.9637 21.8078 22.2871 17.6044C26.6537 9.70776 20.7504 -0.152234 11.6804 0.3211ZM8.98039 16.8011C8.60372 17.0944 8.24039 17.4944 7.82372 17.7244C7.22039 18.0478 7.03372 17.7111 6.80705 17.1778C6.09372 15.4811 6.00705 12.5911 6.42372 10.8144C6.98372 8.39777 8.85372 6.2711 11.4237 6.04443C14.0237 5.81443 16.4371 7.13443 17.5271 9.51777C19.9404 14.8211 13.7637 20.0578 8.98039 16.8044V16.8011Z"
+                            fill="#383838"
+                        />
+                    </svg>
+                </a>
             </div>
         </div>
     </div>
 
     <div class="footer-bottom">
         <div class="container">
-            <div class="block">
-                <div class="wrap">
-                    {% include "components/common/contacts-footer/contacts-footer.njk" %}
-                </div>
-                <div class="wrap">
-                    {% include "components/common/footer-address/footer-address.njk" %}
-                </div>
-                <div class="wrap">
-                    {% include "components/common/copyright/copyright.njk" %}
-                </div>
-            </div>
+            {% include "components/common/copyright/copyright.njk" %}
         </div>
-    </div>
-    <div class="footer-bg">
-        <img class="lazy" src="/assets/images/content/footer-bg.svg" alt="" />
     </div>
 </footer>

@@ -19,7 +19,7 @@ body {
     margin: 0;
     font-family: var(--font-family-primary);
     line-height: 140%;
-    color: var(--color-text-gray);
+    color: var(--txt-dark);
     text-rendering: optimizelegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -69,19 +69,30 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--font-family-heading);
-    line-height: 110%;
-    color: var(--color-black);
+    font-family: var(--font-family-headings);
+    font-style: normal;
+    color: var(--txt-dark);
+}
+
+h1,
+h2 {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 130%;
 }
 
 h1 {
     font-size: 45px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 100%;
+}
+
+h2 {
+    @include bp.mq(tablet) {
+        font-size: 28px;
+    }
 }
 
 .site {
+    position: relative;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -89,7 +100,7 @@ h1 {
 
 .container {
     width: 100%;
-    max-width: calc(var(--container-width) + var(--container-padding) * 2);
+    max-width: var(--container-max-width);
     padding: 0 var(--container-padding);
     margin: 0 auto;
 }
@@ -103,6 +114,20 @@ h1 {
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
+    padding-top: var(--header-height);
+    overflow-x: clip;
+
+    &:has(.hero) {
+        padding-top: 0;
+    }
+
+    .page-content > section:not(.hero):not(.about-company):not(.advantages):not(.our-works):not(.reviews):not(.work-types):not(.faq-home) {
+        padding-top: var(--section-padding-top);
+    }
+
+    .page-content > section:not(.hero):not(.directions):not(.about-company):not(.advantages):not(.our-works):not(.reviews):not(.work-types):not(.faq-home) {
+        padding-bottom: var(--section-padding-bottom);
+    }
 
     .page-header {
         position: relative;
@@ -128,7 +153,7 @@ h1 {
                 font-style: normal;
                 font-weight: 400;
                 line-height: 100%;
-                color: var(--color-black);
+                color: var(--txt-dark);
 
                 @include bp.mq(laptop) {
                     font-size: 32px;
@@ -143,7 +168,7 @@ h1 {
                 font-style: normal;
                 font-weight: 400;
                 line-height: 100%;
-                color: var(--color-black);
+                color: var(--txt-dark);
 
                 @include bp.mq(tablet-xl) {
                     font-size: 32px;
@@ -207,7 +232,7 @@ h1 {
         height: 1rem;
         pointer-events: none;
         content: "";
-        border: 0.175rem solid var(--color-black);
+        border: 0.175rem solid var(--txt-dark);
         border-bottom-color: transparent;
         border-radius: 50%;
         opacity: 1;
@@ -262,13 +287,13 @@ h1 {
             width: var(--navigation-bullet-size);
             height: var(--navigation-bullet-size);
             background: transparent;
-            border: 1px solid var(--color-9);
+            border: 1px solid var(--txt-dark);
             opacity: 1;
 
             &.swiper-pagination-bullet-active {
                 width: var(--navigation-bullet-active-width);
-                background: var(--color-primary);
-                border-color: var(--color-primary);
+                background: var(--brand-dark-orange);
+                border-color: var(--brand-dark-orange);
                 border-radius: var(--navigation-bullet-size);
             }
         }
@@ -285,7 +310,7 @@ h1 {
         height: var(--navigation-button-size);
         padding: 0;
         margin: 0;
-        color: var(--color-9);
+        color: var(--txt-dark);
         cursor: pointer;
         user-select: none;
         background: none;
@@ -297,7 +322,7 @@ h1 {
         }
 
         &:hover svg path {
-            stroke: var(--color-primary);
+            stroke: var(--brand-dark-orange);
         }
 
         &.swiper-button-disabled {
@@ -347,16 +372,20 @@ h1 {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 99;
+    z-index: 101;
     visibility: hidden;
     width: 100%;
     height: 100%;
     pointer-events: none;
-    background: rgb(24 33 40 / 81%);
+    background: rgb(0 0 0 / 50%);
     opacity: 0;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 
     &.is-active {
         visibility: visible;
+        pointer-events: auto;
         opacity: 1;
     }
 }

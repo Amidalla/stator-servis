@@ -1,360 +1,250 @@
 @use "core/breakpoints" as bp;
-@use "core/mixins" as mix;
+
+.page:has(.hero) {
+    --hero-h: calc(100vw * 1066 / 1920);
+    --hero-visible-h: calc(100vw * 871.59 / 1920);
+    --hero-cut-w: calc(100vw * 94.1152 / 1920);
+    --hero-cut-h: calc(var(--hero-h) - var(--hero-visible-h));
+    --hero-after-actions: calc(100vw * 194 / 1920);
+    --hero-dir-overlap-extra: 28px;
+
+    @include bp.mq(laptop-m) {
+        --hero-h: calc(100vw * 568 / 1024);
+        --hero-visible-h: calc(100vw * 460 / 1024);
+    }
+
+    @include bp.mq(tablet-l) {
+        --hero-h: calc(100vw * 837 / 768);
+        --hero-visible-h: calc(100vw * 699 / 768);
+    }
+
+    @include bp.mq(mobile-l) {
+        --hero-h: 0px;
+        --hero-visible-h: 0px;
+        --hero-cut-w: calc(100vw * 48.8828 / 360);
+        --hero-cut-h: calc(100vw * 96.0283 / 360);
+        --hero-dir-overlap-extra: 0px;
+    }
+}
 
 .hero {
     position: relative;
-    margin-bottom: unset;
-    background: var(--color-4);
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    min-height: var(--hero-h);
+    overflow: visible;
+    color: var(--color-white, #fff);
+    background-color: #a8a8a8;
 
-    .hero-bg {
+    .media {
         position: absolute;
-        right: 0;
-        bottom: 0;
+        inset: 0 0 -8px;
         z-index: 0;
-        max-width: 1460px;
+        overflow: hidden;
         pointer-events: none;
 
+        @include bp.mq(mobile-l) {
+            inset: 0;
+            clip-path: polygon(
+                0 0,
+                100% 0,
+                100% calc(100% - var(--hero-cut-h)),
+                var(--hero-cut-w) calc(100% - var(--hero-cut-h)),
+                0 100%
+            );
+        }
+
+        picture,
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        img {
+            object-fit: fill;
+            object-position: top center;
+
+            @include bp.mq(mobile-l) {
+                object-fit: cover;
+                object-position: 80% center;
+            }
+        }
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        padding-top: calc(var(--header-height) + 103px);
+        padding-bottom: calc(var(--hero-cut-h) + var(--hero-after-actions));
+
         @include bp.mq(laptop-l) {
-            max-width: 1030px;
+            padding-top: calc(var(--header-height) + 42px);
         }
 
-        @include bp.mq(laptop) {
-            bottom: 20px;
+        @include bp.mq(tablet-xl) {
+            padding-top: calc(var(--header-height) + 68px);
         }
-    }
 
-    // Скрытый заголовок
-    .visually-hidden {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        border: 0;
-        clip-path: inset(0);
-    }
+        @include bp.mq(tablet-l) {
+            padding-bottom: calc(var(--hero-cut-h) + var(--hero-dir-overlap-extra) + 87px + 40px + 32px);
+        }
 
-    .slider {
-        width: 100%;
-        height: 100%;
+        @include bp.mq(tablet) {
+            padding-bottom: calc(var(--hero-cut-h) + var(--hero-dir-overlap-extra) + 42px + 40px + 24px);
+        }
 
-        .swiper-slide {
-            position: relative;
-            height: auto;
-            background: transparent;
-
-            .container {
-                display: flex;
-                height: 100%;
-                padding-top: 108px;
-                padding-bottom: 233px;
-
-                @include bp.mq(laptop-l) {
-                    padding-bottom: 167px;
-                }
-
-                @include bp.mq(laptop) {
-                    padding-top: 91px;
-                    padding-bottom: 0;
-                }
-
-                @include bp.mq(tablet) {
-                    padding-top: 68px;
-                    padding-bottom: 60px;
-                }
-
-                @include bp.mq(mobile-xl) {
-                    padding-top: 20px;
-                    padding-bottom: 20px;
-                }
-            }
-
-            .block {
-                position: relative;
-                display: flex;
-                width: 100%;
-
-                @include bp.mq(laptop) {
-                    flex-direction: column-reverse;
-                    gap: 0;
-                    min-height: auto;
-                }
-
-                .content {
-                    position: relative;
-                    z-index: 2;
-                    flex: 0 0 60%;
-                    max-width: 60%;
-
-                    @include bp.mq(laptop) {
-                        flex: none;
-                        max-width: 100%;
-                    }
-                }
-
-                .image {
-                    position: absolute;
-                    top: 45%;
-                    right: 0;
-                    z-index: 1;
-                    width: 45%;
-                    max-width: 50%;
-                    pointer-events: none;
-                    transform: translateY(-50%);
-
-                    img {
-                        display: block;
-                        width: 100%;
-                        height: auto;
-                        max-height: 500px;
-                        object-fit: contain;
-                    }
-
-                    @include bp.mq(laptop) {
-                        position: relative;
-                        top: auto;
-                        left: auto;
-                        z-index: 3;
-                        display: flex;
-                        justify-content: flex-end;
-                        order: -1;
-                        width: 100%;
-                        max-width: 100%;
-                        padding-bottom: 82px;
-                        margin-top: -35px;
-                        pointer-events: auto;
-                        transform: none;
-
-                        img {
-                            width: auto;
-                            max-width: 582px;
-                        }
-                    }
-
-                    @include bp.mq(tablet) {
-                        padding-bottom: 40px;
-                        margin-top: 0;
-
-                        img {
-                            max-width: 100%;
-                            max-height: 300px;
-                        }
-                    }
-                }
-            }
+        @include bp.mq(mobile-l) {
+            padding-top: calc(var(--header-height) + 114px);
         }
     }
 
-    .hero__title {
-        margin-top: 0;
-        margin-bottom: 21px;
+    .content {
+        position: relative;
+        z-index: 1;
+        max-width: 780px;
+    }
+
+    .title {
+        max-width: 8.6em;
+        margin: 0;
         font-family: var(--font-family-headings);
-        font-size: 60px;
+        font-size: 80px;
         font-style: normal;
         font-weight: 700;
-        line-height: 110%;
-        color: var(--color-black);
+        line-height: 130%;
+        color: var(--color-white, #fff);
 
         @include bp.mq(laptop-l) {
-            margin-bottom: 26px;
-            font-size: 45px;
+            font-size: 60px;
         }
 
-        @include bp.mq(laptop) {
-            margin-bottom: 17px;
-            font-size: 40px;
+        @include bp.mq(tablet-xl) {
+            font-size: 50px;
         }
 
         @include bp.mq(tablet) {
-            margin-bottom: 1px;
-            font-size: 27px;
-            line-height: 120%;
+            font-size: 33px;
         }
     }
 
-    .hero__subtitle {
-        margin-bottom: 68px;
-        font-size: 30px;
+    .text {
+        max-width: 700px;
+        margin: 20px 0 0;
+        font-family: var(--font-family-primary);
+        font-size: 24px;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 500;
         line-height: 140%;
-        color: #312f2f;
-
-        @include bp.mq(laptop-l) {
-            margin-bottom: 41px;
-            font-size: 25px;
-        }
-
-        @include bp.mq(laptop) {
-            margin-bottom: 37px;
-        }
+        color: var(--color-white, #fff);
 
         @include bp.mq(tablet) {
-            margin-bottom: 18px;
-            font-size: 18px;
-        }
-    }
-
-    .hero__stats {
-        display: flex;
-        gap: 35px;
-
-        @include bp.mq(laptop-l) {
-            gap: 28px;
-        }
-
-        @include bp.mq(laptop) {
-            gap: 19px;
-        }
-
-        @include bp.mq(tablet) {
-            gap: 10px;
-        }
-
-        @include bp.mq(mobile-xl) {
-            justify-content: center;
-        }
-    }
-
-    .hero__stat {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 25px 26px 30px;
-        background: var(--color-white);
-        border-radius: 5px;
-
-        @include bp.mq(laptop-l) {
-            padding: 15px 24px 31px;
-        }
-
-        @include bp.mq(laptop) {
-            padding: 15px 16px 17px;
-        }
-
-        @include bp.mq(tablet) {
-            padding: 11px 8px 4px;
-        }
-    }
-
-    .hero__stat-number {
-        font-family: var(--font-family-headings);
-        font-size: 45px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 100%;
-        color: var(--color-blue);
-
-        @include bp.mq(laptop-l) {
-            font-size: 40px;
-        }
-
-        @include bp.mq(laptop) {
-            font-size: 30px;
-        }
-
-        @include bp.mq(tablet) {
-            font-size: 22px;
-        }
-    }
-
-    .hero__stat-text {
-        font-family: var(--font-family-accent);
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        color: #969696;
-
-        @include bp.mq(laptop-l) {
+            margin-top: 15px;
             font-size: 16px;
         }
+    }
+
+    .actions {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        margin-top: 34px;
+
+        .white {
+            --button-width: 366px;
+
+            justify-content: flex-start;
+            text-align: left;
+        }
 
         @include bp.mq(tablet) {
-            font-size: 14px;
+            flex-direction: column;
+            gap: 12px;
+            align-items: stretch;
+
+            .white {
+                --button-width: 100%;
+
+                justify-content: center;
+                text-align: center;
+            }
         }
     }
 
-    .navigation {
+    .socials {
         position: absolute;
-        right: 0; /* Пагинация справа */
-        bottom: 23px;
-        left: auto; /* Отменяем left: 0 */
-        z-index: 1;
-        width: 100%;
-        height: fit-content;
+        right: 39px;
+        bottom: calc(var(--hero-cut-h) + var(--hero-dir-overlap-extra) + 49px);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
 
-        @include bp.mq(laptop) {
-            right: auto;
-            bottom: 0;
-            left: 0;
+        @include bp.mq(laptop-l) {
+            bottom: calc(var(--hero-cut-h) + var(--hero-dir-overlap-extra) + 20px);
         }
 
-        .swiper-pagination {
-            position: static;
-            display: flex;
-            gap: 16px;
-            justify-content: flex-end; /* Выравнивание вправо */
-            width: 100%;
-            padding-right: 9%; /* Отступ от правого края */
+        @include bp.mq(tablet-l) {
+            right: auto;
+            bottom: calc(var(--hero-cut-h) + var(--hero-dir-overlap-extra) + 87px);
+            left: var(--container-padding);
+            flex-direction: row;
+            justify-content: flex-start;
+        }
 
-            @include bp.mq(laptop-l) {
-                padding-right: 0;
+        @include bp.mq(tablet) {
+            bottom: calc(var(--hero-cut-h) + var(--hero-dir-overlap-extra) + 42px);
+        }
+    }
+
+    .socials-link {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        background: var(--color-white);
+        border-radius: 5px;
+        transition: opacity 0.3s ease;
+
+        svg {
+            display: block;
+        }
+
+        &:hover {
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        &.telegram {
+            padding: 0;
+            background: transparent;
+
+            svg {
+                width: 40px;
+                height: 40px;
             }
+        }
 
-            @include bp.mq(laptop) {
-                justify-content: center;
-                padding-right: 0;
+        &.vk {
+            background: var(--brand-dark-orange);
+
+            svg {
+                width: 28px;
+                height: 17px;
             }
+        }
 
-            .swiper-pagination-bullet {
-                width: 235px;
-                height: 5px;
-                margin: 0 !important;
-                background: var(--color-white);
-                border-radius: 0;
-                opacity: 1;
-                transition: all 0.3s;
-
-                @include bp.mq(laptop-l) {
-                    width: 196.62px;
-                    height: 4.183px;
-                }
-
-                @include bp.mq(laptop) {
-                    width: 196.62px;
-                    height: 4.183px;
-                }
-
-                @include bp.mq(tablet) {
-                    width: 93.749px;
-                    height: 3px;
-                }
-
-                &.swiper-pagination-bullet-active {
-                    width: 235px;
-                    height: 5px;
-                    background: #012f6b;
-                    border-radius: 0;
-                    opacity: 1;
-
-                    @include bp.mq(laptop-l) {
-                        width: 196.62px;
-                        height: 4.183px;
-                    }
-
-                    @include bp.mq(laptop) {
-                        width: 196.62px;
-                        height: 4.183px;
-                    }
-
-                    @include bp.mq(tablet) {
-                        width: 93.749px;
-                        height: 3px;
-                    }
-                }
-            }
+        &.max svg {
+            width: 24px;
+            height: 24px;
         }
     }
 }

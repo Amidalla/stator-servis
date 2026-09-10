@@ -1,53 +1,47 @@
-// src/scss/core/_fonts.scss
-
-// Основной шрифт для текста
 @font-face {
-    font-family: WixMadeforText;
+    font-family: "Noto Sans";
     font-style: normal;
     font-weight: 400;
-    src: url("../assets/fonts/WixMadeforText.ttf") format("truetype");
     font-display: swap;
+    src: url("../assets/fonts/NotoSans-Regular.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: WixMadeforText;
+    font-family: "Noto Sans";
     font-style: normal;
     font-weight: 500;
-    src: url("../assets/fonts/WixMadeforText.ttf") format("truetype");
     font-display: swap;
+    src: url("../assets/fonts/NotoSans-Medium.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: WixMadeforText;
+    font-family: "Noto Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../assets/fonts/NotoSans-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Noto Sans";
     font-style: normal;
     font-weight: 700;
-    src: url("../assets/fonts/WixMadeforText.ttf") format("truetype");
     font-display: swap;
+    src: url("../assets/fonts/NotoSans-Bold.ttf") format("truetype");
 }
 
-// Шрифт для заголовков
 @font-face {
-    font-family: Commissioner;
-    font-style: normal;
+    font-family: "Noto Sans";
+    font-style: italic;
     font-weight: 400;
-    src: url("../assets/fonts/Commissioner.ttf") format("truetype");
     font-display: swap;
+    src: url("../assets/fonts/NotoSans-Italic.ttf") format("truetype");
 }
 
-// Шрифт для акцентов
 @font-face {
-    font-family: Inter;
+    font-family: "Tektur";
     font-style: normal;
-    font-weight: 400;
-    src: url("../assets/fonts/Inter.ttf") format("truetype");
+    font-weight: 400 900;
     font-display: swap;
-}
-
-// Шрифт Unna
-@font-face {
-    font-family: Unna;
-    font-style: normal;
-    font-weight: 400;
-    src: url("../assets/fonts/Unna-Regular.ttf") format("truetype");
-    font-display: swap;
+    src: url("../assets/fonts/Tektur.ttf") format("truetype");
 }
