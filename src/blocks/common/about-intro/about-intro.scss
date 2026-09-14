@@ -41,9 +41,9 @@
     }
 
     .title {
+        max-width: 798px;
         margin: 0 0 20px;
         color: #000;
-        max-width: 798px;
 
         @include bp.mq(laptop-l) {
             font-size: 32px;
@@ -56,6 +56,7 @@
     }
 
     .text {
+        max-width: 75%;
         margin: 0;
         font-family: var(--font-family-primary);
         font-size: 18px;
@@ -63,7 +64,6 @@
         font-weight: 400;
         line-height: 150%;
         color: #000;
-        max-width: 75%;
 
         @include bp.mq(laptop-m) {
             max-width: 93%;

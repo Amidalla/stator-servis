@@ -23,6 +23,7 @@ import { photos } from "../blocks/common/photos/photos.js";
 import { articlesContent } from "../blocks/common/articles-content/articles-content.js";
 import { ourWorks } from "../blocks/common/our-works/our-works.js";
 import { reviews } from "../blocks/common/reviews/reviews.js";
+import { usefulMaterials } from "../blocks/common/useful-materials/useful-materials.js";
 import { popupCallback } from "../components/common/popup-callback/popup-callback.js";
 import { popupFeedbackSuccess } from "../components/common/popup-feedback-success/popup-feedback-success.js";
 
@@ -49,6 +50,7 @@ const components = [
     articlesContent,
     ourWorks,
     reviews,
+    usefulMaterials,
     popupCallback,
     popupFeedbackSuccess
 ];

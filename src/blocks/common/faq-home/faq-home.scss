@@ -1,12 +1,82 @@
+@use "core/breakpoints" as bp;
+
 .faq-home {
     --faq-bleed: calc(var(--container-padding) + max(0px, (100vw - var(--container-max-width)) / 2));
+    --faq-intro-width: 561px;
+    --faq-layout-gap: 164px;
+    --faq-media-overflow: 100px;
+    --faq-intro-pad-top: 80px;
+    --faq-media-width: 433px;
+    --faq-media-height: 485px;
+    --faq-media-left: 5px;
+    --faq-glow-width: 407px;
+    --faq-glow-height: 492px;
+    --faq-glow-left: -85px;
+    --faq-answer-pad: 20px 79px 24px;
+    --faq-answer-size: 20px;
+    --faq-name-size: 24px;
+    --faq-lead-size: 18px;
+    --faq-lead-lh: 150%;
 
     position: relative;
     z-index: 0;
-    padding: 80px 0 0;
+    padding: 0;
     overflow: hidden;
     color: var(--color-white);
     background: var(--txt-dark);
+
+    @include bp.mq(laptop-l) {
+        --faq-intro-width: 407px;
+        --faq-layout-gap: 125px;
+        --faq-media-overflow: 80px;
+        --faq-intro-pad-top: 50px;
+        --faq-media-width: 338px;
+        --faq-media-height: 378px;
+        --faq-media-left: 0;
+        --faq-glow-width: 341px;
+        --faq-glow-height: 403px;
+        --faq-glow-left: -50px;
+        --faq-answer-pad: 20px 40px 24px 80px;
+        --faq-answer-size: 18px;
+    }
+
+    @include bp.mq(tablet-xl) {
+        // max-width: 100% ломает calc(100vw - 100%) → лишний вынос и обрезка цифр
+        --faq-bleed: var(--container-padding);
+        --faq-intro-width: 100%;
+        --faq-layout-gap: 0;
+        --faq-media-overflow: 0;
+        --faq-intro-pad-top: 40px;
+        --faq-media-width: 338px;
+        --faq-media-height: 378px;
+        --faq-media-left: 0;
+        --faq-glow-width: 341px;
+        --faq-glow-height: 403px;
+        --faq-glow-left: -40px;
+        --faq-answer-pad: 20px 40px 24px 70px;
+        --faq-answer-size: 18px;
+    }
+
+    @include bp.mq(tablet-l) {
+        --faq-answer-pad: 20px 40px 24px 80px;
+    }
+
+    @include bp.mq(mobile-l) {
+        --faq-bleed: var(--container-padding);
+        --faq-intro-pad-top: 60px;
+        --faq-media-width: calc(100vw - 15px);
+        --faq-media-height: 387px;
+        --faq-media-left: calc(7px - var(--container-padding));
+        --faq-glow-width: 100vw;
+        --faq-glow-height: 492px;
+        --faq-glow-left: calc(-1 * (var(--container-padding) + var(--faq-media-left)));
+        --faq-media-overflow: 0;
+        --faq-answer-pad: 20px 15px;
+        --faq-answer-size: 14px;
+        --faq-name-size: 20px;
+        --faq-lead-size: 16px;
+        --faq-lead-lh: 130%;
+    }
 
     .container {
         position: relative;
@@ -15,9 +85,14 @@
 
     .layout {
         display: grid;
-        grid-template-columns: minmax(0, 561px) minmax(0, 1fr);
-        gap: 40px 164px;
-        align-items: start;
+        grid-template-columns: minmax(0, var(--faq-intro-width)) minmax(0, 1fr);
+        gap: 40px var(--faq-layout-gap);
+        align-items: stretch;
+
+        @include bp.mq(tablet-xl) {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
     }
 
     .intro {
@@ -25,8 +100,7 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
-        min-height: 737px;
-        padding-bottom: 40px;
+        padding-top: var(--faq-intro-pad-top);
     }
 
     h2 {
@@ -38,34 +112,47 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
-        max-width: 561px;
+        max-width: var(--faq-intro-width);
+
+        @include bp.mq(tablet-xl) {
+            max-width: none;
+        }
 
         p {
             margin: 0;
             font-family: var(--font-family-primary);
-            font-size: 18px;
+            font-size: var(--faq-lead-size);
             font-style: normal;
             font-weight: 400;
-            line-height: 150%;
+            line-height: var(--faq-lead-lh);
             color: var(--txt-secondary, #fff7f2);
         }
     }
 
     .media {
-        position: absolute;
-        bottom: 0;
-        left: 5px;
-        width: 433px;
-        height: 485px;
+        position: relative;
+        left: var(--faq-media-left);
+        width: var(--faq-media-width);
+        height: var(--faq-media-height);
+        margin-top: 10px; // + gap 20px = 30px до текста
+        margin-bottom: calc(-1 * var(--faq-media-overflow));
         pointer-events: none;
+
+        @include bp.mq(tablet-xl) {
+            margin-top: 0; // flex gap 20px ≈ отступ в макете
+        }
+
+        @include bp.mq(mobile-l) {
+            margin-top: 80px; // + gap 20px = 100px до текста
+        }
 
         .glow {
             position: absolute;
-            bottom: -20px;
-            left: -85px;
-            width: 407px;
-            height: 492px;
+            bottom: 0;
+            left: var(--faq-glow-left);
+            width: var(--faq-glow-width);
             max-width: none;
+            height: var(--faq-glow-height);
         }
 
         .photo {
@@ -83,11 +170,29 @@
     .faq-list.accordion {
         --accordion-gap: 0;
 
+        position: relative;
         width: calc(100% + var(--faq-bleed));
         max-width: none;
         margin-right: calc(-1 * var(--faq-bleed));
 
+        @include bp.mq(tablet-xl) {
+            width: calc(100% + var(--faq-bleed) * 2);
+            margin-left: calc(-1 * var(--faq-bleed));
+        }
+
+        // Серый фон ровно под аккордеоном — линии не вылезают на чёрный
+        &::before {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            content: "";
+            background: var(--txt-light-dark, #383838);
+        }
+
         .item {
+            position: relative;
+            z-index: 1;
             background: transparent;
             border-radius: 0;
             box-shadow: none;
@@ -99,7 +204,7 @@
             .panel {
                 gap: 27px;
                 padding: 20px;
-                background: var(--txt-light-dark, #383838);
+                background: transparent;
                 border: 0;
                 border-top: 1px solid var(--btn-grey, #a8a8a8);
                 border-bottom: 1px solid var(--btn-grey, #a8a8a8);
@@ -107,6 +212,10 @@
                 transition:
                     background-color 0.3s ease,
                     border-color 0.3s ease;
+
+                @include bp.mq(laptop-l) {
+                    gap: 20px;
+                }
 
                 &:hover {
                     background: var(--color-blue, #064aa7);
@@ -130,12 +239,17 @@
 
                 .name {
                     flex: 1;
+                    min-width: 0;
                     font-family: var(--font-family-headings);
-                    font-size: 24px;
+                    font-size: var(--faq-name-size);
                     font-style: normal;
                     font-weight: 500;
                     line-height: 140%;
                     color: var(--color-white);
+
+                    @include bp.mq(mobile-l) {
+                        line-height: 150%;
+                    }
                 }
 
                 .icon {
@@ -148,27 +262,50 @@
                         width: 20px;
                         height: 15px;
                         margin: auto;
-                        transition: transform 0.3s ease;
+
                         // ← → ↘
                         transform: scaleX(-1) rotate(45deg);
+                        transition: transform 0.3s ease;
                     }
                 }
             }
 
             .collapse {
-                background: var(--txt-dark);
+                background: transparent;
 
                 .wrap {
-                    padding: 20px 79px 24px;
+                    padding: var(--faq-answer-pad);
                     font-family: var(--font-family-primary);
-                    font-size: 20px;
+                    font-size: var(--faq-answer-size);
                     font-style: normal;
-                    font-weight: 500;
+                    font-weight: 400;
                     line-height: 140%;
                     color: var(--txt-secondary, #fff7f2);
+                    background: var(--txt-dark);
+
+                    @include bp.mq(laptop-l) {
+                        font-weight: 400;
+                        line-height: 150%;
+                    }
+
+                    @include bp.mq(mobile-l) {
+                        display: flex;
+                        justify-content: flex-end;
+                    }
 
                     p {
                         margin: 0;
+
+                        @include bp.mq(tablet-l) {
+                            width: 100%;
+                            padding-right: 15px;
+                        }
+
+                        @include bp.mq(mobile-l) {
+                            width: 100%;
+                            padding-right: 15px;
+                            padding-left: 65px;
+                        }
                     }
                 }
             }

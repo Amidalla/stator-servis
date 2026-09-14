@@ -57,7 +57,7 @@
         color: var(--color-white);
 
         @include bp.mq(mobile-l) {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 500;
             line-height: 150%;
             color: var(--color-white, #fff);
@@ -66,19 +66,19 @@
 
     .mosaic {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
         grid-template-areas:
             "shop cycle worker access"
             "cables spb spb machine";
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 40px 20px;
         margin-bottom: 80px;
 
         @include bp.mq(laptop-l) {
-            grid-template-columns: repeat(6, minmax(0, 1fr));
             grid-template-areas:
                 "shop shop cycle cycle worker worker"
                 "cables cables cables spb spb spb"
                 "machine machine machine access access access";
+            grid-template-columns: repeat(6, minmax(0, 1fr));
         }
 
         @include bp.mq(tablet-l) {
@@ -90,7 +90,6 @@
         }
 
         @include bp.mq(mobile-l) {
-            grid-template-columns: 1fr;
             grid-template-areas:
                 "shop"
                 "cycle"
@@ -99,6 +98,7 @@
                 "cables"
                 "spb"
                 "machine";
+            grid-template-columns: 1fr;
         }
     }
 
@@ -255,15 +255,20 @@
         font-weight: 400;
         line-height: 140%;
         color: var(--txt-dark);
+
+        @include bp.mq(mobile-l) {
+            font-size: 16px;
+        }
     }
 
     .why {
         .title {
-            margin: 0 0 20px;
             max-width: 1430px;
+            margin: 0 0 20px;
         }
 
         .text {
+            max-width: 1430px;
             margin: 0;
             font-family: var(--font-family-primary);
             font-size: 18px;
@@ -271,7 +276,10 @@
             font-weight: 400;
             line-height: 150%;
             color: var(--color-white);
-            max-width: 1430px;
+
+            @include bp.mq(mobile-l) {
+                font-size: 16px;
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 import Swiper from "swiper";
-import { Navigation, EffectFade } from "swiper/modules";
+import { Navigation, EffectFade, Pagination } from "swiper/modules";
 import { syncOverflowControls } from "../../../js/utils/swiper-controls.js";
 
 export function ourWorks(context = document) {
@@ -12,21 +12,7 @@ export function ourWorks(context = document) {
     const { signal } = controller;
     const instances = [];
 
-    const slider = root.querySelector(".slider");
-    if (slider) {
-        instances.push(
-            new Swiper(slider, {
-                modules: [Navigation],
-                slidesPerView: 2,
-                spaceBetween: 20,
-                speed: 600,
-                watchOverflow: true,
-                observer: true,
-                observeParents: true
-            })
-        );
-    }
-
+    // Сначала галереи внутри карточек — иначе внешний слайдер перехватывает клики
     root.querySelectorAll(".card").forEach((card) => {
         const gallery = card.querySelector(".gallery");
         const galleryNav = card.querySelector(".gallery-nav");
@@ -34,6 +20,7 @@ export function ourWorks(context = document) {
 
         const gallerySwiper = new Swiper(gallery, {
             modules: [Navigation, EffectFade],
+            nested: true,
             slidesPerView: 1,
             speed: 500,
             effect: "fade",
@@ -67,6 +54,35 @@ export function ourWorks(context = document) {
 
         instances.push(gallerySwiper);
     });
+
+    const slider = root.querySelector(".slider");
+    const paginationEl = root.querySelector(".pagination");
+
+    if (slider) {
+        instances.push(
+            new Swiper(slider, {
+                modules: [Pagination],
+                slidesPerView: 1,
+                spaceBetween: 20,
+                speed: 600,
+                watchOverflow: true,
+                observer: true,
+                observeParents: true,
+                pagination: paginationEl
+                    ? {
+                          el: paginationEl,
+                          clickable: true
+                      }
+                    : undefined,
+                breakpoints: {
+                    598: {
+                        slidesPerView: 2,
+                        spaceBetween: 20
+                    }
+                }
+            })
+        );
+    }
 
     root.addEventListener(
         "destroy",

@@ -5,6 +5,11 @@ import { Fancybox } from "@fancyapps/ui/dist/fancybox/";
  * @param {string} id - id элемента popup (например, "popup-feedback-success")
  */
 export function showPopup(id) {
+    if (id === "popup-feedback-success" && window.PopupFeedbackSuccess?.open) {
+        window.PopupFeedbackSuccess.open();
+        return;
+    }
+
     Fancybox.show([
         {
             src: `#${id}`,

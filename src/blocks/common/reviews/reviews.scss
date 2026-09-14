@@ -1,10 +1,12 @@
+@use "core/breakpoints" as bp;
+
 .reviews {
     --reviews-gap: 20px;
     --reviews-slider-bleed: calc(var(--container-padding) + max(0px, (100vw - var(--container-max-width)) / 2));
 
     position: relative;
     z-index: 0;
-    padding: 80px 0;
+    padding: 50px 0 40px;
     overflow: hidden;
     color: var(--color-white);
     background: var(--txt-light-dark, #383838);
@@ -26,6 +28,11 @@
         gap: 40px;
         align-items: start;
         overflow: visible;
+
+        @include bp.mq(tablet-l) {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
     }
 
     .intro {
@@ -38,21 +45,29 @@
         max-width: 340px;
         margin: 0;
         font-family: var(--font-family-primary);
-        font-size: 18px;
+        font-size: 20px;
         font-style: normal;
         font-weight: 400;
         line-height: 150%;
         color: var(--color-white);
+
+        @include bp.mq(tablet-l) {
+            max-width: 560px;
+        }
+
+        @include bp.mq(mobile-l) {
+            max-width: none;
+        }
     }
 
     .controls {
         position: relative;
         z-index: 2;
         display: flex;
-        gap: 16px;
+        gap: 20px;
         align-items: center;
-        width: 100%;
-        max-width: 340px;
+        width: fit-content;
+        max-width: 100%;
         margin-top: 20px;
 
         &[hidden] {
@@ -110,22 +125,27 @@
         position: static !important;
         inset: auto !important;
         display: flex;
-        flex: 1 1 auto;
-        gap: 8px;
+        flex: 0 0 auto;
+        gap: 5px;
         align-items: center;
         width: auto !important;
         min-width: 0;
         height: auto !important;
         margin: 0;
         transform: none !important;
+
+        @include bp.mq(mobile-l) {
+            display: none !important;
+        }
     }
 
     .pagination .swiper-pagination-bullet {
-        flex: 1 1 0;
-        height: 2px;
+        flex: 0 0 auto;
+        width: 40px;
+        height: 7px;
         margin: 0 !important;
-        background: rgb(255 255 255 / 25%);
-        border-radius: 0;
+        background: var(--txt-dark, #161616);
+        border-radius: 12px;
         opacity: 1;
         transition: background-color 0.25s ease;
 
@@ -134,20 +154,64 @@
         }
     }
 
+    .pagination-dots {
+        display: none;
+        gap: 7px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0;
+
+        @include bp.mq(mobile-l) {
+            display: flex;
+            margin-top: -20px;
+        }
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        .dot {
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+            padding: 0;
+            cursor: pointer;
+            background: var(--btn-grey, #a8a8a8);
+            border: 0;
+            border-radius: 50%;
+            transition: background-color 0.25s ease;
+
+            &.is-active {
+                background: var(--brand-dark-orange);
+            }
+        }
+    }
+
     .slider {
         width: calc(100% + var(--reviews-slider-bleed));
-        max-width: none;
         min-width: 0;
+        max-width: none;
         margin-right: calc(-1 * var(--reviews-slider-bleed));
         overflow: hidden;
+
+        @include bp.mq(mobile-l) {
+            --reviews-slider-bleed: 0px;
+
+            width: 100%;
+            margin-right: 0;
+        }
 
         .swiper-wrapper {
             align-items: flex-start;
         }
 
         .swiper-slide {
-            height: auto;
             box-sizing: border-box;
+            height: auto;
+
+            @include bp.mq(mobile-l) {
+                width: 100%;
+            }
         }
     }
 
@@ -181,6 +245,10 @@
             box-shadow:
                 inset 0 0 0 1px var(--color-blue, #064aa7),
                 inset 0 0 28px rgb(6 74 167 / 28%);
+        }
+
+        &:hover .name {
+            color: var(--brand-dark-orange);
         }
     }
 
@@ -254,16 +322,21 @@
 
     .name {
         font-family: var(--font-family-headings);
-        font-size: 20px;
+        font-size: 24px;
         font-style: normal;
         font-weight: 600;
         line-height: 130%;
         color: var(--txt-dark);
+        transition: color 0.25s ease;
+
+        @include bp.mq(mobile-l) {
+            font-size: 20px;
+        }
     }
 
     .role {
         font-family: var(--font-family-primary);
-        font-size: 14px;
+        font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
@@ -277,14 +350,14 @@
     .text {
         display: -webkit-box;
         overflow: hidden;
+        -webkit-line-clamp: 4;
         font-family: var(--font-family-primary);
-        font-size: 16px;
+        font-size: 14px;
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
         color: var(--txt-dark);
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 4;
 
         p {
             margin: 0;
@@ -304,12 +377,12 @@
     }
 
     .expand {
-        align-self: flex-start;
         flex-shrink: 0;
+        align-self: flex-start;
         padding: 0;
         margin-top: auto;
         font-family: var(--font-family-primary);
-        font-size: 16px;
+        font-size: 18px;
         font-style: normal;
         font-weight: 500;
         line-height: 140%;

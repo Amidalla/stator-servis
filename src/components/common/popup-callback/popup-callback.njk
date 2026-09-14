@@ -1,6 +1,7 @@
 {% from "components/general/button/button.njk" import render as button %}
 {% from "components/general/input/input.njk" import render as input %}
 {% from "components/general/textarea/textarea.njk" import render as textarea %}
+{% from "components/general/consent-checkbox/consent-checkbox.njk" import render as consentCheckbox %}
 
 <div id="popup-callback" class="popup-callback">
     <button class="popup-callback-close" type="button" aria-label="Закрыть">
@@ -52,6 +53,15 @@
                 name="message",
                 rows="4",
                 placeholder="Комментарий"
+            ) }}
+        </div>
+
+        <div class="field-consent">
+            {{ consentCheckbox(
+                id="popup-callback-consent",
+                text="Я согласен на обработку персональных данных",
+                required=true,
+                data={"error": "Необходимо отметить"}
             ) }}
         </div>
 

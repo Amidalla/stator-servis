@@ -21,8 +21,8 @@
 
     @include bp.mq(tablet-l) {
         padding-top: 80px;
-        clip-path: none;
         background: var(--txt-light-dark, #383838);
+        clip-path: none;
     }
 
     h2 {

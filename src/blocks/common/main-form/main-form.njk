@@ -1,22 +1,111 @@
-<section class="main-form section">
-    <div class="main-form__grid">
-        <!-- Левый блок (пустой) -->
-        <div class="main-form__left">
-            <picture>
-                <source media="(max-width: 600px)" srcset="/assets/images/content/form-mobile.jpg" />
-                <source media="(max-width: 1023px)" srcset="/assets/images/content/form-tablet.jpg" />
-                <img class="lazy" data-src="/assets/images/content/form-bg.jpg" alt="" />
-            </picture>
+{% from "components/general/button/button.njk" import render as button %}
+{% from "components/general/input/input.njk" import render as input %}
+{% from "components/general/textarea/textarea.njk" import render as textarea %}
+{% from "components/general/consent-checkbox/consent-checkbox.njk" import render as consentCheckbox %}
+
+<section class="main-form">
+    <div class="layout">
+        <div class="content">
+            <div class="watermark" aria-hidden="true">
+                <img
+                    class="lazy"
+                    data-src="/assets/images/content/main-form-watermark.png"
+                    alt=""
+                    width="883"
+                    height="883"
+                />
+            </div>
+
+            <div class="inner">
+                <h2 class="title">
+                    Заполните данные
+                    <span>и мы свяжемся с вами</span>
+                </h2>
+
+                <form class="form" data-validate>
+                    <div class="fields">
+                        <div class="row">
+                            <div class="field">
+                                <label class="label" for="main-form-name">Ваше имя</label>
+                                {{ input(
+                                    type="text",
+                                    id="main-form-name",
+                                    name="name",
+                                    placeholder="Ваше имя",
+                                    autocomplete="name",
+                                    required=true,
+                                    minlength="2",
+                                    data={"error": "Введите имя (минимум 2 буквы)"}
+                                ) }}
+                            </div>
+
+                            <div class="field">
+                                <label class="label" for="main-form-phone">Телефон</label>
+                                {{ input(
+                                    type="tel",
+                                    id="main-form-phone",
+                                    name="phone",
+                                    placeholder="+7 (__) --",
+                                    autocomplete="tel",
+                                    required=true,
+                                    data={"mask": "phone", "error": "Введите полный номер телефона"}
+                                ) }}
+                            </div>
+
+                            <div class="field">
+                                <label class="label" for="main-form-email">E-mail</label>
+                                {{ input(
+                                    type="email",
+                                    id="main-form-email",
+                                    name="email",
+                                    placeholder="Ваш e-mail",
+                                    autocomplete="email",
+                                    data={"error": "Введите корректный e-mail"}
+                                ) }}
+                            </div>
+                        </div>
+
+                        <div class="field message">
+                            <label class="label" for="main-form-message">Сообщение</label>
+                            {{ textarea(
+                                id="main-form-message",
+                                name="message",
+                                rows="4",
+                                placeholder="Опишите ваш запрос или задачу"
+                            ) }}
+                        </div>
+                    </div>
+
+                    <div class="field-consent">
+                        {{ consentCheckbox(
+                            id="main-form-consent",
+                            text="Я согласен на обработку персональных данных",
+                            required=true,
+                            data={"error": "Необходимо отметить"}
+                        ) }}
+                    </div>
+
+                    <div class="actions">
+                        {{ button(
+                            text="Отправить заявку",
+                            type="submit",
+                            variant="primary",
+                            disabled=true,
+                            class="submit"
+                        ) }}
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="main-form__right">
-            {% set title = {
-                text: "Пожалуйста, заполните форму, и мы свяжемся с вами",
-                tag: "h2",
-                class: "main-form__title"
-            } %}
-            {% include "components/general/title/title.njk" %}
-            {% set formIdPrefix = "main" %}
-            {% include "components/general/form/form.njk" %}
+
+        <div class="media">
+            <img
+                class="lazy"
+                data-src="/assets/images/content/main-form-photo.png"
+                alt="Специалист Статор-Сервис за перемоткой электродвигателя"
+                width="930"
+                height="712"
+            />
         </div>
     </div>
 </section>

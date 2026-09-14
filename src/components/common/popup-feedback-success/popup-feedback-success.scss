@@ -1,71 +1,117 @@
 @use "core/breakpoints" as bp;
-@use "core/popup" as *;
+
+.popup-feedback-success-fancybox {
+    --fancybox-backdrop-bg: rgb(0 0 0 / 50%);
+    --f-html-bg: var(--txt-dark);
+    --f-html-color: var(--color-white);
+    --f-html-padding: 0;
+    --f-html-margin: 0;
+
+    .fancybox__slide.has-html {
+        padding: 16px;
+    }
+}
 
 .popup-feedback-success {
-    @include popup;
-
-    background: rgb(244 244 244 / 27%);
-    border-radius: 5px;
-    backdrop-filter: blur(9.5px);
-
-    .f-button.is-close-button {
-        svg path {
-            stroke: var(--color-white);
-        }
-    }
-
-    &__btn {
-        min-width: 160px;
-        margin-top: 16px;
-
-        @include bp.mq(mobile-xl) {
-            width: 100%;
-            min-width: unset;
-        }
-    }
+    position: relative;
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+    width: 442px;
+    max-width: 100%;
+    max-height: calc(100dvh - 32px);
+    padding: 30px;
+    overflow-y: auto;
+    color: var(--color-white);
+    background: var(--txt-dark);
+    border-radius: 12px;
+    box-shadow:
+        1px 2px 2.5px 0 rgb(0 0 0 / 44%),
+        3px 8px 4.5px 0 rgb(0 0 0 / 38%),
+        6px 18px 6px 0 rgb(0 0 0 / 23%),
+        11px 33px 7px 0 rgb(0 0 0 / 7%),
+        17px 51px 7.5px 0 rgb(0 0 0 / 1%);
 
     .heading {
-        .icon {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding-right: 50px;
+        margin: 0;
+    }
 
-            img {
-                display: block;
-                width: 64px;
-                height: 64px;
-                object-fit: contain;
-            }
+    .title {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%;
+        color: var(--color-white);
+        word-break: break-word;
+    }
+
+    .text {
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--color-white);
+        word-break: break-word;
+    }
+
+    .popup-feedback-success-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40.207px;
+        height: 40.206px;
+        padding: 10px;
+        cursor: pointer;
+        background: var(--color-white);
+        border: none;
+        border-radius: 5px;
+        transition: opacity 0.3s ease;
+
+        svg {
+            display: block;
+            width: 21px;
+            height: 21px;
         }
 
-        .title {
-            padding-right: 0 !important;
-            margin: 0 0 7px;
-            font-family: var(--font-family-headings);
-            font-size: 30px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 110%;
-            color: var(--color-white);
-            text-align: center;
+        &:hover {
+            opacity: 0.85;
+        }
+    }
 
-            @include bp.mq(mobile-xl) {
-                font-size: 22px;
-            }
+    @include bp.mq(tablet) {
+        .title {
+            font-size: 28px;
         }
 
         .text {
-            margin: 0 0 8px;
-            font-size: 25px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 140%;
-            color: var(--color-white) !important;
-            text-align: center;
-
-            @include bp.mq(mobile-xl) {
-                font-size: 18px;
-            }
+            font-size: 16px;
         }
     }
+
+    @include bp.mq(mobile-xl) {
+        .title {
+            font-size: 24px;
+        }
+
+        .text {
+            font-size: 16px;
+        }
+    }
+}
+
+.popup-feedback-success.f-html,
+.fancybox__container .popup-feedback-success {
+    display: flex;
 }

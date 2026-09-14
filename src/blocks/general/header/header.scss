@@ -209,20 +209,20 @@ header.header {
 
         .navigation-top {
             width: auto;
-            margin-left: auto;
             padding-right: 15px;
+            margin-left: auto;
 
             @include bp.mq(desktop-m) {
                 width: 1008px;
                 max-width: 1008px;
-                margin-left: 0;
                 padding-right: 0;
+                margin-left: 0;
             }
         }
 
         .navigation-top ul {
-            width: auto;
             justify-content: flex-end;
+            width: auto;
         }
 
         @include bp.mq(tablet-xl) {
@@ -416,6 +416,7 @@ header.header {
             width: auto;
             height: 50px;
             padding: 11px 27px 11px 26px;
+            margin-right: 5px;
             font-family: var(--font-family-primary);
             font-size: 20px;
             font-style: normal;
@@ -426,7 +427,6 @@ header.header {
             background-color: var(--brand-dark-orange);
             background-image: none;
             clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 0 100%);
-            margin-right: 5px;
         }
 
         &:hover {

@@ -1,0 +1,180 @@
+{% from "components/general/button/button.njk" import render as button %}
+
+<section class="useful-materials" data-useful-materials>
+    <div class="container">
+        <div class="head">
+            <h2 class="title">Полезные материалы</h2>
+
+            <div class="controls">
+                <button class="nav-btn prev" type="button" aria-label="Предыдущий материал">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="58" height="63" viewBox="0 0 58 63" fill="none" aria-hidden="true">
+                        <path class="shape" d="M58 0H8L0 63H58V0Z" fill="#D9D9D9"/>
+                        <path class="arrow" d="M22.2929 32.2071C21.9024 31.8166 21.9024 31.1834 22.2929 30.7929L28.6569 24.4289C29.0474 24.0384 29.6805 24.0384 30.0711 24.4289C30.4616 24.8195 30.4616 25.4526 30.0711 25.8431L24.4142 31.5L30.0711 37.1569C30.4616 37.5474 30.4616 38.1805 30.0711 38.5711C29.6805 38.9616 29.0474 38.9616 28.6569 38.5711L22.2929 32.2071ZM43 31.5V32.5H23V31.5V30.5H43V31.5Z" fill="#D64212"/>
+                    </svg>
+                </button>
+
+                <div class="pagination"></div>
+
+                <button class="nav-btn next" type="button" aria-label="Следующий материал">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="58" height="63" viewBox="0 0 58 63" fill="none" aria-hidden="true">
+                        <path class="shape" d="M0 0H50L58 63H0V0Z" fill="#D9D9D9"/>
+                        <path class="arrow" d="M34.8751 32.2071C35.2656 31.8166 35.2656 31.1834 34.8751 30.7929L28.5111 24.4289C28.1206 24.0384 27.4874 24.0384 27.0969 24.4289C26.7064 24.8195 26.7064 25.4526 27.0969 25.8431L32.7538 31.5L27.0969 37.1569C26.7064 37.5474 26.7064 38.1805 27.0969 38.5711C27.4874 38.9616 28.1206 38.9616 28.5111 38.5711L34.8751 32.2071ZM14.168 31.5V32.5H34.168V31.5V30.5H14.168V31.5Z" fill="#D64212"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="slider swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <article class="card">
+                        <a class="top" href="/peremotka-yakorya-preobrazovatelya-vremyon-sssr/">
+                            <div class="media">
+                                <img
+                                    class="lazy"
+                                    data-src="/assets/images/content/useful-materials-1.png"
+                                    alt="Перемотка якоря преобразователя времён СССР"
+                                    width="375"
+                                    height="274"
+                                />
+                            </div>
+                            <div class="body">
+                                <h3 class="name">Перемотка якоря преобразователя времён СССР</h3>
+                                <p class="text">
+                                    История одного срочного заказа, где потребовались не просто руки, а понимание принципов, заложенных инженерами полвека назад. Ко мне в цех принесли якорь от преобразователя ПВС-100, 1978 года выпуска.
+                                </p>
+                            </div>
+                        </a>
+                        {{ button(
+                            text="Читать полностью",
+                            type="link",
+                            href="/peremotka-yakorya-preobrazovatelya-vremyon-sssr/",
+                            variant="white",
+                            class="more"
+                        ) }}
+                    </article>
+                </div>
+
+                <div class="swiper-slide">
+                    <article class="card">
+                        <a class="top" href="/блог-и-новости/">
+                            <div class="media">
+                                <img
+                                    class="lazy"
+                                    data-src="/assets/images/content/useful-materials-2.png"
+                                    alt="Экстренный ремонт электродвигателя"
+                                    width="375"
+                                    height="274"
+                                />
+                            </div>
+                            <div class="body">
+                                <h3 class="name">
+                                    Экстренный ремонт электродвигателя: пошаговый план первых 30 минут, чтобы избежать капитальной замены
+                                </h3>
+                                <p class="text">
+                                    Внезапная остановка производственной линии из‑за аномалии в работе электродвигателя — это не просто технический сбой, а прямая угроза выполнению плана и экономической стабильности предприятия. В такой ситуации промедление и непрофессиональные
+                                </p>
+                            </div>
+                        </a>
+                        {{ button(
+                            text="Читать полностью",
+                            type="link",
+                            href="/блог-и-новости/",
+                            variant="white",
+                            class="more"
+                        ) }}
+                    </article>
+                </div>
+
+                <div class="swiper-slide">
+                    <article class="card">
+                        <a class="top" href="/блог-и-новости/">
+                            <div class="media">
+                                <img
+                                    class="lazy"
+                                    data-src="/assets/images/content/useful-materials-3.png"
+                                    alt="Когда требуется ремонт электродвигателя"
+                                    width="375"
+                                    height="274"
+                                />
+                            </div>
+                            <div class="body">
+                                <h3 class="name">Когда требуется ремонт электродвигателя?</h3>
+                                <p class="text">
+                                    Электродвигатель — это сердце любого промышленного оборудования, насосной станции или вентиляционной установки. В отличие от автомобиля, где регламентное ТО прописано в километрах, у электрических машин ресурс исчисляется моточасами и условиями
+                                </p>
+                            </div>
+                        </a>
+                        {{ button(
+                            text="Читать полностью",
+                            type="link",
+                            href="/блог-и-новости/",
+                            variant="white",
+                            class="more"
+                        ) }}
+                    </article>
+                </div>
+
+                <div class="swiper-slide">
+                    <article class="card">
+                        <a class="top" href="/блог-и-новости/">
+                            <div class="media">
+                                <img
+                                    class="lazy"
+                                    data-src="/assets/images/content/useful-materials-4.png"
+                                    alt="Почему надо ремонтировать, а не менять электродвигатель"
+                                    width="375"
+                                    height="274"
+                                />
+                            </div>
+                            <div class="body">
+                                <h3 class="name">Почему надо ремонтировать, а не менять электродвигатель?</h3>
+                                <p class="text">
+                                    Ремонт и перемотка электродвигателя — это разумная инвестиция в надежность вашего производства. Главный аргумент — экономия средств: восстановление обходится в разы дешевле покупки нового агрегата, особенно если речь идет о
+                                </p>
+                            </div>
+                        </a>
+                        {{ button(
+                            text="Читать полностью",
+                            type="link",
+                            href="/блог-и-новости/",
+                            variant="white",
+                            class="more"
+                        ) }}
+                    </article>
+                </div>
+
+                <div class="swiper-slide">
+                    <article class="card">
+                        <a class="top" href="/блог-и-новости/">
+                            <div class="media">
+                                <img
+                                    class="lazy"
+                                    data-src="/assets/images/content/useful-materials-1.png"
+                                    alt="Почему выгодно ремонтировать, а не менять электродвигатель"
+                                    width="375"
+                                    height="274"
+                                />
+                            </div>
+                            <div class="body">
+                                <h3 class="name">Почему выгодно ремонтировать, а не менять электродвигатель?</h3>
+                                <p class="text">
+                                    Ремонт и перемотка электродвигателя — это разумная инвестиция в надежность вашего производства. Главный аргумент — экономия средств: восстановление обходится в разы дешевле покупки нового агрегата, особенно если речь идет о
+                                </p>
+                            </div>
+                        </a>
+                        {{ button(
+                            text="Читать полностью",
+                            type="link",
+                            href="/блог-и-новости/",
+                            variant="white",
+                            class="more"
+                        ) }}
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination-dots"></div>
+    </div>
+</section>

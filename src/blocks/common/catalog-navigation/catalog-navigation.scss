@@ -29,7 +29,7 @@
         flex-wrap: wrap;
         gap: 20px;
 
-        @media (max-width: 1799.98px) {
+        @media (width <= 1799.98px) {
             display: grid;
             grid-template-rows: auto auto;
             grid-auto-columns: max-content;

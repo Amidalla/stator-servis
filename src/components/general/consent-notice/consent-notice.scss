@@ -51,13 +51,13 @@
     }
 
     .text {
+        max-width: 967px;
         font-family: var(--font-family-primary);
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: 130%;
         color: var(--color-white);
-        max-width: 967px;
 
         a {
             color: #d64212;

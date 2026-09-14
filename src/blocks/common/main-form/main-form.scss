@@ -1,113 +1,178 @@
 @use "core/breakpoints" as bp;
-@use "core/mixins" as mixin;
 
 .main-form {
+    --main-form-inner-max: 852px;
+    --main-form-media-width: min(48.4%, 930px);
+    --main-form-pad-top: 100px;
+    --main-form-pad-left: 98px;
+    --main-form-height: 712px;
+
     position: relative;
+    z-index: 0;
+    height: var(--main-form-height);
+    overflow: hidden;
+    color: var(--color-white);
+    background: var(--txt-dark);
 
-    &__grid {
-        display: grid;
-        grid-template-columns: 54% 46%;
-
-        @include bp.mq(laptop) {
-            position: relative;
-            display: block;
-            min-height: 556px;
-        }
+    @include bp.mq(laptop-l) {
+        --main-form-pad-left: 75px;
     }
 
-    &__left {
+    .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) var(--main-form-media-width);
+        height: 100%;
+    }
+
+    .content {
         position: relative;
-        overflow: hidden;
+        display: flex;
+        align-items: flex-start;
+        min-width: 0;
+        height: 100%;
+        padding: var(--main-form-pad-top) 0 0 var(--main-form-pad-left);
+    }
 
-        @include bp.mq(laptop) {
-            width: 100%;
-            height: 100%;
-        }
-
-        &::after {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            content: "";
-            background: linear-gradient(203deg, rgb(22 22 22 / 50%) 5.04%, rgb(0 64 161 / 15%) 47.97%, #161616 121.84%)
-                no-repeat center;
-            background-size: cover;
-        }
+    .watermark {
+        position: absolute;
+        top: 50px;
+        left: -193px;
+        z-index: 0;
+        width: 883px;
+        height: 883px;
+        pointer-events: none;
+        user-select: none;
+        transform: rotate(180deg) scaleY(-1);
 
         img {
             display: block;
             width: 100%;
-            height: 651px;
-            object-fit: cover;
-
-            @include bp.mq(laptop) {
-                height: 580px;
-            }
-        }
-
-        picture {
-            @media (width >= 601px) and (width <= 1023px) {
-                filter: blur(5px);
-            }
-        }
-    }
-
-    &__right {
-        padding: 57px 132px;
-        background: #012f6b;
-
-        @include bp.mq(laptop-l) {
-            padding: 34px 123px 34.5px 97px;
-        }
-
-        @include bp.mq(laptop) {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            z-index: 2;
-            width: 100%;
-            max-width: 581px;
             height: 100%;
-            padding: 43px 10px 57.03px;
-            background: none;
-            transform: translateX(-50%);
-        }
-
-        @include bp.mq(tablet) {
-            max-width: 481px;
-        }
-
-        @include bp.mq(mobile-xl) {
-            max-width: 381px;
+            object-fit: cover;
+            opacity: 0.1;
         }
     }
 
-    &__title {
-        @include mixin.form-title;
+    .inner {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: var(--main-form-inner-max);
     }
 
-    input,
-    textarea {
+    .title {
+        margin: 0 0 40px;
         color: var(--color-white);
-        background: rgb(244 244 244 / 17%);
 
-        &::placeholder {
+        span {
+            display: block;
+        }
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .fields {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 0;
+
+        .label {
+            display: block;
+            margin: 0;
+            font-family: var(--font-family-primary);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 130%;
             color: var(--color-white);
         }
-    }
 
-    .consent-checkbox {
-        .checkbox {
-            background: rgb(244 244 244 / 17%);
+        .input {
+            --input-height: 52px;
+
+            padding: 15px 20px;
+            font-family: var(--font-family-primary);
+            font-size: 16px;
+            line-height: 130%;
+            color: var(--txt-dark);
+            background: var(--color-white);
+            border: 1.5px solid transparent;
+            border-radius: 5px;
+
+            &::placeholder {
+                color: var(--txt-dark);
+            }
+
+            &:hover:not(:disabled, :read-only),
+            &:focus:not(:read-only),
+            &:focus-visible:not(:read-only) {
+                border-color: var(--brand-dark-orange);
+            }
+        }
+
+        .textarea {
+            min-height: 108px;
+            padding: 15px 20px;
+            font-family: var(--font-family-primary);
+            font-size: 16px;
+            line-height: 130%;
+            color: var(--txt-dark);
+            resize: vertical;
+            background: var(--color-white);
+            border: 1.5px solid transparent;
+            border-radius: 5px;
+
+            &::placeholder {
+                color: var(--txt-dark);
+            }
+
+            &:hover:not(:disabled, :read-only),
+            &:focus:not(:read-only),
+            &:focus-visible:not(:read-only) {
+                border-color: var(--brand-dark-orange);
+            }
         }
     }
 
-    .consent-checkbox.variant {
-        label {
+    .field-consent {
+        margin: 0;
+
+        .consent-checkbox {
+            .checkbox {
+                width: 22px;
+                height: 22px;
+                margin-top: 0;
+                background: var(--color-white);
+                border-radius: 2px;
+
+                &::after {
+                    width: 12px;
+                    height: 10px;
+                    background-size: contain;
+                }
+            }
+
             .value {
+                font-family: var(--font-family-primary);
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 130%;
                 color: var(--color-white);
 
                 a {
@@ -118,8 +183,133 @@
     }
 
     .actions {
-        button.red {
-            max-width: 212px;
+        margin-top: 10px;
+
+        .button.submit {
+            --button-width: 100%;
+            --button-bg: var(--brand-dark-orange);
+            --button-color: var(--color-white);
+            --button-border-color: var(--brand-dark-orange);
+
+            width: 100%;
+
+            &:hover:not(:disabled, .disabled) {
+                --button-bg: var(--color-white);
+                --button-color: var(--brand-dark-orange);
+                --button-border-color: var(--brand-dark-orange);
+            }
+
+            @include bp.mq(tablet) {
+                --button-height: 63px;
+                --button-padding: 20px;
+                --button-font-size: 18px;
+            }
+        }
+    }
+
+    .media {
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+        background: var(--color-white);
+        border-radius: 12px 0 0 12px;
+
+        // В макете кадр 930×712, исходник 930×1240 со сдвигом top: -289px
+        img {
+            position: absolute;
+            top: calc(100% * -289 / 712);
+            left: 0;
+            display: block;
+            width: 100%;
+            height: calc(100% * 1240 / 712);
+            max-width: none;
+            object-fit: cover;
+            object-position: left top;
+        }
+    }
+
+    // --------------------------------------
+    // laptop-l и ниже
+    // --------------------------------------
+    @include bp.mq(laptop-l) {
+        --main-form-inner-max: 575px;
+        --main-form-media-width: min(47.8%, 653px);
+
+        .content {
+            padding-right: 30px;
+        }
+
+        // В макете laptop: кадр 653×712, картинка 653×870, top: -104px
+        .media img {
+            top: calc(100% * -104 / 712);
+            height: calc(100% * 870 / 712);
+        }
+    }
+
+    // --------------------------------------
+    // tablet-xl и ниже — без фото
+    // --------------------------------------
+    @include bp.mq(tablet-xl) {
+        --main-form-inner-max: 688px;
+        --main-form-pad-top: 100px;
+        --main-form-pad-left: 40px;
+
+        height: var(--main-form-height);
+
+        .layout {
+            grid-template-columns: 1fr;
+        }
+
+        .content {
+            justify-content: flex-start;
+            padding: var(--main-form-pad-top) var(--main-form-pad-left) 0;
+        }
+
+        .media {
+            display: none;
+        }
+    }
+
+    // --------------------------------------
+    // mobile-l и ниже
+    // --------------------------------------
+    @include bp.mq(mobile-l) {
+        --main-form-inner-max: none;
+        --main-form-pad-top: 60px;
+        --main-form-pad-left: 16px;
+        --main-form-height: auto;
+
+        height: auto;
+
+        .layout {
+            height: auto;
+            min-height: 0;
+        }
+
+        .content {
+            align-items: stretch;
+            height: auto;
+            padding: var(--main-form-pad-top) var(--main-form-pad-left) 60px;
+        }
+
+        .watermark {
+            top: 170px;
+            left: -378px;
+            width: 775px;
+            height: 775px;
+        }
+
+        .title {
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+
+        .row {
+            grid-template-columns: 1fr;
+        }
+
+        .field-consent .consent-checkbox .value {
+            white-space: normal;
         }
     }
 }

@@ -1,11 +1,13 @@
+@use "core/breakpoints" as bp;
+
 .our-works {
     --our-works-cut-w: var(--dir-cut-bottom-w, calc(100vw * 91.66 / 1920));
     --our-works-cut-h: calc(30px + 30px + 32px * 1.3 + 16px * 1.4);
 
     position: relative;
     z-index: 0;
-    padding-top: calc(var(--our-works-cut-h) + 80px);
-    padding-bottom: 80px;
+    padding-top: calc(var(--our-works-cut-h) + 103px);
+    padding-bottom: 50px;
     margin-top: calc(-1 * var(--our-works-cut-h));
     color: var(--color-white);
     background: var(--txt-light-dark, #383838);
@@ -26,18 +28,48 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 40px;
+
+        @include bp.mq(mobile-l) {
+            flex-direction: column;
+            gap: 40px;
+            align-items: stretch;
+        }
     }
 
     .more.button {
         --button-width: auto;
+        --button-height: 63px;
+        --button-padding: 20px;
+        --button-font-size: 18px;
         --button-bg: transparent;
         --button-color: var(--color-white);
         --button-border-color: var(--color-white);
+
+        flex-shrink: 0;
+        width: auto;
 
         &:hover:not(:disabled, .disabled) {
             --button-bg: var(--color-white);
             --button-color: var(--txt-dark);
             --button-border-color: var(--color-white);
+        }
+
+        // Глобальный .button на tablet даёт width: 100% — здесь оставляем auto до mobile-l
+        @include bp.mq(tablet) {
+            --button-width: auto;
+            --button-height: 63px;
+            --button-padding: 20px;
+            --button-font-size: 18px;
+
+            align-self: center;
+            width: auto;
+        }
+
+        @include bp.mq(mobile-l) {
+            --button-width: 100%;
+
+            align-self: stretch;
+            width: 100%;
         }
     }
 
@@ -78,12 +110,27 @@
                 inset 0 0 0 1px var(--color-blue, #064aa7),
                 inset 0 0 28px rgb(6 74 167 / 28%);
         }
+
+        &:hover .name {
+            color: var(--brand-dark-orange);
+        }
+
+        @include bp.mq(laptop-l) {
+            grid-template-rows: auto 1fr;
+            grid-template-columns: 1fr;
+        }
     }
 
     .media {
         min-width: 0;
         padding: 20px;
         background: var(--color-white);
+
+        @include bp.mq(laptop-l) {
+            align-self: start;
+            width: 100%;
+            padding-bottom: 0;
+        }
     }
 
     .gallery {
@@ -91,6 +138,18 @@
         height: 405px;
         overflow: hidden;
         border-radius: 12px 12px 0 0;
+
+        @include bp.mq(laptop-l) {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 416 / 405;
+            border-radius: 12px;
+        }
+
+        @include bp.mq(mobile-l) {
+            height: 309px;
+            aspect-ratio: auto;
+        }
 
         .swiper-wrapper,
         .swiper-slide {
@@ -108,8 +167,8 @@
 
     .tag {
         position: absolute;
-        top: 20px;
-        left: 20px;
+        top: 5px;
+        left: 5px;
         z-index: 2;
         max-width: calc(100% - 40px);
         padding: 4px 10px;
@@ -120,7 +179,7 @@
         line-height: 140%;
         color: var(--brand-dark-orange);
         pointer-events: none;
-        background: var(--txt-secondary, #fff7f2);
+        background: var(--color-white);
         border-radius: 4px;
     }
 
@@ -195,10 +254,15 @@
     .info {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 8px;
         min-width: 0;
+        height: 100%;
         padding: 30px;
         color: var(--txt-dark);
+
+        @include bp.mq(laptop-l) {
+            padding-top: 20px;
+        }
     }
 
     .name {
@@ -209,16 +273,17 @@
         font-weight: 600;
         line-height: 130%;
         color: var(--txt-dark);
+        transition: color 0.25s ease;
 
-        .accent {
-            color: var(--brand-dark-orange);
+        @include bp.mq(tablet-l) {
+            font-size: 20px;
         }
     }
 
     .model {
         margin: 0;
         font-family: var(--font-family-primary);
-        font-size: 16px;
+        font-size: 18px;
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
@@ -233,17 +298,21 @@
     .specs {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 15px;
         padding: 0;
         margin: auto 0 0;
         list-style: none;
+
+        @include bp.mq(laptop-l) {
+            padding-top: 32px;
+        }
 
         li {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
             font-family: var(--font-family-primary);
-            font-size: 16px;
+            font-size: 18px;
             font-style: normal;
             font-weight: 400;
             line-height: 140%;
@@ -255,6 +324,42 @@
 
         .val {
             color: var(--txt-dark);
+        }
+    }
+
+    .pagination.swiper-pagination,
+    .pagination {
+        display: none;
+        gap: 7px;
+        align-items: center;
+        justify-content: center;
+        width: auto !important;
+        height: auto !important;
+        margin: 20px 0 0;
+        transform: none !important;
+
+        @include bp.mq(mobile-l) {
+            display: flex;
+        }
+    }
+
+    .pagination .swiper-pagination-bullet {
+        --swiper-pagination-bullet-size: 16px;
+        --swiper-pagination-bullet-width: 16px;
+        --swiper-pagination-bullet-height: 16px;
+        --swiper-pagination-bullet-border-radius: 50%;
+
+        flex: 0 0 auto;
+        width: 16px;
+        height: 16px;
+        margin: 0 !important;
+        background: var(--btn-grey, #a8a8a8);
+        border-radius: 50%;
+        opacity: 1;
+        transition: background-color 0.25s ease;
+
+        &.swiper-pagination-bullet-active {
+            background: var(--brand-dark-orange);
         }
     }
 }

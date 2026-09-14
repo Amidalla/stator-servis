@@ -11,6 +11,7 @@ export function reviews(context = document) {
     const prevEl = root.querySelector(".nav-btn.prev");
     const nextEl = root.querySelector(".nav-btn.next");
     const paginationEl = root.querySelector(".pagination");
+    const dotsEl = root.querySelector(".pagination-dots");
 
     if (!slider || !prevEl || !nextEl || !paginationEl) return;
 
@@ -19,10 +20,10 @@ export function reviews(context = document) {
     const controller = new AbortController();
     const { signal } = controller;
 
-    // 3.35 ≈ три целых + заметный кусок четвёртого за краем
+    // mobile-l: ровно 1 → tablet-l: 1.7 → laptop-l: 1.9 → desktop: 3.35
     const swiper = new Swiper(slider, {
         modules: [Navigation, Pagination],
-        slidesPerView: 3.35,
+        slidesPerView: 1,
         spaceBetween: 20,
         speed: 600,
         watchOverflow: true,
@@ -36,10 +37,50 @@ export function reviews(context = document) {
         pagination: {
             el: paginationEl,
             clickable: true
+        },
+        breakpoints: {
+            598: {
+                slidesPerView: 1.7,
+                spaceBetween: 20
+            },
+            1024: {
+                slidesPerView: 1.9,
+                spaceBetween: 20
+            },
+            1640: {
+                slidesPerView: 3.35,
+                spaceBetween: 20
+            }
         }
     });
 
-    const syncControls = () => syncOverflowControls(swiper, [controls]);
+    const syncControls = () => syncOverflowControls(swiper, [controls, dotsEl]);
+
+    const syncDots = () => {
+        if (!dotsEl) return;
+
+        const slides = [...(swiper.slides || [])].filter(
+            (slide) => !slide.classList.contains("swiper-slide-duplicate")
+        );
+        const active = swiper.realIndex ?? swiper.activeIndex ?? 0;
+
+        if (dotsEl.children.length !== slides.length) {
+            dotsEl.replaceChildren(
+                ...slides.map((_, index) => {
+                    const dot = document.createElement("button");
+                    dot.type = "button";
+                    dot.className = `dot${index === active ? " is-active" : ""}`;
+                    dot.setAttribute("aria-label", `Отзыв ${index + 1}`);
+                    return dot;
+                })
+            );
+            return;
+        }
+
+        [...dotsEl.children].forEach((dot, index) => {
+            dot.classList.toggle("is-active", index === active);
+        });
+    };
 
     const updateSwiper = () => {
         swiper.update();
@@ -91,14 +132,36 @@ export function reviews(context = document) {
 
     swiper.on("lock", syncControls);
     swiper.on("unlock", syncControls);
+    swiper.on("slideChange", syncDots);
     swiper.on("resize", () => {
         syncControls();
+        syncDots();
         syncExpandButtons();
         equalizeCardHeights();
     });
-    swiper.on("update", syncControls);
-    swiper.on("slidesLengthChange", syncControls);
+    swiper.on("update", () => {
+        syncControls();
+        syncDots();
+    });
+    swiper.on("slidesLengthChange", () => {
+        syncControls();
+        syncDots();
+    });
     swiper.on("observerUpdate", updateSwiper);
+
+    if (dotsEl) {
+        dotsEl.addEventListener(
+            "click",
+            (event) => {
+                const dot = event.target.closest(".dot");
+                if (!dot || !dotsEl.contains(dot)) return;
+
+                const index = [...dotsEl.children].indexOf(dot);
+                if (index >= 0) swiper.slideTo(index);
+            },
+            { signal }
+        );
+    }
 
     root.querySelectorAll(".card").forEach((card) => {
         const expand = card.querySelector(".expand");
@@ -147,6 +210,7 @@ export function reviews(context = document) {
 
     const refresh = () => {
         updateSwiper();
+        syncDots();
         syncExpandButtons();
         equalizeCardHeights();
     };

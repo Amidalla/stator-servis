@@ -121,11 +121,11 @@ h2 {
         padding-top: 0;
     }
 
-    .page-content > section:not(.hero):not(.about-company):not(.advantages):not(.our-works):not(.reviews):not(.work-types):not(.faq-home) {
+    .page-content > section:not(.hero, .about-company, .advantages, .our-works, .reviews, .work-types, .faq-home, .useful-materials, .main-form) {
         padding-top: var(--section-padding-top);
     }
 
-    .page-content > section:not(.hero):not(.directions):not(.about-company):not(.advantages):not(.our-works):not(.reviews):not(.work-types):not(.faq-home) {
+    .page-content > section:not(.hero, .directions, .about-company, .advantages, .our-works, .reviews, .work-types, .faq-home, .useful-materials, .main-form) {
         padding-bottom: var(--section-padding-bottom);
     }
 

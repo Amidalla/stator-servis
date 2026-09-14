@@ -42,8 +42,8 @@ footer.footer {
 
     .logo img {
         width: var(--footer-logo-width);
-        height: auto;
         max-width: 300px;
+        height: auto;
     }
 
     .brand {
@@ -89,8 +89,8 @@ footer.footer {
         font-weight: 600;
         line-height: 130%;
         color: var(--color-light-grey, #d9d9d9);
-        text-decoration: none;
         white-space: nowrap;
+        text-decoration: none;
         border-bottom: 1px solid var(--color-light-grey, #d9d9d9);
         transition: border-color 0.25s ease;
 
@@ -111,8 +111,8 @@ footer.footer {
     }
 
     .faq-col {
-        width: max-content;
         justify-self: start;
+        width: max-content;
 
         @include bp.mq(desktop-m) {
             display: none;
