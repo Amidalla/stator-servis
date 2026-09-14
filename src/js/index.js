@@ -1,4 +1,5 @@
 import lozad from "lozad";
+import AOS from "aos";
 import { menu } from "../components/general/menu/menu.js";
 import { form } from "../components/general/form/form.js";
 import { input } from "../components/general/input/input.js";
@@ -13,6 +14,7 @@ import { searchForm } from "../components/general/search-form/search-form.js";
 import { ourWorks } from "../blocks/common/our-works/our-works.js";
 import { reviews } from "../blocks/common/reviews/reviews.js";
 import { usefulMaterials } from "../blocks/common/useful-materials/useful-materials.js";
+import { advantages } from "../blocks/common/advantages/advantages.js";
 import { popupCallback } from "../components/common/popup-callback/popup-callback.js";
 import { popupFeedbackSuccess } from "../components/common/popup-feedback-success/popup-feedback-success.js";
 
@@ -30,6 +32,7 @@ const components = [
     ourWorks,
     reviews,
     usefulMaterials,
+    advantages,
     popupCallback,
     popupFeedbackSuccess
 ];
@@ -48,9 +51,20 @@ function initLazy() {
     lazyObserver.observe();
 }
 
+function initAos() {
+    AOS.init({
+        duration: 1000,
+        easing: "ease",
+        delay: 0,
+        once: true,
+        offset: 80
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     initLazy();
     init();
+    initAos();
 });
 
 window.showPopup = showPopup;
@@ -60,4 +74,5 @@ window.reinitLazy = initLazy;
 window.reinit = (context = document) => {
     init(context);
     initLazy();
+    AOS.refreshHard();
 };

@@ -1,7 +1,7 @@
 {% from "components/general/button/button.njk" import render as button %}
 
 <section class="hero" data-hero>
-    <div class="media">
+    <div class="media" data-aos="zoom-out" data-aos-delay="600">
         <picture>
             <source media="(max-width: 597.98px)" srcset="/assets/images/content/hero-tablet-m.png" />
             <source media="(max-width: 1023.98px)" srcset="/assets/images/content/hero-tablet.png" />
@@ -17,11 +17,11 @@
     </div>
     <div class="container">
         <div class="content">
-            <h1 class="title">Ремонт промышленного оборудования</h1>
-            <p class="text">
+            <h1 class="title" data-aos="fade-up">Ремонт промышленного оборудования</h1>
+            <p class="text" data-aos="fade-down" data-aos-delay="300">
                 Электродвигатели, бензогенераторы, альтернаторы, насосы, вентиляторы, трансформаторы, роторы
             </p>
-            <div class="actions">
+            <div class="actions" data-aos="fade-down" data-aos-delay="300">
                 {{ button(
                     text="Посмотреть примеры ремонтов",
                     type="link",
@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div class="socials">
+    <div class="socials" data-aos="fade-left" data-aos-delay="500">
             <a
                 class="socials-link max"
                 href="https://max.ru/"
