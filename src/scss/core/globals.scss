@@ -121,11 +121,18 @@ h2 {
         padding-top: 0;
     }
 
+    // Section vertical padding (WP: prefer opt-in `.section-spaced` on new blocks).
+    // Home angled sections are excluded so clip-path stack stays intact.
     .page-content > section:not(.hero, .about-company, .advantages, .our-works, .reviews, .work-types, .faq-home, .useful-materials, .main-form) {
         padding-top: var(--section-padding-top);
     }
 
     .page-content > section:not(.hero, .directions, .about-company, .advantages, .our-works, .reviews, .work-types, .faq-home, .useful-materials, .main-form) {
+        padding-bottom: var(--section-padding-bottom);
+    }
+
+    .page-content > section.section-spaced {
+        padding-top: var(--section-padding-top);
         padding-bottom: var(--section-padding-bottom);
     }
 

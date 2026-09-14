@@ -44,6 +44,21 @@
     --section-padding-top: 80px;
     --section-padding-bottom: 80px;
 
+    // --------------------------------------
+    // -- Section angled cuts (homepage stack)
+    // --------------------------------------
+    --hero-cut-w: calc(100vw * 94.1152 / 1920);
+    --hero-cut-h: calc(100vw * 193.46 / 1920);
+    --dir-cut-bottom-w: calc(100vw * 91.66 / 1920);
+    --dir-cut-bottom-h: calc(100vw * 188.69 / 1920);
+
+    @include bp.mq(mobile-l) {
+        --hero-cut-w: calc(100vw * 48.8828 / 360);
+        --hero-cut-h: calc(100vw * 96.0283 / 360);
+        --dir-cut-bottom-w: calc(100vw * 48.8828 / 360);
+        --dir-cut-bottom-h: calc(100vw * 96.0283 / 360);
+    }
+
     @include bp.mq(desktop-m) {
         --header-height: 119px;
     }

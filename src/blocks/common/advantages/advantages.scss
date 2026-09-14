@@ -1,7 +1,8 @@
 @use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
 
 .advantages {
-    --about-cut-w: var(--dir-cut-bottom-w, calc(100vw * 91.66 / 1920));
+    --about-cut-w: var(--dir-cut-bottom-w);
     --about-stats-cut-h: calc(30px + 30px + 32px * 1.3 + 16px * 1.4);
 
     position: relative;
@@ -11,13 +12,8 @@
     margin-top: -1px;
     color: var(--color-white);
     background: var(--txt-dark);
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        100% 100%,
-        var(--about-cut-w) 100%,
-        0 calc(100% - var(--about-stats-cut-h))
-    );
+
+    @include mix.clip-bottom-left-notch(var(--about-cut-w), var(--about-stats-cut-h));
 
     @include bp.mq(tablet-l) {
         padding-top: 80px;

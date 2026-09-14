@@ -19,9 +19,37 @@
                 {{ navigationTop(
                      items=[
                          { title: "О компании", href: "/o-nas/" },
-                         { title: "Ремонт", href: "/uslugi/remont-elektrodvigateley/" },
-                         { title: "Перемотка", href: "/uslugi/" },
-                         { title: "Балансировка", href: "/uslugi/" },
+                         {
+                             title: "Ремонт",
+                             href: "/uslugi/remont-elektrodvigateley/",
+                             children: [
+                                 { title: "Электродвигатели", href: "/uslugi/remont-elektrodvigateley/" },
+                                 { title: "Насосы", href: "/uslugi/" },
+                                 { title: "Бензогенераторы", href: "/uslugi/" },
+                                 { title: "Вентиляторы", href: "/uslugi/" }
+                             ]
+                         },
+                         {
+                             title: "Перемотка",
+                             href: "/uslugi/",
+                             children: [
+                                 { title: "Электродвигатели", href: "/uslugi/" },
+                                 { title: "Бензогенераторы", href: "/uslugi/" },
+                                 { title: "Альтернаторы", href: "/nashi-raboty/peremotka-alternatora/" },
+                                 { title: "Трансформаторы", href: "/uslugi/" },
+                                 { title: "Катушки", href: "/uslugi/" }
+                             ]
+                         },
+                         {
+                             title: "Балансировка",
+                             href: "/uslugi/",
+                             children: [
+                                 { title: "Роторы", href: "/uslugi/" },
+                                 { title: "Якоря", href: "/uslugi/" },
+                                 { title: "Муфты", href: "/uslugi/" },
+                                 { title: "Промышленные вентиляторы", href: "/uslugi/" }
+                             ]
+                         },
                          { title: "Цены", href: "/cena/" },
                          { title: "Наши работы", href: "/nashi-raboty/" },
                          { title: "Блог", href: "/блог-и-новости/" },

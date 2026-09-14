@@ -51,11 +51,15 @@
                     cursor: pointer;
                     background: none;
                     border: none;
-                    transition: transform 0.3s;
+                    transition:
+                        color 0.3s ease,
+                        transform 0.3s ease;
 
                     svg {
-                        stroke: var(--color-white);
-                        transition: all 0.3s ease;
+                        display: block;
+                        width: 16px;
+                        height: 9px;
+                        transition: color 0.3s ease;
                     }
 
                     &:hover {
@@ -78,11 +82,8 @@
                 }
 
                 > .item .toggle {
-                    transform: rotate(-90deg);
-
-                    svg {
-                        stroke: var(--brand-dark-orange);
-                    }
+                    color: var(--brand-dark-orange);
+                    transform: scaleY(-1);
                 }
             }
         }

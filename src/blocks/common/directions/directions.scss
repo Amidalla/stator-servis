@@ -1,15 +1,9 @@
 @use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
 
 .page:has(.directions) {
-    --dir-cut-top-w: var(--hero-cut-w, calc(100vw * 94.1152 / 1920));
-    --dir-cut-top-h: var(--hero-cut-h, calc(100vw * 193.46 / 1920));
-    --dir-cut-bottom-w: calc(100vw * 91.66 / 1920);
-    --dir-cut-bottom-h: calc(100vw * 188.69 / 1920);
-
-    @include bp.mq(mobile-l) {
-        --dir-cut-bottom-w: calc(100vw * 48.8828 / 360);
-        --dir-cut-bottom-h: calc(100vw * 96.0283 / 360);
-    }
+    --dir-cut-top-w: var(--hero-cut-w);
+    --dir-cut-top-h: var(--hero-cut-h);
 }
 
 .page:has(.hero) .directions {
@@ -25,13 +19,12 @@
     overflow: hidden;
     color: var(--txt-dark);
     background-color: #a8a8a8;
-    clip-path: polygon(
-        var(--dir-cut-top-w) 0,
-        100% 0,
-        100% 100%,
-        calc(100% - var(--dir-cut-bottom-w)) calc(100% - var(--dir-cut-bottom-h)),
-        0 calc(100% - var(--dir-cut-bottom-h)),
-        0 var(--dir-cut-top-h)
+
+    @include mix.clip-band-dual-cut(
+        var(--dir-cut-top-w),
+        var(--dir-cut-top-h),
+        var(--dir-cut-bottom-w),
+        var(--dir-cut-bottom-h)
     );
 
     @include bp.mq(desktop) {

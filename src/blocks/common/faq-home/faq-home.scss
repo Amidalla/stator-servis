@@ -35,9 +35,13 @@
         --faq-media-left: 0;
         --faq-glow-width: 341px;
         --faq-glow-height: 403px;
-        --faq-glow-left: -50px;
+        --faq-glow-left: -60px;
         --faq-answer-pad: 20px 40px 24px 80px;
         --faq-answer-size: 18px;
+    }
+
+    @include bp.mq(laptop) {
+        --faq-glow-left: -100px;
     }
 
     @include bp.mq(tablet-xl) {

@@ -1,4 +1,5 @@
 @use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
 
 .reviews {
     --reviews-gap: 20px;
@@ -63,170 +64,21 @@
     .controls {
         position: relative;
         z-index: 2;
-        display: flex;
-        gap: 20px;
-        align-items: center;
-        width: fit-content;
-        max-width: 100%;
-        margin-top: 20px;
 
-        @include bp.mq(mobile-l) {
-            display: none !important;
-        }
-
-        &[hidden] {
-            display: none !important;
-        }
+        @include mix.slider-controls($margin-top: 20px);
     }
 
     .nav-btn {
-        display: inline-flex;
-        flex-shrink: 0;
-        align-items: center;
-        justify-content: center;
-        width: 58px;
-        height: 63px;
-        padding: 0;
-        cursor: pointer;
-        background: transparent;
-        border: 0;
-
-        svg {
-            display: block;
-            width: 58px;
-            height: 63px;
-            pointer-events: none;
-        }
-
-        .shape {
-            fill: var(--color-light-grey, #d9d9d9);
-            transition: fill 0.25s ease;
-        }
-
-        .arrow {
-            fill: var(--brand-dark-orange);
-            transition: fill 0.25s ease;
-        }
-
-        &:hover:not(.swiper-button-disabled) {
-            .shape {
-                fill: var(--brand-dark-orange);
-            }
-
-            .arrow {
-                fill: var(--color-white);
-            }
-        }
-
-        &.swiper-button-disabled {
-            cursor: default;
-            opacity: 0.55;
-        }
+        @include mix.slider-nav-btn;
     }
 
-    .pagination.swiper-pagination,
-    .pagination {
-        position: static !important;
-        inset: auto !important;
-        display: flex;
-        flex: 0 0 auto;
-        gap: 5px;
-        align-items: center;
-        width: auto !important;
-        min-width: 0;
-        height: auto !important;
-        margin: 0;
-        transform: none !important;
-
-        @include bp.mq(mobile-l) {
-            display: none !important;
-        }
-    }
-
-    .pagination .swiper-pagination-bullet {
-        flex: 0 0 auto;
-        width: 40px;
-        height: 7px;
-        margin: 0 !important;
-        background: var(--txt-dark, #161616);
-        border-radius: 12px;
-        opacity: 1;
-        transition: background-color 0.25s ease;
-
-        &.swiper-pagination-bullet-active {
-            background: var(--brand-dark-orange);
-        }
-    }
+    @include mix.slider-dash-pagination;
 
     .mobile-nav {
-        display: none;
-        gap: 20px;
-        align-items: center;
-        justify-content: center;
-        margin-top: 0;
+        @include mix.slider-mobile-nav($margin-top: 0, $mobile-margin-top: -20px);
 
-        @include bp.mq(mobile-l) {
-            display: flex;
-            margin-top: -20px;
-        }
-
-        &[hidden] {
-            display: none !important;
-        }
-
-        .nav-btn {
-            display: inline-flex;
-            flex-shrink: 0;
-            align-items: center;
-            justify-content: center;
-            width: 58px;
-            height: 63px;
-            padding: 0;
-            cursor: pointer;
-            background: transparent;
-            border: 0;
-
-            svg {
-                display: block;
-                width: 58px;
-                height: 63px;
-                pointer-events: none;
-            }
-
-            .shape {
-                fill: var(--color-light-grey, #d9d9d9);
-                transition: fill 0.25s ease;
-            }
-
-            .arrow {
-                fill: var(--brand-dark-orange);
-                transition: fill 0.25s ease;
-            }
-
-            &.next {
-                .shape {
-                    fill: var(--brand-dark-orange);
-                }
-
-                .arrow {
-                    fill: var(--color-white);
-                }
-            }
-
-            &.swiper-button-disabled {
-                cursor: default;
-                opacity: 0.55;
-            }
-        }
-
-        .fraction {
-            font-family: var(--font-family-primary);
-            font-size: 18px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 140%;
-            color: var(--color-white);
-            white-space: nowrap;
+        .nav-btn.next {
+            @include mix.slider-nav-btn-active;
         }
     }
 
@@ -273,24 +125,10 @@
         transition: height 0.45s ease;
         will-change: height;
 
-        &::after {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            pointer-events: none;
-            content: "";
-            border-radius: inherit;
-            box-shadow: inset 0 0 0 1px transparent;
-            transition: box-shadow 0.25s ease;
-        }
+        @include mix.card-hover-glow($z-index: 2);
 
-        &:hover::after {
-            box-shadow:
-                inset 0 0 0 1px var(--color-blue, #064aa7),
-                inset 0 0 28px rgb(6 74 167 / 28%);
-        }
-
-        &:hover .name {
+        &:hover .name,
+        &:focus-within .name {
             color: var(--brand-dark-orange);
         }
     }

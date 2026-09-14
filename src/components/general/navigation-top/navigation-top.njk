@@ -15,6 +15,9 @@
                 <li class="{{ 'has-children ' if hasChildren else '' }}{{ item.class if item.class else '' }}">
                     <a
                         href="{{ item.href }}"
+                        {% if hasChildren %}
+                            aria-haspopup="true"
+                        {% endif %}
                         {% if item.target %}
                             target="{{ item.target }}"
                         {% endif %}
@@ -23,6 +26,11 @@
                         {% endif %}
                     >
                         {{ item.title }}
+                        {% if hasChildren %}
+                            <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="21" height="12" viewBox="0 0 21 12" fill="none" aria-hidden="true">
+                                <path d="M0.707031 0.707031L10.207 10.207L19.707 0.707031" stroke="currentColor" stroke-width="2" />
+                            </svg>
+                        {% endif %}
                     </a>
                     {% if hasChildren %}
                         <ul class="submenu">

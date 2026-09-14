@@ -5,7 +5,7 @@
 }
 
 .about-company {
-    --about-cut-h: var(--dir-cut-bottom-h, calc(100vw * 188.69 / 1920));
+    --about-cut-h: var(--dir-cut-bottom-h);
 
     position: relative;
     z-index: 1;

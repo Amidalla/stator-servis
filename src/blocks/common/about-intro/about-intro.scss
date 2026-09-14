@@ -1,22 +1,17 @@
 @use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
 
 .about-intro {
-    --about-cut-w: var(--dir-cut-bottom-w, calc(100vw * 91.66 / 1920));
-    --about-cut-h: var(--dir-cut-bottom-h, calc(100vw * 188.69 / 1920));
+    --about-cut-w: var(--dir-cut-bottom-w);
+    --about-cut-h: var(--dir-cut-bottom-h);
 
     position: relative;
     z-index: 2;
     min-height: 534px;
     overflow: hidden;
     background: var(--color-white);
-    clip-path: polygon(
-        0 0,
-        calc(100% - var(--about-cut-w)) 0,
-        100% var(--about-cut-h),
-        100% 100%,
-        var(--about-cut-w) 100%,
-        0 calc(100% - var(--about-cut-h))
-    );
+
+    @include mix.clip-parallelogram-ltr(var(--about-cut-w), var(--about-cut-h));
 
     @include bp.mq(laptop-l) {
         min-height: 0;
