@@ -1,5 +1,5 @@
 import Swiper from "swiper";
-import { Navigation, EffectFade, Pagination } from "swiper/modules";
+import { Navigation, EffectFade } from "swiper/modules";
 import { syncOverflowControls } from "../../../js/utils/swiper-controls.js";
 
 export function ourWorks(context = document) {
@@ -32,8 +32,8 @@ export function ourWorks(context = document) {
             observeParents: true,
             observeSlideChildren: true,
             navigation: {
-                prevEl: card.querySelector(".nav-btn.prev"),
-                nextEl: card.querySelector(".nav-btn.next")
+                prevEl: card.querySelector(".gallery-nav .nav-btn.prev"),
+                nextEl: card.querySelector(".gallery-nav .nav-btn.next")
             }
         });
 
@@ -56,32 +56,56 @@ export function ourWorks(context = document) {
     });
 
     const slider = root.querySelector(".slider");
-    const paginationEl = root.querySelector(".pagination");
+    const mobileNav = root.querySelector(".mobile-nav");
+    const prevEl = mobileNav?.querySelector(".nav-btn.prev");
+    const nextEl = mobileNav?.querySelector(".nav-btn.next");
+    const fractionEl = mobileNav?.querySelector(".fraction");
 
     if (slider) {
-        instances.push(
-            new Swiper(slider, {
-                modules: [Pagination],
-                slidesPerView: 1,
-                spaceBetween: 20,
-                speed: 600,
-                watchOverflow: true,
-                observer: true,
-                observeParents: true,
-                pagination: paginationEl
-                    ? {
-                          el: paginationEl,
-                          clickable: true
-                      }
-                    : undefined,
-                breakpoints: {
-                    598: {
-                        slidesPerView: 2,
-                        spaceBetween: 20
-                    }
+        const swiper = new Swiper(slider, {
+            modules: [Navigation],
+            slidesPerView: 1,
+            spaceBetween: 20,
+            speed: 600,
+            watchOverflow: true,
+            observer: true,
+            observeParents: true,
+            navigation: {
+                prevEl,
+                nextEl
+            },
+            breakpoints: {
+                598: {
+                    slidesPerView: 2,
+                    spaceBetween: 20
                 }
-            })
-        );
+            }
+        });
+
+        const syncFraction = () => {
+            if (!fractionEl) return;
+
+            const slides = [...(swiper.slides || [])].filter(
+                (slide) => !slide.classList.contains("swiper-slide-duplicate")
+            );
+            const current = (swiper.realIndex ?? swiper.activeIndex ?? 0) + 1;
+            fractionEl.textContent = `${current}/${slides.length || 1}`;
+        };
+
+        const syncControls = () => {
+            syncOverflowControls(swiper, [mobileNav]);
+            syncFraction();
+        };
+
+        swiper.on("lock", syncControls);
+        swiper.on("unlock", syncControls);
+        swiper.on("slideChange", syncFraction);
+        swiper.on("resize", syncControls);
+        swiper.on("update", syncControls);
+        swiper.on("slidesLengthChange", syncControls);
+
+        requestAnimationFrame(syncControls);
+        instances.push(swiper);
     }
 
     root.addEventListener(

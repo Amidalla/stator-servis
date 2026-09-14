@@ -45,6 +45,10 @@
         width: fit-content;
         max-width: 100%;
 
+        @include bp.mq(mobile-l) {
+            display: none !important;
+        }
+
         &[hidden] {
             display: none !important;
         }
@@ -129,9 +133,9 @@
         }
     }
 
-    .pagination-dots {
+    .mobile-nav {
         display: none;
-        gap: 7px;
+        gap: 20px;
         align-items: center;
         justify-content: center;
         margin-top: 20px;
@@ -144,20 +148,59 @@
             display: none !important;
         }
 
-        .dot {
+        .nav-btn {
+            display: inline-flex;
             flex-shrink: 0;
-            width: 16px;
-            height: 16px;
+            align-items: center;
+            justify-content: center;
+            width: 58px;
+            height: 63px;
             padding: 0;
             cursor: pointer;
-            background: var(--btn-grey, #a8a8a8);
+            background: transparent;
             border: 0;
-            border-radius: 50%;
-            transition: background-color 0.25s ease;
 
-            &.is-active {
-                background: var(--brand-dark-orange);
+            svg {
+                display: block;
+                width: 58px;
+                height: 63px;
+                pointer-events: none;
             }
+
+            .shape {
+                fill: var(--color-light-grey, #d9d9d9);
+                transition: fill 0.25s ease;
+            }
+
+            .arrow {
+                fill: var(--brand-dark-orange);
+                transition: fill 0.25s ease;
+            }
+
+            &.next {
+                .shape {
+                    fill: var(--brand-dark-orange);
+                }
+
+                .arrow {
+                    fill: var(--color-white);
+                }
+            }
+
+            &.swiper-button-disabled {
+                cursor: default;
+                opacity: 0.55;
+            }
+        }
+
+        .fraction {
+            font-family: var(--font-family-primary);
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+            color: var(--color-white);
+            white-space: nowrap;
         }
     }
 

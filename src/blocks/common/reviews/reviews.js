@@ -8,10 +8,13 @@ export function reviews(context = document) {
 
     const slider = root.querySelector(".slider");
     const controls = root.querySelector(".controls");
-    const prevEl = root.querySelector(".nav-btn.prev");
-    const nextEl = root.querySelector(".nav-btn.next");
-    const paginationEl = root.querySelector(".pagination");
-    const dotsEl = root.querySelector(".pagination-dots");
+    const prevEl = root.querySelector(".controls .nav-btn.prev");
+    const nextEl = root.querySelector(".controls .nav-btn.next");
+    const paginationEl = root.querySelector(".controls .pagination");
+    const mobileNav = root.querySelector(".mobile-nav");
+    const mobilePrev = mobileNav?.querySelector(".nav-btn.prev");
+    const mobileNext = mobileNav?.querySelector(".nav-btn.next");
+    const fractionEl = mobileNav?.querySelector(".fraction");
 
     if (!slider || !prevEl || !nextEl || !paginationEl) return;
 
@@ -31,8 +34,8 @@ export function reviews(context = document) {
         observeParents: true,
         observeSlideChildren: true,
         navigation: {
-            prevEl,
-            nextEl
+            prevEl: [prevEl, mobilePrev].filter(Boolean),
+            nextEl: [nextEl, mobileNext].filter(Boolean)
         },
         pagination: {
             el: paginationEl,
@@ -54,32 +57,19 @@ export function reviews(context = document) {
         }
     });
 
-    const syncControls = () => syncOverflowControls(swiper, [controls, dotsEl]);
-
-    const syncDots = () => {
-        if (!dotsEl) return;
+    const syncFraction = () => {
+        if (!fractionEl) return;
 
         const slides = [...(swiper.slides || [])].filter(
             (slide) => !slide.classList.contains("swiper-slide-duplicate")
         );
-        const active = swiper.realIndex ?? swiper.activeIndex ?? 0;
+        const current = (swiper.realIndex ?? swiper.activeIndex ?? 0) + 1;
+        fractionEl.textContent = `${current}/${slides.length || 1}`;
+    };
 
-        if (dotsEl.children.length !== slides.length) {
-            dotsEl.replaceChildren(
-                ...slides.map((_, index) => {
-                    const dot = document.createElement("button");
-                    dot.type = "button";
-                    dot.className = `dot${index === active ? " is-active" : ""}`;
-                    dot.setAttribute("aria-label", `Отзыв ${index + 1}`);
-                    return dot;
-                })
-            );
-            return;
-        }
-
-        [...dotsEl.children].forEach((dot, index) => {
-            dot.classList.toggle("is-active", index === active);
-        });
+    const syncControls = () => {
+        syncOverflowControls(swiper, [controls, mobileNav]);
+        syncFraction();
     };
 
     const updateSwiper = () => {
@@ -132,36 +122,15 @@ export function reviews(context = document) {
 
     swiper.on("lock", syncControls);
     swiper.on("unlock", syncControls);
-    swiper.on("slideChange", syncDots);
+    swiper.on("slideChange", syncFraction);
     swiper.on("resize", () => {
         syncControls();
-        syncDots();
         syncExpandButtons();
         equalizeCardHeights();
     });
-    swiper.on("update", () => {
-        syncControls();
-        syncDots();
-    });
-    swiper.on("slidesLengthChange", () => {
-        syncControls();
-        syncDots();
-    });
+    swiper.on("update", syncControls);
+    swiper.on("slidesLengthChange", syncControls);
     swiper.on("observerUpdate", updateSwiper);
-
-    if (dotsEl) {
-        dotsEl.addEventListener(
-            "click",
-            (event) => {
-                const dot = event.target.closest(".dot");
-                if (!dot || !dotsEl.contains(dot)) return;
-
-                const index = [...dotsEl.children].indexOf(dot);
-                if (index >= 0) swiper.slideTo(index);
-            },
-            { signal }
-        );
-    }
 
     root.querySelectorAll(".card").forEach((card) => {
         const expand = card.querySelector(".expand");
@@ -210,7 +179,6 @@ export function reviews(context = document) {
 
     const refresh = () => {
         updateSwiper();
-        syncDots();
         syncExpandButtons();
         equalizeCardHeights();
     };
