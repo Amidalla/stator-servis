@@ -94,7 +94,7 @@
             background: var(--txt-dark, #161616);
 
             .name,
-            .text {
+            p {
                 color: var(--color-white);
             }
         }
@@ -121,7 +121,7 @@
         flex-shrink: 0;
     }
 
-    .text {
+    .step p {
         margin: 0;
         font-family: var(--font-family-primary);
         font-size: 18px;
@@ -195,7 +195,7 @@
         }
     }
 
-    .note-text {
+    .note-content p {
         margin: 0;
         font-family: var(--font-family-primary);
         font-size: 18px;

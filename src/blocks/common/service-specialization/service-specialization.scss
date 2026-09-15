@@ -64,7 +64,7 @@
         color: var(--color-white);
     }
 
-    .list {
+    ul {
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -91,15 +91,10 @@
                 background: var(--color-white);
                 border-radius: 50%;
             }
-        }
 
-        .label {
-            display: block;
-            font-weight: 700;
-        }
-
-        .desc {
-            display: block;
+            b {
+                font-weight: 700;
+            }
         }
     }
 
@@ -125,6 +120,10 @@
             flex: none;
             width: 100%;
             max-width: 100%;
+        }
+
+        @include bp.mq(mobile-l) {
+            height: 215px;
         }
 
         img {

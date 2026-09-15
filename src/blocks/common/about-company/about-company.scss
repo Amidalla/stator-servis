@@ -46,7 +46,7 @@
         margin: 0;
     }
 
-    .lead {
+    .head p {
         flex-shrink: 0;
         margin: 0;
         font-family: var(--font-family-headings);
@@ -210,7 +210,7 @@
         }
 
         .name,
-        .text {
+        p {
             min-width: 0;
         }
 
@@ -247,7 +247,7 @@
         color: var(--txt-dark);
     }
 
-    .card .text {
+    .card p {
         margin: 0;
         font-family: var(--font-family-primary);
         font-size: 20px;
@@ -267,7 +267,7 @@
             margin: 0 0 20px;
         }
 
-        .text {
+        p {
             max-width: 1430px;
             margin: 0;
             font-family: var(--font-family-primary);

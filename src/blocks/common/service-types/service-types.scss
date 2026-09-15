@@ -148,6 +148,10 @@
         line-height: 140%;
         color: var(--txt-dark, #161616);
 
+        @include bp.mq(mobile-l) {
+            font-size: 20px;
+        }
+
         a {
             @include mix.line-clamp(2);
 
@@ -189,6 +193,10 @@
         font-weight: 400;
         line-height: 150%;
         color: var(--txt-dark, #161616);
+
+        @include bp.mq(mobile-l) {
+            font-size: 16px;
+        }
     }
 
     .label {
