@@ -22,6 +22,8 @@
                 padding: 14px 0;
                 border-bottom: 2px solid rgb(255 255 255 / 20%);
 
+                cursor: default;
+
                 > a,
                 > .parent {
                     display: flex;
@@ -40,10 +42,6 @@
                         color: var(--color-white);
                         text-decoration: none;
                     }
-                }
-
-                > .parent {
-                    cursor: default;
                 }
 
                 .toggle {
@@ -79,6 +77,10 @@
                 }
             }
 
+            &.has-children > .item {
+                cursor: pointer;
+            }
+
             &.is-open {
                 & > .item {
                     border-bottom-color: var(--brand-dark-orange);
@@ -101,10 +103,11 @@
         overflow: hidden;
         transition: max-height 0.3s ease-out;
 
-        ul {
+        ul[data-level="2"] {
             margin-top: 5px;
 
             > li {
+                padding-left: 20px;
                 border-bottom: unset;
 
                 &:not(:last-child) {

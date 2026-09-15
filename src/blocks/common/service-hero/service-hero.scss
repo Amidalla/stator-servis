@@ -56,27 +56,15 @@
         inset: 0;
         z-index: 1;
         pointer-events: none;
-        background: linear-gradient(
-            113.34deg,
-            rgb(0 0 0 / 0%) 21.99%,
-            rgb(0 0 0 / 70%) 72.47%
-        );
+        background: linear-gradient(113.34deg, rgb(0 0 0 / 0%) 21.99%, rgb(0 0 0 / 70%) 72.47%);
         transform: rotate(180deg) scaleY(-1);
 
         @include bp.mq(tablet-l) {
-            background: linear-gradient(
-                103.69deg,
-                rgb(0 0 0 / 0%) 21.99%,
-                rgb(0 0 0 / 70%) 72.47%
-            );
+            background: linear-gradient(103.69deg, rgb(0 0 0 / 0%) 21.99%, rgb(0 0 0 / 70%) 72.47%);
         }
 
         @include bp.mq(mobile-l) {
-            background: linear-gradient(
-                93.29deg,
-                rgb(0 0 0 / 0%) 21.99%,
-                rgb(0 0 0 / 70%) 72.47%
-            );
+            background: linear-gradient(93.29deg, rgb(0 0 0 / 0%) 21.99%, rgb(0 0 0 / 70%) 72.47%);
         }
     }
 
@@ -184,8 +172,8 @@
             --button-padding: 20px;
             --button-font-size: 18px;
 
-            white-space: normal;
             text-align: center;
+            white-space: normal;
         }
     }
 }

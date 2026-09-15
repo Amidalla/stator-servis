@@ -66,9 +66,9 @@
             position: absolute;
             inset: 0;
             z-index: 0;
+            pointer-events: none;
             content: "";
             background: url("/assets/images/content/service-why-pattern.png") center / cover no-repeat;
-            pointer-events: none;
         }
 
         &:nth-child(even) {

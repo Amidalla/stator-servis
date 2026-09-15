@@ -209,6 +209,7 @@
     }
 
     .footer {
+        box-sizing: border-box;
         display: flex;
         gap: 12px;
         align-items: center;
@@ -218,7 +219,6 @@
         margin-top: auto;
         background: #edeaea;
         border-radius: 12px;
-        box-sizing: border-box;
     }
 
     .price {
