@@ -30,7 +30,7 @@
                 {% endfor %}
             {% endif %}
         />
-        <label {% if id %}for="{{ id }}"{% endif %}>
+        <label {% if id %}for="{{ id }}" {% endif %}>
             <span class="checkbox"></span>
             <span class="value">{{ text | safe }}</span>
         </label>

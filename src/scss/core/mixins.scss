@@ -186,6 +186,14 @@
         display: none !important;
     }
 
+    .nav-btn {
+        @include slider-nav-btn;
+
+        &.next {
+            @include slider-nav-btn-active;
+        }
+    }
+
     .fraction {
         font-family: var(--font-family-primary);
         font-size: 18px;

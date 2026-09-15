@@ -35,7 +35,7 @@
     min-height: var(--hero-h);
     overflow: visible;
     color: var(--color-white, #fff);
-    background-color: #a8a8a8;
+    background-color: var(--txt-dark);
 
     .media {
         position: absolute;

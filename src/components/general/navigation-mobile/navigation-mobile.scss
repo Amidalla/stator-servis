@@ -22,7 +22,8 @@
                 padding: 14px 0;
                 border-bottom: 2px solid rgb(255 255 255 / 20%);
 
-                > a {
+                > a,
+                > .parent {
                     display: flex;
                     width: 100%;
                     font-family: var(--font-family-primary);
@@ -32,11 +33,17 @@
                     line-height: 140%;
                     color: var(--color-white);
                     transition: color 0.3s ease;
+                }
 
+                > a {
                     &:hover {
                         color: var(--color-white);
                         text-decoration: none;
                     }
+                }
+
+                > .parent {
+                    cursor: default;
                 }
 
                 .toggle {

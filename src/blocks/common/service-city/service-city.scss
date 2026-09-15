@@ -1,0 +1,101 @@
+@use "core/breakpoints" as bp;
+
+.service-city {
+    padding: 100px 0;
+    color: var(--color-white);
+    background: var(--brand-dark-orange);
+
+    @include bp.mq(mobile-l) {
+        padding: 80px 0;
+    }
+
+    .head {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 40px;
+    }
+
+    .title {
+        margin: 0;
+        color: var(--color-white);
+    }
+
+    .subtitle {
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--color-white);
+        text-align: right;
+
+        @include bp.mq(tablet-xl) {
+            display: none;
+        }
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+
+        @include bp.mq(tablet-xl) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px;
+        background: var(--color-white);
+        border-radius: 12px;
+
+        &:hover .icon {
+            animation: shake 0.5s ease;
+        }
+    }
+
+    .top {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .icon {
+        display: block;
+        flex-shrink: 0;
+        width: 64px;
+        height: 54px;
+        object-fit: contain;
+    }
+
+    .name {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 140%;
+        color: var(--txt-dark);
+
+        @include bp.mq(mobile-l) {
+            font-size: 20px;
+        }
+    }
+
+    .text {
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--txt-light-dark, #383838);
+
+        @include bp.mq(mobile-l) {
+            font-size: 16px;
+        }
+    }
+}

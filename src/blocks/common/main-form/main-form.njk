@@ -3,12 +3,15 @@
 {% from "components/general/textarea/textarea.njk" import render as textarea %}
 {% from "components/general/consent-checkbox/consent-checkbox.njk" import render as consentCheckbox %}
 
+{% set formSuffix = formSuffix | default("") %}
+
 <section class="main-form" data-main-form>
     <div class="layout">
         <div class="content" data-aos="fade-right">
             <div class="watermark" aria-hidden="true">
                 <img
                     class="lazy"
+                    src="/assets/images/content/main-form-watermark.png"
                     data-src="/assets/images/content/main-form-watermark.png"
                     alt=""
                     width="883"
@@ -26,10 +29,10 @@
                     <div class="fields">
                         <div class="row">
                             <div class="field">
-                                <label class="label" for="main-form-name">Ваше имя</label>
+                                <label class="label" for="main-form-name{{ formSuffix }}">Ваше имя</label>
                                 {{ input(
                                     type="text",
-                                    id="main-form-name",
+                                    id="main-form-name" ~ formSuffix,
                                     name="name",
                                     placeholder="Ваше имя",
                                     autocomplete="name",
@@ -40,10 +43,10 @@
                             </div>
 
                             <div class="field">
-                                <label class="label" for="main-form-phone">Телефон</label>
+                                <label class="label" for="main-form-phone{{ formSuffix }}">Телефон</label>
                                 {{ input(
                                     type="tel",
-                                    id="main-form-phone",
+                                    id="main-form-phone" ~ formSuffix,
                                     name="phone",
                                     placeholder="+7 (__) --",
                                     autocomplete="tel",
@@ -53,10 +56,10 @@
                             </div>
 
                             <div class="field">
-                                <label class="label" for="main-form-email">E-mail</label>
+                                <label class="label" for="main-form-email{{ formSuffix }}">E-mail</label>
                                 {{ input(
                                     type="email",
-                                    id="main-form-email",
+                                    id="main-form-email" ~ formSuffix,
                                     name="email",
                                     placeholder="Ваш e-mail",
                                     autocomplete="email",
@@ -66,9 +69,9 @@
                         </div>
 
                         <div class="field message">
-                            <label class="label" for="main-form-message">Сообщение</label>
+                            <label class="label" for="main-form-message{{ formSuffix }}">Сообщение</label>
                             {{ textarea(
-                                id="main-form-message",
+                                id="main-form-message" ~ formSuffix,
                                 name="message",
                                 rows="4",
                                 placeholder="Опишите ваш запрос или задачу"
@@ -78,7 +81,7 @@
 
                     <div class="field-consent">
                         {{ consentCheckbox(
-                            id="main-form-consent",
+                            id="main-form-consent" ~ formSuffix,
                             text="Я согласен на обработку персональных данных",
                             required=true,
                             data={"error": "Необходимо отметить"}
@@ -101,6 +104,7 @@
         <div class="media" data-aos="fade-left">
             <img
                 class="lazy"
+                src="/assets/images/content/main-form-photo.png"
                 data-src="/assets/images/content/main-form-photo.png"
                 alt="Специалист Статор-Сервис за перемоткой электродвигателя"
                 width="930"

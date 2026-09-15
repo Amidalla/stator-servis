@@ -1,7 +1,7 @@
 @use "core/breakpoints" as bp;
 
 .faq-home {
-    --faq-bleed: calc(var(--container-padding) + max(0px, (100vw - var(--container-max-width)) / 2));
+    --faq-bleed: var(--container-side-bleed);
     --faq-intro-width: 561px;
     --faq-layout-gap: 164px;
     --faq-media-overflow: 100px;
@@ -9,9 +9,9 @@
     --faq-media-width: 433px;
     --faq-media-height: 485px;
     --faq-media-left: 5px;
-    --faq-glow-width: 407px;
-    --faq-glow-height: 492px;
-    --faq-glow-left: -85px;
+    --faq-glow-width: 560px;
+    --faq-glow-height: 520px;
+    --faq-glow-left: calc(-1 * (var(--faq-bleed) + var(--faq-media-left)) - var(--faq-glow-width) / 2);
     --faq-answer-pad: 20px 79px 24px;
     --faq-answer-size: 20px;
     --faq-name-size: 24px;
@@ -33,15 +33,15 @@
         --faq-media-width: 338px;
         --faq-media-height: 378px;
         --faq-media-left: 0;
-        --faq-glow-width: 341px;
-        --faq-glow-height: 403px;
-        --faq-glow-left: -60px;
+        --faq-glow-width: 460px;
+        --faq-glow-height: 430px;
         --faq-answer-pad: 20px 40px 24px 80px;
         --faq-answer-size: 18px;
     }
 
     @include bp.mq(laptop) {
-        --faq-glow-left: -100px;
+        --faq-glow-width: 480px;
+        --faq-glow-height: 450px;
     }
 
     @include bp.mq(tablet-xl) {
@@ -54,9 +54,8 @@
         --faq-media-width: 338px;
         --faq-media-height: 378px;
         --faq-media-left: 0;
-        --faq-glow-width: 341px;
-        --faq-glow-height: 403px;
-        --faq-glow-left: -40px;
+        --faq-glow-width: 460px;
+        --faq-glow-height: 430px;
         --faq-answer-pad: 20px 40px 24px 70px;
         --faq-answer-size: 18px;
     }
@@ -71,9 +70,8 @@
         --faq-media-width: calc(100vw - 15px);
         --faq-media-height: 387px;
         --faq-media-left: calc(7px - var(--container-padding));
-        --faq-glow-width: 100vw;
-        --faq-glow-height: 492px;
-        --faq-glow-left: calc(-1 * (var(--container-padding) + var(--faq-media-left)));
+        --faq-glow-width: min(560px, 140vw);
+        --faq-glow-height: min(520px, 130vw);
         --faq-media-overflow: 0;
         --faq-answer-pad: 20px 15px;
         --faq-answer-size: 14px;
@@ -140,6 +138,7 @@
         height: var(--faq-media-height);
         margin-top: 10px; // + gap 20px = 30px до текста
         margin-bottom: calc(-1 * var(--faq-media-overflow));
+        overflow: visible;
         pointer-events: none;
 
         @include bp.mq(tablet-xl) {
@@ -152,11 +151,21 @@
 
         .glow {
             position: absolute;
-            bottom: 0;
+            bottom: -10px;
             left: var(--faq-glow-left);
             width: var(--faq-glow-width);
             max-width: none;
             height: var(--faq-glow-height);
+            pointer-events: none;
+            background: radial-gradient(
+                50% 50% at 50% 50%,
+                rgb(6 74 167 / 100%) 0%,
+                rgb(6 74 167 / 85%) 28%,
+                rgb(8 45 96 / 55%) 52%,
+                transparent 74%
+            );
+            filter: blur(70px);
+            transform: translateZ(0);
         }
 
         .photo {

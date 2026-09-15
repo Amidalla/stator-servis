@@ -1,0 +1,191 @@
+@use "core/breakpoints" as bp;
+
+.service-hero {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: 477px;
+    overflow: hidden;
+    color: var(--color-white);
+    background-color: var(--txt-dark);
+
+    @include bp.mq(tablet-l) {
+        min-height: 337px;
+    }
+
+    @include bp.mq(mobile-l) {
+        min-height: 372px;
+    }
+
+    .media {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 70% center;
+        }
+
+        @include bp.mq(laptop-m) {
+            img {
+                object-position: 80% center;
+            }
+        }
+
+        @include bp.mq(tablet-l) {
+            img {
+                object-position: 85% center;
+            }
+        }
+
+        @include bp.mq(mobile-l) {
+            img {
+                object-position: 90% center;
+            }
+        }
+    }
+
+    .shade {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: linear-gradient(
+            113.34deg,
+            rgb(0 0 0 / 0%) 21.99%,
+            rgb(0 0 0 / 70%) 72.47%
+        );
+        transform: rotate(180deg) scaleY(-1);
+
+        @include bp.mq(tablet-l) {
+            background: linear-gradient(
+                103.69deg,
+                rgb(0 0 0 / 0%) 21.99%,
+                rgb(0 0 0 / 70%) 72.47%
+            );
+        }
+
+        @include bp.mq(mobile-l) {
+            background: linear-gradient(
+                93.29deg,
+                rgb(0 0 0 / 0%) 21.99%,
+                rgb(0 0 0 / 70%) 72.47%
+            );
+        }
+    }
+
+    > .container {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: calc(var(--header-height) + 16px);
+        padding-bottom: 60px;
+
+        @include bp.mq(tablet-l) {
+            padding-top: calc(var(--header-height) + 16px);
+            padding-bottom: 40px;
+        }
+
+        @include bp.mq(mobile-l) {
+            padding-top: calc(var(--header-height) + 16px);
+            padding-bottom: 40px;
+        }
+    }
+
+    .breadcrumbs {
+        width: auto;
+
+        > .container {
+            display: block;
+            flex: none;
+            width: auto;
+            max-width: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list {
+            gap: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--color-white);
+        }
+
+        .item {
+            gap: 10px;
+        }
+
+        .link,
+        .current-page,
+        .separator {
+            color: var(--color-white);
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .current-page {
+            font-weight: 700;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        align-items: flex-start;
+        max-width: 1150px;
+        margin-top: 37px;
+
+        @include bp.mq(tablet-l) {
+            max-width: 565px;
+            margin-top: 23px;
+        }
+
+        @include bp.mq(mobile-l) {
+            max-width: 100%;
+            margin-top: 24px;
+        }
+    }
+
+    .title {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 60px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 130%;
+        color: var(--color-white);
+
+        @include bp.mq(tablet-l) {
+            font-size: 40px;
+            font-weight: 600;
+        }
+
+        @include bp.mq(mobile-l) {
+            font-size: 28px;
+        }
+    }
+
+    .button {
+        @include bp.mq(mobile-l) {
+            --button-width: auto;
+            --button-height: 63px;
+            --button-padding: 20px;
+            --button-font-size: 18px;
+
+            white-space: normal;
+            text-align: center;
+        }
+    }
+}

@@ -8,9 +8,7 @@ export function syncOverflowControls(swiper, elements = []) {
 
     swiper.checkOverflow?.();
 
-    const slides = [...(swiper.slides || [])].filter(
-        (slide) => !slide.classList.contains("swiper-slide-duplicate")
-    );
+    const slides = [...(swiper.slides || [])].filter((slide) => !slide.classList.contains("swiper-slide-duplicate"));
     const count = slides.length;
     const perView = swiper.params.slidesPerView;
 

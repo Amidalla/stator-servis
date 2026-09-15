@@ -6,14 +6,14 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{{ title }} — карта страниц</title>
-        <link rel="icon" href="/assets/images/system/logo-mobile.svg" type="image/svg+xml" />
+        <link rel="icon" href="./assets/favicons/favicon.svg" type="image/svg+xml" />
         <style>
             @font-face {
                 font-family: "Noto Sans";
                 font-style: normal;
                 font-weight: 400;
                 font-display: swap;
-                src: url("/assets/fonts/NotoSans-Regular.ttf") format("truetype");
+                src: url("./assets/fonts/NotoSans-Regular.ttf") format("truetype");
             }
 
             @font-face {
@@ -21,7 +21,7 @@
                 font-style: normal;
                 font-weight: 600;
                 font-display: swap;
-                src: url("/assets/fonts/NotoSans-SemiBold.ttf") format("truetype");
+                src: url("./assets/fonts/NotoSans-SemiBold.ttf") format("truetype");
             }
 
             @font-face {
@@ -29,7 +29,7 @@
                 font-style: normal;
                 font-weight: 500 700;
                 font-display: swap;
-                src: url("/assets/fonts/Tektur.ttf") format("truetype");
+                src: url("./assets/fonts/Tektur.ttf") format("truetype");
             }
 
             :root {
@@ -61,13 +61,8 @@
                 z-index: -1;
                 overflow: hidden;
                 background:
-                    linear-gradient(
-                        105deg,
-                        rgb(22 22 22 / 94%) 0%,
-                        rgb(22 22 22 / 82%) 48%,
-                        rgb(214 66 18 / 28%) 100%
-                    ),
-                    url("/assets/images/content/hero-desktop.png") center / cover;
+                    linear-gradient(105deg, rgb(22 22 22 / 94%) 0%, rgb(22 22 22 / 82%) 48%, rgb(214 66 18 / 28%) 100%),
+                    url("./assets/images/content/hero-desktop.png") center / cover;
             }
 
             .background::before,
@@ -314,8 +309,8 @@
         <main class="page">
             <section class="hero">
                 <div>
-                    <a class="brand" href="/home.html" aria-label="Статор-Сервис — на главную">
-                        <img src="/assets/images/system/logo.svg" alt="Статор-Сервис" width="168" height="42" />
+                    <a class="brand" href="./home.html" aria-label="Статор-Сервис — на главную">
+                        <img src="./assets/images/system/logo.svg" alt="Статор-Сервис" width="168" height="42" />
                     </a>
                     <h1>Карта страниц</h1>
                     <p class="intro">Навигация по макетам сайта ремонта электродвигателей «Статор-Сервис».</p>
@@ -324,7 +319,7 @@
 
             {% macro pageLink(title, file) %}
                 <li>
-                    <a href="{{ file }}">
+                    <a href="./{{ file }}">
                         <span><span class="name">{{ title }}</span><span class="file">{{ file }}</span></span>
                         <span class="arrow" aria-hidden="true">→</span>
                     </a>
@@ -335,37 +330,37 @@
                 <section class="group group--main">
                     <h2 class="group-title">Основные страницы</h2>
                     <ul class="list">
-                        {{ pageLink("Главная", "/home.html") }}
-                        {{ pageLink("О компании", "/o-nas/") }}
-                        {{ pageLink("Услуги", "/uslugi/") }}
-                        {{ pageLink("Услуга — детальная", "/uslugi/remont-elektrodvigateley/") }}
-                        {{ pageLink("Наши работы", "/nashi-raboty/") }}
-                        {{ pageLink("Работа — детальная", "/nashi-raboty/peremotka-alternatora/") }}
+                        {{ pageLink("Главная", "home.html") }}
+                        {{ pageLink("О компании", "o-nas/") }}
+                        {{ pageLink("Услуга — категория", "service-category/") }}
+                        {{ pageLink("Услуга — детальная", "service-detail/") }}
+                        {{ pageLink("Наши работы", "nashi-raboty/") }}
+                        {{ pageLink("Работа — детальная", "nashi-raboty/peremotka-alternatora/") }}
                     </ul>
                 </section>
 
                 <section class="group group--content">
                     <h2 class="group-title">Контент и сервисы</h2>
                     <ul class="list">
-                        {{ pageLink("Блог и новости", "/блог-и-новости/") }}
-                        {{ pageLink("Статья — детальная", "/peremotka-yakorya-preobrazovatelya-vremyon-sssr/") }}
-                        {{ pageLink("Цены", "/cena/") }}
-                        {{ pageLink("Вопрос–ответ", "/faq/") }}
-                        {{ pageLink("Контакты", "/contact/") }}
+                        {{ pageLink("Блог и новости", "blog-i-novosti/") }}
+                        {{ pageLink("Статья — детальная", "peremotka-yakorya-preobrazovatelya-vremyon-sssr/") }}
+                        {{ pageLink("Цены", "cena/") }}
+                        {{ pageLink("Вопрос–ответ", "faq/") }}
+                        {{ pageLink("Контакты", "contact/") }}
                     </ul>
                 </section>
 
                 <section class="group group--system">
                     <h2 class="group-title">Служебные</h2>
                     <ul class="list">
-                        {{ pageLink("Ошибка 404", "/404.html") }}
+                        {{ pageLink("Ошибка 404", "404.html") }}
                     </ul>
                 </section>
             </div>
 
             <footer class="footer">
                 <p>Карта страниц для разработки сайта</p>
-                <a href="/home.html">Открыть главную</a>
+                <a href="./home.html">Открыть главную</a>
             </footer>
         </main>
     </body>

@@ -1,0 +1,82 @@
+{% from "components/general/button/button.njk" import render as button %}
+{% from "components/general/slider-nav/slider-nav.njk" import navBtn, mobileNav %}
+
+<section class="service-types" data-service-types>
+    <div class="container">
+        <div class="head" data-aos="fade-up">
+            <h2 class="title">Ремонт различных типов электродвигателей</h2>
+            <div class="nav">
+                {{ navBtn(direction="prev", label="Предыдущий тип") }}
+                <div class="pagination"></div>
+                {{ navBtn(direction="next", label="Следующий тип") }}
+            </div>
+        </div>
+
+        <div class="slider swiper" data-aos="fade-up" data-aos-delay="200">
+            <div class="swiper-wrapper">
+                {% set cards = [
+                    { title: "Ремонт асинхронных электродвигателей" },
+                    { title: "Ремонт электродвигателей постоянного тока" },
+                    { title: "Ремонт электродвигателей компрессоров" },
+                    { title: "Ремонт электродвигателей стиральных машин" },
+                    { title: "Ремонт синхронных электродвигателей" },
+                    { title: "Ремонт крановых электродвигателей" }
+                ] %}
+                {% for card in cards %}
+                    <div class="swiper-slide">
+                        <article class="card">
+                            <a class="media" href="/service-detail/">
+                                <img
+                                    class="lazy"
+                                    src="/assets/images/content/service-type-card.png"
+                                    data-src="/assets/images/content/service-type-card.png"
+                                    alt="{{ card.title }}"
+                                    width="385"
+                                    height="232"
+                                />
+                            </a>
+                            <span class="badge">Новинка</span>
+                            <img
+                                class="corner"
+                                src="/assets/images/content/service-type-corner.svg"
+                                alt=""
+                                width="58"
+                                height="70"
+                                aria-hidden="true"
+                            />
+                            <h3 class="name">
+                                <a href="/service-detail/">{{ card.title }}</a>
+                            </h3>
+                            <div class="specs">
+                                <div class="spec">
+                                    <p class="value">3-7 дней</p>
+                                    <p class="label">Срок выполнения</p>
+                                </div>
+                                <div class="divider" aria-hidden="true"></div>
+                                <div class="spec">
+                                    <p class="value">Гарантия 6 мес</p>
+                                    <p class="label">На все работы</p>
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <p class="price">
+                                    <span class="from">от</span>
+                                    <span class="amount">1 000</span>
+                                    <span class="currency">₽</span>
+                                </p>
+                                {{ button(
+                                    text="Заказать",
+                                    type="button",
+                                    variant="red",
+                                    data={"src": "popup-callback"}
+                                ) }}
+                            </div>
+                        </article>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {{ mobileNav(prevLabel="Предыдущий тип", nextLabel="Следующий тип", fraction="1/6") }}
+    </div>
+</section>

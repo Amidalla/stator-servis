@@ -1,6 +1,12 @@
 @use "core/breakpoints" as bp;
 @use "core/mixins" as mix;
 
+.page:has(.service-city) .our-works {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-top: 0;
+}
+
 .our-works {
     --our-works-cut-w: var(--dir-cut-bottom-w);
     --our-works-cut-h: calc(30px + 30px + 32px * 1.3 + 16px * 1.4);
@@ -184,6 +190,10 @@
         &[hidden] {
             display: none !important;
         }
+
+        .nav-btn.prev svg {
+            transform: scaleX(-1);
+        }
     }
 
     .nav-btn {
@@ -213,10 +223,6 @@
         .nav-arrow {
             fill: var(--brand-dark-orange);
             transition: fill 0.25s ease;
-        }
-
-        &.prev svg {
-            transform: scaleX(-1);
         }
 
         &.swiper-button-disabled {
@@ -316,13 +322,5 @@
 
     .mobile-nav {
         @include mix.slider-mobile-nav($margin-top: 20px);
-
-        .nav-btn {
-            @include mix.slider-nav-btn;
-
-            &.next {
-                @include mix.slider-nav-btn-active;
-            }
-        }
     }
 }

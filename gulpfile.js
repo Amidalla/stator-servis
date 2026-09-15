@@ -23,6 +23,9 @@ import path from "path";
 const sassCompiler = gulpSass(sass);
 const bs = browsersync.create();
 
+// Artfactor preview is served from /_html/. Override with PATH_PREFIX= for root deploy.
+const pathPrefix = process.env.PATH_PREFIX ?? "/_html";
+
 const paths = {
     html: "src/pages/**/*.njk",
     templates: "src",
@@ -33,6 +36,22 @@ const paths = {
     assets: "src/assets/**/*",
     devDist: "temp",
     prodDist: "build"
+};
+
+const prefixRootPaths = () => {
+    if (!pathPrefix) {
+        return replace(/a^/, "a");
+    }
+
+    return replace(/(href|src|srcset|data-src|action|poster)="\/(?!\/)/g, `$1="${pathPrefix}/`);
+};
+
+const prefixCssUrls = () => {
+    if (!pathPrefix) {
+        return replace(/a^/, "a");
+    }
+
+    return replace(/url\(\s*(['"]?)\//g, `url($1${pathPrefix}/`);
 };
 
 // Clean temp/ and build/ directories
@@ -66,6 +85,8 @@ export const htmlProd = () =>
         )
         .pipe(replace("bundle.css", "bundle.min.css"))
         .pipe(replace("bundle.js", "bundle.min.js"))
+        .pipe(prefixRootPaths())
+        .pipe(prefixCssUrls())
         .pipe(prettier({ parser: "html" }))
         .pipe(gulp.dest(paths.prodDist));
 
@@ -97,6 +118,7 @@ export const stylesProd = () =>
             })
         )
         .pipe(postcss([autoprefixer(), cssnano({ preset: "default" })]))
+        .pipe(prefixCssUrls())
         .pipe(rename("bundle.min.css"))
         .pipe(gulp.dest(`${paths.prodDist}/css`));
 

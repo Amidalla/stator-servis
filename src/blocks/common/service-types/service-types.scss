@@ -1,0 +1,256 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.service-types {
+    padding: 50px 0 100px;
+    color: var(--color-white);
+    background: var(--txt-light-dark, #383838);
+
+    .head {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 40px;
+
+        @include bp.mq(tablet-xl) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    .title {
+        margin: 0;
+        color: var(--color-white);
+    }
+
+    .nav {
+        display: flex;
+        flex-shrink: 0;
+        gap: 20px;
+        align-items: center;
+
+        .nav-btn {
+            @include mix.slider-nav-btn;
+        }
+
+        .nav-btn.next {
+            @include mix.slider-nav-btn-active;
+        }
+
+        @include mix.slider-dash-pagination;
+
+        @include bp.mq(mobile-l) {
+            display: none !important;
+        }
+    }
+
+    .mobile-nav {
+        @include mix.slider-mobile-nav($margin-top: 20px);
+    }
+
+    .slider {
+        overflow: hidden;
+
+        > .swiper-wrapper {
+            align-items: stretch;
+        }
+
+        > .swiper-wrapper > .swiper-slide {
+            height: auto;
+        }
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        height: 100%;
+        padding: 15px;
+        overflow: hidden;
+        color: var(--txt-dark, #161616);
+        background: var(--color-white);
+        border-radius: 12px;
+
+        @include mix.card-hover-glow($z-index: 3);
+
+        &:hover .corner,
+        &:focus-within .corner {
+            opacity: 0;
+        }
+
+        &:hover .media img,
+        &:focus-within .media img {
+            transform: scale(1.05);
+        }
+
+        &:hover .name a,
+        &:focus-within .name a {
+            color: var(--brand-dark-orange);
+        }
+    }
+
+    .media {
+        position: relative;
+        display: block;
+        flex-shrink: 0;
+        height: 232px;
+        overflow: hidden;
+        border-radius: 12px;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.45s ease;
+        }
+    }
+
+    .badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 2;
+        padding: 10px 15px;
+        font-family: var(--font-family-primary);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--txt-light-dark, #383838);
+        white-space: nowrap;
+        background: var(--color-white);
+        border: 1px solid var(--brand-dark-orange);
+        border-radius: 8px;
+    }
+
+    .corner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        display: block;
+        width: 58px;
+        height: 70px;
+        pointer-events: none;
+        transition: opacity 0.8s ease;
+    }
+
+    .name {
+        height: 68px;
+        margin: 0;
+        overflow: hidden;
+        font-family: var(--font-family-headings);
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 140%;
+        color: var(--txt-dark, #161616);
+
+        a {
+            @include mix.line-clamp(2);
+
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+    }
+
+    .specs {
+        display: flex;
+        gap: 0;
+        align-items: stretch;
+        width: 100%;
+        padding: 5px 0;
+        border-top: 1px solid rgb(22 22 22 / 15%);
+        border-bottom: 1px solid rgb(22 22 22 / 15%);
+    }
+
+    .spec {
+        display: flex;
+        flex: 1 1 0;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+    }
+
+    .divider {
+        flex: 0 0 1px;
+        align-self: stretch;
+        margin: 0 12px;
+        background: rgb(22 22 22 / 15%);
+    }
+
+    .value {
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--txt-dark, #161616);
+    }
+
+    .label {
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--txt-light-dark, #383838);
+    }
+
+    .footer {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        height: 83px;
+        padding: 10px;
+        margin-top: auto;
+        background: #edeaea;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    .price {
+        display: flex;
+        gap: 9px;
+        align-items: center;
+        margin: 0;
+        color: var(--brand-dark-orange);
+        white-space: nowrap;
+
+        .from {
+            font-family: var(--font-family-primary);
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 130%;
+        }
+
+        .amount,
+        .currency {
+            font-family: var(--font-family-headings);
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 150%;
+        }
+    }
+
+    .footer .button {
+        --button-width: 188px;
+        --button-height: 63px;
+        --button-padding: 20px;
+        --button-font-size: 18px;
+
+        @include bp.mq(laptop-l) {
+            --button-width: 133px;
+        }
+
+        // Глобальный .button на tablet принудительно ставит width: 100% —
+        // на слайде это ломает вёрстку карточки, возвращаем свою ширину
+        @include bp.mq(tablet) {
+            width: var(--button-width);
+        }
+    }
+}

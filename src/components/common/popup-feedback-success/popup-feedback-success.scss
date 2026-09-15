@@ -48,7 +48,7 @@
         font-weight: 500;
         line-height: 150%;
         color: var(--color-white);
-        word-break: break-word;
+        overflow-wrap: break-word;
     }
 
     .text {
@@ -59,7 +59,7 @@
         font-weight: 400;
         line-height: 150%;
         color: var(--color-white);
-        word-break: break-word;
+        overflow-wrap: break-word;
     }
 
     .popup-feedback-success-close {

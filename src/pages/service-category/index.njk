@@ -1,0 +1,19 @@
+{% set meta = { title: "Ремонт электродвигателей | Статор-Сервис" } %}
+{% set page = { breadcrumbs: false, heading: false, after_content: false } %}
+{% extends "layouts/default.njk" %}
+{% block content %}
+    {% include "blocks/common/service-hero/service-hero.njk" %}
+    {% include "blocks/common/service-intro/service-intro.njk" %}
+    {% include "blocks/common/service-specialization/service-specialization.njk" %}
+    {% include "blocks/common/service-types/service-types.njk" %}
+    {% include "blocks/common/service-stages/service-stages.njk" %}
+    {% set formSuffix = "-top" %}
+    {% include "blocks/common/main-form/main-form.njk" %}
+    {% include "blocks/common/service-city/service-city.njk" %}
+    {% include "blocks/common/our-works/our-works.njk" %}
+    {% include "blocks/common/service-cycle/service-cycle.njk" %}
+    {% include "blocks/common/service-other/service-other.njk" %}
+    {% include "blocks/common/service-why/service-why.njk" %}
+    {% set formSuffix = "-bottom" %}
+    {% include "blocks/common/main-form/main-form.njk" %}
+{% endblock %}

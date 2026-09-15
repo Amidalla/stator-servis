@@ -3,7 +3,7 @@
 
 .useful-materials {
     --materials-slide-width: 415px;
-    --materials-slider-bleed: calc(var(--container-padding) + max(0px, (100vw - var(--container-max-width)) / 2));
+    --materials-slider-bleed: var(--container-side-bleed);
 
     position: relative;
     z-index: 0;
@@ -102,6 +102,14 @@
             transform: scale(1.05);
         }
 
+        &:hover .name,
+        &:focus-within .name {
+            color: var(--brand-dark-orange);
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+        }
+
         .top {
             display: flex;
             flex-direction: column;
@@ -161,7 +169,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-box-orient: vertical;
-            transition: color 0.25s ease;
+            transition: color 0.3s ease;
         }
 
         .text {

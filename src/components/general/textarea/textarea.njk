@@ -42,5 +42,6 @@
                 aria-{{ key | replace("_", "-") }}="{{ val }}"
             {% endfor %}
         {% endif %}
-    >{% if value %}{{ value }}{% endif %}</textarea>
+    >
+    {% if value %}{{ value }}{% endif %}</textarea>
 {% endmacro %}

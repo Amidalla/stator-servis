@@ -1,0 +1,110 @@
+@use "core/breakpoints" as bp;
+
+.service-cycle {
+    padding: 100px 0;
+    color: var(--color-white);
+    background: var(--txt-dark);
+
+    @include bp.mq(tablet-xl) {
+        padding: 80px 0;
+    }
+
+    .head {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 40px;
+
+        @include bp.mq(tablet-xl) {
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    .title {
+        max-width: 759px;
+        margin: 0;
+        color: var(--color-white);
+
+        @include bp.mq(tablet-xl) {
+            max-width: none;
+        }
+    }
+
+    .subtitle {
+        max-width: 408px;
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--color-white);
+
+        @include bp.mq(tablet-xl) {
+            max-width: none;
+        }
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: 40px;
+        margin-left: -40px;
+        margin-right: -40px;
+
+        @include bp.mq(tablet-xl) {
+            grid-template-columns: 1fr;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    .item {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-height: 255px;
+        padding: 20px 40px;
+
+        &:not(:nth-child(3n)) {
+            border-right: 1px solid rgb(255 255 255 / 40%);
+        }
+
+        @include bp.mq(tablet-xl) {
+            min-height: auto;
+            padding: 0 0 20px;
+            border-bottom: 1px solid var(--color-white);
+
+            &:not(:nth-child(3n)) {
+                border-right: none;
+            }
+        }
+    }
+
+    .name {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 26px;
+        font-weight: 500;
+        line-height: 140%;
+        color: var(--color-white);
+
+        @include bp.mq(mobile-l) {
+            font-size: 20px;
+        }
+    }
+
+    .text {
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--color-white);
+
+        @include bp.mq(mobile-l) {
+            font-size: 16px;
+        }
+    }
+}

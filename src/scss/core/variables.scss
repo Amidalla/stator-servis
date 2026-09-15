@@ -40,6 +40,7 @@
     --container-width: 1720px;
     --container-padding: 60px;
     --container-max-width: calc(var(--container-width) + var(--container-padding) * 2);
+    --container-side-bleed: max(var(--container-padding), calc((100vw - var(--container-width)) / 2));
     --header-height: 112px;
     --section-padding-top: 80px;
     --section-padding-bottom: 80px;

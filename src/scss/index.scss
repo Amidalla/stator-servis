@@ -52,6 +52,15 @@
 @use "../blocks/general/page-in-dev/page-in-dev";
 
 @use "../blocks/common/hero/hero";
+@use "../blocks/common/service-hero/service-hero";
+@use "../blocks/common/service-intro/service-intro";
+@use "../blocks/common/service-specialization/service-specialization";
+@use "../blocks/common/service-types/service-types";
+@use "../blocks/common/service-stages/service-stages";
+@use "../blocks/common/service-city/service-city";
+@use "../blocks/common/service-cycle/service-cycle";
+@use "../blocks/common/service-other/service-other";
+@use "../blocks/common/service-why/service-why";
 @use "../blocks/common/directions/directions";
 @use "../blocks/common/about-intro/about-intro";
 @use "../blocks/common/about-company/about-company";
