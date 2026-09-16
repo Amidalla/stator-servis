@@ -4,10 +4,12 @@
 {% block content %}
     {% include "blocks/common/service-detail-hero/service-detail-hero.njk" %}
     {% include "blocks/common/service-reasons/service-reasons.njk" %}
+    {% set formSuffix = "-top" %}
     {% include "blocks/common/main-form/main-form.njk" %}
     {% include "blocks/common/service-detail-content/service-detail-content.njk" %}
     {% include "blocks/common/our-works/our-works.njk" %}
     {% include "blocks/common/service-why/service-why.njk" %}
     {% include "blocks/common/useful-materials/useful-materials.njk" %}
+    {% set formSuffix = "-bottom" %}
     {% include "blocks/common/main-form/main-form.njk" %}
 {% endblock %}
