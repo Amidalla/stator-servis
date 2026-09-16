@@ -127,15 +127,25 @@
         overflow: hidden;
         background: var(--color-white);
         border-radius: 5px;
-        transition: opacity 0.3s ease;
+        transition: background-color 0.3s ease;
 
         svg {
             display: block;
         }
 
+        svg path,
+        svg rect {
+            transition: fill 0.3s ease;
+        }
+
+        // По ховеру — оранжевый фон со светлым значком (как раньше выглядел VK)
         &:hover {
             text-decoration: none;
-            opacity: 0.8;
+            background: var(--brand-dark-orange);
+        }
+
+        &:hover svg path {
+            fill: var(--color-white);
         }
 
         &.max svg {
@@ -152,15 +162,16 @@
                 width: 40px;
                 height: 40px;
             }
+
+            // Белый фон-квадрат телеграма тоже становится оранжевым
+            &:hover svg rect {
+                fill: var(--brand-dark-orange);
+            }
         }
 
-        &.vk {
-            background: var(--brand-dark-orange);
-
-            svg {
-                width: 28px;
-                height: 17px;
-            }
+        &.vk svg {
+            width: 28px;
+            height: 17px;
         }
     }
 }

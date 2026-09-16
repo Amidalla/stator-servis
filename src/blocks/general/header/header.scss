@@ -35,6 +35,15 @@ header.header {
         position: fixed;
     }
 
+    // Компенсация ширины скроллбара при открытой модалке (Fancybox).
+    // Fancybox скрывает скроллбар и компенсирует body через margin-right,
+    // поэтому обычный (absolute) хедер внутри .site не «прыгает».
+    // Fixed-хедер позиционируется от вьюпорта и расширяется на ширину
+    // скроллбара — компенсируем его тем же значением, что и Fancybox.
+    html.with-fancybox &.is-sticky {
+        padding-right: var(--f-scrollbar-compensate, 0);
+    }
+
     .container {
         position: relative;
         display: flex;
@@ -163,18 +172,24 @@ header.header {
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        transition: opacity 0.3s ease;
 
-        &:hover {
-            text-decoration: none;
-            opacity: 0.8;
-        }
-
-        img {
+        svg {
             display: block;
             width: 30px;
             height: 30px;
-            object-fit: contain;
+        }
+
+        // Значок тёмный, по ховеру — оранжевый; фон (белый квадрат) не меняется
+        svg path {
+            transition: fill 0.3s ease;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &:hover svg path {
+            fill: var(--brand-dark-orange);
         }
     }
 
@@ -187,7 +202,7 @@ header.header {
         background: var(--color-white);
         border-radius: 1px;
 
-        img {
+        svg {
             width: 24px;
             height: 24px;
 

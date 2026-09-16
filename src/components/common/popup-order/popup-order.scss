@@ -1,6 +1,6 @@
 @use "core/breakpoints" as bp;
 
-.popup-callback-fancybox {
+.popup-order-fancybox {
     --fancybox-backdrop-bg: rgb(0 0 0 / 50%);
     --f-html-bg: var(--txt-dark);
     --f-html-color: var(--color-white);
@@ -15,10 +15,11 @@
     }
 }
 
-.popup-callback {
+.popup-order {
     position: relative;
     display: none;
     flex-direction: column;
+    gap: 14px;
     width: 442px;
     max-width: 100%;
     max-height: calc(100dvh - 32px);
@@ -26,22 +27,28 @@
     overflow-y: auto;
     color: var(--color-white);
     background: var(--txt-dark);
-    border-radius: 8px;
+    border-radius: 12px;
+    box-shadow:
+        17px 51px 15px 0 rgb(0 0 0 / 1%),
+        11px 33px 14px 0 rgb(0 0 0 / 7%),
+        6px 18px 12px 0 rgb(0 0 0 / 23%),
+        3px 8px 9px 0 rgb(0 0 0 / 38%),
+        1px 2px 5px 0 rgb(0 0 0 / 44%);
 
     .heading {
         display: flex;
         flex-direction: column;
+        gap: 8px;
         padding-right: 50px;
-        margin-bottom: 14px;
     }
 
     .title {
-        margin: 0 0 12px;
+        margin: 0;
         font-family: var(--font-family-headings);
         font-size: 32px;
         font-style: normal;
         font-weight: 500;
-        line-height: 120%;
+        line-height: 150%;
         color: var(--color-white);
     }
 
@@ -95,6 +102,19 @@
 
     .input {
         height: 48px;
+    }
+
+    // Поле «Услуга» — только для чтения, серый фон
+    .input-service {
+        color: var(--txt-light-dark);
+        cursor: default;
+        background: var(--btn-grey);
+
+        &:focus,
+        &:focus-visible {
+            outline: none;
+            border-color: transparent;
+        }
     }
 
     .textarea {
@@ -154,16 +174,16 @@
         }
     }
 
-    .popup-callback-close {
+    .popup-order-close {
         position: absolute;
         top: 30px;
-        right: 29.793px;
+        right: 30px;
         z-index: 2;
         display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-start;
-        width: 40.207px;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
         padding: 10px;
         cursor: pointer;
         background: var(--color-white);
@@ -201,7 +221,7 @@
     }
 }
 
-.popup-callback.f-html,
-.fancybox__container .popup-callback {
+.popup-order.f-html,
+.fancybox__container .popup-order {
     display: flex;
 }

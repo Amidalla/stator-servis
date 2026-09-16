@@ -43,5 +43,7 @@
             {% endfor %}
         {% endif %}
     >
-        {% if value %}{{ value }}{% endif %}</textarea>
+        {#- убираем пробелы, иначе не виден placeholder -#}
+            {%- if value %}{{ value }}{% endif -%}
+            </textarea>
 {% endmacro %}

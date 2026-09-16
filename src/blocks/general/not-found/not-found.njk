@@ -1,0 +1,63 @@
+{% set arrowIcon %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path
+            d="M4 12H20M20 12L14 6M20 12L14 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
+    </svg>
+{% endset %}
+
+<section class="not-found">
+    <span class="watermark" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="391" viewBox="0 0 1920 391" fill="none">
+            <path
+                d="M260.002 71.9746H81.46V318.587H265.582V390.562H60.2578L0 330.304V60.2578L60.2578 0H260.002V71.9746ZM586.798 69.1855H479.114V390.562H399.887V69.1855H292.203V0H586.798V69.1855ZM920.367 390.562H837.233L817.705 301.29H673.756L654.228 390.562H571.094L662.039 0H829.422L920.367 390.562ZM1199.23 69.1855H1091.55V390.562H1012.32V69.1855H904.637V0H1199.23V69.1855ZM1562.1 60.2578V330.304L1501.84 390.562H1298.75L1238.49 330.304V60.2578L1298.75 0H1501.84L1562.1 60.2578ZM1920.12 60.2578V246.611L1859.86 306.87H1698.06V390.562H1618.83V0H1859.86L1920.12 60.2578ZM1319.95 321.376H1480.64V69.1855H1319.95V321.376ZM1698.06 242.148H1840.89V64.7217H1698.06V242.148ZM685.473 241.59H805.988L766.933 64.1641H724.528L685.473 241.59Z"
+                fill="url(#nf-watermark-grad)"
+                fill-opacity="0.05"
+            />
+            <defs>
+                <linearGradient
+                    id="nf-watermark-grad"
+                    x1="-27.8972"
+                    y1="195.301"
+                    x2="1938.24"
+                    y2="195.301"
+                    gradientUnits="userSpaceOnUse"
+                >
+                    <stop stop-color="white" stop-opacity="0.3" />
+                    <stop offset="1" stop-color="#999999" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </span>
+    <div class="container">
+        <div class="inner">
+            <div class="head">
+                <span class="code">404</span>
+                <div class="caption" data-aos="fade-up">
+                    <h1 class="title">Страница не найдена</h1>
+                    <p class="text">
+                        Похоже, запрашиваемая страница была перемещена или больше не&nbsp;существует. Но&nbsp;мы всегда
+                        можем помочь вам с&nbsp;ремонтом оборудования.
+                    </p>
+                </div>
+            </div>
+
+            <div class="actions" data-aos="fade-up">
+                <a class="btn btn--primary" href="/home.html">
+                    <span class="btn-label"><span class="btn-text">На главную</span></span>
+                    <span class="btn-icon">{{ arrowIcon | safe }}</span>
+                </a>
+                {# TODO: вернуть кнопку «Наши услуги», когда появится общая страница услуг
+                <a class="btn btn--outline" href="/service-category/">
+                    <span class="btn-label"><span class="btn-text">Наши услуги</span></span>
+                    <span class="btn-icon">{{ arrowIcon | safe }}</span>
+                </a>
+                #}
+            </div>
+        </div>
+    </div>
+</section>

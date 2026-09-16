@@ -1,0 +1,399 @@
+@use "core/breakpoints" as bp;
+
+.contacts-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--txt-light-dark);
+
+    > .container {
+        padding-top: calc(var(--header-height) + 16px);
+        padding-bottom: 80px;
+
+        @include bp.mq(tablet-xl) {
+            padding-bottom: 60px;
+        }
+
+        @include bp.mq(mobile-l) {
+            padding-bottom: 40px;
+        }
+    }
+
+    // --------------------------------------
+    // Хлебные крошки (светлые, на тёмном фоне)
+    // --------------------------------------
+    .breadcrumbs {
+        width: 100%;
+        max-width: 100%;
+
+        > .container {
+            display: block;
+            flex: none;
+            width: auto;
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
+            overflow-x: auto;
+            scrollbar-width: none; // Firefox
+            -ms-overflow-style: none; // IE/Edge
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        .list {
+            flex-wrap: nowrap;
+            gap: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--color-light-grey);
+        }
+
+        .item {
+            flex: 0 0 auto;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .link,
+        .separator {
+            color: var(--color-light-grey);
+        }
+
+        .link:hover {
+            color: var(--brand-dark-orange);
+            text-decoration: underline;
+        }
+
+        .current-page {
+            font-weight: 700;
+            color: var(--color-white);
+        }
+    }
+
+    // --------------------------------------
+    // Заголовок + соцсети
+    // --------------------------------------
+    .head {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+        margin-bottom: 40px;
+
+        @include bp.mq(mobile-l) {
+            margin-top: 16px;
+            margin-bottom: 24px;
+        }
+    }
+
+    .title {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--color-white);
+
+        @include bp.mq(laptop) {
+            font-size: 32px;
+        }
+
+        @include bp.mq(mobile-l) {
+            font-size: 28px;
+        }
+    }
+
+    // Соцсети показываем только на десктопе и мобилке (по макетам)
+    .socials {
+        display: flex;
+        flex-shrink: 0;
+        gap: 12px;
+        align-items: center;
+
+        @include bp.mq(laptop) {
+            display: none;
+        }
+
+        @include bp.mq(mobile-l) {
+            display: flex;
+        }
+    }
+
+    .socials-link {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        background: var(--color-white);
+        border-radius: 5px;
+
+        svg {
+            display: block;
+        }
+
+        // Значок тёмный, фон светлый; по ховеру значок становится оранжевым,
+        // фон остаётся светлым (перекрашиваем только сам путь, не белый фон-rect)
+        svg path {
+            transition: fill 0.3s ease;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &:hover svg path {
+            fill: var(--brand-dark-orange);
+        }
+
+        &.telegram {
+            background: transparent;
+
+            svg {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        &.vk svg {
+            width: 28px;
+            height: 17px;
+        }
+
+        &.max svg {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    // --------------------------------------
+    // Сетка карточек
+    // --------------------------------------
+    .cards {
+        display: grid;
+        grid-template-columns: 561fr 415fr 704fr;
+        gap: 20px;
+
+        @include bp.mq(tablet-xl) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @include bp.mq(mobile-l) {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-height: 290px;
+        padding: 20px;
+        overflow: hidden;
+
+        // Чёрный фон + фоновое изображение (прозрачный PNG со схематичным
+        // узором; у первой карточки в узоре есть картинка справа сверху)
+        background-color: var(--txt-dark);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        border-radius: 12px;
+
+        &:first-child {
+            background-position: top -30px right -30px;
+            background-size: contain;
+        }
+
+        > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        @include bp.mq(mobile-l) {
+            min-height: 0;
+            padding: 15px;
+        }
+    }
+
+    // Фон первой карточки «Наши контакты» (с картинкой справа сверху)
+    .card-contacts {
+        background-image: url("/assets/images/content/contacts-card-1.png");
+    }
+
+    // Фон второй карточки «Юридическая информация»
+    .card-legal {
+        background-image: url("/assets/images/content/contacts-card-2.png");
+    }
+
+    .card-map {
+        padding: 0;
+        background-image: none;
+
+        @include bp.mq(tablet-xl) {
+            grid-column: 1 / -1;
+            min-height: 360px;
+        }
+
+        @include bp.mq(mobile-l) {
+            min-height: 300px;
+        }
+    }
+
+    .card-title {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%;
+        color: var(--color-white);
+
+        @include bp.mq(mobile-l) {
+            font-size: 20px;
+        }
+    }
+
+    // Декоративная линия-разделитель (градиент, гаснущий к краям)
+    // на 20px выше низа карточки, по ширине содержимого (в отступах)
+    .card-contacts::after,
+    .card-legal::after {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        left: 20px;
+        height: 1px;
+        content: "";
+        background: linear-gradient(90deg, rgb(217 217 217 / 0%) 0%, rgb(217 217 217) 45%, rgb(217 217 217 / 0%) 100%);
+
+        @include bp.mq(mobile-l) {
+            right: 15px;
+            left: 15px;
+        }
+    }
+
+    // --------------------------------------
+    // Список контактов
+    // --------------------------------------
+    .contact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .contact-item {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    // Иконка контакта — белый скруглённый квадрат с оранжевым значком
+    // (белый фон и цвет заданы прямо в SVG)
+    .ic {
+        display: inline-flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+
+        svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .contact-item .text,
+    .contact-item .phones a {
+        font-family: var(--font-family-primary);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%;
+        color: var(--color-white);
+    }
+
+    a.text,
+    .phones a {
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: var(--brand-dark-orange);
+            text-decoration: none;
+        }
+    }
+
+    .phones {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    // --------------------------------------
+    // Юридическая информация
+    // --------------------------------------
+    .legal-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin: 0;
+    }
+
+    .legal-item {
+        display: flex;
+        gap: 10px;
+        align-items: baseline;
+    }
+
+    .legal-item dt {
+        flex-shrink: 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--brand-dark-orange);
+    }
+
+    .legal-item dd {
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 130%;
+        color: var(--color-white);
+
+        @include bp.mq(mobile-l) {
+            font-size: 16px;
+        }
+    }
+
+    // --------------------------------------
+    // Карта
+    // --------------------------------------
+    .map {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: 290px;
+        border: 0;
+        border-radius: 12px;
+
+        @include bp.mq(tablet-xl) {
+            min-height: 360px;
+        }
+
+        @include bp.mq(mobile-l) {
+            min-height: 300px;
+        }
+    }
+}

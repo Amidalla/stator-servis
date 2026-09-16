@@ -3,8 +3,8 @@
 {% from "components/general/textarea/textarea.njk" import render as textarea %}
 {% from "components/general/consent-checkbox/consent-checkbox.njk" import render as consentCheckbox %}
 
-<div id="popup-callback" class="popup-callback">
-    <button class="popup-callback-close" type="button" aria-label="Закрыть">
+<div id="popup-order" class="popup-order">
+    <button class="popup-order-close" type="button" aria-label="Закрыть">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="21"
@@ -21,16 +21,18 @@
     </button>
 
     <div class="heading">
-        <div class="title">Заказать звонок</div>
-        <p class="text">Оставьте ваши контакты, и мы перезвоним вам в ближайшее время.</p>
+        <div class="title">Оставить заявку на&nbsp;услугу</div>
+        <p class="text">
+            Оставьте контакты и&nbsp;опишите задачу&nbsp;— мы&nbsp;уточним детали, стоимость и&nbsp;сроки.
+        </p>
     </div>
 
     <form class="form" data-validate>
         <div class="field">
-            <label class="label" for="popup-callback-name">Ваше имя</label>
+            <label class="label" for="popup-order-name">Ваше имя</label>
             {{ input(
                 type="text",
-                id="popup-callback-name",
+                id="popup-order-name",
                 name="name",
                 placeholder="Введите ваше имя",
                 autocomplete="name",
@@ -41,10 +43,10 @@
         </div>
 
         <div class="field">
-            <label class="label" for="popup-callback-phone">Телефон</label>
+            <label class="label" for="popup-order-phone">Телефон</label>
             {{ input(
                 type="tel",
-                id="popup-callback-phone",
+                id="popup-order-phone",
                 name="phone",
                 placeholder="+7 (___) ___-__-__",
                 autocomplete="tel",
@@ -54,9 +56,20 @@
         </div>
 
         <div class="field">
-            <label class="label" for="popup-callback-message">Комментарий</label>
+            <label class="label" for="popup-order-service">Услуга</label>
+            {{ input(
+                type="text",
+                id="popup-order-service",
+                name="service",
+                class="input-service",
+                readonly=true
+            ) }}
+        </div>
+
+        <div class="field">
+            <label class="label" for="popup-order-message">Комментарий</label>
             {{ textarea(
-                id="popup-callback-message",
+                id="popup-order-message",
                 name="message",
                 rows="4",
                 placeholder="Комментарий"
@@ -65,8 +78,8 @@
 
         <div class="field-consent">
             {{ consentCheckbox(
-                id="popup-callback-consent",
-                text="я согласен на обработку моих персональных данных",
+                id="popup-order-consent",
+                text="я согласен на обработку моих персональных данных",
                 required=true,
                 data={"error": "Необходимо отметить"}
             ) }}
@@ -74,7 +87,7 @@
 
         <div class="actions">
             {{ button(
-                text="Отправить данные",
+                text="Отправить заявку",
                 type="submit",
                 variant="red",
                 disabled=true

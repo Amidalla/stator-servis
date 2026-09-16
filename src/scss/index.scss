@@ -41,6 +41,7 @@
 @use "../components/common/contacts-footer/contacts-footer";
 @use "../components/common/copyright/copyright";
 @use "../components/common/popup-callback/popup-callback";
+@use "../components/common/popup-order/popup-order";
 @use "../components/common/popup-feedback-success/popup-feedback-success";
 @use "../components/common/contacts-mobile/contacts-mobile";
 
@@ -50,9 +51,14 @@
 @use "../blocks/general/header/header";
 @use "../blocks/general/footer/footer";
 @use "../blocks/general/page-in-dev/page-in-dev";
+@use "../blocks/general/not-found/not-found";
 
 @use "../blocks/common/hero/hero";
+@use "../blocks/common/contacts-hero/contacts-hero";
 @use "../blocks/common/service-hero/service-hero";
+@use "../blocks/common/service-detail-hero/service-detail-hero";
+@use "../blocks/common/service-reasons/service-reasons";
+@use "../blocks/common/service-detail-content/service-detail-content";
 @use "../blocks/common/service-intro/service-intro";
 @use "../blocks/common/service-specialization/service-specialization";
 @use "../blocks/common/service-types/service-types";

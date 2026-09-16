@@ -9,14 +9,17 @@ import { navigationMobile } from "../components/general/navigation-mobile/naviga
 import { hero } from "../blocks/common/hero/hero.js";
 import { directions } from "../blocks/common/directions/directions.js";
 import { header } from "../blocks/general/header/header.js";
+import { notFound } from "../blocks/general/not-found/not-found.js";
 import { showPopup } from "./utils/popup.js";
 import { searchForm } from "../components/general/search-form/search-form.js";
 import { ourWorks } from "../blocks/common/our-works/our-works.js";
+import { serviceDetailHero } from "../blocks/common/service-detail-hero/service-detail-hero.js";
 import { reviews } from "../blocks/common/reviews/reviews.js";
 import { usefulMaterials } from "../blocks/common/useful-materials/useful-materials.js";
 import { advantages } from "../blocks/common/advantages/advantages.js";
 import { serviceTypes } from "../blocks/common/service-types/service-types.js";
 import { popupCallback } from "../components/common/popup-callback/popup-callback.js";
+import { popupOrder } from "../components/common/popup-order/popup-order.js";
 import { popupFeedbackSuccess } from "../components/common/popup-feedback-success/popup-feedback-success.js";
 
 const components = [
@@ -29,13 +32,16 @@ const components = [
     hero,
     directions,
     header,
+    notFound,
     searchForm,
     ourWorks,
+    serviceDetailHero,
     reviews,
     usefulMaterials,
     advantages,
     serviceTypes,
     popupCallback,
+    popupOrder,
     popupFeedbackSuccess
 ];
 

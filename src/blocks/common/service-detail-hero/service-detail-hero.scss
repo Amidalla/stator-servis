@@ -1,0 +1,581 @@
+@use "core/breakpoints" as bp;
+
+.service-detail-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-white);
+
+    > .container {
+        position: relative;
+        z-index: 1;
+        padding-top: calc(var(--header-height) + 16px);
+        padding-bottom: 80px;
+
+        @include bp.mq(tablet-xl) {
+            padding-bottom: 60px;
+        }
+
+        @include bp.mq(mobile-l) {
+            padding-bottom: 40px;
+        }
+    }
+
+    // Декоративный водяной знак «СТАТОР» на всю ширину секции, снизу
+    .watermark {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+        aspect-ratio: 527 / 108;
+        pointer-events: none;
+        background: url("/assets/images/content/stator-watermark.svg") no-repeat center bottom;
+        background-size: 100% auto;
+        opacity: 1;
+    }
+
+    // --------------------------------------
+    // Хлебные крошки (тёмные, на белом фоне)
+    // --------------------------------------
+    .breadcrumbs {
+        width: 100%;
+        max-width: 100%;
+
+        > .container {
+            display: block;
+            flex: none;
+            width: auto;
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
+            overflow-x: auto;
+            scrollbar-width: none; // Firefox
+            -ms-overflow-style: none; // IE/Edge
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        .list {
+            flex-wrap: nowrap;
+            gap: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--txt-light-dark);
+        }
+
+        .item {
+            flex: 0 0 auto;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .link,
+        .separator {
+            color: var(--txt-light-dark);
+        }
+
+        .link:hover {
+            color: var(--brand-dark-orange);
+            text-decoration: underline;
+        }
+
+        .current-page {
+            font-weight: 700;
+            color: var(--txt-dark);
+        }
+    }
+
+    // --------------------------------------
+    // Контент
+    // --------------------------------------
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        align-items: flex-start;
+        max-width: 1430px;
+        margin-top: 20px;
+
+        @include bp.mq(tablet-xl) {
+            gap: 28px;
+            max-width: 100%;
+        }
+
+        @include bp.mq(mobile-l) {
+            gap: 24px;
+            margin-top: 16px;
+        }
+    }
+
+    .title {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--txt-dark);
+
+        @include bp.mq(mobile-l) {
+            font-size: 28px;
+        }
+    }
+
+    .body {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        align-self: stretch;
+        padding-bottom: 45px;
+
+        @include bp.mq(laptop-l) {
+            padding-bottom: 65px;
+        }
+    }
+
+    .counter {
+        font-family: var(--font-family-primary);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--txt-dark);
+
+        b {
+            font-weight: 700;
+            color: var(--brand-dark-orange);
+        }
+    }
+
+    // --------------------------------------
+    // Раскладка: галерея + инфо
+    // --------------------------------------
+    .layout {
+        --gallery-h: 473px;
+
+        display: flex;
+        gap: 21px;
+        align-items: flex-start;
+        align-self: stretch;
+
+        @include bp.mq(laptop-l) {
+            --gallery-h: 411px;
+        }
+
+        @include bp.mq(tablet-xl) {
+            --gallery-h: 401px;
+
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        @include bp.mq(mobile-l) {
+            --gallery-h: 323px;
+        }
+    }
+
+    // --------------------------------------
+    // Галерея
+    // --------------------------------------
+    .gallery {
+        display: flex;
+        flex: 1 1 50%;
+        gap: 10px;
+        align-items: stretch;
+        min-width: 0;
+        height: var(--gallery-h);
+
+        @include bp.mq(tablet-xl) {
+            flex: 1 1 auto;
+            width: 100%;
+        }
+
+        @include bp.mq(mobile-l) {
+            gap: 8px;
+        }
+    }
+
+    .thumbs {
+        position: relative;
+        flex: 0 0 auto;
+        width: 125px;
+
+        @include bp.mq(laptop-l) {
+            width: 104px;
+        }
+
+        @include bp.mq(mobile-l) {
+            width: 64px;
+        }
+    }
+
+    .thumbs-swiper {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .thumb {
+        position: relative;
+        height: auto;
+        aspect-ratio: 125 / 127;
+        overflow: hidden;
+        cursor: pointer;
+        border-radius: 8px;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        &::after {
+            position: absolute;
+            inset: 0;
+            content: "";
+            background: rgb(56 56 56 / 55%);
+            border-radius: inherit;
+            transition: background-color 0.3s ease;
+        }
+
+        &:hover::after,
+        &.swiper-slide-thumb-active::after {
+            background: rgb(56 56 56 / 0%);
+        }
+
+        &.swiper-slide-thumb-active {
+            outline: 2px solid var(--brand-dark-orange);
+            outline-offset: -2px;
+        }
+    }
+
+    // Единственная стрелка «вперёд» — поверх низа ленты миниатюр
+    .thumbs-nav {
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        z-index: 2;
+        display: inline-flex;
+        width: 63px;
+        height: 58px;
+        padding: 0;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        transform: translateX(-50%);
+
+        @include bp.mq(laptop-l) {
+            width: 49.546px;
+            height: 63px;
+
+            svg {
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        // Обе иконки лежат друг на друге; градиент плавно проявляется поверх оранжевой
+        .ic {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: block;
+        }
+
+        .ic-default {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        .ic-hover {
+            z-index: 1;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.25s ease;
+        }
+
+        &:hover .ic-hover,
+        &:focus-visible .ic-hover {
+            opacity: 1;
+        }
+
+        &:focus-visible {
+            outline: none;
+        }
+
+        @include bp.mq(mobile-l) {
+            width: 50px;
+            height: 46px;
+
+            .ic {
+                scale: 0.8;
+            }
+        }
+    }
+
+    .stage {
+        flex: 1 1 auto;
+        min-width: 0;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 12px;
+
+        .main-swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .main-link {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100%;
+            cursor: zoom-in;
+        }
+
+        .main {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .zoom-ic {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            color: var(--color-white);
+            background: rgb(22 22 22 / 45%);
+            border-radius: 50%;
+            opacity: 0;
+            transition:
+                opacity 0.25s ease,
+                background-color 0.25s ease;
+
+            @include bp.mq(mobile-l) {
+                right: 10px;
+                bottom: 10px;
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+        .main-link:hover .zoom-ic,
+        .main-link:focus-visible .zoom-ic {
+            background: var(--brand-dark-orange);
+            opacity: 1;
+        }
+    }
+
+    // --------------------------------------
+    // Инфо-колонка
+    // --------------------------------------
+    .info {
+        display: flex;
+        flex: 1 1 50%;
+        flex-direction: column;
+        gap: 24px;
+        justify-content: space-between;
+        min-width: 0;
+        height: var(--gallery-h);
+
+        @include bp.mq(tablet-xl) {
+            flex: 1 1 auto;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    // Контент из админки — стили по тегам через родителя
+    .text {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        h2 {
+            max-width: 363px;
+            margin: 0;
+            font-family: var(--font-family-headings);
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 140%;
+            color: var(--txt-dark);
+
+            @include bp.mq(tablet-xl) {
+                max-width: 100%;
+                font-size: 22px;
+            }
+
+            @include bp.mq(mobile-l) {
+                font-size: 20px;
+            }
+        }
+
+        p {
+            margin: 0;
+            font-family: var(--font-family-primary);
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+            color: var(--txt-light-dark);
+
+            @include bp.mq(laptop-l) {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .offer {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    // --------------------------------------
+    // Характеристики (срок / гарантия)
+    // --------------------------------------
+    .features {
+        display: flex;
+        gap: 56px;
+        max-width: 385px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-top: 1px solid var(--color-light-grey);
+        border-bottom: 1px solid var(--color-light-grey);
+
+        @include bp.mq(mobile-l) {
+            gap: 32px;
+        }
+    }
+
+    .feature {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        &:not(:first-child)::before {
+            position: absolute;
+            top: 50%;
+            left: -28px;
+            width: 1px;
+            height: 44px;
+            content: "";
+            background: var(--color-light-grey);
+            transform: translateY(-50%);
+
+            @include bp.mq(mobile-l) {
+                left: -16px;
+            }
+        }
+    }
+
+    .feature-value {
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 130%;
+        color: var(--txt-dark);
+    }
+
+    .feature-label {
+        font-family: var(--font-family-primary);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 140%;
+        color: var(--txt-light-dark);
+    }
+
+    // --------------------------------------
+    // Цена
+    // --------------------------------------
+    .price {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 10px;
+        align-items: baseline;
+    }
+
+    .price-label {
+        font-family: var(--font-family-primary);
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 140%;
+        color: var(--txt-dark);
+
+        @include bp.mq(mobile-l) {
+            font-size: 18px;
+        }
+    }
+
+    .price-value {
+        font-family: var(--font-family-headings);
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 140%;
+        color: var(--color-blue);
+
+        @include bp.mq(mobile-l) {
+            font-size: 22px;
+        }
+    }
+
+    // --------------------------------------
+    // Кнопки
+    // --------------------------------------
+    .actions {
+        display: flex;
+        gap: 20px;
+        align-items: stretch;
+
+        @include bp.mq(tablet) {
+            flex-direction: column;
+            gap: 12px;
+        }
+    }
+
+    .actions .button {
+        --button-width: auto;
+
+        width: auto;
+
+        @include bp.mq(tablet) {
+            --button-width: 100%;
+
+            width: 100%;
+        }
+    }
+
+    // «Бесплатная консультация» — контурная на белом фоне
+    .actions .btn-consult {
+        --button-bg: var(--color-white);
+        --button-color: var(--txt-dark);
+        --button-border-color: var(--brand-dark-orange);
+
+        border-width: 2px;
+
+        &:hover:not(:disabled, .disabled) {
+            --button-bg: var(--brand-dark-orange);
+            --button-color: var(--color-white);
+            --button-border-color: var(--brand-dark-orange);
+        }
+    }
+}

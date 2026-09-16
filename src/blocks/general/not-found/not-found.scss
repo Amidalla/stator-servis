@@ -1,0 +1,326 @@
+@use "core/breakpoints" as bp;
+
+.not-found {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    min-height: 855px;
+    padding: 160px 0 100px;
+    overflow: hidden;
+    color: var(--color-white);
+
+    // Цвет + фоновое изображение поверх него (своё для каждого разрешения)
+    background-color: var(--txt-light-dark, #383838);
+    background-image: url("/assets/images/content/not-found-bg.png");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+
+    @include bp.mq(laptop-l) {
+        background-image: url("/assets/images/content/not-found-bg-laptop.png");
+    }
+
+    @include bp.mq(tablet-xl) {
+        padding-top: 140px;
+    }
+
+    @include bp.mq(tablet) {
+        min-height: 700px;
+        padding: 180px 0 139px;
+        background-image: url("/assets/images/content/not-found-bg-tablet.png");
+    }
+
+    @include bp.mq(mobile-l) {
+        min-height: 0;
+        padding: 130px 0 139px;
+        background-image: url("/assets/images/content/not-found-bg-mobile.png");
+    }
+
+    // --------------------------------------
+    // -- Водяной знак «СТАТОР» — на всю ширину, снизу
+    // --------------------------------------
+    .watermark {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+        pointer-events: none;
+        user-select: none;
+
+        svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .inner {
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        align-items: center;
+        max-width: 731px;
+        margin: 0 auto;
+
+        @include bp.mq(mobile-l) {
+            gap: 40px;
+            max-width: 100%;
+        }
+    }
+
+    // --------------------------------------
+    // -- Текстовый блок
+    // --------------------------------------
+    .head {
+        display: flex;
+        flex-direction: column;
+        gap: 27px;
+        align-items: center;
+        width: 100%;
+
+        @include bp.mq(mobile-l) {
+            gap: 20px;
+        }
+    }
+
+    .code {
+        font-family: var(--font-family-headings);
+        font-size: 304px;
+        font-weight: 600;
+        line-height: 1;
+        color: var(--brand-dark-orange);
+        text-align: center;
+        text-transform: uppercase;
+
+        // Скрыто до загрузки шрифта Tektur — иначе цифры мигают запасным
+        // шрифтом, а затем резко подменяются (см. not-found.js)
+        opacity: 0;
+        transform-origin: center;
+
+        @include bp.mq(tablet) {
+            font-size: 240px;
+        }
+
+        @include bp.mq(mobile-l) {
+            font-size: 146px;
+        }
+    }
+
+    // Шрифт загружен — показываем цифры: плавное равномерное появление
+    // (без «отскока» и рывка в конце) + мягкая пульсация
+    &.is-font-ready .code {
+        animation:
+            not-found-code-in 1s ease-out both,
+            not-found-code-pulse 3.5s ease-in-out 1.2s infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &.is-font-ready .code {
+            opacity: 1;
+            animation: none;
+        }
+    }
+
+    .caption {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        width: 100%;
+    }
+
+    .title {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--color-white);
+        text-align: center;
+        text-transform: uppercase;
+
+        @include bp.mq(mobile-l) {
+            font-size: 28px;
+        }
+    }
+
+    .text {
+        max-width: 640px;
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--color-white);
+        text-align: center;
+
+        @include bp.mq(mobile-l) {
+            font-size: 16px;
+        }
+    }
+
+    // --------------------------------------
+    // -- Кнопки
+    // --------------------------------------
+    .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        justify-content: center;
+
+        @include bp.mq(mobile-l) {
+            flex-direction: column;
+            gap: 20px;
+            align-self: stretch;
+            width: 100%;
+        }
+    }
+
+    // Кнопки со скосом — как «Заказать звонок» и поиск в хедере
+    .btn {
+        --btn-skew: 9px;
+
+        display: inline-flex;
+        gap: 5px;
+        align-items: stretch;
+        width: auto;
+        max-width: 100%;
+        height: 63px;
+        text-decoration: none;
+
+        @include bp.mq(mobile-l) {
+            width: 100%;
+            height: 60px;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        .btn-label {
+            position: relative;
+            display: flex;
+            flex: 1 1 auto;
+            align-items: center;
+            justify-content: center;
+            min-width: 0;
+            padding: 0 48px;
+
+            // Скошенный правый край (низ шире верха на --btn-skew)
+            clip-path: polygon(0 0, calc(100% - var(--btn-skew)) 0, 100% 100%, 0 100%);
+
+            @include bp.mq(mobile-l) {
+                padding: 0 32px;
+            }
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 1;
+            font-family: var(--font-family-primary);
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 130%;
+            color: var(--color-white);
+            white-space: nowrap;
+
+            @include bp.mq(mobile-l) {
+                font-size: 16px;
+            }
+        }
+
+        .btn-icon {
+            display: flex;
+            flex: 0 0 58px;
+            align-items: center;
+            justify-content: center;
+            margin-left: calc(-1 * var(--btn-skew));
+            color: var(--brand-dark-orange);
+            background: var(--color-white);
+
+            // Скошенный левый край — стыкуется со скосом лейбла
+            clip-path: polygon(0 0, 100% 0, 100% 100%, var(--btn-skew) 100%);
+
+            svg {
+                display: block;
+                width: 24px;
+                height: 24px;
+                transition: transform 0.3s ease;
+            }
+        }
+
+        &:hover .btn-icon svg {
+            transform: translateX(4px);
+        }
+
+        // Оранжевая — заливка, по ховеру градиент (как «Заказать звонок» в хедере)
+        &--primary {
+            .btn-label {
+                background-color: var(--brand-dark-orange);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 100% 100%;
+            }
+
+            &:hover .btn-label {
+                background-image: url("/assets/images/system/header-callback-bg-hover.png");
+            }
+        }
+
+        // Контурная — оранжевая рамка, тёмная заливка под цвет секции
+        &--outline {
+            .btn-label {
+                background: var(--brand-dark-orange);
+
+                &::before {
+                    position: absolute;
+                    inset: 2px;
+                    z-index: 0;
+                    content: "";
+                    background: var(--txt-light-dark, #383838);
+                    clip-path: polygon(0 0, calc(100% - var(--btn-skew)) 0, 100% 100%, 0 100%);
+                    transition: background-color 0.3s ease;
+                }
+            }
+
+            &:hover .btn-label::before {
+                background: #4a4a4a;
+            }
+        }
+    }
+}
+
+// --------------------------------------
+// -- Анимация цифры 404
+// --------------------------------------
+@keyframes not-found-code-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes not-found-code-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
+}

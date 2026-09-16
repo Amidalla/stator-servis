@@ -1,0 +1,169 @@
+@use "core/breakpoints" as bp;
+
+.service-detail-content {
+    padding: 100px 0 45px;
+    color: var(--color-white);
+    background: var(--txt-light-dark, #383838);
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 100px;
+
+        @include bp.mq(tablet-l) {
+            gap: 80px;
+        }
+    }
+
+    .row {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+
+        @include bp.mq(tablet-l) {
+            flex-direction: column;
+        }
+
+        // Чётный ряд — изображение слева, текст справа
+        &:nth-child(even) {
+            flex-direction: row-reverse;
+
+            @include bp.mq(tablet-l) {
+                flex-direction: column;
+            }
+        }
+    }
+
+    // --------------------------------------
+    // -- Текст (заполняется из админки, без классов у p/ul/li)
+    // --------------------------------------
+    .text {
+        flex: 1 1 auto;
+        min-width: 0;
+
+        > *:last-child {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            margin: 0 0 20px;
+            color: var(--color-white);
+        }
+
+        p {
+            margin: 0 0 40px;
+            font-family: var(--font-family-primary);
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+            color: var(--color-white);
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 0;
+            margin: 0 0 40px;
+            list-style: none;
+
+            li {
+                position: relative;
+                padding-left: 27px;
+                font-family: var(--font-family-primary);
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 150%;
+                color: var(--color-white);
+
+                &::before {
+                    position: absolute;
+                    top: 0.55em;
+                    left: 0;
+                    width: 6px;
+                    height: 6px;
+                    content: "";
+                    background: var(--color-white);
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        b {
+            font-weight: 700;
+        }
+
+        strong {
+            font-size: 20px;
+            font-weight: 700;
+        }
+    }
+
+    // --------------------------------------
+    // -- Изображение
+    // --------------------------------------
+    .media {
+        flex: 0 0 830px;
+        height: 384px;
+        overflow: hidden;
+        border-radius: 12px;
+
+        @include bp.mq(laptop-l) {
+            flex: 0 0 533px;
+        }
+
+        @include bp.mq(tablet-xl) {
+            flex: 0 0 433px;
+        }
+
+        @include bp.mq(tablet-l) {
+            flex: none;
+            width: 100%;
+        }
+
+        // Высокое изображение (первый ряд)
+        &--tall {
+            height: 602px;
+
+            @include bp.mq(tablet-xl) {
+                height: 546px;
+            }
+
+            @include bp.mq(tablet-l) {
+                height: 446px;
+            }
+            @include bp.mq(mobile-l) {
+                height: 291px;
+            }
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}
+
+// --------------------------------------
+// -- Отступы секций на детальной странице услуги (только паддинги)
+// --------------------------------------
+.page:has(.service-detail-content) {
+    .our-works {
+        padding-top: 45px;
+        margin-top: 0;
+    }
+
+    .service-why {
+        padding-bottom: 50px;
+    }
+
+    .useful-materials {
+        padding-top: 50px;
+        padding-bottom: 100px;
+    }
+}
