@@ -12,6 +12,7 @@ import { directions } from "../blocks/common/directions/directions.js";
 import { header } from "../blocks/general/header/header.js";
 import { notFound } from "../blocks/general/not-found/not-found.js";
 import { showPopup } from "./utils/popup.js";
+import { initScrollbarWidth } from "./utils/scrollbar.js";
 import { searchForm } from "../components/general/search-form/search-form.js";
 import { ourWorks } from "../blocks/common/our-works/our-works.js";
 import { serviceDetailHero } from "../blocks/common/service-detail-hero/service-detail-hero.js";
@@ -72,6 +73,7 @@ function initAos() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    initScrollbarWidth();
     initLazy();
     init();
     initAos();

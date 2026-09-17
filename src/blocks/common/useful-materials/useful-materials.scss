@@ -105,9 +105,6 @@
         &:hover .name,
         &:focus-within .name {
             color: var(--brand-dark-orange);
-            background: none;
-            -webkit-background-clip: unset;
-            background-clip: unset;
         }
 
         .top {
@@ -164,11 +161,12 @@
             font-style: normal;
             font-weight: 500;
             line-height: 140%;
-            color: transparent;
-            background: linear-gradient(90deg, #003884 0%, var(--color-blue, #064aa7) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
+            color: var(--color-blue, #064aa7);
             -webkit-box-orient: vertical;
+
+            // Плавная смена цвета по ховеру на карточку (см. &:hover .name).
+            // Раньше был градиентный текст (background-clip: text + прозрачный
+            // color), из-за чего цвет менялся рывком с исчезновением текста.
             transition: color 0.3s ease;
         }
 
