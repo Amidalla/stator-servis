@@ -6,6 +6,7 @@ import { input } from "../components/general/input/input.js";
 import { accordion } from "../components/general/accordion/accordion.js";
 import { consentNotice } from "../components/general/consent-notice/consent-notice.js";
 import { navigationMobile } from "../components/general/navigation-mobile/navigation-mobile.js";
+import { tabs } from "../components/general/tabs/tabs.js";
 import { hero } from "../blocks/common/hero/hero.js";
 import { directions } from "../blocks/common/directions/directions.js";
 import { header } from "../blocks/general/header/header.js";
@@ -29,6 +30,7 @@ const components = [
     accordion,
     consentNotice,
     navigationMobile,
+    tabs,
     hero,
     directions,
     header,

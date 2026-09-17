@@ -1,0 +1,138 @@
+{% from "components/general/breadcrumbs/breadcrumbs.njk" import render as breadcrumbs %}
+{% from "components/general/tabs/tabs.njk" import render as tabs %}
+{% from "components/general/button/button.njk" import render as button %}
+{% from "components/general/slider-nav/slider-nav.njk" import navBtn, mobileNav %}
+
+{# Карточка статьи (переиспользуется во всех вкладках; на WP — тело цикла) #}
+{% macro articleCard(article) %}
+    <article class="card">
+        <a class="top" href="{{ article.href }}">
+            <div class="media">
+                <img
+                    class="lazy"
+                    src="{{ article.image }}"
+                    data-src="{{ article.image }}"
+                    alt="{{ article.title }}"
+                    width="375"
+                    height="274"
+                />
+            </div>
+            <div class="body">
+                <h2 class="name">{{ article.title }}</h2>
+                <p class="text">{{ article.text }}</p>
+            </div>
+        </a>
+        {{ button(
+            text="Читать полностью",
+            type="link",
+            href=article.href,
+            variant="white",
+            class="more"
+        ) }}
+    </article>
+{% endmacro %}
+
+{% set blogArticles = [
+    {
+        title: "Перемотка якоря преобразователя времён СССР",
+        text: "История одного срочного заказа, где потребовались не просто руки, а понимание принципов, заложенных инженерами полвека назад. Ко мне в цех принесли якорь от преобразователя ПВС-100, 1978 года выпуска.",
+        image: "/assets/images/content/useful-materials-1.png",
+        href: "/peremotka-yakorya-preobrazovatelya-vremyon-sssr/"
+    },
+    {
+        title: "Экстренный ремонт электродвигателя: пошаговый план первых 30 минут",
+        text: "Внезапная остановка производственной линии из‑за аномалии в работе электродвигателя — это не просто технический сбой, а прямая угроза выполнению плана и экономической стабильности предприятия. В такой ситуации промедление и непрофессиональные",
+        image: "/assets/images/content/useful-materials-2.png",
+        href: "/blog-i-novosti/"
+    },
+    {
+        title: "Когда требуется ремонт электродвигателя?",
+        text: "Электродвигатель — это сердце любого промышленного оборудования, насосной станции или вентиляционной установки. В отличие от автомобиля, где регламентное ТО прописано в километрах, у электрических машин ресурс исчисляется моточасами и условиями",
+        image: "/assets/images/content/useful-materials-3.png",
+        href: "/blog-i-novosti/"
+    },
+    {
+        title: "Почему надо ремонтировать, а не менять электродвигатель?",
+        text: "Ремонт и перемотка электродвигателя — это разумная инвестиция в надежность вашего производства. Главный аргумент — экономия средств: восстановление обходится в разы дешевле покупки нового агрегата, особенно если речь идет о",
+        image: "/assets/images/content/useful-materials-4.png",
+        href: "/blog-i-novosti/"
+    }
+] %}
+
+{# Вкладки-фильтры. count — сколько карточек показать, pagination — нужна ли пагинация #}
+{% set blogTabs = [
+    { id: "electro", title: "Электродвигатели", active: true, count: 12, pagination: true },
+    { id: "nasosy", title: "Насосы", count: 3, pagination: false },
+    { id: "benzo", title: "Бензогенераторы", count: 2, pagination: false },
+    { id: "ventil", title: "Вентиляторы", count: 4, pagination: false }
+] %}
+
+<section class="blog-list">
+    <div class="container">
+        {{ breadcrumbs(
+            items=[
+                { title: "Главная", url: "/home.html" },
+                { title: "Блог" }
+            ],
+            separator="line",
+            size="sm"
+        ) }}
+
+        <h1 class="blog-list-title" data-aos="fade-right">Полезные статьи</h1>
+
+        {{ tabs(
+            items=blogTabs,
+            group="blog",
+            class="blog-list-tabs",
+            ariaLabel="Категории статей"
+        ) }}
+
+        <div class="blog-panels" data-tabs-panels="blog">
+            {% for tab in blogTabs %}
+                <div
+                    class="blog-panel{% if tab.active %} active{% endif %}"
+                    id="panel-blog-{{ tab.id }}"
+                    role="tabpanel"
+                    aria-labelledby="tab-blog-{{ tab.id }}"
+                    data-tab-panel="{{ tab.id }}"
+                    data-tabs-group="blog"
+                    {% if not tab.active %}hidden{% endif %}
+                >
+                    <div class="grid" data-aos="fade-up" data-aos-delay="200">
+                        {% for i in range(0, tab.count) %}
+                            {{ articleCard(blogArticles[i % (blogArticles | length)]) }}
+                        {% endfor %}
+                    </div>
+
+                    {% if tab.pagination %}
+                        {#
+                            Пагинация в стиле слайдеров. Десктоп: стрелка + точки + стрелка; мобилка: стрелка + N/M + стрелка.
+                            Ссылки/состояния — заглушки под WordPress: на WP это вывод paginate_links()
+                            (текущая/страницы → .bullet.active/.bullet, неактивная стрелка → aria-disabled).
+                        #}
+                        <nav class="blog-pagination" aria-label="Навигация по страницам">
+                            <div class="controls">
+                                {{ navBtn(direction="prev", label="Предыдущая страница", disabled=true) }}
+                                <div class="pagination">
+                                    <a class="bullet active" href="?page=1" aria-current="page" aria-label="Страница 1"></a>
+                                    <a class="bullet" href="?page=2" aria-label="Страница 2"></a>
+                                    <a class="bullet" href="?page=3" aria-label="Страница 3"></a>
+                                    <a class="bullet" href="?page=4" aria-label="Страница 4"></a>
+                                    <a class="bullet" href="?page=5" aria-label="Страница 5"></a>
+                                </div>
+                                {{ navBtn(direction="next", label="Следующая страница", href="?page=2") }}
+                            </div>
+                            {{ mobileNav(
+                                prevLabel="Предыдущая страница",
+                                nextLabel="Следующая страница",
+                                fraction="1/5",
+                                prevDisabled=true,
+                                nextHref="?page=2"
+                            ) }}
+                        </nav>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

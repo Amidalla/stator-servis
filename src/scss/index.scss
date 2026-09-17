@@ -31,6 +31,7 @@
 @use "../components/general/navigation-mobile/navigation-mobile";
 @use "../components/general/navigation-bottom/navigation-bottom";
 @use "../components/general/breadcrumbs/breadcrumbs";
+@use "../components/general/tabs/tabs";
 @use "../components/general/search-form/search-form";
 @use "../components/general/accordion/accordion";
 @use "../components/general/consent-notice/consent-notice";
@@ -76,4 +77,5 @@
 @use "../blocks/common/work-types/work-types";
 @use "../blocks/common/faq-home/faq-home";
 @use "../blocks/common/useful-materials/useful-materials";
+@use "../blocks/common/blog-list/blog-list";
 @use "../blocks/common/main-form/main-form";

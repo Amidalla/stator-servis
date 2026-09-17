@@ -1,0 +1,124 @@
+@use "core/breakpoints" as bp;
+
+// --------------------------------------
+// Панели вкладок: плавное появление при переключении
+// --------------------------------------
+// Анимации переключения через @keyframes: даже если рендер «на паузе»
+// (вкладка в фоне), панель в покое остаётся видимой (opacity 1) — застрять
+// в невидимом состоянии невозможно.
+[data-tab-panel] {
+    &[hidden] {
+        display: none;
+    }
+
+    // Плавное появление новой панели
+    &.is-entering {
+        animation: tab-panel-in 0.4s ease;
+    }
+
+    // Плавное гашение уходящей панели (быстрее, чем появление)
+    &.is-leaving {
+        animation: tab-panel-out 0.2s ease forwards;
+    }
+}
+
+@keyframes tab-panel-in {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes tab-panel-out {
+    from {
+        opacity: 1;
+        transform: none;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-tab-panel].is-entering,
+    [data-tab-panel].is-leaving {
+        animation: none;
+    }
+}
+
+.tabs {
+    // Переменные компонента (легко переопределить в родительском блоке)
+    --tab-gap: 20px;
+    --tab-padding-y: 10px;
+    --tab-padding-x: 15px;
+    --tab-font-size: 14px;
+    --tab-radius: 8px;
+    --tab-color: var(--color-white);
+    --tab-bg: transparent;
+    --tab-border-color: var(--color-white);
+    --tab-hover-color: var(--brand-dark-orange);
+    --tab-hover-border-color: var(--brand-dark-orange);
+    --tab-active-color: var(--color-white);
+    --tab-active-bg: var(--brand-dark-orange);
+    --tab-active-border-color: var(--brand-dark-orange);
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--tab-gap);
+    align-items: center;
+
+    @include bp.mq(tablet) {
+        --tab-gap: 12px;
+    }
+
+    @include bp.mq(mobile-l) {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .tab {
+        flex-shrink: 0;
+        padding: var(--tab-padding-y) var(--tab-padding-x);
+        font-family: var(--font-family-primary);
+        font-size: var(--tab-font-size);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--tab-color);
+        white-space: nowrap;
+        cursor: pointer;
+        background: var(--tab-bg);
+        border: 1px solid var(--tab-border-color);
+        border-radius: var(--tab-radius);
+        transition:
+            color 0.25s ease,
+            background-color 0.25s ease,
+            border-color 0.25s ease;
+
+        &:hover:not(.active),
+        &:focus-visible:not(.active) {
+            color: var(--tab-hover-color);
+            outline: none;
+            border-color: var(--tab-hover-border-color);
+        }
+
+        &.active {
+            color: var(--tab-active-color);
+            background: var(--tab-active-bg);
+            border-color: var(--tab-active-border-color);
+        }
+    }
+}

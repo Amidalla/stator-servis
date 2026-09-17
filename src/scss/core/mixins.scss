@@ -70,8 +70,8 @@
         transition: fill 0.25s ease;
     }
 
-    &:hover:not(.swiper-button-disabled),
-    &:focus-visible:not(.swiper-button-disabled) {
+    &:hover:not(.swiper-button-disabled, :disabled, [aria-disabled="true"]),
+    &:focus-visible:not(.swiper-button-disabled, :disabled, [aria-disabled="true"]) {
         outline: none;
 
         .shape {
@@ -83,7 +83,10 @@
         }
     }
 
-    &.swiper-button-disabled {
+    &.swiper-button-disabled,
+    &:disabled,
+    &[aria-disabled="true"] {
+        pointer-events: none;
         cursor: default;
         opacity: 0.55;
     }

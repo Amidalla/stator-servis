@@ -1,6 +1,10 @@
-{% macro navBtn(direction="prev", label="") %}
+{% macro navBtn(direction="prev", label="", class="", disabled=false, href="") %}
+    {% set navClass = "nav-btn " + direction %}
+    {% if class %}{% set navClass = navClass + " " + class %}{% endif %}
+    {% set navLabel = label if label else ("Предыдущий слайд" if direction == "prev" else "Следующий слайд") %}
+
     {% if direction == "prev" %}
-        <button class="nav-btn prev" type="button" aria-label="{{ label if label else 'Предыдущий слайд' }}">
+        {% set navSvg %}
             <svg xmlns="http://www.w3.org/2000/svg" width="58" height="63" viewBox="0 0 58 63" fill="none" aria-hidden="true">
                 <path class="shape" d="M58 0H8L0 63H58V0Z" fill="#D9D9D9" />
                 <path
@@ -9,9 +13,9 @@
                     fill="#D64212"
                 />
             </svg>
-        </button>
+        {% endset %}
     {% else %}
-        <button class="nav-btn next" type="button" aria-label="{{ label if label else 'Следующий слайд' }}">
+        {% set navSvg %}
             <svg xmlns="http://www.w3.org/2000/svg" width="58" height="63" viewBox="0 0 58 63" fill="none" aria-hidden="true">
                 <path class="shape" d="M0 0H50L58 63H0V0Z" fill="#D9D9D9" />
                 <path
@@ -20,14 +24,28 @@
                     fill="#D64212"
                 />
             </svg>
+        {% endset %}
+    {% endif %}
+
+    {% if disabled %}
+        <span class="{{ navClass }}" role="button" aria-disabled="true" aria-label="{{ navLabel }}">
+            {{ navSvg | safe }}
+        </span>
+    {% elif href %}
+        <a class="{{ navClass }}" href="{{ href }}" aria-label="{{ navLabel }}">
+            {{ navSvg | safe }}
+        </a>
+    {% else %}
+        <button class="{{ navClass }}" type="button" aria-label="{{ navLabel }}">
+            {{ navSvg | safe }}
         </button>
     {% endif %}
 {% endmacro %}
 
-{% macro mobileNav(prevLabel="", nextLabel="", fraction="1/1") %}
+{% macro mobileNav(prevLabel="", nextLabel="", fraction="1/1", prevHref="", nextHref="", prevDisabled=false, nextDisabled=false) %}
     <div class="mobile-nav">
-        {{ navBtn(direction="prev", label=prevLabel) }}
+        {{ navBtn(direction="prev", label=prevLabel, href=prevHref, disabled=prevDisabled) }}
         <div class="fraction" aria-live="polite">{{ fraction }}</div>
-        {{ navBtn(direction="next", label=nextLabel) }}
+        {{ navBtn(direction="next", label=nextLabel, href=nextHref, disabled=nextDisabled) }}
     </div>
 {% endmacro %}
