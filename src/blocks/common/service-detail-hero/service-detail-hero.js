@@ -1,5 +1,5 @@
 import Swiper from "swiper";
-import { Thumbs } from "swiper/modules";
+import { Thumbs, EffectFade } from "swiper/modules";
 import { Fancybox } from "@fancyapps/ui/dist/fancybox/";
 import { syncOverflowControls } from "../../../js/utils/swiper-controls.js";
 
@@ -36,9 +36,13 @@ export function serviceDetailHero(context = document) {
     }
 
     const mainSwiper = new Swiper(mainEl, {
-        modules: [Thumbs],
+        modules: [Thumbs, EffectFade],
         slidesPerView: 1,
         speed: 500,
+        effect: "fade",
+        fadeEffect: {
+            crossFade: true
+        },
         watchOverflow: true,
         observer: true,
         observeParents: true,

@@ -1,0 +1,80 @@
+{% from "components/general/button/button.njk" import render as button %}
+{% from "components/general/slider-nav/slider-nav.njk" import navBtn, mobileNav %}
+
+{% set articles = [
+    {
+        image: "useful-materials-1.png",
+        title: "Перемотка якоря преобразователя времён СССР",
+        text: "История одного срочного заказа, где потребовались не просто руки, а понимание принципов, заложенных инженерами полвека назад. Ко мне в цех принесли якорь от преобразователя ПВС-100, 1978 года выпуска."
+    },
+    {
+        image: "useful-materials-2.png",
+        title: "Экстренный ремонт электродвигателя: план первых 30 минут",
+        text: "Внезапная остановка производственной линии из-за аномалии в работе электродвигателя — это не просто технический сбой, а прямая угроза выполнению плана и экономической стабильности предприятия."
+    },
+    {
+        image: "useful-materials-3.png",
+        title: "Когда требуется ремонт электродвигателя?",
+        text: "Электродвигатель — это сердце любого промышленного оборудования, насосной станции или вентиляционной установки. У электрических машин ресурс исчисляется моточасами и условиями эксплуатации."
+    },
+    {
+        image: "useful-materials-4.png",
+        title: "Почему надо ремонтировать, а не менять электродвигатель?",
+        text: "Ремонт и перемотка электродвигателя — это разумная инвестиция в надёжность вашего производства. Главный аргумент — экономия: восстановление обходится в разы дешевле покупки нового агрегата."
+    },
+    {
+            image: "useful-materials-1.png",
+            title: "Перемотка якоря преобразователя времён СССР",
+            text: "История одного срочного заказа, где потребовались не просто руки, а понимание принципов, заложенных инженерами полвека назад. Ко мне в цех принесли якорь от преобразователя ПВС-100, 1978 года выпуска."
+        }
+] %}
+
+<section class="article-others" data-article-others>
+    <div class="container">
+        <div class="head" data-aos="fade-up">
+            <h2 class="title">Другие статьи</h2>
+
+            <div class="controls">
+                {{ navBtn(direction="prev", label="Предыдущая статья") }}
+                <div class="pagination"></div>
+                {{ navBtn(direction="next", label="Следующая статья") }}
+            </div>
+        </div>
+
+        <div class="slider swiper" data-aos="fade-up" data-aos-delay="200">
+            <div class="swiper-wrapper">
+                {% for article in articles %}
+                    <div class="swiper-slide">
+                        <article class="card">
+                            <a class="top" href="/peremotka-yakorya-preobrazovatelya-vremyon-sssr/">
+                                <div class="media">
+                                    <img
+                                        class="lazy"
+                                        src="/assets/images/content/{{ article.image }}"
+                                        data-src="/assets/images/content/{{ article.image }}"
+                                        alt="{{ article.title }}"
+                                        width="375"
+                                        height="274"
+                                    />
+                                </div>
+                                <div class="body">
+                                    <h3 class="name">{{ article.title }}</h3>
+                                    <p class="text">{{ article.text }}</p>
+                                </div>
+                            </a>
+                            {{ button(
+                                text="Читать полностью",
+                                type="link",
+                                href="/peremotka-yakorya-preobrazovatelya-vremyon-sssr/",
+                                variant="white",
+                                class="more"
+                            ) }}
+                        </article>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {{ mobileNav(prevLabel="Предыдущая статья", nextLabel="Следующая статья", fraction="1/" ~ (articles | length)) }}
+    </div>
+</section>

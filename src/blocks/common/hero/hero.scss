@@ -63,12 +63,12 @@
         }
 
         img {
-            object-fit: fill;
-            object-position: top center;
+            object-fit: cover;
+            object-position: center;
 
             @include bp.mq(mobile-l) {
                 object-fit: cover;
-                object-position: 80% center;
+                object-position: center;
             }
         }
     }
@@ -157,8 +157,16 @@
         .white {
             --button-width: 366px;
 
-            justify-content: flex-start;
-            text-align: left;
+            justify-content: center;
+            text-align: center;
+        }
+
+        // Кнопка "Посмотреть примеры ремонтов" по ховеру выглядит как
+        // кнопка "Бесплатная консультация" в обычном состоянии (только тут)
+        .red:hover:not(:disabled, .disabled) {
+            --button-bg: var(--color-white);
+            --button-color: var(--txt-dark);
+            --button-border-color: var(--color-white);
         }
 
         @include bp.mq(tablet) {

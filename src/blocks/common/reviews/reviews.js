@@ -32,7 +32,9 @@ export function reviews(context = document) {
         watchOverflow: true,
         observer: true,
         observeParents: true,
-        observeSlideChildren: true,
+        // Раскрытие/сворачивание отзыва меняет разметку внутри слайда — не даём
+        // swiper на это реагировать полным пересчётом (иначе моргает пагинация/слайды)
+        observeSlideChildren: false,
         navigation: {
             prevEl: [prevEl, mobilePrev].filter(Boolean),
             nextEl: [nextEl, mobileNext].filter(Boolean)
@@ -84,103 +86,141 @@ export function reviews(context = document) {
         root.querySelectorAll(".card").forEach((card) => {
             const text = card.querySelector(".text");
             const expand = card.querySelector(".expand");
+            const collapse = card.querySelector(".collapse");
             if (!text || !expand) return;
 
             if (card.classList.contains("is-open")) {
                 expand.hidden = true;
+                if (collapse) collapse.hidden = false;
                 return;
             }
 
+            if (collapse) collapse.hidden = true;
             // Одно поле из админки: кнопка только если текст реально обрезан line-clamp
             expand.hidden = text.scrollHeight <= text.clientHeight + 1;
         });
     };
 
-    const equalizeCardHeights = () => {
-        const cards = [...root.querySelectorAll(".card")];
-        const collapsed = cards.filter((card) => !card.classList.contains("is-open"));
+    // Эталонная высота свёрнутой карточки — считается один раз (и при resize),
+    // а не при каждом разворачивании, иначе соседние карточки прыгали бы: при
+    // открытии одной остальные подстраивались под меньший максимум и обратно.
+    let equalHeight = 0;
+    // Сколько карточек сейчас анимируется. Пока идёт анимация, перемер высот
+    // запрещён: он снимает is-open и обнуляет height у всех карточек и оборвал бы
+    // текущий переход. Swiper дёргает resize как раз когда карточка растёт.
+    let animatingCount = 0;
 
-        collapsed.forEach((card) => {
+    const measureEqualHeight = () => {
+        if (animatingCount > 0) return;
+
+        const cards = [...root.querySelectorAll(".card")];
+        if (!cards.length) return;
+
+        // Меряем все карточки в свёрнутом виде (is-open временно снимаем)
+        const openState = cards.map((card) => card.classList.contains("is-open"));
+        cards.forEach((card, i) => {
             card.style.minHeight = "";
-            if (!card.style.height || card.style.height === "auto") {
-                card.style.height = "";
-            }
+            card.style.height = "";
+            if (openState[i]) card.classList.remove("is-open");
         });
 
         let maxHeight = 0;
-        collapsed.forEach((card) => {
+        cards.forEach((card) => {
             maxHeight = Math.max(maxHeight, card.getBoundingClientRect().height);
         });
 
-        if (maxHeight > 0) {
-            const value = `${Math.ceil(maxHeight)}px`;
-            collapsed.forEach((card) => {
-                card.style.minHeight = value;
-            });
-        }
+        cards.forEach((card, i) => {
+            if (openState[i]) card.classList.add("is-open");
+        });
+
+        equalHeight = Math.ceil(maxHeight);
+        applyEqualHeight();
+    };
+
+    // Применяем эталонную высоту к свёрнутым карточкам; открытые — без min-height
+    const applyEqualHeight = () => {
+        if (!equalHeight) return;
+        root.querySelectorAll(".card").forEach((card) => {
+            card.style.minHeight = card.classList.contains("is-open") ? "" : `${equalHeight}px`;
+        });
     };
 
     swiper.on("lock", syncControls);
     swiper.on("unlock", syncControls);
     swiper.on("slideChange", syncFraction);
     swiper.on("resize", () => {
+        // resize прилетает и когда карточка растёт при разворачивании — тогда ничего
+        // не трогаем, иначе оборвём анимацию (measureEqualHeight сам это учитывает)
+        if (animatingCount > 0) return;
         syncControls();
         syncExpandButtons();
-        equalizeCardHeights();
+        measureEqualHeight();
     });
     swiper.on("update", syncControls);
     swiper.on("slidesLengthChange", syncControls);
     swiper.on("observerUpdate", updateSwiper);
 
+    // Разворачивание/сворачивание отзыва с плавной анимацией высоты.
+    // Целевую высоту всегда меряем в естественном потоке (height:auto), стартовую
+    // фиксируем реальным reflow — переход стабильно идёт from → to без рывков.
+    const toggleCard = (card, expand, collapse, open) => {
+        if (card.dataset.animating === "1" || card.classList.contains("is-open") === open) return;
+
+        const from = card.getBoundingClientRect().height;
+
+        card.style.minHeight = "";
+        card.classList.toggle("is-open", open);
+        card.style.height = "auto";
+        let to = card.getBoundingClientRect().height;
+        // Свёрнутая карточка должна прийти к эталонной высоте ряда (без прыжка в конце)
+        if (!open && equalHeight) to = Math.max(to, equalHeight);
+
+        // Возвращаем стартовую высоту и переключаем кнопки до старта анимации
+        card.style.height = `${from}px`;
+        if (expand) expand.hidden = open;
+        if (collapse) collapse.hidden = !open;
+
+        // Форсируем reflow — браузер фиксирует старт перехода на `from`, после чего
+        // синхронная установка конечной высоты запускает плавную анимацию.
+        // (rAF здесь ненадёжен: в фоновой вкладке колбэк может не сработать.)
+        void card.offsetHeight;
+        card.dataset.animating = "1";
+        animatingCount += 1;
+        card.style.height = `${to}px`;
+
+        let finished = false;
+        const finish = () => {
+            if (finished) return;
+            finished = true;
+            card.removeEventListener("transitionend", onEnd);
+            window.clearTimeout(fallbackTimer);
+            card.style.height = "auto";
+            delete card.dataset.animating;
+            animatingCount = Math.max(0, animatingCount - 1);
+            // Применяем уже посчитанную эталонную высоту — соседние карточки не трогаем
+            applyEqualHeight();
+            syncControls();
+        };
+        const onEnd = (event) => {
+            if (event.target === card && event.propertyName === "height") finish();
+        };
+
+        const fallbackTimer = window.setTimeout(finish, 600);
+        card.addEventListener("transitionend", onEnd);
+    };
+
     root.querySelectorAll(".card").forEach((card) => {
         const expand = card.querySelector(".expand");
-        if (!expand) return;
+        const collapse = card.querySelector(".collapse");
 
-        expand.addEventListener(
-            "click",
-            () => {
-                if (card.classList.contains("is-open")) return;
-
-                const from = card.getBoundingClientRect().height;
-                card.style.minHeight = "";
-                card.style.height = `${from}px`;
-                card.classList.add("is-open");
-                expand.hidden = true;
-
-                const to = card.scrollHeight;
-
-                requestAnimationFrame(() => {
-                    card.style.height = `${to}px`;
-                });
-
-                const finish = () => {
-                    card.style.height = "auto";
-                    updateSwiper();
-                    equalizeCardHeights();
-                };
-
-                const onEnd = (event) => {
-                    if (event.target !== card || event.propertyName !== "height") return;
-                    card.removeEventListener("transitionend", onEnd);
-                    window.clearTimeout(fallbackTimer);
-                    finish();
-                };
-
-                const fallbackTimer = window.setTimeout(() => {
-                    card.removeEventListener("transitionend", onEnd);
-                    finish();
-                }, 500);
-
-                card.addEventListener("transitionend", onEnd);
-            },
-            { signal }
-        );
+        expand?.addEventListener("click", () => toggleCard(card, expand, collapse, true), { signal });
+        collapse?.addEventListener("click", () => toggleCard(card, expand, collapse, false), { signal });
     });
 
     const refresh = () => {
         updateSwiper();
         syncExpandButtons();
-        equalizeCardHeights();
+        measureEqualHeight();
     };
 
     requestAnimationFrame(refresh);

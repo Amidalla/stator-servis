@@ -227,9 +227,10 @@
         background-image: url("/assets/images/content/contacts-card-1.png");
     }
 
-    // Фон второй карточки «Юридическая информация»
+    // Вторая карточка «Юридическая информация» — без фонового изображения,
+    // остаётся только чёрный фон (background-color из .card)
     .card-legal {
-        background-image: url("/assets/images/content/contacts-card-2.png");
+        background-image: none;
     }
 
     .card-map {

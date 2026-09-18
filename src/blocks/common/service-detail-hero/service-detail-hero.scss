@@ -185,6 +185,7 @@
         align-items: stretch;
         min-width: 0;
         height: var(--gallery-h);
+        max-width: 705px;
 
         @include bp.mq(tablet-xl) {
             flex: 1 1 auto;

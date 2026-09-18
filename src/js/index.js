@@ -18,6 +18,7 @@ import { ourWorks } from "../blocks/common/our-works/our-works.js";
 import { serviceDetailHero } from "../blocks/common/service-detail-hero/service-detail-hero.js";
 import { reviews } from "../blocks/common/reviews/reviews.js";
 import { usefulMaterials } from "../blocks/common/useful-materials/useful-materials.js";
+import { articleOthers } from "../blocks/common/article-others/article-others.js";
 import { advantages } from "../blocks/common/advantages/advantages.js";
 import { serviceTypes } from "../blocks/common/service-types/service-types.js";
 import { popupCallback } from "../components/common/popup-callback/popup-callback.js";
@@ -41,6 +42,7 @@ const components = [
     serviceDetailHero,
     reviews,
     usefulMaterials,
+    articleOthers,
     advantages,
     serviceTypes,
     popupCallback,

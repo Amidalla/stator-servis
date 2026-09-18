@@ -1,6 +1,9 @@
-{% set meta = { title: "Перемотка якоря преобразователя времён СССР | Статор-Сервис" } %}
+{% set meta = { title: "Экстренный ремонт электродвигателя: план первых 30 минут | Статор-Сервис" } %}
 {% set page = { breadcrumbs: false, heading: false } %}
 {% extends "layouts/default.njk" %}
 {% block content %}
-    {% include "blocks/general/page-in-dev/page-in-dev.njk" %}
+    {% include "blocks/common/article-detail/article-detail.njk" %}
+    {% include "blocks/common/article-others/article-others.njk" %}
+    {% set formSuffix = "-bottom" %}
+    {% include "blocks/common/main-form/main-form.njk" %}
 {% endblock %}

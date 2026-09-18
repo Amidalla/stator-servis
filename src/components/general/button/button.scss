@@ -47,11 +47,21 @@
         outline-offset: 3px;
     }
 
+    // Состояние disabled: серый фон + тёмный текст. Свойства задаём напрямую
+    // (не через --button-*), чтобы перебить цвета вариантов (.primary/.white и т.д.).
+    // pointer-events у нативной кнопки не отключаем — иначе не покажется курсор
+    // «запрещено» (перечёркнутый кружок); клик и так блокируется атрибутом disabled.
     &:disabled,
     &.disabled {
-        pointer-events: none;
+        color: var(--txt-light-dark, #383838);
         cursor: not-allowed;
-        opacity: 0.6;
+        background: var(--btn-grey, #a8a8a8);
+        border-color: var(--btn-grey, #a8a8a8);
+    }
+
+    // Ссылка-кнопка с классом .disabled: клики блокируем pointer-events
+    &.disabled {
+        pointer-events: none;
     }
 
     // --------------------------------------

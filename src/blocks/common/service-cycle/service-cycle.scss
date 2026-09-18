@@ -3,7 +3,24 @@
 .service-cycle {
     padding: 100px 0;
     color: var(--color-white);
-    background: var(--txt-dark);
+    background-color: var(--txt-dark);
+    background-image: url("/assets/images/system/service-cycle-bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    // Фоны под разные разрешения (от большего max-width к меньшему — ниже перебивает)
+    @include bp.mq(laptop) {
+        background-image: url("/assets/images/system/service-cycle-bg-laptop.png");
+    }
+
+    @include bp.mq(tablet) {
+        background-image: url("/assets/images/system/service-cycle-bg-tablet.png");
+    }
+
+    @include bp.mq(mobile-m) {
+        background-image: url("/assets/images/system/service-cycle-bg-mobile.png");
+    }
 
     @include bp.mq(tablet-xl) {
         padding: 80px 0;

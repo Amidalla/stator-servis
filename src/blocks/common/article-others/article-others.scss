@@ -1,0 +1,203 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+// Секция «Другие статьи»: слайдер и карточки один в один с useful-materials,
+// отличается только раскладкой — на десктопе 4 слайда в ряд.
+.article-others {
+    position: relative;
+    z-index: 0;
+    padding: 80px 0;
+    overflow: hidden;
+    color: var(--color-white);
+    background: var(--txt-light-dark, #383838);
+
+    @include bp.mq(tablet-xl) {
+        padding: 60px 0;
+    }
+
+    @include bp.mq(mobile-l) {
+        padding: 40px 0;
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+        overflow: visible;
+    }
+
+    .head {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 41px;
+
+        @include bp.mq(mobile-l) {
+            flex-direction: column;
+            gap: 40px;
+            align-items: stretch;
+            margin-bottom: 40px;
+        }
+    }
+
+    .title {
+        margin: 0;
+        color: var(--color-white);
+    }
+
+    .controls {
+        flex-shrink: 0;
+
+        @include mix.slider-controls;
+    }
+
+    .nav-btn {
+        @include mix.slider-nav-btn;
+    }
+
+    @include mix.slider-dash-pagination;
+
+    .mobile-nav {
+        @include mix.slider-mobile-nav($margin-top: 20px);
+
+        .nav-btn.next {
+            @include mix.slider-nav-btn-active;
+        }
+    }
+
+    .slider {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .swiper-slide {
+        height: auto;
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 576px;
+        padding: 20px;
+        overflow: hidden;
+        background: var(--color-white);
+        border-radius: 12px;
+
+        @include bp.mq(mobile-l) {
+            justify-content: flex-start;
+            height: auto;
+        }
+
+        @include mix.card-hover-glow($z-index: 2);
+
+        &:hover .media img,
+        &:focus-within .media img {
+            transform: scale(1.05);
+        }
+
+        &:hover .name,
+        &:focus-within .name {
+            color: var(--brand-dark-orange);
+        }
+
+        .top {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            min-height: 0;
+            color: inherit;
+            text-decoration: none;
+
+            &:hover,
+            &:focus-visible {
+                color: inherit;
+                text-decoration: none;
+            }
+        }
+
+        .media {
+            position: relative;
+            flex-shrink: 0;
+            width: 100%;
+            height: 274px;
+            overflow: hidden;
+            border-radius: 12px;
+
+            @include bp.mq(mobile-l) {
+                height: 191px;
+            }
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.45s ease;
+            }
+        }
+
+        .body {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 0;
+        }
+
+        .name {
+            display: -webkit-box;
+            margin: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            font-family: var(--font-family-primary);
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 140%;
+            color: var(--color-blue, #064aa7);
+            -webkit-box-orient: vertical;
+            transition: color 0.3s ease;
+        }
+
+        .text {
+            display: -webkit-box;
+            margin: 0 0 30px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 4;
+            font-family: var(--font-family-primary);
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 130%;
+            color: var(--txt-light-dark, #383838);
+            -webkit-box-orient: vertical;
+        }
+
+        .button.more {
+            --button-width: 100%;
+            --button-bg: var(--color-white);
+            --button-color: var(--txt-light-dark, #383838);
+            --button-border-color: var(--brand-dark-orange);
+
+            position: relative;
+            z-index: 3;
+            align-self: stretch;
+
+            @include bp.mq(tablet) {
+                --button-height: 63px;
+                --button-padding: 20px;
+                --button-font-size: 18px;
+            }
+        }
+
+        .button.more:hover:not(:disabled, .disabled),
+        .button.more:focus-visible {
+            --button-bg: var(--brand-dark-orange);
+            --button-color: var(--color-white);
+            --button-border-color: var(--brand-dark-orange);
+        }
+    }
+}

@@ -248,6 +248,10 @@
         background: var(--color-white);
         border-radius: 12px;
 
+        .name {
+            transition: all 0.3s ease;
+        }
+
         &:hover {
             .image img {
                 transform: scale(1.05);
@@ -256,6 +260,10 @@
             .tags a {
                 color: var(--color-blue, #064aa7);
                 border-color: var(--color-blue, #064aa7);
+            }
+
+            .name {
+                color: var(--color-blue, #064aa7);
             }
         }
     }

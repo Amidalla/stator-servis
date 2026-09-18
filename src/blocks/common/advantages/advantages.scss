@@ -15,7 +15,7 @@
 
     @include mix.clip-bottom-left-notch(var(--about-cut-w), var(--about-stats-cut-h));
 
-    @include bp.mq(tablet-l) {
+    @include bp.mq(tablet-xl) {
         padding-top: 80px;
         background: var(--txt-light-dark, #383838);
         clip-path: none;
@@ -32,7 +32,7 @@
         margin-bottom: -1px;
         background: var(--txt-dark);
 
-        @include bp.mq(tablet-l) {
+        @include bp.mq(tablet-xl) {
             grid-template-columns: repeat(2, minmax(0, 1fr));
             background: var(--txt-light-dark, #383838);
         }
@@ -49,18 +49,10 @@
         color: var(--color-white);
         background: var(--txt-dark);
 
-        @include bp.mq(tablet-l) {
-            background: var(--txt-light-dark, #383838);
-        }
-
-        @include bp.mq(mobile-l) {
-            background: var(--txt-dark);
-        }
-
         &:first-child {
             padding-left: 79px;
 
-            @include bp.mq(tablet-l) {
+            @include bp.mq(tablet-xl) {
                 padding-left: 30px;
             }
         }
@@ -71,7 +63,7 @@
 
         // tablet-l: 20 | 5.000+
         //           6 мес | 650+
-        @include bp.mq(tablet-l) {
+        @include bp.mq(tablet-xl) {
             &:nth-child(3) {
                 order: 4;
             }
@@ -92,10 +84,22 @@
 
     .value {
         font-family: var(--font-family-headings);
-        font-size: 32px;
+        font-size: 60px;
         font-style: normal;
         font-weight: 500;
         line-height: 150%;
+
+        @include bp.mq(laptop-l) {
+            font-size: 50px;
+        }
+
+        @include bp.mq(laptop-m) {
+            font-size: 40px;
+        }
+
+        @include bp.mq(laptop) {
+            font-size: 32px;
+        }
     }
 
     .label {

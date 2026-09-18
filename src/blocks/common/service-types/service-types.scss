@@ -75,11 +75,6 @@
 
         @include mix.card-hover-glow($z-index: 3);
 
-        &:hover .corner,
-        &:focus-within .corner {
-            opacity: 0;
-        }
-
         &:hover .media img,
         &:focus-within .media img {
             transform: scale(1.05);
@@ -124,18 +119,6 @@
         background: var(--color-white);
         border: 1px solid var(--brand-dark-orange);
         border-radius: 8px;
-    }
-
-    .corner {
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 2;
-        display: block;
-        width: 58px;
-        height: 70px;
-        pointer-events: none;
-        transition: opacity 0.8s ease;
     }
 
     .name {

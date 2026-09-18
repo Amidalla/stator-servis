@@ -101,33 +101,22 @@ footer.footer {
         }
     }
 
+    // «Вопрос-ответ» в блоке brand показываем только там, где скрыт столбец
+    // «О компании» (в нём эта ссылка есть как обычный пункт), чтобы не дублировать
     .brand-faq {
         display: none;
 
-        @include bp.mq(desktop-m) {
+        @include bp.mq(tablet-xl) {
             display: inline-flex;
             margin-top: -15px;
         }
     }
 
-    .faq-col {
-        justify-self: start;
-        width: max-content;
-
-        @include bp.mq(desktop-m) {
-            display: none;
-        }
-    }
-
     .block {
         display: grid;
-        grid-template-columns: minmax(415px, 430px) max-content minmax(0, 1fr);
+        grid-template-columns: minmax(415px, 430px) minmax(0, 1fr);
         gap: 40px 48px;
         align-items: start;
-
-        @include bp.mq(desktop-m) {
-            grid-template-columns: minmax(415px, 430px) minmax(0, 1fr);
-        }
 
         @include bp.mq(laptop-l) {
             grid-template-columns: minmax(285px, 300px) minmax(0, 1fr);
