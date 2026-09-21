@@ -7,7 +7,6 @@ export function searchForm(context = document) {
     const toggle = root.querySelector(".search-toggle");
     const dropdown = root.querySelector(".search-dropdown");
     const input = root.querySelector(".search-header input");
-    const allResultsBtn = root.querySelector(".search-all-results");
     let isOpen = false;
 
     const open = () => {
@@ -52,10 +51,6 @@ export function searchForm(context = document) {
         if (target && !target.classList.contains("search-all-results")) {
             setTimeout(close, 200);
         }
-    });
-
-    allResultsBtn?.addEventListener("click", (e) => {
-        e.preventDefault();
     });
 
     root.addEventListener(

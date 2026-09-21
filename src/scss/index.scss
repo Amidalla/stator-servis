@@ -71,6 +71,12 @@
 @use "../blocks/common/directions/directions";
 @use "../blocks/common/about-intro/about-intro";
 @use "../blocks/common/about-company/about-company";
+@use "../blocks/common/about-hero/about-hero";
+@use "../blocks/common/about-why/about-why";
+@use "../blocks/common/about-production/about-production";
+@use "../blocks/common/about-workshop/about-workshop";
+@use "../blocks/common/about-transparency/about-transparency";
+@use "../blocks/common/about-repair/about-repair";
 @use "../blocks/common/advantages/advantages";
 @use "../blocks/common/our-works/our-works";
 @use "../blocks/common/reviews/reviews";
@@ -78,6 +84,13 @@
 @use "../blocks/common/faq-home/faq-home";
 @use "../blocks/common/useful-materials/useful-materials";
 @use "../blocks/common/blog-list/blog-list";
+@use "../blocks/common/works-list/works-list";
+@use "../blocks/common/work-detail/work-detail";
+@use "../blocks/common/other-services/other-services";
+@use "../blocks/common/price-list/price-list";
+@use "../blocks/common/faq-page/faq-page";
+@use "../blocks/common/privacy-policy/privacy-policy";
+@use "../blocks/common/search-results/search-results";
 @use "../blocks/common/article-detail/article-detail";
 @use "../blocks/common/article-others/article-others";
 @use "../blocks/common/main-form/main-form";

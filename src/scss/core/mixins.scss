@@ -189,12 +189,10 @@
         display: none !important;
     }
 
+    // Обе стрелки на сером фоне; оранжевыми становятся по ховеру
+    // (в мобилке — по нажатию). См. slider-nav-btn.
     .nav-btn {
         @include slider-nav-btn;
-
-        &.next {
-            @include slider-nav-btn-active;
-        }
     }
 
     .fraction {

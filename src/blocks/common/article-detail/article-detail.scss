@@ -541,6 +541,12 @@
                 font-size: 16px;
             }
 
+            span {
+                display: inline-block;
+                margin-left: -27px;
+                margin-top: 10px;
+            }
+
             &::before {
                 display: inline;
                 margin-left: -28px;

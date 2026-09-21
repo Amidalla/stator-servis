@@ -1,0 +1,118 @@
+@use "core/breakpoints" as bp;
+
+.about-why {
+    position: relative;
+    z-index: 0;
+    padding: 100px 0 50px;
+    overflow: hidden;
+    background: #a8a8a8;
+
+    @include bp.mq(tablet-xl) {
+        padding: 60px 0 50px;
+    }
+
+    @include bp.mq(mobile-l) {
+        padding: 40px 0;
+    }
+
+    // Вотермарк — линейный скайлайн Петербурга, сверху справа
+    .watermark {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 0;
+        width: 780px;
+        max-width: 48%;
+        aspect-ratio: 780 / 295;
+        pointer-events: none;
+        background: url("/assets/images/content/about-city.png") no-repeat right top;
+        background-size: contain;
+        opacity: 0.55;
+
+        @include bp.mq(tablet-xl) {
+            display: none;
+        }
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .head {
+        max-width: 1100px;
+        margin-bottom: 40px;
+    }
+
+    .title {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--txt-dark);
+
+        @include bp.mq(tablet-xl) {
+            font-size: 36px;
+        }
+
+        @include bp.mq(mobile-xl) {
+            font-size: 28px;
+
+            br {
+                display: none;
+            }
+        }
+    }
+
+    .lead {
+        margin: 16px 0 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--txt-light-dark);
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+
+        @include bp.mq(tablet-xl) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .card {
+        padding: 30px;
+        background: var(--color-white);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgb(0 0 0 / 8%);
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background: var(--color-light-grey, #d9d9d9);
+        }
+
+        .name {
+            margin: 0 0 40px;
+            font-family: var(--font-family-headings);
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 130%;
+            color: var(--txt-dark);
+        }
+
+        p {
+            margin: 0;
+            font-family: var(--font-family-primary);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 150%;
+            color: var(--txt-light-dark);
+        }
+    }
+}

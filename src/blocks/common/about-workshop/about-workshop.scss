@@ -1,0 +1,189 @@
+@use "core/breakpoints" as bp;
+
+.about-workshop {
+    position: relative;
+    z-index: 0;
+    padding: 0 0 80px;
+    overflow: hidden;
+    background: var(--color-white);
+
+    // С tablet-xl иллюстрация убрана — возвращаем обычный верхний отступ секции
+    @include bp.mq(tablet-xl) {
+        padding: 60px 0;
+    }
+
+    @include bp.mq(mobile-l) {
+        padding: 40px 0;
+    }
+
+    // Диагональные срезы углов (как у секций на главной):
+    // сверху справа — цвет предыдущей секции (about-production, серый),
+    // снизу слева — цвет следующей секции (about-transparency, тёмный).
+    &::before,
+    &::after {
+        position: absolute;
+        z-index: 3;
+        width: var(--dir-cut-bottom-w);
+
+        // +1px по высоте и вынос за край секции на 1px, чтобы на дробных
+        // разрешениях не пробивалась светлая линия шва между секциями
+        height: calc(var(--dir-cut-bottom-h) + 1px);
+        pointer-events: none;
+        content: "";
+    }
+
+    &::before {
+        top: -1px;
+        right: 0;
+        background: #a8a8a8;
+        clip-path: polygon(0 0, 100% 0, 100% 100%);
+    }
+
+    &::after {
+        bottom: -1px;
+        left: 0;
+        background: var(--txt-dark, #161616);
+        clip-path: polygon(0 0, 100% 100%, 0 100%);
+
+        // В мобилке нижний уголок убираем
+        @include bp.mq(mobile-l) {
+            display: none;
+        }
+    }
+
+    // Заголовок/лид слева, иллюстрация справа. Иллюстрация прижата
+    // к самому верху секции (без отступа сверху), текст ниже — как в макете.
+    .head {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 40px;
+
+        @include bp.mq(tablet-xl) {
+            flex-direction: column;
+            gap: 24px;
+        }
+    }
+
+    .intro {
+        flex: 0 1 640px;
+        min-width: 0;
+        padding-top: 80px;
+
+        // С tablet-xl иллюстрации нет: колонка — сбрасываем flex-basis
+        // (иначе 640px уходит в высоту) и верхний сдвиг заголовка
+        @include bp.mq(tablet-xl) {
+            flex: none;
+            width: 100%;
+            padding-top: 0;
+        }
+    }
+
+    .illus {
+        flex: 0 1 930px;
+        min-width: 0;
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        // С tablet-xl рисунок убираем
+        @include bp.mq(tablet-xl) {
+            display: none;
+        }
+    }
+
+    .title {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--txt-dark);
+
+        @include bp.mq(tablet-xl) {
+            font-size: 36px;
+        }
+
+        @include bp.mq(mobile-xl) {
+            font-size: 28px;
+        }
+
+        @include bp.mq(mobile-l){
+            max-width: 299px;
+        }
+    }
+
+    .lead {
+        margin: 16px 0 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--txt-light-dark);
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+
+        @include bp.mq(tablet-xl) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        height: 383px;
+        padding: 30px;
+        background: var(--color-light-grey);
+        border-radius: 12px;
+        transition: background-color 0.3s ease;
+
+        // laptop-l и ниже — без фиксированной высоты
+        @include bp.mq(laptop-l) {
+            height: auto;
+        }
+
+        .name {
+            margin: 0 0 30px;
+            font-family: var(--font-family-headings);
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 130%;
+            color: var(--txt-dark);
+            transition: color 0.3s ease;
+
+            // Без фикс. высоты карточки отступ до текста задаём тут — 40px
+            @include bp.mq(laptop-l) {
+                margin-bottom: 40px;
+            }
+        }
+
+        p {
+            margin: auto 0 0;
+            font-family: var(--font-family-primary);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 150%;
+            color: var(--txt-light-dark);
+            transition: color 0.3s ease;
+        }
+
+        &:hover {
+            background: var(--brand-dark-orange);
+
+            .name,
+            p {
+                color: var(--color-white);
+            }
+        }
+    }
+}

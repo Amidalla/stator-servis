@@ -2,5 +2,10 @@
 {% set page = { breadcrumbs: false, heading: false, after_content: false } %}
 {% extends "layouts/default.njk" %}
 {% block content %}
-    {% include "blocks/general/page-in-dev/page-in-dev.njk" %}
+    {% include "blocks/common/work-detail/work-detail.njk" %}
+    {% include "blocks/common/our-works/our-works.njk" %}
+    {% include "blocks/common/other-services/other-services.njk" %}
+    {% include "blocks/common/faq-home/faq-home.njk" %}
+    {% set formSuffix = "-bottom" %}
+    {% include "blocks/common/main-form/main-form.njk" %}
 {% endblock %}

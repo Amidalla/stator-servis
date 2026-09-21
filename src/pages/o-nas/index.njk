@@ -2,5 +2,15 @@
 {% set page = { breadcrumbs: false, heading: false } %}
 {% extends "layouts/default.njk" %}
 {% block content %}
-    {% include "blocks/general/page-in-dev/page-in-dev.njk" %}
+    {% include "blocks/common/about-hero/about-hero.njk" %}
+    {% include "blocks/common/about-why/about-why.njk" %}
+    {% include "blocks/common/about-production/about-production.njk" %}
+    {% include "blocks/common/about-workshop/about-workshop.njk" %}
+    {% include "blocks/common/about-transparency/about-transparency.njk" %}
+    {% include "blocks/common/about-repair/about-repair.njk" %}
+    {% include "blocks/common/reviews/reviews.njk" %}
+    {% include "blocks/common/faq-home/faq-home.njk" %}
+    {% include "blocks/common/useful-materials/useful-materials.njk" %}
+    {% set formSuffix = "-bottom" %}
+    {% include "blocks/common/main-form/main-form.njk" %}
 {% endblock %}

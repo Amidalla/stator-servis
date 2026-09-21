@@ -1,0 +1,33 @@
+{% from "components/general/breadcrumbs/breadcrumbs.njk" import render as breadcrumbs %}
+
+<section class="about-hero">
+    <div class="media">
+        <picture>
+            <source media="(max-width: 597.98px)" srcset="/assets/images/content/about-hero-mobile.png" />
+            <source media="(max-width: 1023.98px)" srcset="/assets/images/content/about-hero-tablet.png" />
+            <source media="(max-width: 1439.98px)" srcset="/assets/images/content/about-hero-laptop.png" />
+            <img
+                class="lazy"
+                src="/assets/images/content/about-hero.png"
+                data-src="/assets/images/content/about-hero.png"
+                alt="Собственное производство Статор-Сервис"
+                width="1920"
+                height="477"
+            />
+        </picture>
+    </div>
+    <div class="shade" aria-hidden="true"></div>
+    <div class="container">
+        {{ breadcrumbs(
+            items=[{ title: "Главная", url: "/home.html" }, { title: "О компании" }],
+            separator="line",
+            size="sm",
+            class="light"
+        ) }}
+        <div class="content" data-aos="fade-up">
+            <h1 class="title">О компании</h1>
+            <p class="subtitle">У нас собственное производство</p>
+            <p class="text">Все работы мы проведём сами, без посредников, с гарантией качества успевая точно в срок</p>
+        </div>
+    </div>
+</section>

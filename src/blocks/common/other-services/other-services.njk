@@ -1,0 +1,58 @@
+{#
+    «Другие наши услуги» — две карточки услуг (Перемотка, Балансировка).
+    Разметка и стили карточек переиспользуют service-card (как в блоке directions).
+#}
+{% set services = [
+    {
+        name: "Перемотка",
+        image: "/assets/images/content/directions-rewind.png",
+        alt: "Перемотка промышленного оборудования",
+        tags: ["Электродвигатели", "Альтернаторы", "Насосы", "Бензогенераторы", "Вентиляторы"]
+    },
+    {
+        name: "Балансировка",
+        image: "/assets/images/content/directions-balance.png",
+        alt: "Балансировка промышленного оборудования",
+        tags: ["Роторы", "Якоря", "Электродвигатели", "Насосы", "Бензогенераторы", "Вентиляторы"]
+    }
+] %}
+
+<section class="other-services">
+    <div class="container">
+        <h2 class="title" data-aos="fade-up">Другие наши услуги</h2>
+
+        <div class="cards">
+            {% for service in services %}
+                <article class="card" data-aos="fade-up" data-aos-delay="{{ 100 * (loop.index) }}">
+                    <div class="visual">
+                        <div class="image">
+                            <img
+                                class="lazy"
+                                src="{{ service.image }}"
+                                data-src="{{ service.image }}"
+                                alt="{{ service.alt }}"
+                                width="528"
+                                height="213"
+                            />
+                        </div>
+                        <img
+                            class="watermark"
+                            src="/assets/images/content/stator-watermark.svg"
+                            alt=""
+                            width="527"
+                            height="108"
+                            aria-hidden="true"
+                        />
+                    </div>
+                    <h3 class="name">{{ service.name }}</h3>
+                    <p class="caption">промышленного оборудования</p>
+                    <div class="tags">
+                        {% for tag in service.tags %}
+                            <a href="/service-category/">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>

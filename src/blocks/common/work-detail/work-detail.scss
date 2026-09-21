@@ -1,0 +1,97 @@
+@use "core/breakpoints" as bp;
+
+// Деталка «Наши работы». Секция переиспользует стили service-detail-hero
+// (галерея, раскладка, крошки, водяной знак). Здесь — только отличия:
+// заголовок, тег на фото, «Модель» и характеристики вместо цены/срока.
+.work-detail {
+    .title {
+        font-size: 44px;
+        font-weight: 700;
+
+        @include bp.mq(mobile-l) {
+            font-size: 28px;
+        }
+    }
+
+    // Тег категории поверх основного фото (как в карточках our-works)
+    .stage {
+        position: relative;
+    }
+
+    .stage .tag {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 3;
+        max-width: calc(100% - 32px);
+        padding: 6px 12px;
+        font-family: var(--font-family-primary);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 140%;
+        color: var(--brand-dark-orange);
+        pointer-events: none;
+        background: var(--color-white);
+        border-radius: 6px;
+
+        @include bp.mq(mobile-l) {
+            top: 10px;
+            left: 10px;
+            font-size: 12px;
+        }
+    }
+
+    .model {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 140%;
+        color: var(--txt-dark);
+
+        span {
+            font-weight: 600;
+            color: var(--txt-dark);
+        }
+
+        @include bp.mq(mobile-l) {
+            font-size: 20px;
+        }
+    }
+
+    // Характеристики (как в карточках our-works)
+    .specs {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        li {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            font-family: var(--font-family-primary);
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+        }
+
+        .key {
+            color: var(--txt-light-dark, #383838);
+        }
+
+        .val {
+            color: var(--txt-dark);
+        }
+    }
+
+    // Инфо-колонка: модель/описание сверху, характеристики + кнопки снизу
+    .offer {
+        gap: 28px;
+    }
+}

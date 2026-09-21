@@ -52,10 +52,6 @@
 
     .mobile-nav {
         @include mix.slider-mobile-nav($margin-top: 20px);
-
-        .nav-btn.next {
-            @include mix.slider-nav-btn-active;
-        }
     }
 
     .slider {
@@ -67,6 +63,11 @@
             width: 100%;
             margin-right: 0;
             overflow: hidden;
+        }
+
+        // Слайды равной высоты (по самому высокому) — на всех разрешениях
+        > .swiper-wrapper {
+            align-items: stretch;
         }
     }
 
@@ -90,9 +91,9 @@
         background: var(--color-white);
         border-radius: 12px;
 
+        // Равная высота слайдов и на мобилке (карточка тянется на всю высоту слайда)
         @include bp.mq(mobile-l) {
-            justify-content: flex-start;
-            height: auto;
+            height: 100%;
         }
 
         @include mix.card-hover-glow($z-index: 2);

@@ -14,10 +14,13 @@ import { notFound } from "../blocks/general/not-found/not-found.js";
 import { showPopup } from "./utils/popup.js";
 import { initScrollbarWidth } from "./utils/scrollbar.js";
 import { searchForm } from "../components/general/search-form/search-form.js";
+import { customScrollbar } from "../components/general/custom-scrollbar/custom-scrollbar.js";
 import { ourWorks } from "../blocks/common/our-works/our-works.js";
 import { serviceDetailHero } from "../blocks/common/service-detail-hero/service-detail-hero.js";
 import { reviews } from "../blocks/common/reviews/reviews.js";
 import { usefulMaterials } from "../blocks/common/useful-materials/useful-materials.js";
+import { aboutProduction } from "../blocks/common/about-production/about-production.js";
+import { worksList } from "../blocks/common/works-list/works-list.js";
 import { articleOthers } from "../blocks/common/article-others/article-others.js";
 import { advantages } from "../blocks/common/advantages/advantages.js";
 import { serviceTypes } from "../blocks/common/service-types/service-types.js";
@@ -38,10 +41,13 @@ const components = [
     header,
     notFound,
     searchForm,
+    customScrollbar,
     ourWorks,
     serviceDetailHero,
     reviews,
     usefulMaterials,
+    aboutProduction,
+    worksList,
     articleOthers,
     advantages,
     serviceTypes,

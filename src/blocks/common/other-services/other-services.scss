@@ -1,0 +1,60 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.other-services {
+    padding: 80px 0;
+    overflow: hidden;
+    color: var(--color-white);
+    background: var(--txt-light-dark, #383838);
+
+    @include bp.mq(tablet-xl) {
+        padding: 60px 0;
+    }
+
+    @include bp.mq(mobile-l) {
+        padding: 40px 0;
+    }
+
+    .title {
+        margin: 0 0 40px;
+        font-family: var(--font-family-headings);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--color-white);
+
+        @include bp.mq(tablet-xl) {
+            font-size: 32px;
+        }
+
+        @include bp.mq(mobile-l) {
+            font-size: 26px;
+        }
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+
+        @include bp.mq(tablet-l) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    // Карточка услуги (белая, с картинкой, тегами и водяным знаком «СТАТОР»)
+    @include mix.service-card;
+
+    // Ватермарка — svg под картинкой, за названием и тегами
+    .watermark {
+        position: absolute;
+        top: calc(100% + 3px);
+        left: 0;
+        z-index: 0;
+        width: 100%;
+        height: auto;
+        pointer-events: none;
+        user-select: none;
+    }
+}

@@ -1,0 +1,138 @@
+@use "core/breakpoints" as bp;
+
+// Оформление, картинки и адаптив идентичны блоку service-why.
+.about-repair {
+    padding: 50px 0 0;
+    color: var(--color-white);
+    background: var(--txt-light-dark, #383838);
+
+    .head {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 40px;
+
+        @include bp.mq(laptop-l) {
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    .title {
+        max-width: 845px;
+        margin: 0;
+        color: var(--color-white);
+    }
+
+    .lead {
+        max-width: 654px;
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        line-height: 150%;
+
+        @include bp.mq(mobile-l) {
+            font-size: 16px;
+        }
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        @include bp.mq(laptop-l) {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: var(--container-max-width);
+            padding: 0 var(--container-padding);
+            margin: 0 auto;
+        }
+
+        @include bp.mq(tablet-xl) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .item {
+        position: relative;
+        min-height: 307px;
+        padding: 40px;
+        overflow: hidden;
+        background: var(--txt-dark, #161616);
+
+        @include bp.mq(mobile-l) {
+            min-height: auto;
+        }
+
+        &::before {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            content: "";
+            background: url("/assets/images/content/service-why-pattern.png") center / cover no-repeat;
+        }
+
+        &:nth-child(even) {
+            background: var(--brand-dark-orange);
+
+            &::before {
+                mix-blend-mode: color-dodge;
+            }
+        }
+
+        @include bp.mq(laptop-l) {
+            &:nth-child(3) {
+                order: 4;
+            }
+
+            &:nth-child(4) {
+                order: 3;
+            }
+        }
+
+        @include bp.mq(tablet-xl) {
+            &:nth-child(3) {
+                order: 3;
+            }
+
+            &:nth-child(4) {
+                order: 4;
+            }
+        }
+    }
+
+    .name {
+        position: relative;
+        z-index: 1;
+        margin: 0 0 20px;
+        font-family: var(--font-family-headings);
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 140%;
+        color: var(--color-white);
+
+        @include bp.mq(mobile-l) {
+            font-size: 20px;
+        }
+    }
+
+    .text {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        line-height: 150%;
+        color: var(--color-white);
+
+        @include bp.mq(mobile-l) {
+            font-size: 16px;
+        }
+    }
+}
+
+// Только на странице «О компании» (первый блок — about-hero): верхний отступ 30px
+.page:has(.about-hero) .about-repair {
+    padding-top: 30px;
+}

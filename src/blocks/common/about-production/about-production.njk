@@ -1,0 +1,95 @@
+{% from "components/general/slider-nav/slider-nav.njk" import navBtn, mobileNav %}
+{#
+    «Современное производство и опытные специалисты» — заголовок и слайдер
+    из фотографий цеха. Все изображения — из макета.
+#}
+<section class="about-production" data-about-production>
+    <div class="container">
+        <h2 class="title" data-aos="fade-up">Современное производство и опытные специалисты</h2>
+
+        <div class="slider swiper" data-aos="fade-up" data-aos-delay="200">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="shot">
+                        <img
+                            class="lazy"
+                            src="/assets/images/content/about-production-1.png"
+                            data-src="/assets/images/content/about-production-1.png"
+                            alt="Ремонт электродвигателя в цехе Статор-Сервис"
+                            width="488"
+                            height="494"
+                        />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="shot">
+                        <img
+                            class="lazy"
+                            src="/assets/images/content/about-production-2.png"
+                            data-src="/assets/images/content/about-production-2.png"
+                            alt="Специалист за работой в цехе"
+                            width="706"
+                            height="566"
+                        />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="shot">
+                        <img
+                            class="lazy"
+                            src="/assets/images/content/about-production-3.png"
+                            data-src="/assets/images/content/about-production-3.png"
+                            alt="Погрузочная техника и оборудование"
+                            width="488"
+                            height="494"
+                        />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="shot">
+                        <img
+                            class="lazy"
+                            src="/assets/images/content/about-production-1.png"
+                            data-src="/assets/images/content/about-production-1.png"
+                            alt="Ремонт электродвигателя в цехе Статор-Сервис"
+                            width="488"
+                            height="494"
+                        />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="shot">
+                        <img
+                            class="lazy"
+                            src="/assets/images/content/about-production-2.png"
+                            data-src="/assets/images/content/about-production-2.png"
+                            alt="Специалист за работой в цехе"
+                            width="706"
+                            height="566"
+                        />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="shot">
+                        <img
+                            class="lazy"
+                            src="/assets/images/content/about-production-3.png"
+                            data-src="/assets/images/content/about-production-3.png"
+                            alt="Погрузочная техника и оборудование"
+                            width="488"
+                            height="494"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls" data-aos="fade-up">
+            {{ navBtn(direction="prev", label="Предыдущее фото") }}
+            <div class="pagination"></div>
+            {{ navBtn(direction="next", label="Следующее фото") }}
+        </div>
+
+        {{ mobileNav(prevLabel="Предыдущее фото", nextLabel="Следующее фото", fraction="1/6") }}
+    </div>
+</section>

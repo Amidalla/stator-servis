@@ -1,0 +1,337 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.search-results {
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    color: var(--color-white);
+    background: var(--txt-light-dark, #383838);
+
+    > .container {
+        padding-top: calc(var(--header-height) + 16px);
+        padding-bottom: 80px;
+
+        @include bp.mq(tablet-xl) {
+            padding-bottom: 60px;
+        }
+
+        @include bp.mq(mobile-l) {
+            padding-bottom: 40px;
+        }
+    }
+
+    // --------------------------------------
+    // Хлебные крошки (светлые, на тёмном фоне)
+    // --------------------------------------
+    .breadcrumbs {
+        width: 100%;
+        max-width: 100%;
+
+        > .container {
+            display: block;
+            flex: none;
+            width: auto;
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list {
+            gap: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--color-light-grey);
+        }
+
+        .item {
+            gap: 10px;
+        }
+
+        .link,
+        .separator {
+            color: var(--color-light-grey);
+        }
+
+        .link:hover {
+            color: var(--brand-dark-orange);
+            text-decoration: underline;
+        }
+
+        .current-page {
+            font-weight: 700;
+            color: var(--color-white);
+        }
+    }
+
+    // --------------------------------------
+    // Заголовок + количество
+    // --------------------------------------
+    .head {
+        margin: 20px 0 30px;
+
+        @include bp.mq(mobile-l) {
+            margin: 16px 0 20px;
+        }
+    }
+
+    .search-title {
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--color-white);
+
+        @include bp.mq(laptop) {
+            font-size: 32px;
+        }
+
+        @include bp.mq(mobile-l) {
+            font-size: 26px;
+        }
+    }
+
+    .search-count {
+        margin: 8px 0 0;
+        font-family: var(--font-family-headings);
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%;
+        color: var(--color-white);
+
+        @include bp.mq(laptop) {
+            font-size: 26px;
+        }
+
+        @include bp.mq(mobile-l) {
+            font-size: 20px;
+        }
+    }
+
+    // --------------------------------------
+    // Поле поиска
+    // --------------------------------------
+    .search-field {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+        max-width: 675px;
+        padding: 16px 20px;
+        margin-bottom: 40px;
+        background: var(--color-white);
+        border-radius: 8px;
+
+        .ic {
+            display: inline-flex;
+            flex-shrink: 0;
+            color: var(--txt-dark);
+        }
+
+        input {
+            flex: 1 1 auto;
+            min-width: 0;
+            padding: 0;
+            font-family: var(--font-family-primary);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: var(--txt-dark);
+            outline: none;
+            background: transparent;
+            border: 0;
+
+            &::placeholder {
+                color: var(--btn-grey, #a8a8a8);
+            }
+        }
+
+        .clear {
+            display: inline-flex;
+            flex-shrink: 0;
+            padding: 0;
+            color: var(--txt-light-dark, #383838);
+            cursor: pointer;
+            background: transparent;
+            border: 0;
+            transition: color 0.25s ease;
+
+            &:hover {
+                color: var(--brand-dark-orange);
+            }
+        }
+    }
+
+    // --------------------------------------
+    // Список результатов (белая карточка со строками)
+    // --------------------------------------
+    .results {
+        padding: 10px 40px;
+        background: var(--color-white);
+        border-radius: 12px;
+
+        @include bp.mq(mobile-l) {
+            padding: 6px 18px;
+        }
+    }
+
+    .result {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 30px 0;
+        border-top: 1px solid var(--color-light-grey);
+
+        &:first-child {
+            border-top: 0;
+        }
+
+        @include bp.mq(mobile-l) {
+            gap: 16px;
+            padding: 20px 0;
+        }
+
+        .body {
+            min-width: 0;
+        }
+
+        .name {
+            margin: 0 0 12px;
+            font-family: var(--font-family-headings);
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 130%;
+
+            @include bp.mq(mobile-l) {
+                font-size: 18px;
+            }
+
+            a {
+                color: var(--txt-dark);
+                text-decoration: none;
+                transition: color 0.25s ease;
+
+                &:hover {
+                    color: var(--brand-dark-orange);
+                }
+            }
+        }
+
+        .text {
+            margin: 0;
+            font-family: var(--font-family-primary);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 150%;
+            color: var(--txt-light-dark, #383838);
+
+            @include bp.mq(mobile-l) {
+                font-size: 14px;
+            }
+        }
+
+        // Квадрат-стрелка справа
+        .go {
+            display: inline-flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: center;
+            width: 58px;
+            height: 58px;
+            color: var(--brand-dark-orange);
+            background: var(--color-light-grey, #d9d9d9);
+            border-radius: 6px;
+            transition:
+                color 0.25s ease,
+                background-color 0.25s ease;
+
+            @include bp.mq(mobile-l) {
+                width: 46px;
+                height: 46px;
+            }
+        }
+
+        // Ховер строки — оранжевый заголовок и оранжевая кнопка
+        &:hover {
+            border-top-color: var(--brand-dark-orange);
+
+            .name a {
+                color: var(--brand-dark-orange);
+            }
+
+            .go {
+                color: var(--color-white);
+                background: var(--brand-dark-orange);
+            }
+        }
+
+        &:hover + .result {
+            border-top-color: var(--brand-dark-orange);
+        }
+    }
+
+    // --------------------------------------
+    // Пагинация в стиле слайдеров
+    // --------------------------------------
+    .search-pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+
+        @include bp.mq(tablet-xl) {
+            margin-top: 40px;
+        }
+
+        @include bp.mq(mobile-l) {
+            margin-top: 30px;
+        }
+
+        .controls {
+            @include mix.slider-controls;
+
+            .nav-btn {
+                @include mix.slider-nav-btn;
+            }
+
+            .nav-btn.next:not(.swiper-button-disabled, [aria-disabled="true"]) {
+                @include mix.slider-nav-btn-active;
+            }
+        }
+
+        .pagination {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bullet {
+            display: block;
+            flex: 0 0 auto;
+            width: 40px;
+            height: 7px;
+            background: var(--txt-dark, #161616);
+            border-radius: 12px;
+            transition: background-color 0.25s ease;
+
+            &:focus-visible {
+                outline: none;
+            }
+
+            &.active,
+            &:hover {
+                background: var(--brand-dark-orange);
+            }
+        }
+
+        .mobile-nav {
+            @include mix.slider-mobile-nav($margin-top: 0);
+        }
+    }
+}

@@ -1,0 +1,501 @@
+@use "core/breakpoints" as bp;
+
+// Срез верхнего угла ячейки таблицы: треугольник цвета секции (::before)
+// закрывает угол ячейки И линии рамки border-collapse в этом месте, показывая
+// фон секции; поверх — диагональный бордер (::after), продолжающий рамку по
+// линии среза. Треугольник на 2px больше среза, чтобы полностью скрыть 1px
+// линии рамки у концов среза. $side: left — верхний левый угол, right — правый.
+@mixin corner-cut($side) {
+    position: relative;
+
+    &::before {
+        position: absolute;
+        z-index: 1;
+        width: calc(var(--table-cut) + 5px);
+        height: calc(var(--table-cut) + 5px);
+        content: "";
+        background: var(--txt-light-dark, #383838);
+
+        // Треугольник выступает на 2px за край таблицы (вверх и в сторону),
+        // чтобы полностью перекрыть 1px линии рамки border-collapse у среза.
+        // Горизонтальный выступ поглощается padding у .table-wrap, поэтому
+        // лишней прокрутки на десктопе не возникает.
+        @if $side == left {
+            inset: -1px auto auto -3px;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        } @else {
+            inset: -1px -3px auto auto;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+        }
+    }
+
+    &::after {
+        position: absolute;
+        z-index: 2;
+        width: calc(var(--table-cut) * 1.4142);
+        height: 1px;
+        content: "";
+        background: var(--cell-border-color);
+
+        @if $side == left {
+            inset: 0 auto auto 0;
+            transform: translateY(var(--table-cut)) rotate(-45deg);
+            transform-origin: 0 0;
+        } @else {
+            inset: 0 0 auto auto;
+            transform: translateY(var(--table-cut)) rotate(45deg);
+            transform-origin: 100% 0;
+        }
+    }
+}
+
+.price-list {
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    color: var(--color-white);
+    background: var(--txt-light-dark, #383838);
+
+    // Разделители ячеек — видимый серый бордер, как в макете
+    --cell-border-color: #6e6e6e;
+    --cell-border: 1px solid var(--cell-border-color);
+    --row-odd: #4c4b4b;
+    --row-even: #3a3a3a;
+
+    // Ширина диагонального среза угла таблиц
+    --table-cut: 40px;
+
+    > .container {
+        padding-top: calc(var(--header-height) + 16px);
+        padding-bottom: 80px;
+
+        @include bp.mq(tablet-xl) {
+            padding-bottom: 60px;
+        }
+
+        @include bp.mq(mobile-l) {
+            padding-bottom: 40px;
+        }
+    }
+
+    // --------------------------------------
+    // Хлебные крошки (светлые, на тёмном фоне)
+    // --------------------------------------
+    .breadcrumbs {
+        width: 100%;
+        max-width: 100%;
+
+        > .container {
+            display: block;
+            flex: none;
+            width: auto;
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list {
+            gap: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--color-light-grey);
+        }
+
+        .item {
+            gap: 10px;
+        }
+
+        .link,
+        .separator {
+            color: var(--color-light-grey);
+        }
+
+        .link:hover {
+            color: var(--brand-dark-orange);
+            text-decoration: underline;
+        }
+
+        .current-page {
+            font-weight: 700;
+            color: var(--color-white);
+        }
+    }
+
+    // --------------------------------------
+    // Заголовки
+    // --------------------------------------
+    .price-title {
+        margin: 20px 0 40px;
+        font-family: var(--font-family-headings);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--color-white);
+
+        @include bp.mq(laptop) {
+            font-size: 32px;
+        }
+
+        @include bp.mq(mobile-l) {
+            margin: 16px 0 20px;
+            font-size: 26px;
+        }
+    }
+
+    .coeff-title {
+        margin: 100px 0 40px;
+        font-family: var(--font-family-headings);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--color-white);
+
+        @include bp.mq(laptop) {
+            font-size: 30px;
+        }
+
+        @include bp.mq(mobile-l) {
+            margin: 40px 0 20px;
+            font-size: 24px;
+        }
+    }
+
+    .table-wrap {
+        // 2px по бокам поглощают выступ угловых псевдоэлементов (срезы),
+        // иначе на десктопе появляется лишняя горизонтальная прокрутка
+        padding: 0 2px;
+        overflow-x: auto;
+
+        // Нативную полосу прячем — её рисует кастомный скролбар (см. ниже)
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    // Кастомный скролбар (создаётся JS-компонентом customScrollbar после
+    // .table-wrap). Параметры из макета: дорожка #FFF7F2, скругление снизу 12px,
+    // паддинг 2/2/9/2; бегунок 9px, радиус 12px, красно-оранжевый градиент.
+    .table-scrollbar {
+        padding: 2px 2px 9px;
+        background: var(--txt-secondary, #fff7f2);
+        border-radius: 0 0 12px 12px;
+
+        &[hidden] {
+            display: none;
+        }
+    }
+
+    .table-scrollbar__thumb {
+        width: 0; // задаётся из JS
+        height: 9px;
+        touch-action: none;
+        cursor: grab;
+        background: radial-gradient(127.2% 61.28% at 0.94% 78.21%, #a70000 0%, #d64212 100%);
+        border-radius: 12px;
+        will-change: width, transform;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    // --------------------------------------
+    // Прайс-таблица
+    // --------------------------------------
+    .price-table {
+        width: 100%;
+        font-family: var(--font-family-primary);
+        border-spacing: 0;
+
+        // Внешняя рамка таблицы есть всегда, внутренние разделители тоже.
+        // Срез угла и его бордер рисуются псевдоэлементами на угловой ячейке
+        // (см. .col-power), чтобы спрятать линии рамки border-collapse в срезе.
+        border-collapse: collapse;
+
+        th,
+        td {
+            padding: 14px 20px;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 140%;
+            text-align: left;
+            border: var(--cell-border);
+            transition: background-color 0.2s ease;
+        }
+
+        thead th {
+            font-weight: 400;
+            vertical-align: top;
+            color: var(--color-white);
+        }
+
+        // Левый столбец «Мощность, кВт» — тёмный
+        .col-power {
+            font-weight: 500;
+            color: var(--color-white);
+            background: #252424;
+        }
+
+        thead .col-power {
+            font-family: var(--font-family-headings);
+            font-size: 22px;
+            vertical-align: middle;
+            text-transform: uppercase;
+
+            // Срез верхнего левого угла таблицы
+            @include corner-cut(left);
+        }
+
+        // Синяя шапка «Частота вращение»
+        .head-freq {
+            font-family: var(--font-family-headings);
+            font-size: 22px;
+            text-align: left;
+            background: var(--color-blue, #064aa7);
+        }
+
+        // Оранжевая шапка «Сроки выполнения ремонта»
+        .head-terms {
+            font-family: var(--font-family-headings);
+            font-size: 22px;
+            text-align: left;
+            background: var(--brand-dark-orange, #d64212);
+
+            // Срез верхнего правого угла таблицы
+            @include corner-cut(right);
+        }
+
+        // Подшапки под синей (3000/1500/… и «Цена (без НДС)»)
+        thead tr:nth-child(2) th:not(.term) {
+            background: rgb(37 36 36 / 40%);
+        }
+
+        thead .sub {
+            background: #252424;
+        }
+
+        // Плановый / Срочный — приглушённый оранжевый
+        .term {
+            font-family: var(--font-family-headings);
+            font-size: 22px;
+            vertical-align: middle;
+            background: #773c29;
+        }
+
+        .sub {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--color-light-grey);
+        }
+
+        // Зебра строк данных
+        tbody tr:nth-child(odd) th,
+        tbody tr:nth-child(odd) td {
+            background: var(--row-odd);
+        }
+
+        tbody tr:nth-child(even) th,
+        tbody tr:nth-child(even) td {
+            background: var(--row-even);
+        }
+
+        tbody .col-power {
+            background: #252424;
+        }
+
+        // Подсветка строки по наведению (перекрывает зебру и «Мощность»)
+        tbody tr:hover th,
+        tbody tr:hover td {
+            background: rgb(217 217 217 / 39%);
+        }
+    }
+
+    .note {
+        margin: 12px 0 0;
+        font-family: var(--font-family-primary);
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--color-light-grey);
+    }
+
+    // --------------------------------------
+    // Таблица коэффициентов (4 колонки: имя | коэф. | имя | коэф.)
+    // --------------------------------------
+    .coeff-table {
+        // Срез меньше, чем у прайс-таблицы, чтобы не задевал текст в ячейке
+        --table-cut: 24px;
+
+        width: 100%;
+        font-family: var(--font-family-primary);
+        border-spacing: 0;
+
+        // Внешняя рамка таблицы есть всегда, внутренние разделители тоже.
+        // Срезы углов и их бордеры — псевдоэлементами на угловых ячейках,
+        // чтобы спрятать линии рамки border-collapse в месте среза.
+        border-collapse: collapse;
+
+        td {
+            padding: 14px 20px;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 140%;
+            vertical-align: middle;
+            border: var(--cell-border);
+            transition: background-color 0.2s ease;
+        }
+
+        .name {
+            width: 41%;
+            color: var(--color-white);
+        }
+
+        .coef {
+            width: 9%;
+            font-weight: 500;
+            color: var(--color-white);
+            white-space: nowrap;
+        }
+
+        // Срез верхнего левого угла
+        tbody tr:first-child td:first-child {
+            @include corner-cut(left);
+        }
+
+        // Срез верхнего правого угла (зеркально)
+        tbody tr:first-child td:last-child {
+            @include corner-cut(right);
+        }
+
+        tbody tr:nth-child(odd) td {
+            background: var(--row-even);
+        }
+
+        tbody tr:nth-child(even) td {
+            background: var(--row-odd);
+        }
+
+        // Подсветка строки по наведению
+        tbody tr:hover td {
+            background: rgb(217 217 217 / 39%);
+        }
+    }
+
+    // --------------------------------------
+    // Что включает ремонт — два блока (синий / оранжевый)
+    // --------------------------------------
+    .includes {
+        display: grid;
+        grid-template-rows: auto auto;
+
+        // Две строки-трека (шапка + список) общие для обеих карточек через
+        // subgrid — так шапки всегда одной высоты и срез угла одинаковый.
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        align-items: start;
+        margin-top: 100px;
+
+        @include bp.mq(tablet-l) {
+            grid-template-rows: none;
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .inc-card {
+        // Срез угла шапки — как в таблице коэффициентов (24px, угол + бордер)
+        --table-cut: 24px;
+
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 2;
+        gap: 0;
+        overflow: hidden;
+        border-radius: 4px;
+
+        @include bp.mq(tablet-l) {
+            display: block;
+        }
+    }
+
+    .inc-head {
+        min-height: 101.19px;
+        padding: 22px 28px;
+        margin: 0;
+        font-family: var(--font-family-headings);
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--color-white);
+
+        // Рамка карточки (верх + бока + разделитель со списком). На срезе угла
+        // бордер прячется треугольником ::before из миксина corner-cut.
+        border: var(--cell-border);
+
+        @include bp.mq(mobile-l) {
+            padding: 16px 18px;
+            font-size: 18px;
+        }
+    }
+
+    // Срезы углов шапок — тем же миксином, что и таблицы (24px, угол + бордер):
+    // синяя карточка режется слева, оранжевая — справа (наружу).
+    .inc-card.blue .inc-head {
+        background: var(--color-blue, #064aa7);
+
+        @include corner-cut(left);
+    }
+
+    .inc-card.orange .inc-head {
+        background: var(--brand-dark-orange, #d64212);
+
+        @include corner-cut(right);
+    }
+
+    .inc-list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        // Бока и низ рамки карточки (верх — от бордера шапки)
+        border-right: var(--cell-border);
+        border-bottom: var(--cell-border);
+        border-left: var(--cell-border);
+
+        li {
+            padding: 16px 28px;
+            font-family: var(--font-family-primary);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 140%;
+            color: var(--color-white);
+            border-bottom: var(--cell-border);
+            transition: background-color 0.2s ease;
+
+            &:last-child {
+                border-bottom: 0;
+            }
+
+            @include bp.mq(mobile-l) {
+                padding: 14px 18px;
+            }
+        }
+
+        li:nth-child(odd) {
+            background: var(--row-even);
+        }
+
+        li:nth-child(even) {
+            background: var(--row-odd);
+        }
+
+        // Подсветка строки по наведению — как в таблицах
+        li:hover {
+            background: rgb(217 217 217 / 39%);
+        }
+    }
+}

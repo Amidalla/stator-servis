@@ -7,6 +7,14 @@
     margin-top: 0;
 }
 
+// Деталка «Наши работы»: our-works идёт после белой секции — убираем
+// «домашний» отрицательный отступ/наложение, задаём обычные отступы секции
+.page:has(.work-detail) .our-works {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    margin-top: 0;
+}
+
 .our-works {
     --our-works-cut-w: var(--dir-cut-bottom-w);
     --our-works-cut-h: calc(30px + 30px + 32px * 1.3 + 16px * 1.4);
@@ -100,8 +108,17 @@
         overflow: hidden;
         background: var(--color-white);
         border-radius: 12px;
+        isolation: isolate; // общий контекст наложения для карточки
 
         @include mix.card-hover-glow($z-index: 3);
+
+        // Вся карточка — ссылка на деталку работ. Растянутая ссылка поверх фото
+        // (z-index 0), но ниже стрелок и тега (z-index 2) — они кликабельны.
+        .card-link {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
 
         &:hover .name,
         &:focus-within .name {
@@ -128,6 +145,10 @@
 
     .gallery {
         position: relative;
+
+        // Убираем swiper'овский z-index: 1, иначе стрелки (z-index 2) остаются
+        // внутри контекста галереи и оказываются под растянутой ссылкой карточки
+        z-index: auto;
         height: 405px;
         overflow: hidden;
         border-radius: 12px 12px 0 0;
@@ -147,6 +168,14 @@
         .swiper-wrapper,
         .swiper-slide {
             height: 100%;
+        }
+
+        // Swiper ставит на .swiper-wrapper z-index: 1. Так как галерея больше не
+        // образует свой контекст наложения (z-index: auto выше), этот z-index
+        // конкурирует с .card-link (тоже z-index 1) и, будучи ниже по DOM,
+        // перекрывает ссылку. Возвращаем wrapper в общий поток карточки.
+        .swiper-wrapper {
+            z-index: auto;
         }
 
         img {

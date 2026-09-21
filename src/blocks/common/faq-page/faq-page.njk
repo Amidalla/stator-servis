@@ -1,0 +1,98 @@
+{% from "components/general/breadcrumbs/breadcrumbs.njk" import render as breadcrumbs %}
+{% from "components/general/tabs/tabs.njk" import render as tabs %}
+
+{# Вопросы-ответы. Переиспользуют аккордеон (data-accordion) и содержимое faq-home. #}
+{% set faqItems = [
+    {
+        q: "Сколько стоит перемотка электродвигателя?",
+        a: "Стоимость зависит от мощности, типа обмотки и состояния железа. После диагностики согласуем смету и сроки — без скрытых доплат."
+    },
+    {
+        q: "Сколько времени занимает перемотка?",
+        a: "В среднем от нескольких рабочих дней до двух недель — в зависимости от сложности, наличия материалов и загрузки мастерской. Срочный ремонт обсуждаем отдельно."
+    },
+    {
+        q: "Где можно найти специалистов по перемотке электродвигателей?",
+        a: "Специализированные ремонтные мастерские, занимающиеся ремонтом электрооборудования, могут выполнить перемотку электродвигателей. Также можно найти частных мастеров, предлагающих подобные услуги."
+    },
+    {
+        q: "Гарантируется ли работоспособность двигателя после перемотки?",
+        a: "Да. После перемотки проводим испытания и выдаём гарантию на выполненные работы. Двигатель возвращается в работу только после проверки параметров."
+    },
+    {
+        q: "Можно ли перемотать двигатель самостоятельно?",
+        a: "Не рекомендуем: нужны специальное оборудование, материалы и опыт расчёта обмоток. Ошибка при самостоятельной перемотке часто приводит к повторному выходу из строя."
+    }
+] %}
+
+{% set faqTabs = [
+    { id: "nasosy", title: "Насосы", active: true },
+    { id: "electro", title: "Электродвигатели" },
+    { id: "benzo", title: "Бензогенераторы" },
+    { id: "alter", title: "Альтернаторы" }
+] %}
+
+<section class="faq-page">
+    <div class="container">
+        {{ breadcrumbs(
+            items=[
+                { title: "Главная", url: "/home.html" },
+                { title: "Вопрос-ответ" }
+            ],
+            separator="line",
+            size="sm"
+        ) }}
+
+        <h1 class="faq-page-title" data-aos="fade-right">Вопрос-ответ</h1>
+
+        {{ tabs(
+            items=faqTabs,
+            group="faq",
+            class="faq-page-tabs",
+            ariaLabel="Категории вопросов"
+        ) }}
+
+        <div class="faq-panels" data-tabs-panels="faq">
+            {% for tab in faqTabs %}
+                <div
+                    class="faq-panel{% if tab.active %} active{% endif %}"
+                    id="panel-faq-{{ tab.id }}"
+                    role="tabpanel"
+                    aria-labelledby="tab-faq-{{ tab.id }}"
+                    data-tab-panel="{{ tab.id }}"
+                    data-tabs-group="faq"
+                    {% if not tab.active %}hidden{% endif %}
+                >
+                    <div class="accordion faq-list" data-accordion="component" data-aos="fade-up">
+                        {% for item in faqItems %}
+                            <div class="item" data-accordion-item>
+                                <button
+                                    type="button"
+                                    class="panel"
+                                    aria-expanded="false"
+                                    aria-controls="faq-{{ tab.id }}-{{ loop.index }}"
+                                >
+                                    <span class="num"
+                                        >{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
+                                    <span class="name">{{ item.q }}</span>
+                                    <span class="icon" aria-hidden="true">
+                                        <img src="/assets/images/system/icon-arrow-faq.svg" alt="" width="20" height="15" />
+                                    </span>
+                                </button>
+                                <div
+                                    class="collapse"
+                                    id="faq-{{ tab.id }}-{{ loop.index }}"
+                                    role="region"
+                                >
+                                    <div class="wrap">
+                                        <p>{{ item.a }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

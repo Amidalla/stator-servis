@@ -164,8 +164,13 @@ export const scriptsProd = () =>
         )
         .pipe(gulp.dest(`${paths.prodDist}/js`));
 
-// Copy assets for development
-export const assets = () => gulp.src(paths.assets, { encoding: false }).pipe(gulp.dest(`${paths.devDist}/assets`));
+// Copy assets for development.
+// `since: gulp.lastRun(assets)` делает копирование инкрементальным: при пересборке
+// по watch копируются только изменённые файлы, а не всё дерево assets целиком.
+// Это убирает периодическую ошибку EPERM на Windows, когда gulp пытался
+// перезаписать в temp/ файл, временно заблокированный dev-сервером (BrowserSync).
+export const assets = () =>
+    gulp.src(paths.assets, { encoding: false, since: gulp.lastRun(assets) }).pipe(gulp.dest(`${paths.devDist}/assets`));
 
 // Copy and optimize assets for production
 export const assetsProd = () =>

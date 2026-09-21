@@ -1,0 +1,112 @@
+@use "core/breakpoints" as bp;
+@use "core/mixins" as mix;
+
+.about-production {
+    // Высота центрального (активного) и боковых слайдов по брейкпоинтам
+    --prod-h-center: 520px;
+    --prod-h-side: 420px;
+
+    padding: 50px 0 80px;
+    overflow: hidden;
+    background: #a8a8a8;
+
+    @include bp.mq(laptop-l) {
+        --prod-h-center: 406px;
+        --prod-h-side: 308px;
+    }
+
+    @include bp.mq(tablet-l) {
+        --prod-h-center: 262px;
+        --prod-h-side: 162px;
+    }
+
+    // mobile-xl и ниже — 1 слайд, центр = боковые
+    @include bp.mq(mobile-xl) {
+        --prod-h-center: 308px;
+        --prod-h-side: 308px;
+    }
+
+    @include bp.mq(mobile-l) {
+        --prod-h-center: 262px;
+        --prod-h-side: 262px;
+    }
+
+    @include bp.mq(tablet-xl) {
+        padding: 50px 0 60px;
+    }
+
+    @include bp.mq(mobile-l) {
+        padding: 40px 0;
+    }
+
+    .title {
+        margin: 0 0 40px;
+        font-family: var(--font-family-headings);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--txt-dark);
+
+        @include bp.mq(tablet-xl) {
+            font-size: 36px;
+        }
+
+        @include bp.mq(mobile-xl) {
+            font-size: 28px;
+        }
+    }
+
+    .slider {
+        width: 100%;
+    }
+
+    // Слайды выравниваем по центру: боковые ниже центрального.
+    // Высоту ряда фиксируем по центральному слайду, чтобы при плавном изменении
+    // высоты фото секция не «проседала».
+    .swiper-wrapper {
+        align-items: center;
+        height: var(--prod-h-center);
+    }
+
+    .swiper-slide {
+        height: auto;
+    }
+
+    .shot {
+        height: 100%;
+
+        img {
+            display: block;
+            width: 100%;
+            height: var(--prod-h-side);
+            object-fit: cover;
+            border-radius: 16px;
+            transition: height 0.4s ease;
+        }
+    }
+
+    // Центральный (активный) слайд крупнее остальных
+    .swiper-slide-active .shot img {
+        height: var(--prod-h-center);
+    }
+
+    .controls {
+        @include mix.slider-controls($margin-top: 30px);
+
+        justify-content: center;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .nav-btn {
+        @include mix.slider-nav-btn;
+    }
+
+    @include mix.slider-dash-pagination;
+
+    // В мобилке — навигация как в слайдере отзывов (стрелка + N/M + стрелка)
+    .mobile-nav {
+        @include mix.slider-mobile-nav($margin-top: 20px);
+    }
+}
