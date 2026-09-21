@@ -186,13 +186,22 @@
         padding: 30px 0;
         border-top: 1px solid var(--color-light-grey);
 
+        @include bp.mq(mobile-l) {
+            border-bottom: 1px solid var(--txt-dark, #161616);
+        }
+
         &:first-child {
             border-top: 0;
         }
 
+        // mobile-l: заголовок/текст сверху, ссылка «Подробнее» снизу на всю ширину
         @include bp.mq(mobile-l) {
-            gap: 16px;
-            padding: 20px 0;
+            flex-direction: column;
+            gap: 40px;
+            align-items: stretch;
+            padding: 0;
+            margin-bottom: 40px;
+            border-top: none;
         }
 
         .body {
@@ -266,9 +275,45 @@
                 z-index: 1;
             }
 
+            .go-arrow {
+                display: inline-flex;
+                align-items: center;
+            }
+
+            // Текст «Подробнее» и мобильная стрелка — только для мобильного вида
+            .go-text,
+            .go-arrow--mob {
+                display: none;
+            }
+
+            // mobile-l: превращаем квадрат-кнопку в текстовую ссылку «Подробнее →»
             @include bp.mq(mobile-l) {
-                width: 46px;
-                height: 46px;
+                justify-content: space-between;
+                width: 100%;
+                height: auto;
+                overflow: visible;
+                color: var(--txt-dark, #161616);
+                background: none;
+
+                &::before {
+                    display: none;
+                }
+
+                .go-text {
+                    display: block;
+                    font-family: var(--font-family-primary);
+                    font-size: 18px;
+                    font-weight: 600;
+                    line-height: 130%;
+                }
+
+                .go-arrow--desk {
+                    display: none;
+                }
+
+                .go-arrow--mob {
+                    display: inline-flex;
+                }
             }
         }
 
@@ -286,6 +331,14 @@
 
             .go::before {
                 opacity: 1;
+            }
+        }
+
+        // На мобилке .go — тёмная текстовая ссылка; ховер-подсветку кнопки
+        // (белый текст) не применяем, иначе текст пропал бы на белом фоне
+        @include bp.mq(mobile-l) {
+            &:hover .go {
+                color: var(--txt-dark, #161616);
             }
         }
 

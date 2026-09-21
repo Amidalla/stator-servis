@@ -321,6 +321,7 @@
 
         tbody tr:last-child td:last-child {
             border-right: var(--cell-border);
+
             // background: url("/assets/images/content/table-round-price-br.svg") 0 0 / 100% 100% no-repeat;
             border-bottom: var(--cell-border);
             border-radius: 0 0 12px;
@@ -423,6 +424,7 @@
 
         tbody tr:last-child td:last-child {
             border-right: var(--cell-border);
+
             // background: url("/assets/images/content/table-round-coeff-br.svg") 0 0 / 100% 100% no-repeat;
             border-bottom: var(--cell-border);
             border-radius: 0 0 12px;

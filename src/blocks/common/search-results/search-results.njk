@@ -23,6 +23,16 @@
     </svg>
 {% endmacro %}
 
+{# Стрелка для мобильной ссылки «Подробнее» (mobile-l и ниже) #}
+{% macro arrowMobile() %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="15" viewBox="0 0 21 15" fill="none" aria-hidden="true">
+        <path
+            d="M20.7071 8.07429C21.0976 7.68377 21.0976 7.0506 20.7071 6.66008L14.3431 0.29612C13.9526 -0.0944047 13.3195 -0.0944047 12.9289 0.29612C12.5384 0.686644 12.5384 1.31981 12.9289 1.71033L18.5858 7.36719L12.9289 13.024C12.5384 13.4146 12.5384 14.0477 12.9289 14.4383C13.3195 14.8288 13.9526 14.8288 14.3431 14.4383L20.7071 8.07429ZM0 7.36719V8.36719H20V7.36719V6.36719H0V7.36719Z"
+            fill="currentColor"
+        />
+    </svg>
+{% endmacro %}
+
 <section class="search-results">
     <div class="container">
         {{ breadcrumbs(
@@ -83,7 +93,9 @@
                         <p class="text">{{ result.text }}</p>
                     </div>
                     <a class="go" href="{{ result.href }}" aria-label="Открыть: {{ result.title }}">
-                        {{ arrow() }}
+                        <span class="go-text">Подробнее</span>
+                        <span class="go-arrow go-arrow--desk">{{ arrow() }}</span>
+                        <span class="go-arrow go-arrow--mob">{{ arrowMobile() }}</span>
                     </a>
                 </article>
             {% endfor %}

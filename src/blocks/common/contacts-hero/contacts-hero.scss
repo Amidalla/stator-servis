@@ -338,6 +338,10 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
+
+        @include bp.mq(mobile-l) {
+            margin-bottom: 20px;
+        }
     }
 
     // --------------------------------------
@@ -348,6 +352,10 @@
         flex-direction: column;
         gap: 16px;
         margin: 0;
+
+        @include bp.mq(mobile-l) {
+            margin-bottom: 20px;
+        }
     }
 
     .legal-item {
