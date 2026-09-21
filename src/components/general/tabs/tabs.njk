@@ -14,7 +14,8 @@
         class="{{ tabsClasses }}"
         role="tablist"
         aria-label="{{ ariaLabel }}"
-        {% if group %}data-tabs="{{ group }}"{% else %}data-tabs{% endif %}
+        {% if group %}data-tabs="{{ group }}"
+        {% else %}data-tabs{% endif %}
     >
         {% for item in items %}
             <button

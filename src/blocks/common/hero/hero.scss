@@ -1,16 +1,20 @@
 @use "core/breakpoints" as bp;
 
 .page:has(.hero) {
-    --hero-h: calc(100vw * 1066 / 1920);
-    --hero-visible-h: calc(100vw * 871.59 / 1920);
+    // Значения из десктопной картинки hero-desktop.png (1920×1049): полная
+    // высота 1049, «полка» (плоский верх среза) начинается на 857, диагональный
+    // срез слева шириной ~94px. Меняли картинку — обновляли под её геометрию.
+    --hero-h: calc(100vw * 1065 / 1920);
+    --hero-visible-h: calc(100vw * 871 / 1920);
     --hero-cut-w: calc(100vw * 94.1152 / 1920);
     --hero-cut-h: calc(var(--hero-h) - var(--hero-visible-h));
-    --hero-after-actions: calc(100vw * 194 / 1920);
+    --hero-after-actions: calc(100vw * 148 / 1920);
     --hero-dir-overlap-extra: 28px;
 
     @include bp.mq(laptop-m) {
         --hero-h: calc(100vw * 568 / 1024);
         --hero-visible-h: calc(100vw * 460 / 1024);
+        --hero-after-actions: calc(100vw * 194 / 1920);
     }
 
     @include bp.mq(tablet-l) {
@@ -39,10 +43,14 @@
 
     .media {
         position: absolute;
-        inset: 0 0 -8px;
+        inset: 0 0 25px;
         z-index: 0;
         overflow: hidden;
         pointer-events: none;
+
+        @include bp.mq(laptop-m) {
+            inset: 0 0 -8px;
+        }
 
         @include bp.mq(mobile-l) {
             inset: 0;
@@ -64,7 +72,17 @@
 
         img {
             object-fit: cover;
-            object-position: center;
+
+            // Диагональный срез картинки — в её левом нижнем углу. Прижимаем
+            // картинку влево: на узких десктопах object-fit:cover режет по бокам,
+            // и при центрировании угол среза «уезжает» от выреза directions.
+            // Левый якорь держит угол на месте — стык остаётся плотным.
+            object-position: left center;
+
+            // Ниже laptop-m — другая картинка и своя настройка, не трогаем
+            @include bp.mq(laptop-m) {
+                object-position: center;
+            }
 
             @include bp.mq(mobile-l) {
                 object-fit: cover;

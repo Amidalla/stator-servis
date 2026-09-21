@@ -153,13 +153,10 @@
         .controls {
             @include mix.slider-controls;
 
+            // Обе стрелки на сером фоне, оранжевыми становятся по ховеру
+            // (как на /blog-i-novosti/)
             .nav-btn {
                 @include mix.slider-nav-btn;
-            }
-
-            // Следующая страница — активная оранжевая стрелка (как в макете)
-            .nav-btn.next:not(.swiper-button-disabled, [aria-disabled="true"]) {
-                @include mix.slider-nav-btn-active;
             }
         }
 

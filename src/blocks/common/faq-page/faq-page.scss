@@ -142,7 +142,6 @@
 
                 &:hover {
                     background: var(--color-blue, #064aa7);
-                    border-color: transparent;
 
                     .name {
                         color: var(--color-white);
@@ -157,6 +156,10 @@
                     font-weight: 500;
                     line-height: 150%;
                     color: var(--brand-dark-orange);
+
+                    // Свой слой — чтобы цифра не «дёргалась» при смене фона
+                    // панели по ховеру (текст не перерисовывается по фону)
+                    transform: translateZ(0);
                     transition: color 0.3s ease;
 
                     @include bp.mq(mobile-l) {
@@ -191,8 +194,8 @@
                         height: 15px;
                         margin: auto;
 
-                        // ← → ↘
-                        transform: scaleX(-1) rotate(45deg);
+                        // Закрытый — стрелка ↘ (как в faq-home)
+                        transform: scaleX(-1) rotate(-45deg);
                         transition: transform 0.3s ease;
                     }
                 }
@@ -209,6 +212,8 @@
                     font-weight: 400;
                     line-height: 140%;
                     color: var(--txt-secondary, #fff7f2);
+                    background: var(--txt-dark);
+                    border-bottom: 1px solid var(--btn-grey, #a8a8a8);
 
                     @include bp.mq(laptop-l) {
                         padding: 20px 40px 24px 80px;
@@ -241,8 +246,8 @@
                     }
 
                     .icon img {
-                        // ← → ↗ (−90° от закрытого)
-                        transform: scaleX(-1) rotate(-45deg);
+                        // Открытый — стрелка ↗ (как в faq-home)
+                        transform: scaleX(-1) rotate(45deg);
                     }
                 }
             }

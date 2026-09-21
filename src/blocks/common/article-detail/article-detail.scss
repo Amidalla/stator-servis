@@ -187,6 +187,7 @@
 
         @include bp.mq(tablet-xl) {
             --gallery-h: 401px;
+
             flex-direction: column;
             gap: 60px;
         }
@@ -197,6 +198,7 @@
 
         @include bp.mq(mobile-l) {
             --gallery-h: 323px;
+
             gap: 40px;
         }
     }
@@ -239,8 +241,8 @@
         align-items: stretch;
         width: 100%;
         min-width: 0;
-        height: var(--gallery-h);
         max-width: 705px;
+        height: var(--gallery-h);
 
         @include bp.mq(mobile-l) {
             gap: 8px;
@@ -543,8 +545,8 @@
 
             span {
                 display: inline-block;
-                margin-left: -27px;
                 margin-top: 10px;
+                margin-left: -27px;
             }
 
             &::before {

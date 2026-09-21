@@ -1,6 +1,8 @@
 {% macro navBtn(direction="prev", label="", class="", disabled=false, href="") %}
     {% set navClass = "nav-btn " + direction %}
-    {% if class %}{% set navClass = navClass + " " + class %}{% endif %}
+    {% if class %}
+        {% set navClass = navClass + " " + class %}
+    {% endif %}
     {% set navLabel = label if label else ("Предыдущий слайд" if direction == "prev" else "Следующий слайд") %}
 
     {% if direction == "prev" %}

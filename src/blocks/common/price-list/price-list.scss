@@ -1,54 +1,5 @@
 @use "core/breakpoints" as bp;
 
-// Срез верхнего угла ячейки таблицы: треугольник цвета секции (::before)
-// закрывает угол ячейки И линии рамки border-collapse в этом месте, показывая
-// фон секции; поверх — диагональный бордер (::after), продолжающий рамку по
-// линии среза. Треугольник на 2px больше среза, чтобы полностью скрыть 1px
-// линии рамки у концов среза. $side: left — верхний левый угол, right — правый.
-@mixin corner-cut($side) {
-    position: relative;
-
-    &::before {
-        position: absolute;
-        z-index: 1;
-        width: calc(var(--table-cut) + 5px);
-        height: calc(var(--table-cut) + 5px);
-        content: "";
-        background: var(--txt-light-dark, #383838);
-
-        // Треугольник выступает на 2px за край таблицы (вверх и в сторону),
-        // чтобы полностью перекрыть 1px линии рамки border-collapse у среза.
-        // Горизонтальный выступ поглощается padding у .table-wrap, поэтому
-        // лишней прокрутки на десктопе не возникает.
-        @if $side == left {
-            inset: -1px auto auto -3px;
-            clip-path: polygon(0 0, 100% 0, 0 100%);
-        } @else {
-            inset: -1px -3px auto auto;
-            clip-path: polygon(0 0, 100% 0, 100% 100%);
-        }
-    }
-
-    &::after {
-        position: absolute;
-        z-index: 2;
-        width: calc(var(--table-cut) * 1.4142);
-        height: 1px;
-        content: "";
-        background: var(--cell-border-color);
-
-        @if $side == left {
-            inset: 0 auto auto 0;
-            transform: translateY(var(--table-cut)) rotate(-45deg);
-            transform-origin: 0 0;
-        } @else {
-            inset: 0 0 auto auto;
-            transform: translateY(var(--table-cut)) rotate(45deg);
-            transform-origin: 100% 0;
-        }
-    }
-}
-
 .price-list {
     position: relative;
     z-index: 0;
@@ -56,14 +7,19 @@
     color: var(--color-white);
     background: var(--txt-light-dark, #383838);
 
-    // Разделители ячеек — видимый серый бордер, как в макете
-    --cell-border-color: #6e6e6e;
+    // Разделители ячеек — бордер как в макете (кремовый, как в SVG срезов)
+    --cell-border-color: #fff7f2;
     --cell-border: 1px solid var(--cell-border-color);
     --row-odd: #4c4b4b;
     --row-even: #3a3a3a;
 
-    // Ширина диагонального среза угла таблиц
-    --table-cut: 40px;
+    // Фиксированная (десктопная) ширина таблиц: на всех разрешениях таблицы
+    // выглядят как на десктопе, а на узких экранах включается прокрутка.
+    --table-width: 1716px;
+
+    @include bp.mq(mobile-l) {
+        --table-width: 1100px;
+    }
 
     > .container {
         padding-top: calc(var(--header-height) + 16px);
@@ -207,14 +163,16 @@
     // Прайс-таблица
     // --------------------------------------
     .price-table {
-        width: 100%;
+        // Фиксированная десктопная ширина (на узких экранах — прокрутка)
+        width: var(--table-width);
         font-family: var(--font-family-primary);
         border-spacing: 0;
 
-        // Внешняя рамка таблицы есть всегда, внутренние разделители тоже.
-        // Срез угла и его бордер рисуются псевдоэлементами на угловой ячейке
-        // (см. .col-power), чтобы спрятать линии рамки border-collapse в срезе.
-        border-collapse: collapse;
+        // separate + spacing:0 — бордеры рисуются ВНУТРИ ячеек (как обводка в
+        // SVG), а не по сетке с выносом наружу на 0.5px. Иначе SVG-ячейки на
+        // DPR=1 выглядят чуть ниже/уже соседних. Чтобы не двоить — каждая ячейка
+        // рисует только правый и нижний бордер, внешние верх/лево добавляем краю.
+        border-collapse: separate;
 
         th,
         td {
@@ -223,8 +181,23 @@
             font-weight: 400;
             line-height: 140%;
             text-align: left;
-            border: var(--cell-border);
+            border-right: var(--cell-border);
+            border-bottom: var(--cell-border);
             transition: background-color 0.2s ease;
+
+            @include bp.mq(mobile-l) {
+                font-size: 16px;
+            }
+        }
+
+        // Внешняя рамка: верх нужен только синей шапке (у срезанных углов
+        // Мощность/Сроки верх зашит в SVG), лево — у столбца «Мощность»
+        .head-freq {
+            border-top: var(--cell-border);
+        }
+
+        .col-power {
+            border-left: var(--cell-border);
         }
 
         thead th {
@@ -246,8 +219,15 @@
             vertical-align: middle;
             text-transform: uppercase;
 
-            // Срез верхнего левого угла таблицы
-            @include corner-cut(left);
+            // Срез + внешний бордер (верх/лево) в SVG-фоне. Внутренние края
+            // (право/низ) рисуем бордером, поэтому убираем только верх и лево.
+            background: url("/assets/images/content/table-cut-power.svg") 0 0 / 100% 100% no-repeat;
+            border-top: 0;
+            border-left: 0;
+
+            @include bp.mq(mobile-l) {
+                font-size: 20px;
+            }
         }
 
         // Синяя шапка «Частота вращение»
@@ -256,17 +236,25 @@
             font-size: 22px;
             text-align: left;
             background: var(--color-blue, #064aa7);
+
+            @include bp.mq(mobile-l) {
+                font-size: 20px;
+            }
         }
 
-        // Оранжевая шапка «Сроки выполнения ремонта»
+        // Оранжевая шапка «Сроки выполнения ремонта» — срез + внешний бордер
+        // (верх/право) в SVG-фоне; низ (внутренний) рисуем бордером
         .head-terms {
             font-family: var(--font-family-headings);
             font-size: 22px;
             text-align: left;
-            background: var(--brand-dark-orange, #d64212);
+            background: url("/assets/images/content/table-cut-terms.svg") 0 0 / 100% 100% no-repeat;
+            border-top: 0;
+            border-right: 0;
 
-            // Срез верхнего правого угла таблицы
-            @include corner-cut(right);
+            @include bp.mq(mobile-l) {
+                font-size: 20px;
+            }
         }
 
         // Подшапки под синей (3000/1500/… и «Цена (без НДС)»)
@@ -284,12 +272,20 @@
             font-size: 22px;
             vertical-align: middle;
             background: #773c29;
+
+            @include bp.mq(mobile-l) {
+                font-size: 20px;
+            }
         }
 
         .sub {
             font-size: 18px;
             font-weight: 400;
             color: var(--color-light-grey);
+
+            @include bp.mq(mobile-l) {
+                font-size: 16px;
+            }
         }
 
         // Зебра строк данных
@@ -312,6 +308,23 @@
         tbody tr:hover td {
             background: rgb(217 217 217 / 39%);
         }
+
+        // Скругление нижних углов — угол + бордер зашиты в SVG-фон последней
+        // строки (внутренние края рисуют соседи, поэтому свой бордер убираем).
+        // Выигрывают по специфичности у зебры и ховера, чтобы срез не пропадал.
+        tbody tr:last-child .col-power {
+            // background: url("/assets/images/content/table-round-price-bl.svg") 0 0 / 100% 100% no-repeat;
+            border-bottom: var(--cell-border);
+            border-left: var(--cell-border);
+            border-radius: 0 0 0 12px;
+        }
+
+        tbody tr:last-child td:last-child {
+            border-right: var(--cell-border);
+            // background: url("/assets/images/content/table-round-price-br.svg") 0 0 / 100% 100% no-repeat;
+            border-bottom: var(--cell-border);
+            border-radius: 0 0 12px;
+        }
     }
 
     .note {
@@ -327,17 +340,14 @@
     // Таблица коэффициентов (4 колонки: имя | коэф. | имя | коэф.)
     // --------------------------------------
     .coeff-table {
-        // Срез меньше, чем у прайс-таблицы, чтобы не задевал текст в ячейке
-        --table-cut: 24px;
-
-        width: 100%;
+        // Фиксированная десктопная ширина (на узких экранах — прокрутка)
+        width: var(--table-width);
         font-family: var(--font-family-primary);
         border-spacing: 0;
 
-        // Внешняя рамка таблицы есть всегда, внутренние разделители тоже.
-        // Срезы углов и их бордеры — псевдоэлементами на угловых ячейках,
-        // чтобы спрятать линии рамки border-collapse в месте среза.
-        border-collapse: collapse;
+        // separate + spacing:0 — бордеры внутри ячеек (см. коммент в .price-table).
+        // Каждая ячейка рисует право/низ, внешние верх/лево добавляем краю.
+        border-collapse: separate;
 
         td {
             padding: 14px 20px;
@@ -345,8 +355,22 @@
             font-weight: 400;
             line-height: 140%;
             vertical-align: middle;
-            border: var(--cell-border);
+            border-right: var(--cell-border);
+            border-bottom: var(--cell-border);
             transition: background-color 0.2s ease;
+
+            @include bp.mq(mobile-l) {
+                font-size: 16px;
+            }
+        }
+
+        // Внешняя рамка: верх — первый ряд, лево — первый столбец
+        tbody tr:first-child td {
+            border-top: var(--cell-border);
+        }
+
+        td:first-child {
+            border-left: var(--cell-border);
         }
 
         .name {
@@ -361,14 +385,18 @@
             white-space: nowrap;
         }
 
-        // Срез верхнего левого угла
+        // Срез + внешний бордер угловых ячеек первой строки — в SVG-фоне;
+        // внутренние края (право/низ у левой, низ у правой) — обычным бордером
         tbody tr:first-child td:first-child {
-            @include corner-cut(left);
+            background: url("/assets/images/content/table-cut-coeff-left.svg") 0 0 / 100% 100% no-repeat;
+            border-top: 0;
+            border-left: 0;
         }
 
-        // Срез верхнего правого угла (зеркально)
         tbody tr:first-child td:last-child {
-            @include corner-cut(right);
+            background: url("/assets/images/content/table-cut-coeff-right.svg") 0 0 / 100% 100% no-repeat;
+            border-top: 0;
+            border-right: 0;
         }
 
         tbody tr:nth-child(odd) td {
@@ -380,8 +408,24 @@
         }
 
         // Подсветка строки по наведению
-        tbody tr:hover td {
+        tbody tr:not(:first-child):hover td {
             background: rgb(217 217 217 / 39%);
+        }
+
+        // Скругление нижних углов — угол + внешний бордер в SVG-фоне последней
+        // строки; внутренние края рисуют соседи/остаточный бордер
+        tbody tr:last-child td:first-child {
+            // background: url("/assets/images/content/table-round-coeff-bl.svg") 0 0 / 100% 100% no-repeat;
+            border-bottom: var(--cell-border);
+            border-left: var(--cell-border);
+            border-radius: 0 0 0 12px;
+        }
+
+        tbody tr:last-child td:last-child {
+            border-right: var(--cell-border);
+            // background: url("/assets/images/content/table-round-coeff-br.svg") 0 0 / 100% 100% no-repeat;
+            border-bottom: var(--cell-border);
+            border-radius: 0 0 12px;
         }
     }
 
@@ -406,15 +450,15 @@
     }
 
     .inc-card {
-        // Срез угла шапки — как в таблице коэффициентов (24px, угол + бордер)
-        --table-cut: 24px;
-
         display: grid;
         grid-template-rows: subgrid;
         grid-row: span 2;
         gap: 0;
+
+        // Клипуем только ВЕРХ (низ скругляет сам список — иначе клип карточки
+        // тем же радиусом «съедал» бы бордер списка на нижних углах в Chrome)
         overflow: hidden;
-        border-radius: 4px;
+        border-radius: 12px 12px 0 0;
 
         @include bp.mq(tablet-l) {
             display: block;
@@ -432,39 +476,40 @@
         line-height: 130%;
         color: var(--color-white);
 
-        // Рамка карточки (верх + бока + разделитель со списком). На срезе угла
-        // бордер прячется треугольником ::before из миксина corner-cut.
-        border: var(--cell-border);
+        // Бордер шапки — в SVG-фоне (см. .inc-card.blue/.orange), свой убираем
+        border: 0;
 
         @include bp.mq(mobile-l) {
             padding: 16px 18px;
-            font-size: 18px;
+            font-size: 20px;
         }
     }
 
-    // Срезы углов шапок — тем же миксином, что и таблицы (24px, угол + бордер):
-    // синяя карточка режется слева, оранжевая — справа (наружу).
+    // Шапки карточек — фон, срез и бордер в SVG (синяя режется слева,
+    // оранжевая справа), скругление верхних углов тоже в SVG.
     .inc-card.blue .inc-head {
-        background: var(--color-blue, #064aa7);
-
-        @include corner-cut(left);
+        background: url("/assets/images/content/card-cut-blue.svg") 0 0 / 100% 100% no-repeat;
     }
 
     .inc-card.orange .inc-head {
-        background: var(--brand-dark-orange, #d64212);
-
-        @include corner-cut(right);
+        background: url("/assets/images/content/card-cut-orange.svg") 0 0 / 100% 100% no-repeat;
     }
 
     .inc-list {
         padding: 0;
         margin: 0;
+
+        // overflow:hidden клипует фон строк по нижней дуге
+        overflow: hidden;
         list-style: none;
 
-        // Бока и низ рамки карточки (верх — от бордера шапки)
+        // Бока и низ рамки карточки (верх — от бордера шапки). Бордер держим на
+        // самом списке (у него же радиус), иначе overflow:hidden карточки срезал
+        // бы прямой бордер на скруглении и угол «ломался».
         border-right: var(--cell-border);
         border-bottom: var(--cell-border);
         border-left: var(--cell-border);
+        border-radius: 0 0 12px 12px;
 
         li {
             padding: 16px 28px;
@@ -482,6 +527,7 @@
 
             @include bp.mq(mobile-l) {
                 padding: 14px 18px;
+                font-size: 16px;
             }
         }
 

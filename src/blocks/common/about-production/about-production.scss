@@ -76,13 +76,24 @@
     .shot {
         height: 100%;
 
+        // Скругление + обрезка тут (а не на img), чтобы зум по ховеру
+        // подрезался по скруглённым углам
+        overflow: hidden;
+        border-radius: 16px;
+
         img {
             display: block;
             width: 100%;
             height: var(--prod-h-side);
             object-fit: cover;
-            border-radius: 16px;
-            transition: height 0.4s ease;
+            transition:
+                height 0.4s ease,
+                transform 0.5s ease;
+        }
+
+        // Ховер — плавный зум фото (как в остальных фото-карточках сайта)
+        &:hover img {
+            transform: scale(1.06);
         }
     }
 

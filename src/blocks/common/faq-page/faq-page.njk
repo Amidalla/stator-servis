@@ -25,11 +25,12 @@
     }
 ] %}
 
+{# count — сколько вопросов показать во вкладке (демо; на WP — реальная выдача) #}
 {% set faqTabs = [
-    { id: "nasosy", title: "Насосы", active: true },
-    { id: "electro", title: "Электродвигатели" },
-    { id: "benzo", title: "Бензогенераторы" },
-    { id: "alter", title: "Альтернаторы" }
+    { id: "nasosy", title: "Насосы", active: true, count: 5 },
+    { id: "electro", title: "Электродвигатели", count: 3 },
+    { id: "benzo", title: "Бензогенераторы", count: 4 },
+    { id: "alter", title: "Альтернаторы", count: 2 }
 ] %}
 
 <section class="faq-page">
@@ -64,7 +65,8 @@
                     {% if not tab.active %}hidden{% endif %}
                 >
                     <div class="accordion faq-list" data-accordion="component" data-aos="fade-up">
-                        {% for item in faqItems %}
+                        {% for i in range(0, tab.count) %}
+                            {% set item = faqItems[i % (faqItems | length)] %}
                             <div class="item" data-accordion-item>
                                 <button
                                     type="button"

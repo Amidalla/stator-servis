@@ -113,7 +113,7 @@
             font-size: 28px;
         }
 
-        @include bp.mq(mobile-l){
+        @include bp.mq(mobile-l) {
             max-width: 299px;
         }
     }
@@ -144,7 +144,10 @@
         padding: 30px;
         background: var(--color-light-grey);
         border-radius: 12px;
-        transition: background-color 0.3s ease;
+        transition:
+            transform 0.45s ease,
+            box-shadow 0.45s ease,
+            background-color 0.45s ease;
 
         // laptop-l и ниже — без фиксированной высоты
         @include bp.mq(laptop-l) {
@@ -159,7 +162,7 @@
             font-weight: 500;
             line-height: 130%;
             color: var(--txt-dark);
-            transition: color 0.3s ease;
+            transition: color 0.45s ease;
 
             // Без фикс. высоты карточки отступ до текста задаём тут — 40px
             @include bp.mq(laptop-l) {
@@ -174,11 +177,14 @@
             font-weight: 400;
             line-height: 150%;
             color: var(--txt-light-dark);
-            transition: color 0.3s ease;
+            transition: color 0.45s ease;
         }
 
+        // Карточка приподнимается с тенью + оранжевый фон, белый текст
         &:hover {
             background: var(--brand-dark-orange);
+            box-shadow: 0 18px 40px rgb(0 0 0 / 20%);
+            transform: translateY(-6px);
 
             .name,
             p {

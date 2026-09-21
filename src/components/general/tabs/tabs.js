@@ -45,6 +45,38 @@ export function tabs(context = document) {
             });
         };
 
+        const prefersReducedMotion = () =>
+            window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        // Плавно анимируем высоту контейнера панелей: у вкладок разное количество
+        // контента, и без этого блок ниже «прыгает» рывком при переключении.
+        let heightCleanup = null;
+        const animatePanelsHeight = (containerEl, from, to) => {
+            if (heightCleanup) heightCleanup();
+            if (from === to || prefersReducedMotion()) return;
+
+            containerEl.style.height = `${from}px`;
+            containerEl.style.overflow = "hidden";
+            void containerEl.offsetHeight; // reflow — фиксируем стартовую высоту
+            containerEl.style.transition = `height ${ENTER_MS}ms ease`;
+            containerEl.style.height = `${to}px`;
+
+            const cleanup = () => {
+                containerEl.style.height = "";
+                containerEl.style.overflow = "";
+                containerEl.style.transition = "";
+                containerEl.removeEventListener("transitionend", onEnd);
+                window.clearTimeout(fallback);
+                heightCleanup = null;
+            };
+            const onEnd = (e) => {
+                if (e.target === containerEl && e.propertyName === "height") cleanup();
+            };
+            containerEl.addEventListener("transitionend", onEnd);
+            const fallback = window.setTimeout(cleanup, ENTER_MS + 80);
+            heightCleanup = cleanup;
+        };
+
         const activate = (id) => {
             // Подсветку таба меняем сразу — интерфейс отзывчивый.
             tabButtons.forEach((btn) => {
@@ -73,9 +105,18 @@ export function tabs(context = document) {
             current.classList.add("is-leaving");
             switchTimer = window.setTimeout(() => {
                 switchTimer = null;
+
+                // Контейнер панелей — прямой родитель; его высоту анимируем от
+                // старой панели к новой, чтобы контент ниже съезжал плавно.
+                const container = next.parentElement;
+                if (heightCleanup) heightCleanup();
+                const fromHeight = container.offsetHeight;
+
                 current.hidden = true;
                 current.classList.remove("is-leaving", "active");
                 showPanel(next);
+
+                animatePanelsHeight(container, fromHeight, container.offsetHeight);
             }, LEAVE_MS);
         };
 
@@ -93,6 +134,7 @@ export function tabs(context = document) {
             "destroy",
             () => {
                 if (switchTimer) clearTimeout(switchTimer);
+                if (heightCleanup) heightCleanup();
                 controller.abort();
             },
             { once: true }

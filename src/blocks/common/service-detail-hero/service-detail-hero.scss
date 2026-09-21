@@ -184,8 +184,8 @@
         gap: 10px;
         align-items: stretch;
         min-width: 0;
-        height: var(--gallery-h);
         max-width: 705px;
+        height: var(--gallery-h);
 
         @include bp.mq(tablet-xl) {
             flex: 1 1 auto;

@@ -11,12 +11,17 @@ export function form(context = document) {
 
         const submitBtn = root.querySelector('[type="submit"]');
         const requiredFields = root.querySelectorAll("[required]");
+        // E-mail проверяем, даже если поле необязательное: пустое — ок,
+        // заполненное — должно быть в правильном формате.
+        const emailFields = root.querySelectorAll('input[type="email"]');
+        const watchedFields = new Set([...requiredFields, ...emailFields]);
 
         const isFieldValid = (field) => {
             if (field.type === "checkbox") return field.checked;
 
             const value = field.value.trim();
-            if (value === "") return false;
+            // Пустое необязательное поле — валидно; обязательное пустое — нет.
+            if (value === "") return !field.required;
 
             if (field.type === "email") {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -36,7 +41,9 @@ export function form(context = document) {
 
         const updateSubmitState = () => {
             if (!submitBtn) return;
-            submitBtn.disabled = ![...requiredFields].every(isFieldValid);
+            // Блокируем сабмит, если не заполнены обязательные поля или
+            // введён e-mail в неверном формате
+            submitBtn.disabled = ![...watchedFields].every(isFieldValid);
         };
 
         const showError = (wrapper, message) => {
@@ -67,11 +74,16 @@ export function form(context = document) {
                 return;
             }
 
-            const message = field.dataset.error || "Заполните поле";
+            // Для e-mail с введённым, но некорректным значением — сообщение
+            // про формат; иначе — data-error поля или общий текст
+            let message = field.dataset.error || "Заполните поле";
+            if (field.type === "email" && field.value.trim() !== "") {
+                message = field.dataset.errorFormat || "Заполните e-mail в правильном формате";
+            }
             showError(wrapper, message);
         };
 
-        requiredFields.forEach((field) => {
+        watchedFields.forEach((field) => {
             field.addEventListener(
                 "input",
                 () => {
