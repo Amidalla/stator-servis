@@ -6,6 +6,10 @@ export function customScrollbar(context = document) {
     const wraps = context.querySelectorAll(".table-wrap");
     if (!wraps.length) return;
 
+    // За сколько пикселей до конца прокрутки скрывать правую границу
+    // (не дожидаясь, пока докрутят строго до упора).
+    const EDGE_THRESHOLD = 30;
+
     wraps.forEach((wrap) => {
         if (wrap.dataset.scrollbarInit === "true") return;
         wrap.dataset.scrollbarInit = "true";
@@ -33,9 +37,10 @@ export function customScrollbar(context = document) {
             const scrollable = overflow > 1;
             // Правую границу (класс .is-scrollable, CSS рисует по нему бордер,
             // как в макете) показываем, пока справа ещё есть что прокручивать:
-            // видна с самого начала и во время прокрутки, а когда докрутили до
-            // конца — исчезает.
-            const hasMoreRight = scrollable && wrap.scrollLeft < overflow - 1;
+            // видна с самого начала и во время прокрутки, а когда до конца
+            // остаётся меньше EDGE_THRESHOLD — исчезает чуть раньше, чем
+            // докрутили строго до упора.
+            const hasMoreRight = scrollable && wrap.scrollLeft < overflow - EDGE_THRESHOLD;
             wrap.classList.toggle("is-scrollable", hasMoreRight);
             if (!scrollable) {
                 bar.hidden = true;

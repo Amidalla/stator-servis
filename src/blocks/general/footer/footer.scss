@@ -12,19 +12,12 @@ footer.footer {
     overflow: hidden;
     color: var(--color-white);
     background-color: var(--txt-dark);
-    background-image: url("/assets/images/system/footer-bg.png");
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: 100% auto;
 
     @include bp.mq(laptop-l) {
         --footer-logo-width: 280px;
 
         gap: 10px;
         padding: 56px 0 32px;
-        background-image: url("/assets/images/system/footer-bg-laptop.png");
-        background-repeat: no-repeat;
-        background-size: cover;
     }
 
     @include bp.mq(tablet-xl) {
@@ -32,16 +25,40 @@ footer.footer {
 
         gap: 60px;
         padding: 60px 0 32px;
-        background-color: #000;
-        background-image: url("/assets/images/system/footer-bg-tablet.png");
-        background-repeat: no-repeat;
-        background-size: cover;
     }
 
-    @include bp.mq(mobile-l) {
-        background-image: url("/assets/images/system/footer-bg-mobile.png");
-        background-repeat: no-repeat;
-        background-size: cover;
+    .footer-watermark {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+        width: 100%;
+        font-family: var(--font-family-headings);
+        font-size: 544px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1;
+        color: rgb(255 255 255 / 2%);
+        text-align: center;
+        text-transform: uppercase;
+        white-space: nowrap;
+        text-box-trim: trim-both;
+        text-box-edge: cap alphabetic;
+        pointer-events: none;
+        user-select: none;
+
+        @include bp.mq(laptop-l) {
+            font-size: 387.64px;
+        }
+
+        @include bp.mq(tablet-xl) {
+            inset: 275px 0 auto auto;
+            width: auto;
+            font-size: 368.34px;
+            line-height: 1;
+            text-align: left;
+            writing-mode: vertical-rl;
+        }
     }
 
     .footer-main,
