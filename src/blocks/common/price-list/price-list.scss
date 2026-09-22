@@ -17,6 +17,18 @@
     // выглядят как на десктопе, а на узких экранах включается прокрутка.
     --table-width: 1716px;
 
+    @include bp.mq(desktop-l) {
+        --table-width: 1516px;
+    }
+
+    @include bp.mq(laptop-l) {
+        --table-width: 1300px;
+    }
+
+    @include bp.mq(laptop-m) {
+        --table-width: 1155px;
+    }
+
     @include bp.mq(mobile-l) {
         --table-width: 1100px;
     }
@@ -127,8 +139,20 @@
         // Нативную полосу прячем — её рисует кастомный скролбар (см. ниже)
         scrollbar-width: none;
 
+        // Правая граница-подсказка, когда таблица прокручивается (как в макете).
+        // Держим её всегда (прозрачной), чтобы появление/исчезновение не сдвигало
+        // вёрстку; настоящий border рисуется ПОВЕРХ прокручиваемого содержимого
+        // (в отличие от inset-тени, которую перекрывали фоны ячеек).
+        border-right: 1px solid transparent;
+
         &::-webkit-scrollbar {
             display: none;
+        }
+
+        // Класс .is-scrollable вешает JS, пока у таблицы есть горизонтальная
+        // прокрутка: граница видна с самого начала и всё время прокрутки.
+        &.is-scrollable {
+            border-right-color: var(--color-light-grey, #d9d9d9);
         }
     }
 
@@ -185,6 +209,10 @@
             border-bottom: var(--cell-border);
             transition: background-color 0.2s ease;
 
+            @include bp.mq(laptop-l) {
+                font-size: 18px;
+            }
+
             @include bp.mq(mobile-l) {
                 font-size: 16px;
             }
@@ -225,7 +253,7 @@
             border-top: 0;
             border-left: 0;
 
-            @include bp.mq(mobile-l) {
+            @include bp.mq(laptop-l) {
                 font-size: 20px;
             }
         }
@@ -252,7 +280,7 @@
             border-top: 0;
             border-right: 0;
 
-            @include bp.mq(mobile-l) {
+            @include bp.mq(laptop-l) {
                 font-size: 20px;
             }
         }
@@ -273,7 +301,7 @@
             vertical-align: middle;
             background: #773c29;
 
-            @include bp.mq(mobile-l) {
+            @include bp.mq(laptop-l) {
                 font-size: 20px;
             }
         }
@@ -316,7 +344,6 @@
             // background: url("/assets/images/content/table-round-price-bl.svg") 0 0 / 100% 100% no-repeat;
             border-bottom: var(--cell-border);
             border-left: var(--cell-border);
-            border-radius: 0 0 0 12px;
         }
 
         tbody tr:last-child td:last-child {
@@ -324,7 +351,6 @@
 
             // background: url("/assets/images/content/table-round-price-br.svg") 0 0 / 100% 100% no-repeat;
             border-bottom: var(--cell-border);
-            border-radius: 0 0 12px;
         }
     }
 
@@ -359,6 +385,10 @@
             border-right: var(--cell-border);
             border-bottom: var(--cell-border);
             transition: background-color 0.2s ease;
+
+            @include bp.mq(laptop-l) {
+                font-size: 18px;
+            }
 
             @include bp.mq(mobile-l) {
                 font-size: 16px;
@@ -419,7 +449,6 @@
             // background: url("/assets/images/content/table-round-coeff-bl.svg") 0 0 / 100% 100% no-repeat;
             border-bottom: var(--cell-border);
             border-left: var(--cell-border);
-            border-radius: 0 0 0 12px;
         }
 
         tbody tr:last-child td:last-child {
@@ -427,7 +456,6 @@
 
             // background: url("/assets/images/content/table-round-coeff-br.svg") 0 0 / 100% 100% no-repeat;
             border-bottom: var(--cell-border);
-            border-radius: 0 0 12px;
         }
     }
 
@@ -525,6 +553,10 @@
 
             &:last-child {
                 border-bottom: 0;
+            }
+
+            @include bp.mq(laptop-l) {
+                font-size: 18px;
             }
 
             @include bp.mq(mobile-l) {

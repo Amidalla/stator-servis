@@ -5,6 +5,10 @@
     color: var(--color-white);
     background: var(--txt-light-dark, #383838);
 
+    @include bp.mq(mobile-l) {
+        padding-bottom: 100px;
+    }
+
     .head {
         display: flex;
         gap: 40px;
@@ -59,8 +63,24 @@
         overflow: hidden;
         background: var(--txt-dark, #161616);
 
+        @include bp.mq(tablet-xl) {
+            min-height: 188px;
+        }
+
         @include bp.mq(mobile-l) {
             min-height: auto;
+        }
+
+        &:first-child {
+            @include bp.mq(mobile-l) {
+                border-radius: 12px 12px 0 0;
+            }
+        }
+
+        &:last-child {
+            @include bp.mq(mobile-l) {
+                border-radius: 0 0 12px 12px;
+            }
         }
 
         &::before {

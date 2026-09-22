@@ -1,0 +1,8 @@
+{% set meta = { title: "Вакансии | Статор-Сервис" } %}
+{% set page = { breadcrumbs: false, heading: false } %}
+{% extends "layouts/default.njk" %}
+{% block content %}
+    {% include "blocks/common/vacancies/vacancies.njk" %}
+    {% set formSuffix = "-bottom" %}
+    {% include "blocks/common/main-form/main-form.njk" %}
+{% endblock %}

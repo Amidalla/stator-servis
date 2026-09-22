@@ -1,0 +1,169 @@
+@use "core/breakpoints" as bp;
+
+// Карточки липкого сайдбара «Нужна консультация?» + «Мы всегда на связи».
+// Общие для деталки статьи и страницы вакансий. Прилипание/сетку задаёт
+// сама страница на обёртке .sidebar.
+
+// Карточка «Нужна консультация?» — изображение на тёмном фоне
+.consult-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+    background: var(--txt-light-dark, #383838);
+    border-radius: 12px;
+}
+
+.consult-media {
+    overflow: hidden;
+    border-radius: 8px;
+
+    @include bp.mq(tablet-xl) {
+        display: none;
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.consult-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.consult-title {
+    margin: 0;
+    font-family: var(--font-family-headings);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+    color: var(--color-white);
+}
+
+.consult-text {
+    margin: 0;
+    font-family: var(--font-family-primary);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 150%;
+    color: var(--color-light-grey);
+}
+
+.consult-btn {
+    --button-width: 100%;
+    --button-height: auto;
+    --button-padding: 10px 15px;
+    --button-font-size: 14px;
+    --button-bg: var(--brand-dark-orange, #d64212);
+    --button-color: var(--color-white, #fff);
+    --button-border-color: var(--brand-dark-orange, #d64212);
+
+    justify-content: center;
+    margin-top: 4px;
+    font-weight: 400;
+    border: none;
+    border-radius: 8px;
+
+    &:hover:not(:disabled, .disabled),
+    &:focus-visible {
+        --button-bg: #b8380f;
+        --button-color: var(--color-white, #fff);
+    }
+}
+
+// Карточка «Мы всегда на связи»
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+    background: var(--color-white);
+    border: 1px solid var(--color-light-grey);
+    border-radius: 12px;
+}
+
+.contact-title {
+    margin: 0;
+    font-family: var(--font-family-headings);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+    color: var(--txt-dark);
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.contact-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-family: var(--font-family-primary);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%;
+    color: var(--txt-light-dark);
+
+    img,
+    svg {
+        flex-shrink: 0;
+        width: 20px;
+        height: auto;
+        margin-top: 2px;
+        object-fit: contain;
+    }
+
+    span {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    a {
+        display: flex;
+        flex: 1 1 auto;
+        gap: 12px;
+        align-items: flex-start;
+        width: 100%;
+        color: var(--txt-light-dark);
+        text-decoration: none;
+        transition: color 0.25s ease;
+
+        &:hover {
+            color: var(--brand-dark-orange);
+        }
+    }
+}
+
+.contact-btn {
+    --button-width: 100%;
+    --button-height: auto;
+    --button-padding: 10px 15px;
+    --button-font-size: 14px;
+    --button-bg: var(--btn-grey, #a8a8a8);
+    --button-color: var(--txt-light-dark, #383838);
+    --button-border-color: var(--btn-grey, #a8a8a8);
+
+    justify-content: center;
+    margin-top: 10px;
+    font-weight: 400;
+    border: none;
+    border-radius: 8px;
+
+    &:hover:not(:disabled, .disabled),
+    &:focus-visible {
+        --button-bg: var(--brand-dark-orange, #d64212);
+        --button-color: var(--color-white, #fff);
+    }
+}

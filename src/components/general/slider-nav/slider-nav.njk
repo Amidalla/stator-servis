@@ -30,11 +30,20 @@
     {% endif %}
 
     {% if disabled %}
-        <span class="{{ navClass }}" role="button" aria-disabled="true" aria-label="{{ navLabel }}">
+        <span
+            class="{{ navClass }}"
+            role="button"
+            aria-disabled="true"
+            aria-label="{{ navLabel }}"
+        >
             {{ navSvg | safe }}
         </span>
     {% elif href %}
-        <a class="{{ navClass }}" href="{{ href }}" aria-label="{{ navLabel }}">
+        <a
+            class="{{ navClass }}"
+            href="{{ href }}"
+            aria-label="{{ navLabel }}"
+        >
             {{ navSvg | safe }}
         </a>
     {% else %}

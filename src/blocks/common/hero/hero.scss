@@ -172,11 +172,25 @@
         align-items: center;
         margin-top: 34px;
 
+        // Кнопка "Бесплатная консультация" в покое — «призрак»: прозрачный фон,
+        // белая рамка 1px, белый текст. По ховеру — заливается белым с тёмным
+        // текстом (то, как .white выглядит в покое в других местах).
         .white {
             --button-width: 366px;
+            --button-gap: 9px;
+            --button-bg: transparent;
+            --button-color: var(--color-white, #fff);
+            --button-border-color: var(--color-white, #fff);
 
             justify-content: center;
             text-align: center;
+            border-width: 1px;
+
+            &:hover:not(:disabled, .disabled) {
+                --button-bg: var(--color-white, #fff);
+                --button-color: var(--txt-dark);
+                --button-border-color: var(--color-white, #fff);
+            }
         }
 
         // Кнопка "Посмотреть примеры ремонтов" по ховеру выглядит как

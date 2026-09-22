@@ -46,11 +46,11 @@ export function articleOthers(context = document) {
                 slidesPerView: 2,
                 spaceBetween: 20
             },
-            768: {
+            833: {
                 slidesPerView: 3,
                 spaceBetween: 20
             },
-            1300: {
+            1439: {
                 slidesPerView: 4,
                 spaceBetween: 20
             }

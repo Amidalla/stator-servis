@@ -23,6 +23,8 @@ footer.footer {
         gap: 10px;
         padding: 56px 0 32px;
         background-image: url("/assets/images/system/footer-bg-laptop.png");
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 
     @include bp.mq(tablet-xl) {
@@ -31,7 +33,15 @@ footer.footer {
         gap: 60px;
         padding: 60px 0 32px;
         background-color: #000;
-        background-image: none;
+        background-image: url("/assets/images/system/footer-bg-tablet.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    @include bp.mq(mobile-l) {
+        background-image: url("/assets/images/system/footer-bg-mobile.png");
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 
     .footer-main,
@@ -53,9 +63,9 @@ footer.footer {
         align-items: flex-start;
 
         .button {
-            --button-width: auto;
+            --button-width: 266px;
 
-            width: auto;
+            width: 266px;
             margin-top: 4px;
 
             @include bp.mq(tablet-xl) {

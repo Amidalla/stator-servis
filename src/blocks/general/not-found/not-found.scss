@@ -12,14 +12,9 @@
 
     // Цвет + фоновое изображение поверх него (своё для каждого разрешения)
     background-color: var(--txt-light-dark, #383838);
-    background-image: url("/assets/images/content/not-found-bg.png");
     background-repeat: no-repeat;
     background-position: center top;
     background-size: cover;
-
-    @include bp.mq(laptop-l) {
-        background-image: url("/assets/images/content/not-found-bg-laptop.png");
-    }
 
     @include bp.mq(tablet-xl) {
         padding-top: 140px;
@@ -28,13 +23,11 @@
     @include bp.mq(tablet) {
         min-height: 700px;
         padding: 180px 0 139px;
-        background-image: url("/assets/images/content/not-found-bg-tablet.png");
     }
 
     @include bp.mq(mobile-l) {
         min-height: 0;
         padding: 130px 0 139px;
-        background-image: url("/assets/images/content/not-found-bg-mobile.png");
     }
 
     // --------------------------------------

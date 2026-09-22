@@ -539,6 +539,12 @@
             color: var(--txt-light-dark);
             counter-increment: step;
 
+            // На планшете/мобилке убираем «висячий» отступ: номер, заголовок
+            // (в т.ч. перенесённые строки) и описание выравниваются по левому краю.
+            @include bp.mq(tablet-xl) {
+                padding-left: 0;
+            }
+
             @include bp.mq(mobile-l) {
                 font-size: 16px;
             }
@@ -547,6 +553,10 @@
                 display: inline-block;
                 margin-top: 10px;
                 margin-left: -27px;
+
+                @include bp.mq(tablet-xl) {
+                    margin-left: 0;
+                }
             }
 
             &::before {
@@ -555,6 +565,10 @@
                 font-weight: 600;
                 color: var(--color-blue);
                 content: counter(step) ". ";
+
+                @include bp.mq(tablet-xl) {
+                    margin-left: 0;
+                }
             }
         }
 

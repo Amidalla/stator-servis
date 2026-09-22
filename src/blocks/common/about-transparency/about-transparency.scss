@@ -5,7 +5,7 @@
     // Размер диагонального среза правого верхнего угла карточки
     --reasons-cut: 130px;
 
-    padding: 100px 0 30px;
+    padding: 100px 0 40px;
     background: var(--txt-dark);
 
     @include bp.mq(mobile-l) {

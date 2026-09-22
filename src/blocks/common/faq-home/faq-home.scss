@@ -143,6 +143,7 @@
 
         @include bp.mq(tablet-xl) {
             margin-top: 0; // flex gap 20px ≈ отступ в макете
+            margin-bottom: -50px;
         }
 
         @include bp.mq(mobile-l) {

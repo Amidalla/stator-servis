@@ -1,0 +1,416 @@
+@use "core/breakpoints" as bp;
+
+.vacancies {
+    position: relative;
+    background: var(--color-white);
+
+    > .container {
+        padding-top: calc(var(--header-height) + 16px);
+        padding-bottom: 80px;
+
+        @include bp.mq(tablet-xl) {
+            padding-bottom: 60px;
+        }
+
+        @include bp.mq(mobile-l) {
+            padding-bottom: 40px;
+        }
+    }
+
+    // --------------------------------------
+    // Хлебные крошки (тёмные, на белом фоне) — как на деталке статьи
+    // --------------------------------------
+    .breadcrumbs {
+        width: 100%;
+        max-width: 100%;
+
+        > .container {
+            display: block;
+            flex: none;
+            width: auto;
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        .list {
+            flex-wrap: nowrap;
+            gap: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--txt-light-dark);
+        }
+
+        .item {
+            flex: 0 0 auto;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .link,
+        .separator {
+            color: var(--txt-light-dark);
+        }
+
+        .link:hover {
+            color: var(--brand-dark-orange);
+            text-decoration: underline;
+        }
+
+        .current-page {
+            font-weight: 700;
+            color: var(--txt-dark);
+        }
+    }
+
+    // --------------------------------------
+    // Заголовок
+    // --------------------------------------
+    .vacancies-title {
+        max-width: 1214px;
+        margin: 20px 0 0;
+        font-family: var(--font-family-headings);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        color: var(--txt-dark);
+
+        @include bp.mq(mobile-l) {
+            margin-top: 16px;
+            font-size: 28px;
+        }
+    }
+
+    .vacancies-lead {
+        max-width: 915px;
+        margin: 16px 0 0;
+        font-family: var(--font-family-primary);
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--txt-light-dark);
+
+        @include bp.mq(tablet-xl) {
+            font-size: 16px;
+        }
+    }
+
+    // --------------------------------------
+    // Раскладка: список вакансий + липкий сайдбар
+    // --------------------------------------
+    .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 415px;
+        gap: 20px;
+        align-items: start;
+        margin-top: 30px;
+
+        // До tablet-xl — как на десктопе (две колонки). На tablet-xl и ниже
+        // сайдбар уходит вниз на всю ширину.
+        @include bp.mq(tablet-xl) {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+    }
+
+    .vacancies-main {
+        min-width: 0;
+    }
+
+    // --------------------------------------
+    // Аккордеон вакансий (переопределяем базовый .accordion)
+    // --------------------------------------
+    .vacancies-list {
+        --accordion-gap: 20px;
+
+        .item {
+            border: 1px solid var(--color-light-grey, #d9d9d9);
+            border-radius: 12px;
+            box-shadow: none;
+
+            // Тень по ховеру
+            &:hover {
+                box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
+            }
+
+            // Раскрытый аккордеон — оранжево-красная рамка
+            &.is-open {
+                border-color: var(--color-dark-red, #e05757);
+
+                // У открытого без ховера тени нет (базовый аккордеон её добавляет) —
+                // тень оставляем только по ховеру
+                &:not(:hover) {
+                    box-shadow: none;
+                }
+
+                // Название остаётся тёмным (базовый аккордеон красит в оранжевый)
+                .panel .name {
+                    color: var(--txt-dark, #161616);
+                }
+            }
+
+            // Шапка вакансии: название+адрес слева, цена справа
+            .panel {
+                display: flex;
+                gap: 20px;
+                align-items: flex-start;
+                justify-content: space-between;
+                padding: 20px;
+
+                @include bp.mq(mobile-xl) {
+                    flex-direction: column;
+                    gap: 15px;
+                }
+
+                .head {
+                    display: flex;
+                    flex: 1;
+                    flex-direction: column;
+                    gap: 15px;
+                    min-width: 0;
+                }
+
+                .name {
+                    flex: none;
+                    margin: 0;
+                    font-family: var(--font-family-headings);
+                    font-size: 24px;
+                    font-weight: 500;
+                    line-height: 140%;
+                    color: var(--txt-dark, #161616);
+
+                    // Длинное название переносится на несколько строк, не ломая вёрстку
+                    overflow-wrap: anywhere;
+
+                    @include bp.mq(mobile-xl) {
+                        font-size: 20px;
+                    }
+                }
+
+                // Название не подкрашиваем ни по ховеру, ни при раскрытии
+                &:hover .name {
+                    color: var(--txt-dark, #161616);
+                }
+
+                // Адрес (иконка-пин + текст)
+                .address {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    font-family: var(--font-family-primary);
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 150%;
+                    color: #000;
+
+                    svg {
+                        flex: 0 0 20px;
+                        width: 20px;
+                        height: 24px;
+                    }
+
+                    span {
+                        min-width: 0;
+                    }
+
+                    @include bp.mq(mobile-xl) {
+                        font-size: 16px;
+                    }
+                }
+
+                // Цена «от 90 000 руб» (от — 500, число — 700)
+                .price {
+                    flex: none;
+                    font-family: var(--font-family-headings);
+                    font-size: 24px;
+                    font-weight: 500;
+                    line-height: 140%;
+                    color: var(--txt-dark, #161616);
+                    white-space: nowrap;
+
+                    b {
+                        font-weight: 700;
+                    }
+
+                    @include bp.mq(mobile-xl) {
+                        font-size: 20px;
+                    }
+                }
+            }
+
+            // Содержимое вакансии
+            .collapse .wrap {
+                display: flex;
+                flex-direction: column;
+                padding: 0 20px 20px;
+
+                // Убираем левый отступ списка (базовый аккордеон задаёт 1.75rem) —
+                // маркеры выравниваются по левому краю с заголовком группы.
+                ul {
+                    padding-left: 0;
+                }
+            }
+
+            .vacancy-group {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+
+                // Разделители между группами: 30px сверху и снизу линии
+                & + .vacancy-group {
+                    padding-top: 30px;
+                    margin-top: 30px;
+                    border-top: 1px solid var(--color-light-grey, #d9d9d9);
+                }
+
+                h2 {
+                    margin: 0;
+                    font-family: var(--font-family-primary);
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: 140%;
+                    color: var(--color-dark-red, #e05757);
+                }
+
+                ul {
+                    padding: 0;
+                    margin: 0;
+                    list-style: none;
+                }
+
+                li {
+                    position: relative;
+                    padding-left: 20px;
+                    font-family: var(--font-family-primary);
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 150%;
+                    color: var(--txt-light-dark, #383838);
+
+                    @include bp.mq(mobile-xl) {
+                        font-size: 16px;
+                    }
+
+                    &::before {
+                        position: absolute;
+                        top: 11px;
+                        left: 4px;
+                        width: 5px;
+                        height: 5px;
+                        content: "";
+                        background: var(--txt-light-dark, #383838);
+                        border-radius: 50%;
+                    }
+
+                    & + li {
+                        margin-top: 6px;
+                    }
+                }
+            }
+
+            // Плашка с кнопкой «Откликнуться»
+            .vacancy-cta {
+                display: flex;
+                gap: 16px;
+                align-items: center;
+                justify-content: space-between;
+                padding: 14px 14px 14px 24px;
+                margin-top: 30px;
+                background: var(--txt-secondary, #fff7f2);
+                border-radius: 12px;
+
+                // tablet и ниже: заметка-плашка сверху, кнопка отдельным блоком снизу
+                @include bp.mq(tablet) {
+                    flex-direction: column;
+                    gap: 16px;
+                    align-items: stretch;
+                    padding: 0;
+                    background: transparent;
+                    border-radius: 0;
+                }
+            }
+
+            .vacancy-note {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                font-family: var(--font-family-primary);
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 150%;
+                color: var(--txt-light-dark, #383838);
+
+                svg {
+                    flex: 0 0 18px;
+                    width: 18px;
+                    height: 22px;
+                }
+
+                // На мобилке заметка — отдельная плашка с фоном
+                @include bp.mq(tablet) {
+                    padding: 9px;
+                    background: var(--txt-secondary, #fff7f2);
+                    border-radius: 12px;
+                }
+            }
+
+            .vacancy-btn {
+                --button-height: auto;
+                --button-padding: 14px 32px;
+                --button-font-size: 16px;
+
+                flex: none;
+                border-radius: 8px;
+
+                @include bp.mq(tablet) {
+                    --button-width: 100%;
+
+                    // Радиально-градиентный фон кнопки по макету
+                    --button-bg: radial-gradient(127.2% 61.28% at 0.94% 78.21%, #a70000 0%, #d64212 100%);
+
+                    width: 100%;
+                    border: none;
+                    border-radius: 12px;
+                }
+            }
+        }
+    }
+
+    // --------------------------------------
+    // Липкий сайдбар (карточки — общий партиал consult-sidebar)
+    // --------------------------------------
+    .sidebar {
+        position: sticky;
+        top: calc(var(--header-height) + 20px);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-self: start;
+
+        // tablet-xl и ниже: сайдбар внизу, карточки в одну строку (равные)
+        @include bp.mq(tablet-xl) {
+            position: static;
+            flex-direction: row;
+            gap: 20px;
+
+            > .consult-card,
+            > .contact-card {
+                flex: 1 1 0;
+                min-width: 0;
+            }
+        }
+
+        // mobile-l и ниже: карточки друг под другом
+        @include bp.mq(mobile-xl) {
+            flex-direction: column;
+        }
+    }
+}

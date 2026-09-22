@@ -41,6 +41,18 @@ export function accordion(context = document) {
                     // Теперь высота доступна
                     const height = collapse.scrollHeight;
                     collapse.style.maxHeight = `${height}px`;
+
+                    // После анимации снимаем ограничение высоты — тогда открытый
+                    // блок свободно меняет высоту при ресайзе/переносе текста и
+                    // не обрезается (иначе max-height остаётся от старой ширины).
+                    const onEnd = (e) => {
+                        if (e.propertyName !== "max-height") return;
+                        collapse.removeEventListener("transitionend", onEnd);
+                        if (item.classList.contains("is-open")) {
+                            collapse.style.maxHeight = "none";
+                        }
+                    };
+                    collapse.addEventListener("transitionend", onEnd, { signal });
                 });
             }
         };
@@ -69,7 +81,8 @@ export function accordion(context = document) {
                 panel.setAttribute("aria-expanded", "true");
                 const collapse = item.querySelector(".collapse");
                 if (collapse) {
-                    collapse.style.maxHeight = `${collapse.scrollHeight}px`;
+                    // Изначально открытый — без ограничения высоты (не обрежется на ресайзе)
+                    collapse.style.maxHeight = "none";
                 }
             }
 

@@ -67,7 +67,7 @@
     }
 
     .intro {
-        flex: 0 1 640px;
+        flex: 0 1 850px;
         min-width: 0;
         padding-top: 80px;
 
@@ -83,11 +83,29 @@
     .illus {
         flex: 0 1 930px;
         min-width: 0;
+        margin-right: -100px;
+        margin-bottom: -60px;
 
         img {
             display: block;
             width: 100%;
             height: auto;
+        }
+
+        @include bp.mq(desktop-l) {
+            flex: 0 1 775px;
+            padding-top: 50px;
+        }
+
+        @include bp.mq(desktop-m) {
+            flex: 0 1 675px;
+        }
+
+        @include bp.mq(laptop-l) {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            max-width: 480px;
         }
 
         // С tablet-xl рисунок убираем

@@ -29,6 +29,16 @@
         background-size: contain;
         opacity: 0.55;
 
+        @include bp.mq(laptop-l) {
+            top: 100px;
+            width: 550px;
+        }
+
+        @include bp.mq(laptop-m) {
+            top: 150px;
+            width: 400px;
+        }
+
         @include bp.mq(tablet-xl) {
             display: none;
         }

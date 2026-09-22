@@ -30,7 +30,14 @@ export function customScrollbar(context = document) {
 
         const update = () => {
             const overflow = wrap.scrollWidth - wrap.clientWidth;
-            if (overflow <= 1) {
+            const scrollable = overflow > 1;
+            // Правую границу (класс .is-scrollable, CSS рисует по нему бордер,
+            // как в макете) показываем, пока справа ещё есть что прокручивать:
+            // видна с самого начала и во время прокрутки, а когда докрутили до
+            // конца — исчезает.
+            const hasMoreRight = scrollable && wrap.scrollLeft < overflow - 1;
+            wrap.classList.toggle("is-scrollable", hasMoreRight);
+            if (!scrollable) {
                 bar.hidden = true;
                 return;
             }
@@ -122,6 +129,7 @@ export function customScrollbar(context = document) {
             "destroy",
             () => {
                 controller.abort();
+                wrap.classList.remove("is-scrollable");
                 resizeObserver?.disconnect();
                 bar.remove();
                 delete wrap.dataset.scrollbarInit;

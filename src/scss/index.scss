@@ -45,6 +45,7 @@
 @use "../components/common/popup-order/popup-order";
 @use "../components/common/popup-feedback-success/popup-feedback-success";
 @use "../components/common/contacts-mobile/contacts-mobile";
+@use "../components/common/consult-sidebar/consult-sidebar";
 
 // --------------------------------------
 // -- Blocks
@@ -92,4 +93,5 @@
 @use "../blocks/common/search-results/search-results";
 @use "../blocks/common/article-detail/article-detail";
 @use "../blocks/common/article-others/article-others";
+@use "../blocks/common/vacancies/vacancies";
 @use "../blocks/common/main-form/main-form";

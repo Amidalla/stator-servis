@@ -547,7 +547,7 @@
         gap: 20px;
         align-items: stretch;
 
-        @include bp.mq(tablet) {
+        @include bp.mq(tablet-m) {
             flex-direction: column;
             gap: 12px;
         }
@@ -558,25 +558,35 @@
 
         width: auto;
 
-        @include bp.mq(tablet) {
+        @include bp.mq(tablet-m) {
             --button-width: 100%;
 
             width: 100%;
         }
     }
 
-    // «Бесплатная консультация» — контурная на белом фоне
+    // «Бесплатная консультация» — белая с оранжевой рамкой 1px и тёмно-серым
+    // текстом; по ховеру — светло-бежевый фон и белая рамка.
     .actions .btn-consult {
-        --button-bg: var(--color-white);
-        --button-color: var(--txt-dark);
-        --button-border-color: var(--brand-dark-orange);
+        --button-width: 366px;
+        --button-gap: 9px;
+        --button-bg: var(--color-white, #fff);
+        --button-color: var(--txt-light-dark, #383838);
+        --button-border-color: var(--brand-dark-orange, #d64212);
 
+        width: 366px;
         border-width: 2px;
 
         &:hover:not(:disabled, .disabled) {
-            --button-bg: var(--brand-dark-orange);
-            --button-color: var(--color-white);
-            --button-border-color: var(--brand-dark-orange);
+            --button-bg: #eddad4;
+            --button-color: var(--txt-light-dark, #383838);
+            --button-border-color: var(--color-white, #fff);
+        }
+
+        @include bp.mq(tablet-m) {
+            --button-width: 100%;
+
+            width: 100%;
         }
     }
 }

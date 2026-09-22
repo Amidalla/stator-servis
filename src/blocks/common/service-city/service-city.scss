@@ -31,6 +31,10 @@
         color: var(--color-white);
         text-align: right;
 
+        @include bp.mq(laptop-l) {
+            max-width: 400px;
+        }
+
         @include bp.mq(tablet-xl) {
             display: none;
         }
