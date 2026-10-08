@@ -46,13 +46,9 @@ const prefixRootPaths = () => {
     return replace(/(href|src|srcset|data-src|action|poster)="\/(?!\/)/g, `$1="${pathPrefix}/`);
 };
 
-const prefixCssUrls = () => {
-    if (!pathPrefix) {
-        return replace(/a^/, "a");
-    }
-
-    return replace(/url\(\s*(['"]?)\//g, `url($1${pathPrefix}/`);
-};
+// CSS lives in css/, assets in assets/ — make root url()s relative to the stylesheet,
+// so backgrounds work from any base folder (e.g. a WordPress theme) without _html.
+const relativeCssUrls = () => replace(/url\(\s*(['"]?)\/(?!\/)/g, "url($1../");
 
 // Clean temp/ and build/ directories
 export const clean = (done) => {
@@ -86,7 +82,6 @@ export const htmlProd = () =>
         .pipe(replace("bundle.css", "bundle.min.css"))
         .pipe(replace("bundle.js", "bundle.min.js"))
         .pipe(prefixRootPaths())
-        .pipe(prefixCssUrls())
         .pipe(prettier({ parser: "html" }))
         .pipe(gulp.dest(paths.prodDist));
 
@@ -118,7 +113,7 @@ export const stylesProd = () =>
             })
         )
         .pipe(postcss([autoprefixer(), cssnano({ preset: "default" })]))
-        .pipe(prefixCssUrls())
+        .pipe(relativeCssUrls())
         .pipe(rename("bundle.min.css"))
         .pipe(gulp.dest(`${paths.prodDist}/css`));
 

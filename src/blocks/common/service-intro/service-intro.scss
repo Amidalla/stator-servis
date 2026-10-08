@@ -11,6 +11,7 @@
 
     .layout {
         display: flex;
+        gap: 40px;
         align-items: flex-start;
         justify-content: space-between;
 
@@ -21,7 +22,7 @@
     }
 
     .title {
-        flex: 0 0 auto;
+        flex: 0 0 60%;
         margin: 0;
         color: var(--color-white);
 
@@ -31,7 +32,7 @@
     }
 
     .layout p {
-        flex: 0 0 996px;
+        flex: 0 0 40%;
         max-width: 996px;
         margin: 0;
         font-family: var(--font-family-primary);
@@ -41,7 +42,7 @@
         color: var(--color-white);
 
         @include bp.mq(laptop-l) {
-            flex: 0 0 569px;
+            flex: 0 0 40%;
             max-width: 569px;
         }
 

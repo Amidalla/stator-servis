@@ -1,3 +1,5 @@
+{% from "components/common/service-tags/service-tags.njk" import render as serviceTags %}
+
 <section class="service-other">
     <div class="container">
         <h2 class="title" data-aos="fade-up">Другие наши услуги</h2>
@@ -19,13 +21,7 @@
                 </div>
                 <h3 class="name">Перемотка</h3>
                 <p class="caption">промышленного оборудования</p>
-                <div class="tags">
-                    <a href="/service-category/">Электродвигатели</a>
-                    <a href="/service-category/">Альтернаторы</a>
-                    <a href="/service-category/">Бензогенераторы</a>
-                    <a href="/service-category/">Трансформаторы</a>
-                    <a href="/service-category/">Катушки</a>
-                </div>
+                {{ serviceTags(tags=["Электродвигатели", "Альтернаторы", "Бензогенераторы", "Трансформаторы", "Катушки"]) }}
             </article>
 
             <article class="card" data-aos="fade-up" data-aos-delay="200">
@@ -44,12 +40,7 @@
                 </div>
                 <h3 class="name">Балансировка</h3>
                 <p class="caption">промышленного оборудования</p>
-                <div class="tags">
-                    <a href="/service-category/">Роторы</a>
-                    <a href="/service-category/">Якоря</a>
-                    <a href="/service-category/">Муфты</a>
-                    <a href="/service-category/">Промышленные вентиляторы</a>
-                </div>
+                {{ serviceTags(tags=["Роторы", "Якоря", "Муфты", "Промышленные вентиляторы"]) }}
             </article>
         </div>
     </div>

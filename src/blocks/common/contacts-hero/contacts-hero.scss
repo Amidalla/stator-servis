@@ -294,7 +294,7 @@
     .contact-item {
         display: flex;
         gap: 12px;
-        align-items: flex-start;
+        align-items: center;
     }
 
     // Иконка контакта — белый скруглённый квадрат с оранжевым значком
@@ -305,6 +305,7 @@
         align-items: center;
         justify-content: center;
         width: 34px;
+        max-width: 34px;
         height: 34px;
 
         svg {

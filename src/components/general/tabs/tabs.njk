@@ -2,8 +2,7 @@
         items=[],
         group="",
         variant="pills",
-        class="",
-        ariaLabel="Фильтр"
+        class=""
     ) %}
     {% set tabsClasses = "tabs " + variant %}
     {% if class %}
@@ -12,8 +11,6 @@
 
     <div
         class="{{ tabsClasses }}"
-        role="tablist"
-        aria-label="{{ ariaLabel }}"
         {% if group %}data-tabs="{{ group }}"
         {% else %}data-tabs{% endif %}
     >
@@ -21,12 +18,7 @@
             <button
                 class="tab{% if item.active %} active{% endif %}"
                 type="button"
-                role="tab"
-                {% if item.id %}id="tab-{{ group }}-{{ item.id }}"{% endif %}
                 {% if item.id %}data-tab="{{ item.id }}"{% endif %}
-                {% if group %}data-tabs-group="{{ group }}"{% endif %}
-                aria-selected="{{ "true" if item.active else "false" }}"
-                {% if item.id %}aria-controls="panel-{{ group }}-{{ item.id }}"{% endif %}
             >
                 {{ item.title }}
             </button>

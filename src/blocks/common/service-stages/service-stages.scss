@@ -1,4 +1,9 @@
+@use "sass:map";
+@use "sass:math";
 @use "core/breakpoints" as bp;
+
+// Максимум элементов в сетке этапов, для которого считается число рядов
+$stages-max: 24;
 
 .service-stages {
     position: relative;
@@ -46,67 +51,186 @@
         margin: 0 0 40px;
     }
 
+    // --------------------------------------
+    // Сетка этапов: две колонки, заполнение сверху вниз.
+    // Количество рядов = ceil(кол-во элементов / 2) считается через :has(),
+    // поэтому число этапов (и наличие .media) может быть любым.
+    // --------------------------------------
     .columns {
+        --stages-rows: 1;
+
         display: grid;
-        grid-template-rows: repeat(4, auto);
+        grid-template-rows: repeat(var(--stages-rows), auto);
         grid-template-columns: repeat(2, minmax(0, 1fr));
         grid-auto-flow: column;
         column-gap: 20px;
         align-items: stretch;
 
+        // Один элемент — без пустой правой колонки
+        &:has(> :only-child) {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
         @include bp.mq(tablet-xl) {
             grid-template-rows: auto;
-            grid-template-columns: 1fr;
+            grid-template-columns: minmax(0, 1fr);
             grid-auto-flow: row;
+        }
+
+        // Скругления: верх у первого элемента колонки, низ — у последнего
+        > :first-child {
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        > :last-child {
+            border-bottom-right-radius: 12px;
+            border-bottom-left-radius: 12px;
+        }
+
+        > :not(:first-child) {
+            border-top-width: 0;
+        }
+
+        @media (min-width: #{map.get(bp.$breakpoints, tablet-xl) + 0.02px}) {
+            @for $count from 2 through $stages-max {
+                $rows: math.ceil(math.div($count, 2));
+
+                &:has(> :nth-child(#{$count}):last-child) {
+                    --stages-rows: #{$rows};
+
+                    > :nth-child(#{$rows}) {
+                        border-bottom-right-radius: 12px;
+                        border-bottom-left-radius: 12px;
+                    }
+
+                    > :nth-child(#{$rows + 1}) {
+                        border-top-width: 1px;
+                        border-top-left-radius: 12px;
+                        border-top-right-radius: 12px;
+                    }
+                }
+            }
         }
     }
 
+    // --------------------------------------
+    // Этап (контент из админки, без классов у p/ul/ol/h*)
+    // --------------------------------------
     .step {
         display: flex;
         flex-direction: column;
-        gap: 24px;
+        gap: 16px;
         align-items: flex-start;
         min-width: 0;
         padding: 20px 8px 20px 20px;
+        font-family: var(--font-family-primary);
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 150%;
+        color: var(--txt-light-dark, #383838);
         background: var(--color-white);
         border: 1px solid var(--color-light-grey, #d9d9d9);
-        transition: background 0.5s ease;
+        transition:
+            background 0.5s ease,
+            color 0.3s ease;
 
         @include bp.mq(mobile-l) {
             padding: 20px 8px;
+            font-size: 16px;
         }
 
-        &:nth-child(1),
-        &:nth-child(5) {
-            border-radius: 12px 12px 0 0;
+        > * {
+            max-width: 100%;
+            margin: 0;
         }
 
-        &:nth-child(5) {
-            @include bp.mq(tablet) {
-                border-top: none;
-                border-radius: 0;
+        > .name {
+            margin-bottom: 8px;
+        }
+
+        :where(h2, h3, h4, h5, h6):not(.name) {
+            font-family: var(--font-family-headings);
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 140%;
+            color: var(--txt-dark, #161616);
+            transition: color 0.3s ease;
+
+            @include bp.mq(mobile-l) {
+                font-size: 18px;
             }
         }
 
-        &:nth-child(4) {
-            flex: 1 0 auto;
-            border-radius: 0 0 12px 12px;
+        ul,
+        ol {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0;
+            list-style: none;
 
-            @include bp.mq(tablet) {
-                border-radius: 0;
+            li {
+                position: relative;
+                padding-left: 27px;
             }
         }
 
-        &:not(:nth-child(1), :nth-child(5)) {
-            border-top: 0;
+        ul li::before {
+            position: absolute;
+            top: 0.6em;
+            left: 0;
+            width: 6px;
+            height: 6px;
+            content: "";
+            background: var(--brand-dark-orange);
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        ol {
+            counter-reset: stage-item;
+
+            li {
+                counter-increment: stage-item;
+
+                &::before {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    font-weight: 600;
+                    color: var(--brand-dark-orange);
+                    content: counter(stage-item) ".";
+                    transition: color 0.3s ease;
+                }
+            }
+        }
+
+        a {
+            color: var(--brand-dark-orange);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: color 0.3s ease;
+        }
+
+        b,
+        strong {
+            font-weight: 700;
         }
 
         &:hover {
+            color: var(--color-white);
             background: var(--txt-dark, #161616);
 
             .name,
-            p {
+            :where(h2, h3, h4, h5, h6):not(.name),
+            a,
+            ol li::before {
                 color: var(--color-white);
+            }
+
+            ul li::before {
+                background: var(--color-white);
             }
         }
     }
@@ -130,20 +254,6 @@
 
     .num {
         flex-shrink: 0;
-    }
-
-    .step p {
-        margin: 0;
-        font-family: var(--font-family-primary);
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 150%;
-        color: var(--txt-light-dark, #383838);
-        transition: color 0.3s ease;
-
-        @include bp.mq(mobile-l) {
-            font-size: 16px;
-        }
     }
 
     .media {

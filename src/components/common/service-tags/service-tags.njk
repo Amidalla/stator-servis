@@ -1,0 +1,45 @@
+{% macro render(
+        tags=[],
+        limit=4,
+        href="/service-category/",
+        showText="Показать все категории",
+        hideText="Свернуть категории",
+        class=""
+    ) %}
+    {% set tagsClasses = "tags service-tags" %}
+    {% if class %}
+        {% set tagsClasses = tagsClasses + " " + class %}
+    {% endif %}
+
+    <div class="{{ tagsClasses }}" data-service-tags>
+        {% for tag in tags %}
+            {% if loop.index <= limit %}
+                <a href="{{ tag.href or href }}">{{ tag.text or tag }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if tags | length > limit %}
+            <div class="more" data-service-tags-more inert>
+                <div class="more-inner">
+                    <div class="more-list">
+                        {% for tag in tags %}
+                            {% if loop.index > limit %}
+                                <a href="{{ tag.href or href }}">{{ tag.text or tag }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <button
+                class="toggle"
+                type="button"
+                aria-expanded="false"
+                data-service-tags-toggle
+                data-show-text="{{ showText }}"
+                data-hide-text="{{ hideText }}"
+            >
+                {{ showText }}
+            </button>
+        {% endif %}
+    </div>
+{% endmacro %}

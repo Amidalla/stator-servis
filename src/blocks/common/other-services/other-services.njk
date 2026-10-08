@@ -1,3 +1,5 @@
+{% from "components/common/service-tags/service-tags.njk" import render as serviceTags %}
+
 {#
     «Другие наши услуги» — две карточки услуг (Перемотка, Балансировка).
     Разметка и стили карточек переиспользуют service-card (как в блоке directions).
@@ -46,11 +48,7 @@
                     </div>
                     <h3 class="name">{{ service.name }}</h3>
                     <p class="caption">промышленного оборудования</p>
-                    <div class="tags">
-                        {% for tag in service.tags %}
-                            <a href="/service-category/">{{ tag }}</a>
-                        {% endfor %}
-                    </div>
+                    {{ serviceTags(tags=service.tags) }}
                 </article>
             {% endfor %}
         </div>

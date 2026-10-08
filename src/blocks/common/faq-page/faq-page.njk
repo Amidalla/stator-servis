@@ -25,9 +25,14 @@
     }
 ] %}
 
-{# count — сколько вопросов показать во вкладке (демо; на WP — реальная выдача) #}
+{#
+    Вкладки-фильтры (логика как на porozhek.ru/vopros-otvet/): все вопросы выводятся
+    одним списком, у вопроса data-tag = id категории; таб показывает только свои вопросы.
+    Номер 01, 02… считается CSS-счётчиком по видимым вопросам (на WP его не выводим).
+    count — сколько демо-вопросов категории вывести (на WP — реальная выдача цикла).
+#}
 {% set faqTabs = [
-    { id: "nasosy", title: "Насосы", active: true, count: 5 },
+    { id: "nasosy", title: "Насосы", count: 5 },
     { id: "electro", title: "Электродвигатели", count: 3 },
     { id: "benzo", title: "Бензогенераторы", count: 4 },
     { id: "alter", title: "Альтернаторы", count: 2 }
@@ -47,53 +52,39 @@
         <h1 class="faq-page-title" data-aos="fade-right">Вопрос-ответ</h1>
 
         {{ tabs(
-            items=faqTabs,
+            items=[{ id: "all", title: "Все вопросы", active: true }].concat(faqTabs),
             group="faq",
-            class="faq-page-tabs",
-            ariaLabel="Категории вопросов"
+            class="faq-page-tabs"
         ) }}
 
-        <div class="faq-panels" data-tabs-panels="faq">
+        <div class="accordion faq-list" data-accordion="component" data-tabs-list="faq" data-aos="fade-up">
             {% for tab in faqTabs %}
-                <div
-                    class="faq-panel{% if tab.active %} active{% endif %}"
-                    id="panel-faq-{{ tab.id }}"
-                    role="tabpanel"
-                    aria-labelledby="tab-faq-{{ tab.id }}"
-                    data-tab-panel="{{ tab.id }}"
-                    data-tabs-group="faq"
-                    {% if not tab.active %}hidden{% endif %}
-                >
-                    <div class="accordion faq-list" data-accordion="component" data-aos="fade-up">
-                        {% for i in range(0, tab.count) %}
-                            {% set item = faqItems[i % (faqItems | length)] %}
-                            <div class="item" data-accordion-item>
-                                <button
-                                    type="button"
-                                    class="panel"
-                                    aria-expanded="false"
-                                    aria-controls="faq-{{ tab.id }}-{{ loop.index }}"
-                                >
-                                    <span class="num"
-                                        >{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
-                                    <span class="name">{{ item.q }}</span>
-                                    <span class="icon" aria-hidden="true">
-                                        <img src="/assets/images/system/icon-arrow-faq.svg" alt="" width="20" height="15" />
-                                    </span>
-                                </button>
-                                <div
-                                    class="collapse"
-                                    id="faq-{{ tab.id }}-{{ loop.index }}"
-                                    role="region"
-                                >
-                                    <div class="wrap">
-                                        <p>{{ item.a }}</p>
-                                    </div>
-                                </div>
+                {% for i in range(0, tab.count) %}
+                    {% set item = faqItems[i % (faqItems | length)] %}
+                    <div class="item" data-accordion-item data-tag="{{ tab.id }}">
+                        <button
+                            type="button"
+                            class="panel"
+                            aria-expanded="false"
+                            aria-controls="faq-{{ tab.id }}-{{ loop.index }}"
+                        >
+                            <span class="num"></span>
+                            <span class="name">{{ item.q }}</span>
+                            <span class="icon" aria-hidden="true">
+                                <img src="/assets/images/system/icon-arrow-faq.svg" alt="" width="20" height="15" />
+                            </span>
+                        </button>
+                        <div
+                            class="collapse"
+                            id="faq-{{ tab.id }}-{{ loop.index }}"
+                            role="region"
+                        >
+                            <div class="wrap">
+                                <p>{{ item.a }}</p>
                             </div>
-                        {% endfor %}
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
             {% endfor %}
         </div>
     </div>

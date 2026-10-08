@@ -9,6 +9,7 @@ import { navigationMobile } from "../components/general/navigation-mobile/naviga
 import { tabs } from "../components/general/tabs/tabs.js";
 import { hero } from "../blocks/common/hero/hero.js";
 import { directions } from "../blocks/common/directions/directions.js";
+import { serviceTags } from "../components/common/service-tags/service-tags.js";
 import { header } from "../blocks/general/header/header.js";
 import { notFound } from "../blocks/general/not-found/not-found.js";
 import { showPopup } from "./utils/popup.js";
@@ -38,6 +39,7 @@ const components = [
     tabs,
     hero,
     directions,
+    serviceTags,
     header,
     notFound,
     searchForm,
@@ -90,6 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
 window.showPopup = showPopup;
 
 window.reinitLazy = initLazy;
+
+// Пересчёт позиций AOS после изменения высоты контента (например, фильтр табов)
+window.refreshAos = () => AOS.refresh();
 
 window.reinit = (context = document) => {
     init(context);

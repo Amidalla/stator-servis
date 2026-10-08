@@ -3,9 +3,9 @@
 {% from "components/general/button/button.njk" import render as button %}
 {% from "components/general/slider-nav/slider-nav.njk" import navBtn, mobileNav %}
 
-{# Карточка статьи (переиспользуется во всех вкладках; на WP — тело цикла) #}
-{% macro articleCard(article) %}
-    <article class="card">
+{# Карточка статьи (на WP — тело цикла). tag — id категории для фильтра табами #}
+{% macro articleCard(article, tag="", hidden=false) %}
+    <article class="card" data-tag="{{ tag }}"{% if hidden %} hidden{% endif %}>
         <a class="top" href="{{ article.href }}">
             <div class="media">
                 <img
@@ -59,12 +59,16 @@
     }
 ] %}
 
-{# Вкладки-фильтры. count — сколько карточек показать, pagination — нужна ли пагинация #}
+{#
+    Вкладки-фильтры (логика как на porozhek.ru/vopros-otvet/): все статьи выводятся
+    одним списком, у карточки data-tag = id категории; таб показывает только свои карточки.
+    count — сколько демо-карточек категории вывести (на WP — реальная выдача цикла).
+#}
 {% set blogTabs = [
-    { id: "electro", title: "Электродвигатели", active: true, count: 12, pagination: true },
-    { id: "nasosy", title: "Насосы", count: 3, pagination: false },
-    { id: "benzo", title: "Бензогенераторы", count: 2, pagination: false },
-    { id: "ventil", title: "Вентиляторы", count: 4, pagination: false }
+    { id: "electro", title: "Электродвигатели", count: 12 },
+    { id: "nasosy", title: "Насосы", count: 3 },
+    { id: "benzo", title: "Бензогенераторы", count: 2 },
+    { id: "ventil", title: "Вентиляторы", count: 4 }
 ] %}
 
 <section class="blog-list">
@@ -81,58 +85,53 @@
         <h1 class="blog-list-title" data-aos="fade-right">Полезные статьи</h1>
 
         {{ tabs(
-            items=blogTabs,
+            items=[{ id: "all", title: "Все статьи", active: true }].concat(blogTabs),
             group="blog",
-            class="blog-list-tabs",
-            ariaLabel="Категории статей"
+            class="blog-list-tabs"
         ) }}
 
-        <div class="blog-panels" data-tabs-panels="blog">
-            {% for tab in blogTabs %}
-                <div
-                    class="blog-panel{% if tab.active %} active{% endif %}"
-                    id="panel-blog-{{ tab.id }}"
-                    role="tabpanel"
-                    aria-labelledby="tab-blog-{{ tab.id }}"
-                    data-tab-panel="{{ tab.id }}"
-                    data-tabs-group="blog"
-                    {% if not tab.active %}hidden{% endif %}
-                >
-                    <div class="grid" data-aos="fade-up" data-aos-delay="200">
-                        {% for i in range(0, tab.count) %}
-                            {{ articleCard(blogArticles[i % (blogArticles | length)]) }}
-                        {% endfor %}
-                    </div>
+        <div class="blog-results" data-tabs-list="blog">
+            <div class="grid" data-aos="fade-up" data-aos-delay="200">
+                {% for tab in blogTabs %}
+                    {% for i in range(0, tab.count) %}
+                        {{ articleCard(blogArticles[i % (blogArticles | length)], tag=tab.id) }}
+                    {% endfor %}
+                {% endfor %}
+            </div>
 
-                    {% if tab.pagination %}
-                        {#
-                            Пагинация в стиле слайдеров. Десктоп: стрелка + точки + стрелка; мобилка: стрелка + N/M + стрелка.
-                            Ссылки/состояния — заглушки под WordPress: на WP это вывод paginate_links()
-                            (текущая/страницы → .bullet.active/.bullet, неактивная стрелка → aria-disabled).
-                        #}
-                        <nav class="blog-pagination" aria-label="Навигация по страницам">
-                            <div class="controls">
-                                {{ navBtn(direction="prev", label="Предыдущая страница", disabled=true) }}
-                                <div class="pagination">
-                                    <a class="bullet active" href="?page=1" aria-current="page" aria-label="Страница 1"></a>
-                                    <a class="bullet" href="?page=2" aria-label="Страница 2"></a>
-                                    <a class="bullet" href="?page=3" aria-label="Страница 3"></a>
-                                    <a class="bullet" href="?page=4" aria-label="Страница 4"></a>
-                                    <a class="bullet" href="?page=5" aria-label="Страница 5"></a>
-                                </div>
-                                {{ navBtn(direction="next", label="Следующая страница", href="?page=2") }}
-                            </div>
-                            {{ mobileNav(
-                                prevLabel="Предыдущая страница",
-                                nextLabel="Следующая страница",
-                                fraction="1/5",
-                                prevDisabled=true,
-                                nextHref="?page=2"
-                            ) }}
-                        </nav>
-                    {% endif %}
+            {#
+                Пагинация в стиле слайдеров. Десктоп: стрелка + точки + стрелка; мобилка: стрелка + N/M + стрелка.
+                Ссылки/состояния — заглушки под WordPress: на WP это вывод paginate_links()
+                (текущая/страницы → .bullet.active/.bullet, неактивная стрелка → aria-disabled).
+
+                Привязка к табам — на усмотрение программиста:
+                - data-tab-only="all"            — видна только на табе «Все статьи»;
+                - data-tab-only="electro"        — только на табе «Электродвигатели»;
+                - data-tab-only="electro nasosy" — на нескольких табах;
+                - без data-tab-only               — видна всегда (одна общая);
+                - можно вывести свою пагинацию для каждой категории или не выводить вовсе.
+                Демо: пагинация только у таба «Все статьи».
+            #}
+            <nav class="blog-pagination" data-tab-only="all" aria-label="Навигация по страницам">
+                <div class="controls">
+                    {{ navBtn(direction="prev", label="Предыдущая страница", disabled=true) }}
+                    <div class="pagination">
+                        <a class="bullet active" href="?page=1" aria-current="page" aria-label="Страница 1"></a>
+                        <a class="bullet" href="?page=2" aria-label="Страница 2"></a>
+                        <a class="bullet" href="?page=3" aria-label="Страница 3"></a>
+                        <a class="bullet" href="?page=4" aria-label="Страница 4"></a>
+                        <a class="bullet" href="?page=5" aria-label="Страница 5"></a>
+                    </div>
+                    {{ navBtn(direction="next", label="Следующая страница", href="?page=2") }}
                 </div>
-            {% endfor %}
+                {{ mobileNav(
+                    prevLabel="Предыдущая страница",
+                    nextLabel="Следующая страница",
+                    fraction="1/5",
+                    prevDisabled=true,
+                    nextHref="?page=2"
+                ) }}
+            </nav>
         </div>
     </div>
 </section>

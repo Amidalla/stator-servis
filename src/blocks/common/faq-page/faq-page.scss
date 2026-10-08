@@ -109,8 +109,10 @@
 
         width: 100%;
         max-width: none;
+        counter-reset: faq-num;
 
         .item {
+            counter-increment: faq-num;
             background: transparent;
             border-radius: 0;
             box-shadow: none;
@@ -164,6 +166,11 @@
 
                     @include bp.mq(mobile-l) {
                         font-size: 24px;
+                    }
+
+                    // Нумерация по видимым вопросам (скрытые фильтром не считаются)
+                    &::before {
+                        content: counter(faq-num, decimal-leading-zero);
                     }
                 }
 
@@ -252,7 +259,12 @@
                 }
             }
 
-            & + .item .panel {
+            &[hidden] {
+                counter-increment: none;
+            }
+
+            // Схлопываем двойную рамку только между видимыми вопросами
+            &:not([hidden]) ~ .item .panel {
                 margin-top: -1px;
             }
         }

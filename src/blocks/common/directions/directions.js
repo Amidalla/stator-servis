@@ -6,7 +6,7 @@ export function directions(context = document) {
 
     const controller = new AbortController();
     const { signal } = controller;
-    const wraps = [...root.querySelectorAll(".tags")];
+    const wraps = [...root.querySelectorAll(".tags, .tags .more-list")];
 
     const layoutTagGroup = (wrap) => {
         const tags = [...wrap.querySelectorAll(":scope > a")];

@@ -43,8 +43,8 @@
 {% endmacro %}
 
 {# Карточка работы. Переиспользует разметку карточек блока «Наши работы» (our-works). #}
-{% macro workCard(work) %}
-    <article class="card">
+{% macro workCard(work, tag="", hidden=false) %}
+    <article class="card" data-tag="{{ tag }}"{% if hidden %} hidden{% endif %}>
         <a class="card-link" href="/nashi-raboty/works-detail/" aria-label="{{ work.name }}"></a>
         <div class="media">
             <div class="gallery swiper">
@@ -106,12 +106,16 @@
 
 {% set works = [pumpWork, motorWork] %}
 
-{# Вкладки-фильтры. count — сколько карточек показать, pagination — нужна ли пагинация #}
+{#
+    Вкладки-фильтры (логика как на porozhek.ru/vopros-otvet/): все работы выводятся
+    одним списком, у карточки data-tag = id категории; таб показывает только свои карточки.
+    count — сколько демо-карточек категории вывести (на WP — реальная выдача цикла).
+#}
 {% set worksTabs = [
-    { id: "nasosy", title: "Насосы", active: true, count: 12, pagination: true },
-    { id: "electro", title: "Электродвигатели", count: 6, pagination: false },
-    { id: "benzo", title: "Бензогенераторы", count: 2, pagination: false },
-    { id: "alter", title: "Альтернаторы", count: 2, pagination: false }
+    { id: "nasosy", title: "Насосы", count: 12 },
+    { id: "electro", title: "Электродвигатели", count: 6 },
+    { id: "benzo", title: "Бензогенераторы", count: 2 },
+    { id: "alter", title: "Альтернаторы", count: 2 }
 ] %}
 
 <section class="works-list" data-works-list>
@@ -128,58 +132,53 @@
         <h1 class="works-list-title" data-aos="fade-right">Наши работы</h1>
 
         {{ tabs(
-            items=worksTabs,
+            items=[{ id: "all", title: "Все работы", active: true }].concat(worksTabs),
             group="works",
-            class="works-list-tabs",
-            ariaLabel="Категории работ"
+            class="works-list-tabs"
         ) }}
 
-        <div class="works-panels" data-tabs-panels="works">
-            {% for tab in worksTabs %}
-                <div
-                    class="works-panel{% if tab.active %} active{% endif %}"
-                    id="panel-works-{{ tab.id }}"
-                    role="tabpanel"
-                    aria-labelledby="tab-works-{{ tab.id }}"
-                    data-tab-panel="{{ tab.id }}"
-                    data-tabs-group="works"
-                    {% if not tab.active %}hidden{% endif %}
-                >
-                    <div class="our-works">
-                        <div class="grid" data-aos="fade-up" data-aos-delay="200">
-                            {% for i in range(0, tab.count) %}
-                                {{ workCard(works[i % (works | length)]) }}
-                            {% endfor %}
-                        </div>
-                    </div>
-
-                    {% if tab.pagination %}
-                        {#
-                            Пагинация в стиле слайдеров — заглушки под WordPress (paginate_links()).
-                        #}
-                        <nav class="works-pagination" aria-label="Навигация по страницам">
-                            <div class="controls">
-                                {{ navBtn(direction="prev", label="Предыдущая страница", disabled=true) }}
-                                <div class="pagination">
-                                    <a class="bullet active" href="?page=1" aria-current="page" aria-label="Страница 1"></a>
-                                    <a class="bullet" href="?page=2" aria-label="Страница 2"></a>
-                                    <a class="bullet" href="?page=3" aria-label="Страница 3"></a>
-                                    <a class="bullet" href="?page=4" aria-label="Страница 4"></a>
-                                    <a class="bullet" href="?page=5" aria-label="Страница 5"></a>
-                                </div>
-                                {{ navBtn(direction="next", label="Следующая страница", href="?page=2") }}
-                            </div>
-                            {{ mobileNav(
-                                prevLabel="Предыдущая страница",
-                                nextLabel="Следующая страница",
-                                fraction="1/5",
-                                prevDisabled=true,
-                                nextHref="?page=2"
-                            ) }}
-                        </nav>
-                    {% endif %}
+        <div class="works-results" data-tabs-list="works">
+            <div class="our-works">
+                <div class="grid" data-aos="fade-up" data-aos-delay="200">
+                    {% for tab in worksTabs %}
+                        {% for i in range(0, tab.count) %}
+                            {{ workCard(works[i % (works | length)], tag=tab.id) }}
+                        {% endfor %}
+                    {% endfor %}
                 </div>
-            {% endfor %}
+            </div>
+
+            {#
+                Пагинация в стиле слайдеров — заглушки под WordPress (paginate_links()).
+
+                Привязка к табам — на усмотрение программиста:
+                - data-tab-only="all"             — видна только на табе «Все работы»;
+                - data-tab-only="nasosy"          — только на табе «Насосы»;
+                - data-tab-only="nasosy electro"  — на нескольких табах;
+                - без data-tab-only               — видна всегда (одна общая);
+                - можно вывести свою пагинацию для каждой категории или не выводить вовсе.
+                Демо: пагинация только у таба «Все работы».
+            #}
+            <nav class="works-pagination" data-tab-only="all" aria-label="Навигация по страницам">
+                <div class="controls">
+                    {{ navBtn(direction="prev", label="Предыдущая страница", disabled=true) }}
+                    <div class="pagination">
+                        <a class="bullet active" href="?page=1" aria-current="page" aria-label="Страница 1"></a>
+                        <a class="bullet" href="?page=2" aria-label="Страница 2"></a>
+                        <a class="bullet" href="?page=3" aria-label="Страница 3"></a>
+                        <a class="bullet" href="?page=4" aria-label="Страница 4"></a>
+                        <a class="bullet" href="?page=5" aria-label="Страница 5"></a>
+                    </div>
+                    {{ navBtn(direction="next", label="Следующая страница", href="?page=2") }}
+                </div>
+                {{ mobileNav(
+                    prevLabel="Предыдущая страница",
+                    nextLabel="Следующая страница",
+                    fraction="1/5",
+                    prevDisabled=true,
+                    nextHref="?page=2"
+                ) }}
+            </nav>
         </div>
     </div>
 </section>
