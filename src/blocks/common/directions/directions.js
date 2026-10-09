@@ -27,7 +27,17 @@ export function directions(context = document) {
     };
 
     const layoutAll = () => wraps.forEach(layoutTagGroup);
-    const observer = new ResizeObserver(layoutAll);
+    const widths = new WeakMap();
+
+    // Раскладка зависит только от ширины — при изменении высоты (раскрытие тегов) не пересчитываем
+    const observer = new ResizeObserver((entries) => {
+        entries.forEach(({ target }) => {
+            const width = target.clientWidth;
+            if (widths.get(target) === width) return;
+            widths.set(target, width);
+            layoutTagGroup(target);
+        });
+    });
 
     wraps.forEach((wrap) => observer.observe(wrap));
     layoutAll();

@@ -20,14 +20,12 @@
 
         {% if tags | length > limit %}
             <div class="more" data-service-tags-more inert>
-                <div class="more-inner">
-                    <div class="more-list">
-                        {% for tag in tags %}
-                            {% if loop.index > limit %}
-                                <a href="{{ tag.href or href }}">{{ tag.text or tag }}</a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
+                <div class="more-list">
+                    {% for tag in tags %}
+                        {% if loop.index > limit %}
+                            <a href="{{ tag.href or href }}">{{ tag.text or tag }}</a>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
             <button

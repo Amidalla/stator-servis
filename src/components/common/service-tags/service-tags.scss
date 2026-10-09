@@ -1,26 +1,16 @@
 .service-tags {
     --service-tags-gap: 12px;
-    --service-tags-duration: 0.4s;
 
     // --------------------------------------
     // Скрытые теги
     // --------------------------------------
 
     .more {
-        display: grid;
         flex: 1 1 100%;
-        grid-template-rows: 0fr;
+        height: 0;
         margin-top: calc(-1 * var(--service-tags-gap));
-        opacity: 0;
-        transition:
-            grid-template-rows var(--service-tags-duration) ease,
-            margin-top var(--service-tags-duration) ease,
-            opacity var(--service-tags-duration) ease;
-    }
-
-    .more-inner {
-        min-height: 0;
         overflow: hidden;
+        opacity: 0;
     }
 
     .more-list {
@@ -69,7 +59,7 @@
     // --------------------------------------
 
     &.open .more {
-        grid-template-rows: 1fr;
+        height: auto;
         margin-top: 0;
         opacity: 1;
     }
